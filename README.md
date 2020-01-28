@@ -9,8 +9,7 @@ The *Unoffcial Ink Cookbook* is a collaboration between [Dan Cox](https://github
 
 ## Table of Contents
 * [Chapter 1: Interactive Fiction and Narrative Games](Chapter1/index.md)
-
-
+* [Chapter 2: Installing and Using the Inky Editor](Chapter2/index.md)
 
 # Copyright
 Ink, its logo, and other associated branding are copyright inkle studios.
