@@ -1,8 +1,26 @@
-# Chapter 2: Installing and Using the Inky Editor
+# Chapter 2: Ink and the Inky Editor
 
-Writing Ink can take place in any program that can handle text, but the Inky Editor, put out by the creators of the Ink programming language, Inkle Studios, helps by not only providing ways to check for potential issues with the code, but also runs a story as it is written.
+**Summary**: In this chapter, you will learn about Ink, where to find the Inky Editor, and generally how to install and use it through basics like opening, editing, and saving Ink file.
 
-In this chapter, you will learn where to find the Inky Editor, how to install and use it, and some basics like opening and saving Ink files while editing them.
+---
+
+## Ink
+
+What does this have to do with Ink? As a successor to text-parsers, Ink is part of another genre that rose in part from more graphical interfaces and the influence of hypertext where a user could click on options. These are *choice-based*.
+
+## Ink Helps With Making Narrative Games?
+
+Yes! Ink is called a "narrative scripting language" (ink, 2020). It was designed to create narrative game-like experiences through scripting different interactions in a language. Ink is a programming language created in order to help with the common problems of writing narrative games: giving the player choices, acting as a result of the player making a choice, and keeping track of information related to the game and choices made.
+
+## Using Ink to Make More Complicated Projects
+
+Many projects use Ink as their narrative or dialog system. Within a larger project with many interlocking and interdependent systems, Ink, and what it produces, can help writers construct a story that has multiple choices, paths, and outcomes for a player while other members of a team work with the finished product and interact with it through other tools like its Story API or the Unity Plugin. It is a tool designed to produce a file that can be read by other tools. As part of a toolchain, a collection of tools where the output of one feeds another, it works well as something in which a writer or developer can write and test the story in one tool and then use its output as part of a graphical system or other tools.
+
+## What can you make with Ink?
+
+Ink is designed to produce text-based projects. Inky, the editor covered in this book, is focused on writing text-heavy projects. It works best with projects that have choices and outcomes, and has been designed around handling how to connect what a user sees with how they interact with the game. 
+
+That does not mean Ink has not been used in other, more graphical projects. *Heaven’s Vault* (2019), a game written in Ink and using the Unity game engine, was created by Inkle Studios, the inventor and maintainers of Ink. They integrate a story-rich game with animations, 3D models, and large worlds. Yet, its basis is in Ink itself, and their dialogue system, a central part of the game, is run directly from Ink.
 
 ## Why use the Inky editor?
 
