@@ -32,7 +32,9 @@ As a more general term, nonlinear storytelling consists of these two different a
 
 ## Narrative Games
 
-Early computers worked through users typing commands. They would type something, the computer would try to understand it, and then it would respond in some way. Many of the games created in the 1980s up through the 1990s followed this same model: they used typing commands as the many source of player input in order to navigate digital worlds. Players would "play" through using a keyboard and typing out what they wanted to happen next.
+Early computers worked through users typing commands. They would type something, the computer would try to understand it, and then it would respond in some way. Many of the games created in the 1980s up through the 1990s followed this same model: they used typing commands as the many source of player input in order to navigate digital worlds. Players would "play" through using a keyboard and typing out what they wanted to happen next. 
+
+The software *Inform* (1993) helped users create these projects. Building on the work to reverse engineer a commercial format, users could write in a language, inform, to create new games that could be played using the existing tools. This language allowed for building worlds and defining relationships between objects where simple commands `go north` would understand both a "north" and "south."
 
 As computer graphics improved, many games began to take the same nonlinear storytelling aspects of the earlier games and apply them in new ways. Decades after *Colossal Cave* (1977), large online games were possible through a number of different advances in graphical and communication technologies. Yet, at their root, many video games still have a heavier reliance on reading text and making choices, the central part of all nonlinear storytelling.
 
@@ -40,17 +42,29 @@ To help label games that may be more textual in nature, many people have used th
 
 ## Adventure Games
 
-With improvements to graphical technologies, videos game moved away from strictly text input and started to use more interactive forms. Players were given the ability to click on different elements and work with graphical interfaces. More narrative-based games moved from text-parsers to what became *adventure games*. These began by combining text commands with graphical elements such as backgrounds and characters, but quickly became a way of describing games that were more click-based. The player would click on something on screen and the player would see short descriptions or ways to interact with on-screen elements.
+With improvements to graphical technologies, videos game moved away from strictly text input and started to use more interactive forms. Players were given the ability to click on different elements and work with graphical interfaces. More narrative-based games moved from text-parsers to what became *adventure games*. These began by combining text commands with graphical elements such as backgrounds and characters, but quickly became a way of describing games that were more click-based. The player would click on something on the screen and the player would see short descriptions or ways to interact with more elements.
 
-Adventure games borrowed from works like the earlier CYOA books, but used different interfaces. Famous games from this genre and period include the *The Secret of Monkey Island* (1990) and *Myst* (1993).
+Adventure games borrowed from works like the earlier CYOA books, but used different interfaces. Famous games from this genre and period include *Wizard and the Princess* (1980), *The Secret of Monkey Island* (1990), and *Myst* (1993).
 
 ## Hypertext
 
-The rise of the world wide web starting in 1994 changed how people accessed information and thought about interfaces. While some users had come to use graphical user interfaces in games, the mouse quickly became the focus as some early games used *hypertext*, documents designed for reading by a web browser, as the medium of the game itself. In these, 
+The rise of the world wide web changed how people accessed information and thought about interfaces. While some users had come to use graphical user interfaces in operating systems such as Windows or MacOS, the mouse quickly became the focus for interactions. In roughly the same time as more graphical adventure games, software such as [Storyspace](https://en.wikipedia.org/wiki/Storyspace) (1987) and [Hypercard](https://en.wikipedia.org/wiki/HyperCard) (1987) introduced more text-based interactions as a user clicked on links and parts and different parts were loaded as a response.
+
+The introduction of *hypertext*, documents designed for reading in a web browser, also helped people develop games and other projects easier. Using HTML, links could be constructed to move between documents or even among them. This allowed for more text-based projects and the rise of many works such as *afternoon, a story* (1987) and *Patchwork Girl* (1995).
 
 ## Choice-Based
 
+*Twine 1* (2009) helped re-popularize using HTML for creating projects. Allowing users with little to no programming knowledge to quickly create projects, this type of *choice-based* games exploded within the independent development scene and opened a wider audience to personal essays and experimental projects that were often previously ignored. Many who were kept from creating games from a lack of access to the tools of creation were able to fully embrace Twine and build many projects that found an audience.
 
+Introduced with and proceeding *Twine 1* (2009) was a language called Twee that *Twine 1* (2009) could read and write. Instead of writing within the editor itself, Twee allowed users to write in a text format that used special characters for marking sections and design links between what Twine called "passages," parts of an overall story.
+
+## Enter Ink
+
+Parts of what became Ink were introduced in *inklewriter* (2012), a tool for creating interactive stories. Designed to help users create stories with no programming knowledge, it was popular for many years but ultimately shut down in 2018. In the years building to that, Inkle Studios introduced *Ink* (2016), a programming language design to create narrative games and projects.
+
+Borrowing from previous languages and tools such as Inform and Twee, Ink 
+
+## Ready?
 
 Ready to get started? Turn to [Chapter 2](../Chapter2/index.md)!
 
