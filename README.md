@@ -12,6 +12,15 @@ The *Unofficial Ink Cookbook* is a collaboration between [Dan Cox](https://githu
 - [Chapter 3: Common Terms](Chapter3/index.md)
 - [Chapter 4: Understanding Choices](Chapter4/index.md)
 - [Chapter 5: Managing Project Files](Chapter5/index.md)
+- [Chapter 6: Alternatives](Chapter6/index.md)
+- [Chapter 7: Gather Points](Chapter7/index.md)
+- [Chapter 8: It's All Variable](Chapter8/index.md)
+- [Chapter 9: Knot and Function Parameters](Chapter9/index.md)
+- [Chapter 10: Tunnels and Threads](Chapter10/index.md)
+- [Chapter 11: LIST-ing to a Side](Chapter11/index.md)
+- [Chapter 12: Ink for the Web](Chapter12/index.md)
+- [Chapter 13: JavaScript Story API](Chapter13/index.md)
+- [Chapter 14: Working with Unity](Chapter14/index.md)
 
 ## Copyright
 
