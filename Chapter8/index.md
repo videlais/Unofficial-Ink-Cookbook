@@ -23,15 +23,15 @@
 
 ## Working with Code
 
-Like many other programming languages, Ink also has the concepts of variables. Used to store and react to values during a program, variables in Ink can take different forms and be used for various uses.
+Like many other scripting languages, Ink also has the concepts of variables. Used to store and react to values during a program, variables in Ink can take different forms and be used for various uses.
 
-When using variables in Ink, more direct programming is required. While variables can be created using their keywords, as covered later in this chapter, change their values requires knowing more about how Ink handles its own programming.
+When using variables in Ink, more direct coding is required. While variables can be created using their keywords, as covered later in this chapter, changing their values requires knowing more about how Ink handles its own programming.
 
 Previously, programming in Ink consisted of using Knots, Diverts, and Alternatives. These were used to move around in a story or cycle through a collection of values. When working with variables and manipulating their values in Ink, this changes and takes on two different forms: single line or multiple lines.
 
 ## Single Line
 
-A single line of programming in Ink starts with the tilde character, ~. It signifies that something will happen only on that single line and Ink should show or other parse the next line as it normally work outside of programming.
+A single line of programming in Ink starts with the tilde character, ~. It signifies that something will happen only on that single line and Ink should show or otherwise parse the next line as it normally work outside of programming.
 
 ```ink
 ~ health = health - 1
@@ -52,7 +52,7 @@ For programming that may take multiple lines, opening and closing curly brackets
 
 ## Variables
 
-In programming terminology, a variable is something that can change. Often, the metaphor used is one of a bucket. The variable represents a value when the program is running. The two commons actions are to “look into” the bucket to see its value or to “change” the value that is in the bucket through replacing it or adding more into it.
+In programming terminology, a variable is something that can change. Often, the metaphor used is one of a bucket. The variable represents a value when the program is running. The two commons actions are to "look into" the bucket to see its value or to "change" the value that is in the bucket through replacing it or adding more into it.
 
 The values of variables can be shown through using opening and closing curly brackets around them. This allows an easy way to include different values such as statistics for players to see before they make decisions.
 
@@ -62,11 +62,11 @@ You have {health}.
 
 ### Types of Data Values
 
-Ink supports saving and react to many different types of data. It can use numbers, strings, Booleans, and even the text of diverts.
+Ink supports saving and using many different types of data. These include numbers, strings, Booleans, and even the text of diverts.
 
 #### Numbers
 
-The value of any variables can be any numbers, including both whole and decimal.
+The value of any variable can be any number, including both whole and decimal.
 
 ```ink
 VAR test = 4.5
@@ -98,7 +98,7 @@ In programming terminology, a string is a collection of letters, numbers, spaces
 VAR name = “John”
 ```
 
-In Ink, there is very limited support for working with strings. However, there are three operations that can take place between strings: equality, inequality, and substring.
+In Ink, there is limited support for working with strings. However, there are three operations that can take place between strings: equality, inequality, and substring.
 
 To test if one string is exactly the same as another string, the equality symbol, ==, can be used.
 
@@ -122,7 +122,7 @@ The last operation is the substring operation. It tests if the string to the rig
 
 Boolean values are named after George Boole, the inventor of what is now called boolean algebra. In his work, he created a representation of complex systems using simple rules where the outcome was either true or false.
 
-In computer programming, these values, the keywords true and false, are called Boolean values because they represent either 1 or 0. These are the outcomes of any conditional testing (covered later in this chapter) and can also be stored in variables as well.
+In computer programming, these values, the keywords `true` and `false`, are called Boolean values because they represent either 1 or 0. These are the outcomes of any conditional testing (covered later in this chapter) and can also be stored in variables as well.
 
 ```ink
 VAR proof = true
@@ -150,7 +150,7 @@ Ink provides three different types of variables: global, temporary, and constant
 
 #### Global Variables
 
-Like many other scripting languages, Ink also understands scope. In programming terminology, a variable’s scope is where it can be accessed in a program. Depending on which “level” (scope) a variable has, it can or can not be accessed by other parts of the program.
+Like many other scripting languages, Ink also understands *scope*. In programming terminology, a variable’s scope is where it can be accessed in a program. Depending on which “level” (scope) a variable has, it can or can not be accessed by other parts of the program.
 
 ```ink
 VAR health = 0
@@ -158,7 +158,7 @@ VAR name = "Dan"
 VAR divertExample = ->Example
 ```
 
-Global variables are defined using the keyword "VAR" in Ink. Because they are global, they can be accessed in any part of a project. Once they are created, they are a part of everything. They can be used, updated, and accessed across the entire Flow. They can contain numbers, strings, and even diverts.
+Global variables are defined using the keyword `VAR` in Ink. Because they are global, they can be accessed in any part of a project. Once they are created, they are a part of everything. They can be used, updated, and accessed across the entire Flow. They can contain numbers, strings, and even diverts.
 
 ```ink
 Example:
@@ -268,7 +268,7 @@ The amount of drink left is {drink}.
     -> DONE
 ```
 
-Along with the "if" testing is also an alternative, "else." The use of the else keyword uses hyphens within a multiple-line block of code. It establishes what should happen if the first conditional logic is not true. If that first test is not true, it then does something. What it can do is either provide some alternative code or additional tests.
+Along with the "if" testing is also an alternative, "else." The use of the `else` keyword uses hyphens within a multiple-line block of code. It establishes what should happen if the first conditional logic is not true. If that first test is not true, it then does something. What it can do is either provide some alternative code or additional tests.
 
 **Example:**
 
@@ -299,7 +299,7 @@ The amount of drink left is {drink}.
 
 It is possible to "chain" multiple conditional logic tests together, one after another. In these cases, each testing will be run in order from top to bottom and any code associated with the test will be run if any of the tests are true.
 
-In other programming languages, such usages are sometimes called "switch statements." In Ink, it is possible to use a variable as the initial conditional and have the logic be possible values. In this case, each hyphen is a possible value from the variable with the else keyword as the "default" code to run if the other values are not available.
+In other scripting languages, such usages are sometimes called "switch statements." In Ink, it is possible to use a variable as the initial conditional and have the logic be possible values. In this case, each hyphen is a possible value from the variable with the else keyword as the "default" code to run if the other values are not available.
 
 ```ink
 VAR drink = 4
@@ -330,19 +330,19 @@ The amount of drink left is {drink}.
 
 ### Working with Alternatives
 
-It is possible to save the result of an alternative in Ink. However, it cannot be the initial value of a variable. The reason for this is that alternatives collapse their possibilities when played; before the story starts, the alternatives is all of its possible values.
+It is possible to save the result of an alternative in Ink. However, it cannot be the initial value of a variable. The reason for this is that alternatives collapse their possibilities when played; before the story starts, the alternatives is all of its possible values!
 
 Setting an initial default value works for working with alternatives, though. This value can be then be overridden by a single line of code that changes the value of the variable.
 
 ```ink
-VAR day = “”
+VAR day = ""
 
 ~ day = {~Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday}
 ```
 
 ## Try It
 
-This chapter’s examples show off the power of variables, a concept used in many other programming languages.  Working with variables in Ink will allow you to create content that could be difficult (or even impossible!) to make otherwise. Using variables in your stories will also help you practice for other kinds of programming work.
+This chapter’s examples show off the power of variables, a concept used in many other scripting languages. Working with variables in Ink will allow you to create content that could be difficult (or even impossible!) to make otherwise. Using variables in your stories will also help you practice for other kinds of programming work.
 
 If you are already familiar with how variables in other coding languages work, it is worth practicing with Ink’s variables to understand the similarities and differences between how Ink handles them in comparison to other languages.
 

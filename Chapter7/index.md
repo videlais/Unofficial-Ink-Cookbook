@@ -12,7 +12,7 @@ Ink uses the concept of the Weave to understand choices and their connection to 
 
 Ink uses the concept of Flow to describe how a story moves through different options and across branching paths. Within a Flow, Ink also uses the idea of a Weave, a section of options and gather points that connect to each other, to serve as a faster shorthand than using knots and diverts.
 
-Gather Points use the minus sign, `-`, and serve as their name suggests, they gather. They act as the thing to run after a set of choices to “gather” their weave back together. Instead of using knots and diverts to show short text strings by bouncing between them, gather points can quickly fold back into each other.
+Gather Points use the minus sign, `-`, and serve as their name suggests, they gather. They act as the thing to run after a set of choices to "gather" their weave back together. Instead of using knots and diverts to show short text strings by bouncing between them, gather points can quickly fold back into each other.
 
 ## Labelled Options
 
