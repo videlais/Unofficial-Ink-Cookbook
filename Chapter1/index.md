@@ -69,9 +69,9 @@ Introduced with and proceeding *Twine 1* (2009) was a language called Twee that 
 
 ## Enter Ink
 
-Parts of what became Ink were introduced in *inklewriter* (2012), a tool for creating interactive stories. Designed to help users create stories with no programming knowledge, it was popular for many years but ultimately shut down in 2018. In the years building to that, Inkle Studios introduced *Ink* (2016), a programming language design to create narrative games and projects.
+Parts of what became Ink were introduced in *inklewriter* (2012), a tool for creating interactive stories. Designed to help users create stories with no programming knowledge and has been re-introduced as open source in 2020. In the years building to that, Inkle Studios introduced *Ink* (2016), a scripting language design to create narrative games and projects.
 
-Borrowing from previous tools, Ink allowed authors to write interactive, nonlinear stories using a special programming language. (It's the subject of this book!)
+Borrowing from previous tools, Ink allowed authors to write interactive, nonlinear stories. (It's the subject of this book!)
 
 ## References
 

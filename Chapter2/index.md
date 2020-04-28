@@ -23,7 +23,7 @@
 
 ## Making Narrative Games
 
-Ink is a "narrative scripting language" (ink, 2020). It was designed to create narrative game-like experiences through scripting different interactions in a language. Ink is a *programming language* created in order to help with the common problems of writing narrative games: giving the player choices, acting on those choices, and keeping track of information related to the game.
+Ink is a "narrative scripting language" (ink, 2020). It was designed to create narrative game-like experiences through authoring different interactions. Ink is a *scripting language* created in order to help with the common problems of writing narrative games: giving the player choices, acting on those choices, and keeping track of information related to the game.
 
 ## Using Ink
 
@@ -33,7 +33,7 @@ Many projects use Ink as their narrative or dialog system. It helps writers cons
 
 Ink is designed to produce text-based projects. Inky, the editor covered in this book, is focused on writing text-heavy projects. It works best with projects that have choices and outcomes, and has been designed around handling how to connect what a user sees with how they interact with the game.
 
-That does not mean Ink has not been used in other, more graphical projects. *Heaven’s Vault* (2019), a game written in Ink and using the Unity game engine, was created by Inkle Studios, the inventor and maintainers of Ink. They integrate a story-rich game with animations, 3D models, and large worlds. Yet, its basis is in Ink itself, and their dialogue system, a central part of the game, is run directly from Ink.
+That does not mean Ink has not been used in other, more graphical projects. *Heaven’s Vault* (2019), a game written in Ink and using the Unity game engine, was created by Inkle Studios, the inventor and maintainers of Ink. They integrated a story-rich game with animations, 3D models, and large worlds. Yet, its basis is in Ink itself, and their dialogue system, a central part of the game, is run directly from Ink.
 
 ## Inky Editor
 
@@ -68,7 +68,7 @@ For MacOS X users, Inky will be in a DMG file. These can be opened and the Inky 
 
 *Figure 3:* Inky Editor
 
-When opened, the Inky Editor will show two main panes. The first, on the left, is where the code is written. As it is run by the editor, the results will be previewed on the right pane.
+When opened, the Inky Editor will show two main panes. The first, on the left, is where the code is written. As it is run in the editor, the results will be previewed on the right pane.
 
 ### Opening an Ink File
 

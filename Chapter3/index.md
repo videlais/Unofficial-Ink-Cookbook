@@ -14,7 +14,7 @@
 
 ## Common Terms
 
-Every programming language has its own terms for its elements. Ink is no different and explains how to write and understand code in relationship to a project through the following terms:
+Every language has its own terms for its elements. Ink is no different, and explains how to write and understand code in relationship to a project through the following terms:
 
 - *Choice:* Some text a user interacts with in order to progress the story
 - *Weave:* Collection of branching choices
@@ -22,7 +22,7 @@ Every programming language has its own terms for its elements. Ink is no differe
 
 Ink uses the metaphor of threads and sewing to describe projects. The total collection of all choices is a project's *weave*. Through making *choices*, a user creates a *flow* through the overall *weave*.
 
-**Note:** This book uses the term *option* for what the user sees and clicks on to interact with in an Ink project. *Choices* are what an author creates; a user interacts with *options*.
+**Note:** This book uses the term *option* for what the user sees and clicks on to interact with in an Inky project. *Choices* are what an author creates; a user interacts with *options*.
 
 ## Creating a New Project and Weave
 
@@ -41,7 +41,7 @@ Underneath the previous text, add the following:
 * Give up on a New Project
 ```
 
-Choices will be covered more in the next chapter, but they are the basic building block of any Ink project. They are what a user interacts with when playing an Ink game and how the other key concepts in Ink relate to each other within the Flow of a project.
+Choices will be covered more in the next chapter, but they are the basic building block of any Ink project. They are what a user interacts with when playing an Ink game, and how the other key concepts in Ink relate to each other within the Flow of a project.
 
 Through adding Choices, the preview pane in Inky can be used to "choose," and then rewind or restart a story. When working with the Inky Editor, this can help in moving through a story’s *weave*, and in testing how different parts.
 
@@ -51,7 +51,7 @@ Testing a project in the Inky Editor is one of the most important skills to lear
 
 First, click on the "Choose to Write More" choice. On the right-hand side, it will be shown and then the End of Story text will be shown.
 
-Whenever a story ends, the "End of Story" text is shown in the Inky Editor. This signals that there is no more content in the story.
+**Note:** Whenever a story ends, the "End of Story" text is shown in the Inky Editor. This signals that there is no more content in the story.
 
 Click the "Restart" button in the Inky Editor. (It is the double-arrow, the rightmost icon above the Preview Pane area.) This will restart the story back before any choices were made.
 
@@ -178,9 +178,9 @@ Let’s now consider the next set of choices and their branches.
     -> DONE
 ```
 
-This set ends very quickly!
+This part ends very quickly!
 
-The final set, however, expands outward into other branches.
+The final part, however, expands outward into other branches.
 
 ```ink
 * Go East
