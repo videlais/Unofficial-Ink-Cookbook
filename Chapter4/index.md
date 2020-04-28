@@ -147,13 +147,13 @@ When using knots and diverts to create a looping structure, it is important to i
 The use of a Divert to point to a Knot allows for looping back to a single knot within the story. Instead of moving between them, a single Knot can serve as the central "hub" for choices. Consider the following code:
 
 ```ink
-Assassin! You watched the woman as she moved closer to you. As you move the candle you hold downward to get a better look, her sword reflects its light back to you.
+Assassin! You watch the woman as she inches closer to you. As you move the candle to get a better look, her sword reflects its light back to you.
 
 -> Escape
 
 == Escape ==
 * [Try to fight her]
-    You know there is no way you can win against here. You are just a monk and barely trained
+    You know there is no way you can win against her. You are just a monk and barely trained
     -> Escape
 * [Run the other way]
     This seems like the best option. You take off running.
@@ -179,7 +179,7 @@ By default, an option will remove itself once chosen. As designed, a choice is a
 Normally, choices disappear after they are "used." Sticky choices, on the other hand, do not. As it comes to looping knots and those cases where revisiting a particular knot is the case, sticky choices can be very useful.
 
 ```ink
-You awake on the shore. As the waves lap at you, your memory tries to fills itself back in from the night before and how you came to be here. There was a storm, yes. A might storm. And then... well, you are not as sure. Something about a storm, for sure.
+You awake on the shore. As the waves lap at you, your memory tries to fills itself back in from the night before and how you came to be here. There was a storm, yes. A mighty storm. And then... well, you are not as sure. Something about a storm, for sure.
 
 -> Explore_the_Island
 
@@ -233,7 +233,7 @@ Testing for multiple values allows for repeating the loop between choices and kn
 
 ## Glue
 
-The default act is for each new line of text to have its own new line in the output. However, this can be changed using glue, a pairing of less-than and greater-than signs.
+The default action is for each new line of text to have its own new line in the output. However, this can be changed using glue, a pairing of less-than and greater-than signs.
 
 ```ink
 This text <>
@@ -300,8 +300,12 @@ As seen in this chapter’s examples, it is easy to create a complex branching s
 
 As practice, try doing the following:
 
-First, create a simple branching story that uses choices, knots, and diverts. The story should have at least two choices, and player should have a set of at least two options within each of those two choices. The story should use at least two diverts, and those diverts should go to two different knots. You should pay attention to the narrative content of your story as you write, but don’t worry about the length of the story: focus more on creating the necessary Ink code to tell a short story that makes sense.
+First, create a simple branching story that uses choices, knots, and diverts. The story should have at least two choices, and player should have a set of at least two options within each of those two choices. The story should use at least two diverts, and those diverts should go to two different knots.
 
-Now, revise your story: make at least one of the options inside of one of your two choices use selective output. Introduce at least one loop using a knot into the story and use a sticky choice inside it so that it works properly - but be sure it isn’t an infinite loop! While modifying the story you created may be a challenge because you have to rewrite some of the story content, think about ways you can change the narrative you created to include that kind of content instead of creating a new story from scratch.
+You should pay attention to the narrative content of your story as you write, but don’t worry about the length of the story: focus more on creating the necessary Ink code to tell a short story that makes sense.
+
+Now, revise your story: make at least one of the options inside of one of your two choices use selective output. Introduce at least one loop using a knot into the story and use a sticky choice inside it so that it works properly - but be sure it isn’t an infinite loop!
+
+While modifying the story you created may be a challenge because you have to rewrite some of the story content, think about ways you can change the narrative you created to include that kind of content instead of creating a new story from scratch.
 
 Finally, revise your story again: add at least two conditional choices to the story. Make one of those into an advanced choice. Once you have done so, check the story for consistency: make sure the narrative still makes sense! You might also want to have someone else play through it to see if there are problems that you have not caught on your own.
