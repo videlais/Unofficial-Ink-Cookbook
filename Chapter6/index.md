@@ -2,11 +2,12 @@
 
 - [Chapter 6: Alternatives](#chapter-6-alternatives)
   - [Alternatives](#alternatives)
+  - [Sequences](#sequences)
   - [Cycles](#cycles)
   - [Once-Only](#once-only)
   - [Shuffles](#shuffles)
   - [Multi-block Alternatives](#multi-block-alternatives)
-    - [Sequences](#sequences)
+    - [Multi-Line Sequences](#multi-line-sequences)
     - [Multiline Cycles](#multiline-cycles)
     - [Multiline Once-Only](#multiline-once-only)
     - [Multi-line Shuffles](#multi-line-shuffles)
@@ -27,7 +28,8 @@
 Along with writing text, Ink also provides a way to create alternatives, a programmable way to provide sequences of text, different cycling, and shuffled, or random text from a collection.
 
 In Ink, Alternatives are usually text within curly brackets, `{}`. They have already been introduced as part of determining if a knot (or stitch) has been visited. When used with text strings, they can be used to introduce "alternative" text.
-Sequences
+
+## Sequences
 
 ```ink
 -> Freaking_Out
@@ -101,11 +103,11 @@ Here I am, 30 minutes before the date and I haven't picked out my clothes!
 
 ## Multi-block Alternatives
 
-Alternatives are often used as part of bracket entries. However, they also have an extended, multiline as well.
+Alternatives are often used as part of bracket entries. However, they also have an extended, multiline form as well.
 
-### Sequences
+### Multi-Line Sequences
 
-The keyword stopping is used as part of a multiline sequence alternative.
+The keyword `stopping` is used as part of a multiline sequence alternative.
 
 ```ink
 {stopping:
@@ -117,7 +119,7 @@ The keyword stopping is used as part of a multiline sequence alternative.
 
 ### Multiline Cycles
 
-Multiline cycles use the cycle keyword.
+Multiline cycles use the `cycle` keyword.
 
 ```ink
 {cycle:
@@ -129,7 +131,7 @@ Multiline cycles use the cycle keyword.
 
 ### Multiline Once-Only
 
-The once-only alternative used the keyword once for multiline usage.
+The once-only alternative used the keyword `once` for multiline usage.
 
 ```ink
 {once:
@@ -140,7 +142,7 @@ The once-only alternative used the keyword once for multiline usage.
 
 ### Multi-line Shuffles
 
-Mult-line shuffles use the shuffle keyword.
+Mult-line shuffles use the `shuffle` keyword.
 
 ```ink
 {shuffle:
@@ -153,11 +155,11 @@ Mult-line shuffles use the shuffle keyword.
 
 ## Advanced Shuffles
 
-The keyword shuffle can be paired with the keywords once and stopping.
+The keyword `shuffle` can be paired with the keywords `once` and `stopping`.
 
 ### Shuffle Once
 
-When paired with the keyword once, the shuffle will pick a random entry and then show nothing when used additional times.
+When paired with the keyword `once`, the `shuffle` keyword will pick a random entry and then show nothing when used additional times.
 
 ```ink
 {shuffle once:
@@ -170,7 +172,7 @@ When paired with the keyword once, the shuffle will pick a random entry and then
 
 ### Shuffle Stopping
 
-Using the keywords shuffle and stopping together shows a random entry excluding the last one and then only the last one in additional attempts.
+Using the keywords `shuffle` and `stopping` together shows a random entry excluding the last one and then only the last one in additional attempts.
 
 ```ink
 {shuffle stopping:
@@ -184,7 +186,7 @@ Using the keywords shuffle and stopping together shows a random entry excluding 
 
 ### Advanced Alternatives
 
-Previously, alternatives were shown as part of single usage or as containing merely text. The usage of alternatives extend much more than what has been shown so far.
+Previously, alternatives were shown as part of single usage or as containing merely text. The usage of alternatives extend much more than what has been shown so far!
 
 #### Blank Elements
 
@@ -229,6 +231,8 @@ crab!
 -> DONE
 ```
 
+**Reminder:** In the above example, the use of `<>` is glue. It makes the next line run together with the previous.
+
 ### Choice Text and Alternatives
 
 Alternatives can be used as part of the choice text of an option. However, to avoid the alternative appearing as a conditional, it is recommended to have some text before the alternative.
@@ -243,7 +247,9 @@ Alternatives can be used as part of the choice text of an option. However, to av
 
 ## Try It
 
-This chapter’s examples demonstrate the different kinds of alternatives available within Ink. Alternatives allow you to create very complex stories with looping content, randomization, and lots of other advanced features. Learning how alternatives work can be challenging, but practicing with them will help you figure out how each one works and how they can be combined together to build advanced Ink stories.
+This chapter’s examples demonstrate the different kinds of alternatives available within Ink.
+
+Alternatives allow you to create very complex stories with looping content, randomization, and lots of other advanced features. Learning how alternatives work can be challenging, but practicing with them will help you figure out how each one works and how they can be combined together to build advanced Ink stories!
 
 We recommend the following practice exercises:
 
@@ -251,4 +257,6 @@ First, create a simple Ink story that uses a sequence. You need a loop (Chapter 
 
 Next, revise your story to include a cycle and a once-only. Remember that a cycle will repeat the values inside it, while a once-only will show nothing once the last entry is reached, so try to revise your story’s narrative so that the new content will make sense.
 
-After that, revise the story again: this time, find a way to include a shuffle in the story. Remember that a shuffle will randomize the values inside it, so you might want to think of something in your story’s narrative that could have a randomized outcome. As a tip, remember that you can nest alternatives within another: doing so is a common way to use shuffles and allows you to create heavily randomized content.
+After that, revise the story again: this time, find a way to include a shuffle in the story. Remember that a shuffle will randomize the values inside it, so you might want to think of something in your story’s narrative that could have a randomized outcome.
+
+As a tip, remember that you can nest alternatives within another: doing so is a common way to use shuffles and allows you to create heavily randomized content!
