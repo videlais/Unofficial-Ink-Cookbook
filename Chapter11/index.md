@@ -28,9 +28,7 @@
 
 ## LIST
 
-Beyond using variables, Ink also provides a data type call a LIST. These store collections of values that can be accessed, changed, and manipulated in different ways in connection to each other.
-
-Along with variables and their different types like temporary and constants, Ink also has a variable type called a LIST. It allows for storing a sequence of things where both the values and their order is important.
+Beyond using variables, Ink also provides a data type call a `LIST`. These store collections of values that can be accessed, changed, and manipulated in different ways in connection to each other.
 
 ```ink
 LIST moods = happy, angry, sad
@@ -50,7 +48,7 @@ These can also be used as part of the flow once set earlier, allowing for changi
 
 ## Automatically Set to False
 
-The values used in a `LIST` are automatically set to false. What this means in practice is that any values include in a `LIST` are in it, but do not count toward its total unless they are “enabled,” set to true.
+The values used in a `LIST` are automatically set to `false`. What this means in practice is that any values include in a `LIST` are in it, but do not count toward its total unless they are "enabled," set to true.
 
 The following code will show a value of 0.
 
@@ -64,7 +62,7 @@ The function `LIST_COUNT()` returns the total number of enabled entries in a `LI
 
 ## Enabling Values
 
-Values in a `LIST` are considered true if they have opening and closing parentheses around them.
+Values in a `LIST` are considered `true` if they have opening and closing parentheses around them.
 
 The same code which shown a total of zero will change to three when all of its values are now set to true.
 
@@ -76,7 +74,7 @@ LIST moods = (happy), (angry), (sad)
 
 ## Built-in Functions
 
-For dealing directly with lists, Ink also has several specific functions. As a `LIST` can have both true and false values, each of these functions deals with and understands the entries in a `LIST` in different ways.
+For dealing directly with lists, Ink also has several specific functions. As a `LIST` can have both `true` and `false` values, each of these functions deals with and understands the entries in a `LIST` in different ways.
 
 ### `LIST_COUNT()`
 
@@ -239,7 +237,7 @@ Current Clues: {clues}
 
 ## Conflicting Values and Variable Names
 
-One of the rules of `LIST` is that must contain unique variable names. A value cannot exist in two separate `LIST`s. Therefore, when moving values from one `LIST` to another, it is recommended to remove first and then add to the new `LIST`.
+One of the rules of `LIST` is that must contain unique variable names. A value cannot exist in two separate `LIST`s! Therefore, when moving values from one `LIST` to another, it is recommended to remove first and then add to the new `LIST`.
 
 ```ink
 LIST Items = (Dagger), (Lead_Pipe), (Spanner), (Candlestick), (Revolver), (Rope)
@@ -294,9 +292,9 @@ The smallest value is A is smaller than all values in B, and the largest value i
 
 ## Multi-listed Lists
 
-Once a `LIST` value exists, it can be used by any `LIST` or by a `VAR`, or temp variable. Beyond moving values between `LIST`s, it is also possible to intermix values from `LIST`s once they are created.
+Once a `LIST` value exists, it can be used by any `LIST`, `VAR`, or temp variable. Beyond moving values between `LIST`s, it is also possible to intermix values from `LIST`s once they are created.
 
-In more complex projects, this can be a way to define all possible value in a `LIST` and then use them to define different states or descriptions during the running of a project.
+In more complex projects, this can be a way to define all possible values in a `LIST` and then use them to define different states or descriptions during the running of a project.
 
 ```ink
 LIST Items = (Dagger), (Lead_Pipe), (Spanner), (Candlestick), (Revolver), (Rope)

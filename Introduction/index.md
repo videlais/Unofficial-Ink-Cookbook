@@ -5,6 +5,7 @@
   - [Style Conventions](#style-conventions)
     - [Code](#code)
     - [Emphasis](#emphasis)
+    - [Code Styling](#code-styling)
 
 ## Who This Book is For
 
@@ -20,7 +21,7 @@ This book uses some style conventions to visually explain concepts.
 
 ### Code
 
-All Ink code is marked in code-blocks. It may appear `in-line`, but most code will appear as the following:
+All Ink code is marked in code blocks. It may appear `in-line`, but most code will appear as the following:
 
 ```ink
 This is some code.
@@ -34,3 +35,9 @@ When introducing terms, it will be given *emphasis*.
 In different places, *emphasis may be used to stress its importance or connection to other concepts.*
 
 In rare cases, strong emphasis is used to **stress warnings or potential problems.**.
+
+### Code Styling
+
+Keywords in Ink appear through in-line code blocks. For example, `VAR` would appear like this.
+
+When discussing other scripting or programming languages, emphasis is used for properties and function names. Strong emphasis is used for the name of objects or other complex data structures.

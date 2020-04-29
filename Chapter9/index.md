@@ -20,11 +20,11 @@
 
 ## Functions
 
-To help with process data, Ink provides ways to pass information between knots and functions. When working with variables, these provide a way to process or test data in different ways.
+To help with processing data, Ink provides ways to pass information between knots and functions. When working with variables, these provide a way to process or test data in different ways.
 
-In programming terminology, a function is some section of code designed around some task. It borrows the term for mathematical functions in which data is changed through applying some known set of rules.
+In programming terminology, a function is some section of code designed around some task. It borrows the term from mathematical functions in which data is changed through applying a set of rules.
 
-In Ink, the concept of functions come in two ways. The first is in Knot Parameters and then second is in Functions themselves. For Ink, these divisions help authors to think through how to divide up their code and calculations in ways that may be more narrative or mechanically focused depending on their needs.
+In Ink, the concept of functions comes in two ways. The first is in Knot Parameters and then second is in Functions themselves. For Ink, these divisions help authors to think through how to divide up their code and calculations in ways that may be more narrative or mechanically focused, depending on their needs.
 
 ## Knot Parameters
 
@@ -60,7 +60,7 @@ Within the knot itself, the new names for the values passed it as parameters are
 
 Functions in Ink act like knots with parameters. They can define the name of variables and those act as temporarily variables within their context. They can also perform small tasks and make calculations using code. However, knots with parameters and function has a small very key difference: function can return data.
 
-Functions are a special type of knot but use the keyword "function." This also enables them to use additional functionality not available to regular knots and stitches: returning data using the "return" keyword.
+Functions are a special type of knot but use the keyword `function`. This also enables them to use additional functionality not available to regular knots and stitches: returning data using the `return` keyword.
 
 Similar to many other scripting languages, functions in Ink can be called, perform some task, and then return the result of the task.
 
@@ -87,11 +87,11 @@ Functions can:
 
 ## Passing By Reference
 
-Functions in Ink are also capable of another common programming concept called passing by reference. Normally, values are copied when a function is used. Within the function, some action is taken and maybe a value is returned. The values passed to the function, however, do not change inside of the function itself.
+Functions in Ink are also capable of another common programming concept called *passing by reference*. Normally, values are copied when a function is used. Within the function, some action is taken and maybe a value is returned. The values passed to the function, however, do not change inside of the function itself.
 
-Using a concept called passing by reference, values passed to a function can be changed. The term “by reference” takes is meaning from an early programming term of where the location of a variable in computer memory was its reference. By knowing a variable's reference, it was possible to change its value directly.
+Using a concept called passing by reference, values passed to a function can be changed. The term "by reference" takes is meaning from an early programming term of where the location of a variable in computer memory was its *reference*. By knowing a variable's reference, it was possible to change its value directly.
 
-In Ink, this terminology means that using the keyword "ref", a variable is available to be changed inside of the function. Instead of copying its value, its reference is passed to the function.
+In Ink, this terminology means that using the keyword `ref`, a variable is available to be changed inside of the function. Instead of copying its value, its reference is passed to the function.
 
 ```ink
 VAR name = "Dan"
@@ -106,7 +106,7 @@ The new name is {changeName(name)} {name}.
 
 ## Variable Naming Issues
 
-As was mentioned in the chapter called "It’s All Variable", variables created using the keyword `VAR` are global. This means they can be accessed anywhere in the Flow. This also means that their names are reserved. Two variables cannot have the same name.
+As was mentioned in the chapter called "It’s All Variable", variables created using the keyword `VAR` are global. This means they can be accessed anywhere in the Flow. This also means that their names are reserved. **Two variables cannot have the same name.**
 
 In the earlier section explaining how parameters are temporary variables within a knot or function, this means they cannot share names with other, existing variables in a project. Naming variables and parameters, then, becomes a matter of trying to use the most descriptive names for their purpose.
 
@@ -116,7 +116,7 @@ To help with common mathematical operations, Ink has several built-in functions 
 
 ### `POW(number, to-the-power-of)`
 
-The function pow() computes and returns a number multiplied by itself the number of times supplied by the second parameter. It is the to-the-power-of function.
+The function `POW()` computes and returns a number multiplied by itself the number of times supplied by the second parameter. It is the to-the-power-of function.
 
 ```ink
 { POW(4, 2) }

@@ -6,19 +6,35 @@
     - [Hierarchy View](#hierarchy-view)
     - [Inspector View](#inspector-view)
     - [Scripting Files](#scripting-files)
-    - [Unity Editor Modes](#unity-editor-modes)
+  - [Unity Editor Modes](#unity-editor-modes)
   - [Importing and Testing](#importing-and-testing)
     - [Getting the Ink Unity Plugin](#getting-the-ink-unity-plugin)
     - [Adding Ink Files](#adding-ink-files)
     - [Writing Ink Code](#writing-ink-code)
     - [Testing](#testing)
     - [Associating Files](#associating-files)
-    - [Debugging `Continue()`](#debugging-continue)
+    - [Debugging *Continue()*](#debugging-continue)
     - [Checking the Console](#checking-the-console)
   - [Working with the Ink API](#working-with-the-ink-api)
     - [Working with *canContinue*](#working-with-cancontinue)
     - [Working with Choices](#working-with-choices)
     - [Choosing Choices](#choosing-choices)
+    - [Reviewing Ink API](#reviewing-ink-api)
+    - [Building an Interface](#building-an-interface)
+    - [Building a UI](#building-a-ui)
+      - [Creating a Canvas](#creating-a-canvas)
+      - [Adding a Vertical Layout Group](#adding-a-vertical-layout-group)
+      - [Planning UI](#planning-ui)
+      - [Working with a Prefab](#working-with-a-prefab)
+    - [Tags and Rich Text](#tags-and-rich-text)
+      - [Parsing Tags](#parsing-tags)
+      - [Rich Text](#rich-text)
+      - [Marking Options](#marking-options)
+    - [Keep-on Continuing](#keep-on-continuing)
+      - [Styled User Interface](#styled-user-interface)
+    - [Ink Variables and Functions](#ink-variables-and-functions)
+      - [Global Variables](#global-variables)
+      - [Calling Functions](#calling-functions)
 
 **Summary:** In this chapter, you will learn about Unity, how to import and use the Ink Unity Integration plugin, and how to work with the Story API to create a simple button-based example project.
 
@@ -26,7 +42,7 @@
 
 The creators of Ink, Inkle Studio, have created an Ink Unity Integration plugin for working with Ink in the game engine Unity, providing ways to test compiled Ink files, make new Ink files, and work with the Story API in Unity game object scripts to load blocks of a story and its choices.
 
-Unity is a popular cross-platform game engine for making 2D and 3D games. It supports virtual and augmented reality projects and has been used by major game development projects to make anything from small, indie projects to major AAA titles. Using the game engine is free, but accessing the asset store, where additional resources and plugins can be found, requires registering an account with Unity before being able to access materials.
+Unity is a popular cross-platform game engine for making 2D and 3D games. It supports virtual and augmented reality projects and has been used by major game development projects to make everything from small, indie projects to major AAA titles. Using the game engine is free, but accessing the asset store, where additional resources and plugins can be found, requires registering an account with Unity before being able to access materials.
 
 *What are the basics of Unity Editor?*
 
@@ -46,7 +62,7 @@ When working with a single game object, the Inspector View shows details about i
 
 Unity uses the C# programming language for scripting purposes. Files are added through being attached as a new component to a game object. This allows the script to access details about the game object it is associated with and react or manipulate it as a result.
 
-### Unity Editor Modes
+## Unity Editor Modes
 
 The Unity Editor has two modes: runtime and editor mode. While in runtime mode, Unity is displaying any game objects in the current scene and running any code. The properties and settings of game objects can be changed while in runtime and they will be updated in real-time. However, any changes made during the runtime mode will not be retained when it ends.
 
@@ -91,12 +107,12 @@ Name this new Ink file "InkTesting". As soon as it is named, the Ink Unity plugi
 ### Writing Ink Code
 
 Clicking on a Ink file from the Project View will show it in the Inspector View. Each file as an associated JSON Asset (the compiled file) and the ability to be played in Unity.
-However, the Ink Unity Integration plugin DOES NOT come with an editor or the ability to edit Ink files directly in Unity itself. For writing Ink, the Inky Editor is recommended.
 
-Clicking on the “Open” button from the Inspector View will prompt for the system-wide default editing program to associate the file with when opening. It is again highly recommended to use the Inky Editor when first learning Ink, but any text editor can work.
+The Ink Unity Integration plugin DOES NOT come with an editor or the ability to edit Ink files directly in Unity itself. For writing Ink, the Inky Editor is recommended.
+
+Clicking on the "Open" button from the Inspector View will prompt for the system-wide default editing program to associate the file with when opening. It is again highly recommended to use the Inky Editor when first learning Ink, but any text editor can work.
 
 Once open, add the following example Ink code:
-This is an example Ink file.
 
 ```ink
 * Choice 1
@@ -119,7 +135,7 @@ Because this code will be using the Ink Runtime, the library will need to be inc
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Ink.Runtime;
+using Ink.Runtime; //Add this line after the others!
 ```
 
 Two new variables will needed to be added within the object as well.
@@ -131,9 +147,9 @@ private Story story;
 
 The first inkJSONAsset will serve as the input to this file and will be associated with the JSON Asset of the Ink file.
 
-The second, story, will be the private Story object used across different internal functions.
+The second, **story**, will be the private Story object used across different internal functions.
 
-Finally, within the Start() function, add the following:
+Finally, within the *Start()* function, add the following:
 
 ```C#
  story = new Story(inkJSONAsset.text);
@@ -150,7 +166,7 @@ With this file selected in the Project View, drag and drop the compiled JSON fil
 
 Once accomplished, the compiled JSON file will be associated with that field and, in turn, the public variable inkJSONAsset within the script file.
 
-### Debugging `Continue()`
+### Debugging *Continue()*
 
 Through either double-clicking (if closed) or moving to the window with the file open, return to the "InkExample.cs" file.
 
@@ -167,23 +183,25 @@ Add a new line after the loading in the Start() function:
 
 Save the file.
 
-In Unity, click on the “Play” button.
+In Unity, click on the "Play" button.
 
 ### Checking the Console
 
-The use of Debug.log() wrote to the Unity console.
+The use of *Debug.log()* wrote to the Unity console.
 
 If this window is not already open, go to Window -> General -> Console to open it. (Dragging the window to another can dock it there as a tab.)
 
 The latest message of the Console window should be the following:
 
 ```log
-“This is an example Ink file.”
+"This is an example Ink file."
 ```
 
-The use of the `Continue()` function loaded and returned the next text chunk of the story. Using the *Debug.Log()* function displayed it for testing purposes.
+The use of the *Continue()* function loaded and returned the next text chunk of the story. Using the *Debug.Log()* function displayed it for testing purposes.
 
 If this message was displayed, everything worked correctly and the Ink Unity Integration plugin is working!
+
+**Full Code:**
 
 ```C#
 using System.Collections;
@@ -209,11 +227,11 @@ public class InkExample : MonoBehaviour
 
 ## Working with the Ink API
 
-In the previous part, the Ink function `Continue()` was used to load and return the next text chunk. It is one of many functions that are exposed as part of using a Story object.
+In the previous part, the Ink function *Continue()* was used to load and return the next text chunk. It is one of many functions that are exposed as part of using a Story object.
 
 ### Working with *canContinue*
 
-The previous example Ink code was not very complicated. It had some initial text and two choices as part of that block.
+The previous example, the Ink code was not very complicated. It had some initial text and two choices as part of that block.
 
 This is an example Ink file.
 
@@ -240,11 +258,9 @@ Using the *Debug.log()* function, the first chunk was loaded. However, calling i
 
 The error shown mentions *canContinue*. This is a property of the Story object whose purpose is, like its name implies, to expose a value if there is more story to continue or not.
 
-Starting to write the function will prompt its name. Placing the cursor over the name or continuing to type it will show its name and usage.
+The *canContinue* property has a Boolean value if there is more story or not. This is needed before calling *Continue()* (as it mentions) to make sure the error does not happen again.
 
-The canContinue property has a Boolean value if there is more story or not. This is needed before calling Continue() (as it mentions) to make sure the error does not happen again.
-
-As this process of checking canContinue and then calling Continue() is a common action, it should also be made into its own function.
+As this process of checking canContinue and then calling *Continue()* is a common action, it should also be made into its own function.
 
 ```C#
  // Load and potentially return the next story block
@@ -261,11 +277,11 @@ As this process of checking canContinue and then calling Continue() is a common 
 
 ### Working with Choices
 
-Working with canContinue exposes if there is more story or not. The function *Continue()* loads and returns the next text block. Neither of these deal with choices, a central aspect of Ink. For that, the property currentChoices is needed.
+Working with *canContinue* exposes if there is more story or not. The function *Continue()* loads and returns the next text block. Neither of these deal with choices, a central aspect of Ink. For that, the property currentChoices is needed.
 
 For each call of *Continue()*, the *currentChoices* property is populated with a List of Choice objects. However, and as its description mentions, once *canContinue* becomes false, it will often be populated with the last List it loaded.
 
-Moving through the List of Choice objects can be accomplished using foreach().
+Moving through the List of Choice objects can be accomplished using *foreach()* in C#.
 
 ```C#
 // Start is called before the first frame update
@@ -280,7 +296,7 @@ Moving through the List of Choice objects can be accomplished using foreach().
     }
 ```
 
-Each Choice object has two important properties: index and text. The order of choices matters. Their index is used to mark which of the choices was chosen. It text property is the option to show to the user.
+Each Choice object has two important properties: *index* and *text*. The order of choices matters. Their index is used to mark which of the choices was chosen. It text property is the option to show to the user.
 
 ### Choosing Choices
 
@@ -302,25 +318,20 @@ To make a choice, its index is needed. This is used with another function,*Choos
 ```
 
 Based on the example Ink story, the calls to *Debug.log()* would show the initial text, the index and text of each Choice, and then the text of the choice.
- 
-Reviewing Ink API
-Name
-Type
-Description
-canContinue
-Property
-Is true if the story can continue to run or false otherwise.
-Continue()
-Function
-Returns the next text block and loads the next choices, if any.
-currentChoices
-Property
-A List<Choice> of the current choices. (Each entry’s text property contains their text and indexits order.)
-ChooseChoiceIndex()
-Function
-Supplying a valid index matching the length of the List<Choice> of currentChoices will consider that entry “clicked.”
 
-Building an Interface
+### Reviewing Ink API
+
+**Property:**
+
+- *canContinue*:  Is true if the story can continue to run or false otherwise.
+- *currentChoices*: A `List<Choice>` of the current choices. (Each entry's text property contains their text and index.)
+
+**Method:**
+
+- *Continue()*: Returns the next text block and loads the next choices, if any.
+- *ChooseChoiceIndex()*: Supplying a valid index matching the length of the `List<Choice>` of *currentChoices* will consider that entry "clicked."
+
+### Building an Interface
 
 In the first part, the Ink Unity Integration plugin was added to a Unity project. In the second, the Ink API was used to load, parse, and work through a story’s text and choices.
 
@@ -337,13 +348,13 @@ This is an example Ink file.
     -> DONE
 ```
 
-Building a UI
+### Building a UI
 
 In the previous two parts, a Script was used as a component on the game object Main Camera. This was used as a way to demonstrate how the different Ink API worked together. However, this is not an efficient use of the types of game objects in Unity.
 
 Click on the Main Camera game object. In the Inspector View, look for the Ink Example (Script) and click on the right-most icon, the gizmo. From the drop-down listing, click on “Remove Component”. This will disassociate the file from the Main Camera.
 
-Creating a Canvas
+#### Creating a Canvas
 
 Working with UI in Unity works best with a Canvas, a game object used to hold other game objects and other UI elements.
 
@@ -351,9 +362,9 @@ In the Hierarchy View, click on the Create or right-click and then UI -> Canvas.
 
 Select the new Canvas game object. Click on Add Component from the Inspector View.
 
-Select “Scripts” and then the Ink Example file. This will associate the file with the Canvas object.
+Select "Scripts" and then the Ink Example file. This will associate the file with the Canvas object.
 
-Adding a Vertical Layout Group
+#### Adding a Vertical Layout Group
 
 With the Canvas game object selected, click on Add Component again.
 
@@ -365,7 +376,8 @@ The padding around the canvas will serve to leave a small border around all of t
 
 The second option will force the contents to expand and allow the elements themselves to control its own width.
 
-Planning UI
+#### Planning UI
+
 This new interface needs to replicate a fairly standard appearance of having text over some elements the user can interact with below it.
 
 To have the text appear above choices, the UI element Text can be used. However, to make things easier, this will be added to a new game object that contains it.
@@ -377,7 +389,7 @@ To have the text appear above choices, the UI element Text can be used. However,
         newGameObject.transform.SetParent(this.transform, false);
 ```
 
-Once created, the new game object will need to be associated with the same transform space of its parent (the canvas). The function transform.SetParent() does this, matching the transform passed to it.
+Once created, the new game object will need to be associated with the same transform space of its parent (the canvas). The function transform.*SetParent()* does this, matching the transform passed to it.
 
 ```C#
 // Add a new Text component to the new GameObject
@@ -392,9 +404,9 @@ Once created, the new game object will need to be associated with the same trans
 
 Next, a new Text object can be added through the `AddComponent<Type>()` function. A new Text component can be added to the new game object and the reference saved.
 
-To help with visibility, its fontSize and font are set. The text property is set using the previously-defined getNextStoryBlock() function from the previous part.
+To help with visibility, its fontSize and font are set. The text property is set using the previously-defined *getNextStoryBlock()* function from the previous part.
 
-For each choice, following a model from the previous part, the foreach() function can parse them all. However, instead of using Text, Button objects can be used instead.
+For each choice, following a model from the previous part, the *foreach()* function can parse them all. However, instead of using **Text**, **Button** objects can be used instead.
 
 ```C#
  foreach (Choice choice in story.currentChoices)
@@ -411,7 +423,7 @@ For each choice, following a model from the previous part, the foreach() functio
         }
 ```
 
-For the listener, an onClick event is used. The delegate keyword is used to pass a method as a parameter to the AddListenerer() function. Whenever a button is clicked, the function onClickChoiceButton() function is used.
+For the listener, an onClick event is used. The delegate keyword is used to pass a method as a parameter to the *AddListenerer()* function. Whenever a button is clicked, the function *onClickChoiceButton()* function is used.
 
 ```C#
 // When we click the choice button, tell the story to choose that choice!
@@ -422,11 +434,11 @@ For the listener, an onClick event is used. The delegate keyword is used to pass
     }
 ```
 
-Separating out the ChooseChoiceIndex() function to its own now, the OnClickChoiceButton() function now takes a choice and tells the story a certain choice has been made.
+Separating out the *ChooseChoiceIndex()* function to its own now, the *OnClickChoiceButton()* function now takes a choice and tells the story a certain choice has been made.
 
-This also calls refresh(), the new function that will serve as the central hub for all of the UI elements. However, once final things is needed: clearUI().
+This also calls *refresh()*, the new function that will serve as the central hub for all of the UI elements. However, once final things is needed: *clearUI()*.
 
-Each time the refresh() function is called, it should update all of the UI elements. It cannot know ahead of time how much text or how many choices might be per story chunk. Therefore, all of the game objects should be cleared and then re-created per click action.
+Each time the *refresh()* function is called, it should update all of the UI elements. It cannot know ahead of time how much text or how many choices might be per story chunk. Therefore, all of the game objects should be cleared and then re-created per click action.
 
 ```C#
 // Clear out all of the UI, calling Destory() in reverse
@@ -440,15 +452,15 @@ Each time the refresh() function is called, it should update all of the UI eleme
     }
 ```
 
-Working with a Prefab
+#### Working with a Prefab
 
-In the existing code, the Instantiate() function is used to clone an existing object from in the Unity project. What is cloned is a Prefab Button.
+In the existing code, the *Instantiate()* function is used to clone an existing object from in the Unity project. What is cloned is a Prefab **Button**.
 
 To create this Prefab, create a Button.
 
 In the Project View, create a folder. Name it "Prefabs".
 
-Drag and drop the game object from the Hierarchy View to the Project View and in the “Prefabs” folder.
+Drag and drop the game object from the Hierarchy View to the Project View and in the "Prefabs" folder.
 
 Right-click on the new Button and choose Delete. (Make sure it is in the Prefabs folder before deleting!)
 
@@ -547,11 +559,11 @@ public class InkExample : MonoBehaviour
 }
 ```
 
-Tags and Rich Text
+### Tags and Rich Text
 
 Working across these sections, the Ink Unity Integration plugin was used imported, tested, and then used to build a simple button-based interface. However, there is one more tool Ink has that can be used in Unity: tags.
 
-In Ink, tags are extra code that are ignored. They start with the hash character, #, and run to the end of the line or until another tag is found.
+In Ink, tags are extra code that are ignored. They start with the hash character, `#`, and run to the end of the line or until another tag is found.
 
 Tags are also attached to the text in front of them. For a single line, its tag would go at the end. For multiple lines, the tags would go at the end of all of text.
 
@@ -561,11 +573,11 @@ Tags are also attached to the text in front of them. For a single line, its tag 
 
 One way to use tags in Ink when working with Unity, then, is as "speech tags." These can mark who is saying which words during dialogue.
 
-Parsing Tags
+#### Parsing Tags
 
-One of the properties not previously discussed so far is currentTags. This is also part of the StoryAPI and, like currentChoices, is populated by a call to the Continue() function.
+One of the properties not previously discussed so far is currentTags. This is also part of the StoryAPI and, like *currentChoices*, is populated by a call to the *Continue()* function.
 
-The currentTags property holds a `List<string>`. If there are no tags, it will be empty. Therefore, its own property Count can be tested. If its “count” is greater than zero, use the first tag. Otherwise, ignore it.
+The *currentTags* property holds a `List<string>`. If there are no tags, it will be empty. Therefore, its own property Count can be tested. If its “count” is greater than zero, use the first tag. Otherwise, ignore it.
 
 ```C#
 // Get the current tags (if any)
@@ -584,11 +596,11 @@ else
 
 Now, if there is a speech tag, it will precede any text and show who is speaking in the interface.
 
-Rich Text
+#### Rich Text
 
 The Ink documentation mentions using tags for things like color or other styling information for text. This could be done, but Unity provides an easier way: rich text.
 
-By default, Text objects have rich text enabled. This means that text can be styled in Ink and passed through to Unity. (In fact, Inky supports a smaller subset of styles as well!)
+By default, **Text** objects have rich text enabled. This means that text can be styled in Ink and passed through to Unity. (In fact, Inky supports a smaller subset of styles as well!)
 
 ```ink
 "What? Have you <i>never</i> seen a dialogue system before?" #Dan
@@ -615,7 +627,7 @@ Instead of using tags for colors, the rich text code can be added to Ink directl
  }
 ```
 
-Marking Options
+#### Marking Options
 
 As a small user interface change, each option (what is shown to the user) can be marked with a number matching its choice index. However, as choosing a zero option might be off-putting for some users, this could be increased by one.
 
@@ -635,11 +647,11 @@ foreach (Choice choice in story.currentChoices)
 }
 ```
 
-Keep-on Continuing
+### Keep-on Continuing
 
-Along with improving the interface, another change (and function) needs to be made. So far, the function Continue() has been used. This is good if the goal is load content line by line. However, with multi-line content, and those potentially using more rich text markup, this is not as useful.
+Along with improving the interface, another change (and function) needs to be made. So far, the function *Continue()* has been used. This is good if the goal is load content line by line. However, with multi-line content, and those potentially using more rich text markup, this is not as useful.
 
-The function ContinueMaximally() will load content until it finds the next set of choices. In this code, it can be used to load blocks of text until it reaches another choice or the end of the story.
+The function *ContinueMaximally()* will load content until it finds the next set of choices. In this code, it can be used to load blocks of text until it reaches another choice or the end of the story.
 
 ```C#
 // Load and potentially return the next story block
@@ -654,20 +666,20 @@ string getNextStoryBlock()
 }
 ```
 
-Styled User Interface
+#### Styled User Interface
 
 Updating the Ink code, it can now include the following as a much more complex example which also includes usage of rich text markup.
 
 ```ink
 "What? Have you <i>never</i> seen a dialogue system before?" #Dan
 * ["No. Of course I have!"]
-    "That's good. As this is the beginnings of one. 
+    "That's good. As this is the beginnings of one.
     "It even has <b>multiple</b> lines of dialogue.
     "That's neat, right?" #Dan
     -> DONE
 ```
 
-Code
+**Code:**
 
 ```C#
 using System.Collections;
@@ -765,13 +777,13 @@ public class InkExample : MonoBehaviour
 }
 ```
 
-Ink Variables and Functions
+### Ink Variables and Functions
 
-To close out this series, two more aspects of working with Ink in Unity need to be examined: variables and functions.
+To close out this chapter, two more aspects of working with Ink in Unity need to be examined: variables and functions.
 
-Global Variables
+#### Global Variables
 
-In Ink, all variables created using the VAR keyword are global. These values can be accessed and changed anywhere in a project. What this also means is that external programs can also change them as well.
+In Ink, all variables created using the `VAR` keyword are global. These values can be accessed and changed anywhere in a project. What this also means is that external programs can also change them as well.
 
 As part of the Story API, the property *variablesState* is an accessor to any global variables available in the story.
 
@@ -804,11 +816,11 @@ List<string> tags = story.currentTags;
 
 Now, instead of using the value set in Ink, the Unity C# code is overwriting it during run-time.
 
-Calling Functions
+#### Calling Functions
 
 While working with variables directly is one approach to working with the values within an Ink story, there is also another, calling functions.
 
-Like with the variables, it is also possible to call functions in Ink from Unity. The function to do this is EvaluateFunction(). It accepts the name of the function to call and any parameters to pass to the function as comma-separated values.
+Like with the variables, it is also possible to call functions in Ink from Unity. The function to do this is *EvaluateFunction()*. It accepts the name of the function to call and any parameters to pass to the function as comma-separated values.
 
 Returning to the Ink code, it could be updated to the following where, now, a function changes the internal value, leaving the work up to Ink on how to handle things internally.
 
@@ -825,7 +837,7 @@ VAR name = "Freya"
 ~ name = newName
 ```
 
-In the Unity code, the change can happen on the same line as the previous variablesState usage.
+In the Unity code, the change can happen on the same line as the previous *variablesState* usage.
 
 ```C#
  // Add a new Text component to the new GameObject
