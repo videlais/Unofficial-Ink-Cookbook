@@ -3,54 +3,61 @@
 - [Chapter 5: Managing Project Files](#chapter-5-managing-project-files)
   - [Projects](#projects)
   - [Adding New Files](#adding-new-files)
-    - [Including Files](#including-files)
+  - [Knots Across Files](#knots-across-files)
   - [Stitches](#stitches)
   - [Try It](#try-it)
 
 **Summary:** In this chapter, you will learn about managing a project through adding new files, working with stitches, and including other files in a project.
 
+---
+
 ## Projects
 
-In Inky, each new file is a new project. Managing projects, then, becomes an important part of working with Inky and programming in Ink.
+In Inky, each new story is a new project. Understanding projects, then, becomes an important part of working with Inky and programming in Ink.
 
-In the Inky Editor, creating a new file is creating a New Project. It is assumed that any new file will be part of a different project (unless added through the New Included File option).
-
-It is always good to save a project to a new directory when working with the Inky Editor, too. The reason for this is that additional Ink files can be added. Inky will detect these files and then add them to the project. This allows for quickly working between files and knowing which files are part of which project!
+Projects are created through the File menu using File -> New Project.
 
 ## Adding New Files
 
-Once a project has been created, new files can be added to it. When editing a project, using the File → New Included File option to create a new file and have it automatically included in the project.
+Once a project has been created, new files can be added to it. When editing a project, use the File → New Included File option to create a new file and have it automatically included in the project.
 
-### Including Files
+**Note:** It is always good to save a project to a new directory when working with the Inky Editor. Inky will detect files with the `.ink` filetype and add them to the project.
 
-For better organization in more complex projects, Ink stories can be broken up into files. These can then be "included" through using the `INCLUDE` keyword. (This is automatically generated when the New Included File option is used. The file will be added, and the `INCLUDE` keyword will be added to the project file.)
-
-```ink
-INCLUDE Dinner
-INCLUDE GettingReady
-```
-
-Once broken up, knots in other files can also be called by their names like they would if they were in the same file.
-
-**GettingReady.ink:**
+For better organization in more complex projects, Ink stories can be broken up into different files. These can then be "included" through using the `INCLUDE` keyword. (This is automatically generated when the New Included File option is used. The file will be added, and the `INCLUDE` keyword will be added to the project file.)
 
 ```ink
-=== Getting_Ready ===
-
-= Pick_Out_Something_Good
-  I took some time and picked out something good.
-  -> Chapter_3
-  
-= Just_Grab_Something
-  I just grabbed some clothes off the floor and ran out.
-  -> Chapter_3
+INCLUDE Example.ink
 ```
 
-This allows for using diverts and knots across files, branching off into other parts and returning to others through having files be those locations, people, or other logical sections of a much longer flow.
+## Knots Across Files
+
+Once broken up, knots in other files can also be called by their names like they would if they were in the same file. As far as Ink is concerned, they are when using `INCLUDE`!
+
+**KnotsAcrossFiles.ink:**
+
+```ink
+INCLUDE Example.ink
+
+This story begins here, in this file. However, it quickly moves to another file, Example.ink.
+
+-> Example_Knot
+```
+
+**Example.ink:**
+
+```ink
+=== Example_Knot ===
+I'm in another file!
+-> DONE
+```
+
+In the above code, the story begins in the file `KnotsAcrossFiles.ink`. When the divert is encountered, the story moves across files to `Example.ink`. However, as far as Ink was concerned, it was all one story!
 
 ## Stitches
 
-Like breaking a project into different files, knots can also be broken into parts called *Stitches*. As reviewed in the Common Terms chapter, Stitches are subsections of Knots. As a project can be broken up into files, so too can a Knot be broken up into its own Stitches!
+Like breaking a project into different files, knots can also be broken into parts called *stitches*.
+
+Stitches are *subsections of knots*. As a project can be broken up into files, so too can a knot be broken up into its own stitches!
 
 ```ink
 * Pick out something good
@@ -59,7 +66,9 @@ Like breaking a project into different files, knots can also be broken into part
     -> Getting_Ready.Just_Grab_Something
 ```
 
-Within a knot, a stitch is defined with a single equal sign `=`. Just like knots, they can also be a section to be diverted to. However, as stitches are within knots, they must be referenced as such. A stitch takes its location as the `knotName.stitchName` with a dot between the two.
+Within a knot, a stitch is defined with a single equal sign `=`. Just like knots, they can also be a section to be diverted to.
+
+As stitches are within knots, they must be referenced as such. A stitch takes its location as the `knotName.stitchName` with a dot between the two.
 
 **GettingReady.ink:**
 
@@ -79,10 +88,9 @@ Combined with the `INCLUDE` keyword, stitches in other files can be reached thro
 
 **Example:**
 
-**Example.ink:**
+**StitchExample.ink:**
 
 ```ink
-INCLUDE Dinner
 INCLUDE GettingReady
 
 CHAPTER 1: ASKING HIM OUT
@@ -109,46 +117,8 @@ Why hadn't I thought about what I was going to wear? Here I am, 30 minutes befor
 
 === Chapter_3 ===
 CHAPTER 3: EATING DINNER
-
--> Dinner
-```
-
-**Dinner.Ink:**
-
-```ink
-=== Dinner ===
-
-But I hadn't made dinner plans! And they we were, standing outside his apartment.
-
-He turned to me. "What should we eat?"
-
--> Pizza_Choices
-
-=== Pizza_Choices ===
-+ {Pizza < 1} [Pizza?]
-    -> Pizza
-+ {Pizza} {Salad < 1} [Salad?]
-    -> Salad
-+ {Pizza} {Salad} {Nothing < 2} [Nothing?]
-    -> Nothing
-+ {Pizza} {Salad} {Nothing} [Sushi?]
-    -> Sushi
-
-=== Pizza ===
-He shook his head. "I don't like pizza."
--> Pizza_Choices
-
-=== Sushi ===
-"Sushi sounds good!"
 -> DONE
 
-=== Salad ===
-"Not a salad."
--> Pizza_Choices
-
-=== Nothing ===
-{"We have to eat something!"|"Stop being silly!"}
--> Pizza_Choices
 ```
 
 **GettingReady.ink:**
@@ -171,7 +141,7 @@ Knots are sections of a story. They can be places, people, or useful logical sep
 
 As practice, try doing the following:
 
-Using a previous project created from reading the Try It parts of another chapter or a brand new project, adopt or create a new story. This time, divide up the story into different locations the protagonist would visit.
+Using a previous project created from reading the **Try It** parts of another chapter or a brand new project, adopt or create a new story. This time, divide up the story into different locations the protagonist would visit.
 
 For each location, create a new, included file in the project. Using the `INCLUDE` keyword, make sure all of the files can be accessed.
 

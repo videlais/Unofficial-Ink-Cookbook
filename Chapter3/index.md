@@ -16,8 +16,8 @@
 
 Every language has its own terms for its elements. Ink is no different, and explains how to write and understand code in relationship to a project through the following terms:
 
-- *Choice:* Some text a user interacts with in order to progress the story
-- *Weave:* Collection of branching choices
+- *Choice:* Some text defining a possible branching path
+- *Weave:* Collection of choices
 - *Flow:* A user-created path through the available choices
 
 Ink uses the metaphor of threads and sewing to describe projects. The total collection of all choices is a project's *weave*. Through making *choices*, a user creates a *flow* through the overall *weave*.
@@ -47,15 +47,15 @@ Through adding Choices, the preview pane in Inky can be used to "choose," and th
 
 ### Playing with Preview
 
-Testing a project in the Inky Editor is one of the most important skills to learn when using it. Based on the example now written in the editor, its different choices and their outcomes can be examined.
+Testing a project in the Inky Editor is one of the most important skills to learn when working with Ink. Based on the example now written in the editor, its different choices and their outcomes can be examined.
 
-First, click on the "Choose to Write More" choice. On the right-hand side, it will be shown and then the End of Story text will be shown.
+First, click on the "Choose to Write More" option in the Preview pane. It will be shown and then the End of Story text will be shown.
 
 **Note:** Whenever a story ends, the "End of Story" text is shown in the Inky Editor. This signals that there is no more content in the story.
 
 Click the "Restart" button in the Inky Editor. (It is the double-arrow, the rightmost icon above the Preview Pane area.) This will restart the story back before any choices were made.
 
-This time, click on the "Give up on a New Project" choice. Notice that it too will be shown and then the same "End of Story" text is shown.
+This time, click on the "Give up on a New Project" option. Notice that it too will be shown and then the same "End of Story" text is shown.
 
 Right now, these two choices do not amount to much. Clicking on either will choose that option and then end the story right there.
 
@@ -63,9 +63,15 @@ Right now, these two choices do not amount to much. Clicking on either will choo
 
 So far, only code has been added to Ink projects. There is also another type of text that can be added that helps with understanding how code works: comments.
 
-In programming terminology, a comment is some text that is included in code but is ignored when it is run. *A comment is some text for the author or as a reminder of how something works*. Comments can also simply be used as notes to help keep track of things in a project as an author works on it.
+In programming terminology, a comment is some text that is included in code but is ignored when it is run.
 
-Comments in Ink are added through using two forward slashes, `//`. Anything that follows the slashes until the next line is considered a new comment. This also includes adding comments on lines after code as well. Anything from the two slashes to the end of the line is a comment and ignored by Ink.
+*A comment is text written for an author or as a reminder of how something works*.
+
+Comments can also simply be used as notes to help keep track of things in a project as an author works on it.
+
+Comments in Ink are added through using two forward slashes, `//`. Anything that follows the slashes until the next line is considered a new comment. This also includes adding comments on lines after code as well.
+
+Anything from the two slashes to the end of the line is a comment and ignored by Ink.
 
 ```ink
 // These are all comments.
@@ -102,11 +108,11 @@ To avoid confusion, the common style when adding text to the output of a choice 
     Nope. I have given up writing in Ink!
 ```
 
-This styling approach also extends to multiple levels of choice output. If one choice is "under" another, the amount of indentation would continue. It is not uncommon, in larger projects, to seeing many different levels of indentation, each signaling different choices and their output all coexisting at once.
+This styling approach also extends to multiple levels of choice output. If one choice is "under" another, the amount of indentation would continue. It is not uncommon, in larger projects, to see many different levels of indentation, each signaling various choices and their output all coexisting at once.
 
 ### Adding More Choices
 
-Working with indentation and being able to read between and around choices in Ink is an important skill. Adding an additional choice to the existing code is as easy as including extra asterisks and then the text of the choice option for the user.
+Adding an additional choices to the existing code is as easy as including extra asterisks and then more text of the choice option for the user.
 
 ```ink
 * Choose to Write More
@@ -133,7 +139,9 @@ Create a new Ink project called “FirstStory.ink” and save the file. In the c
 You stand before a cave entrance. There are three passages forward.
 ```
 
-This will be a cave exploration example. There will be two initial choices of passages that will expand out into different areas. At each, the player will have the choice to retreat back the way they came in the cave.
+This will be a cave exploration example.
+
+There will be two initial choices of passages that will expand out into different areas. At each, the player will have the choice to retreat back the way they came in the cave.
 
 Copy or type the following code for the first set of choices:
 
@@ -201,7 +209,9 @@ The final part, however, expands outward into other branches.
         -> DONE
 ```
 
-Through using multiple levels of indentation and asterisks, choices were added under others, creating a branching structure that started with three and then moved outward. A Divert was introduced as a way to quickly collapse certain paths to prevent the story from becoming too complex.
+Through using multiple levels of indentation and asterisks, choices were added under others, creating a branching structure that started with three and then moved outward.
+
+A Divert was also introduced as a way to quickly collapse certain paths to prevent the story from becoming too complex.
 
 **Full Example:**
 

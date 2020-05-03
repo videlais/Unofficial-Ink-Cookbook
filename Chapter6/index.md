@@ -6,7 +6,7 @@
   - [Cycles](#cycles)
   - [Once-Only](#once-only)
   - [Shuffles](#shuffles)
-  - [Multi-block Alternatives](#multi-block-alternatives)
+  - [Multi-Line Alternatives](#multi-line-alternatives)
     - [Multi-Line Sequences](#multi-line-sequences)
     - [Multiline Cycles](#multiline-cycles)
     - [Multiline Once-Only](#multiline-once-only)
@@ -23,13 +23,27 @@
 
 **Summary:** In this chapter, you will learn about alternatives and how to use sequences, cycles, and shuffles.
 
+---
+
 ## Alternatives
 
-Along with writing text, Ink also provides a way to create alternatives, a programmable way to provide sequences of text, different cycling, and shuffled, or random text from a collection.
+Along with writing text, Ink also provides a way to create *alternatives*, a programmable way to provide sequences of text, different cycling, and shuffled, or random text from a collection.
 
-In Ink, Alternatives are usually text within curly brackets, `{}`. They have already been introduced as part of determining if a knot (or stitch) has been visited. When used with text strings, they can be used to introduce "alternative" text.
+In Ink, alternatives are usually text within curly brackets, `{}`. When used with text strings, they can be used to introduce "alternative" text.
+
+Each element in an alternative is separated by the pipe character, `|`. Some alternative forms also use special characters at the start to differentiate their forms from others.
 
 ## Sequences
+
+A *sequence* is a series of values. Ink will move from one to another *in sequence* until there are no more to show.
+
+```ink
+{What should I do? | What if I didn't say anything? | Should I ask him out?}
+```
+
+In the above code, the first element "What should I do?" would be shown. If the alternative is encountered a second time, the element "What if I didn't say anything?" would be shown. If encountered a third time, finally "Should I ask him out?" would be shown.
+
+Using diverts and knots to loop, it is possible to view all entries in a sequence through re-encountering it. Ink will show each element until there are no more.
 
 ```ink
 -> Freaking_Out
@@ -40,9 +54,17 @@ In Ink, Alternatives are usually text within curly brackets, `{}`. They have alr
     -> Freaking_Out
 ```
 
-By default, the values within the curly brackets will move in sequence from one to another until it reaches the end. It will then stop at the last value and repeat it.
-
 ## Cycles
+
+A *cycle* is an alternative that repeats. It "cycles" all of entries in order and them starts back at the first element again.
+
+Cycles start with the ampersand, `&`.
+
+```ink
+{&Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday}
+```
+
+If a cycle is encountered again, it will move to the next element in order. Using diverts and knots to loop, the entries in the cycle can be shown and then repeated.
 
 ```ink
 -> New_Day
@@ -53,11 +75,11 @@ By default, the values within the curly brackets will move in sequence from one 
     -> New_Day
 ```
 
-To have the text strings repeat, create a "cycle" of values using the `&` symbol within the curly brackets.
-
 ## Once-Only
 
 Instead of cycling text, Ink also provides a "once-only" alternative that runs through its entries and then stops at the end showing nothing. It only runs through its entries "once."
+
+Cycles start with the exclamation point, `!`.
 
 ```ink
 {!"I don't want you around"|"You need to leave"|"Get out"}, I said.
@@ -65,45 +87,19 @@ Instead of cycling text, Ink also provides a "once-only" alternative that runs t
 
 ## Shuffles
 
+A *shuffle* is a special type of alternative. Instead of using entries in sequence, it uses them *randomly*. It will pick a new, random element from the entries each time it is encountered.
+
+Shuffles start with a tilde, `~`.
+
 ```ink
 It was {~Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday}.
 ```
 
-Within alternatives, entries can also be selected at random. This is called a shuffle. It uses the tilde, `~`.
+## Multi-Line Alternatives
 
-**Example:**
+Alternatives are often written using curly bracket with entries separated by the pipe character. However, they also have an extended, multiline form as well.
 
-```ink
-It was {~Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday}.
-
-I was unsure about asking him out on a date.
-
-CHAPTER 1: ASKING HIM OUT
-
--> Chapter_1
-
-=== Chapter_1 ===
-
-{&What should I do? | What if I didn't say anything? | Should I ask him out?}
-
-+ {Chapter_1} [Did he even like guys?]
-    -> Chapter_1
-
-* {Chapter_1} I should just do it!
-    I let it go for weeks. Finally, I asked him out.
-    -> Chapter_2
-
-=== Chapter_2 ===
-CHAPTER 2: GETTING READY
-
-Why hadn't I thought about what I was going to wear?
-
-Here I am, 30 minutes before the date and I haven't picked out my clothes!
-```
-
-## Multi-block Alternatives
-
-Alternatives are often used as part of bracket entries. However, they also have an extended, multiline form as well.
+When written in the multi-line format, each element in the alternative is separated by a newline and then a hyphen, `-`. Everything on the line following the hyphen is considered part of the element.
 
 ### Multi-Line Sequences
 
@@ -142,7 +138,7 @@ The once-only alternative used the keyword `once` for multiline usage.
 
 ### Multi-line Shuffles
 
-Mult-line shuffles use the `shuffle` keyword.
+Multi-line shuffles use the `shuffle` keyword.
 
 ```ink
 {shuffle:
@@ -159,7 +155,7 @@ The keyword `shuffle` can be paired with the keywords `once` and `stopping`.
 
 ### Shuffle Once
 
-When paired with the keyword `once`, the `shuffle` keyword will pick a random entry and then show nothing when used additional times.
+When paired with the keyword `once`, the `shuffle` keyword will pick a random element and then show nothing when used additional times.
 
 ```ink
 {shuffle once:
@@ -172,7 +168,7 @@ When paired with the keyword `once`, the `shuffle` keyword will pick a random en
 
 ### Shuffle Stopping
 
-Using the keywords `shuffle` and `stopping` together shows a random entry excluding the last one and then only the last one in additional attempts.
+Using the keywords `shuffle` and `stopping` together shows a random element excluding the last one and then only the last one in additional attempts.
 
 ```ink
 {shuffle stopping:
@@ -192,7 +188,7 @@ Previously, alternatives were shown as part of single usage or as containing mer
 
 Alternatives can contain blank elements.
 
-A single element, for example, can be held until the user interacts with a section or knot a certain number of times before showing, using the alternative itself to track the number of interactions.
+A single element, for example, can be held until the user interacts with a knot a certain number of times before showing it, using the alternative itself to track the number of interactions.
 
 ```ink
 I walked through each room, looking everything over. My uncle had told me this house was haunted, but I never believed it.
@@ -205,13 +201,39 @@ I walked through each room, looking everything over. My uncle had told me this h
     -> Check
 ```
 
+In the above code, only the selective output "Check everything" will appear until a user makes a choice three times. At the start of the fourth, the text "A light suddenly came on by itself!" will be shown.
+
+The use of the once-only (starting with `!`) also means the text will continue to be shown as the alternative has been run once.
+
 #### Nested Alternatives
 
-Alternatives can be nested into other alternatives.
+Alternatives can also be nested into other alternatives.
 
 ```ink
 The {~ vampire {~runs|flies} | zombie {~scrambles|crawls} } toward you.
 ```
+
+There are two shuffles in the above example:
+
+**First Verb Shuffle:**
+
+```ink
+{~runs|flies}
+```
+
+**Second Verb Shuffle:**
+
+```ink
+{~scrambles|crawls}
+```
+
+Both of these are inside a larger shuffle:
+
+```ink
+{~ vampire | zombie }
+```
+
+When encountered, a random element from the larger shuffle will be picked. Then, using one of the inner shuffles, a second element will be picked.
 
 #### Alternatives and Diverts
 
@@ -253,9 +275,9 @@ Alternatives allow you to create very complex stories with looping content, rand
 
 We recommend the following practice exercises:
 
-First, create a simple Ink story that uses a sequence. You need a loop (Chapter 4) of some kind so that your player will visit your sequence at least twice, which means you will probably need to use choices, diverts, and knots (Chapter 4) as well. Remember that a sequence will stop at the last value and repeat it once the end of the sequence is reached: you might want to take advantage of that feature in your story’s narrative. As usual, don’t worry about writing a lengthy story, but try to create one that makes sense.
+First, create a simple Ink story that uses a sequence. You need a loop of some kind so that your player will visit your sequence at least twice, which means you will probably need to use choices, diverts, and knots as well. (Remember that a sequence will stop at the last value and repeat it once the end of the sequence is reached: you might want to take advantage of that feature in your story’s narrative.) As usual, don’t worry about writing a lengthy story, but try to create one that makes sense.
 
-Next, revise your story to include a cycle and a once-only. Remember that a cycle will repeat the values inside it, while a once-only will show nothing once the last entry is reached, so try to revise your story’s narrative so that the new content will make sense.
+Next, revise your story to include a cycle and a once-only. Remember that a cycle will repeat the values inside it, while a once-only will show nothing once the last element is reached, so try to revise your story’s narrative so that the new content will make sense.
 
 After that, revise the story again: this time, find a way to include a shuffle in the story. Remember that a shuffle will randomize the values inside it, so you might want to think of something in your story’s narrative that could have a randomized outcome.
 

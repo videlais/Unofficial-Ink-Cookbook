@@ -5,7 +5,9 @@
   - [Style Conventions](#style-conventions)
     - [Code](#code)
     - [Emphasis](#emphasis)
-    - [Code Styling](#code-styling)
+      - [Concepts](#concepts)
+      - [Representations](#representations)
+  - [Other Programming Languages](#other-programming-languages)
 
 ## Who This Book is For
 
@@ -30,14 +32,22 @@ This is a second line of code.
 
 ### Emphasis
 
+#### Concepts
+
 When introducing terms, it will be given *emphasis*.
 
-In different places, *emphasis may be used to stress its importance or connection to other concepts.*
+In different places, *emphasis may repeated to stress importance or connection to other, previous concepts.*
 
-In rare cases, strong emphasis is used to **stress warnings or potential problems.**.
+#### Representations
 
-### Code Styling
+Strong emphasis is used for **story knots** and **stitches**. As these are the different sections of a story, they are given **strong emphasis**
 
-Keywords in Ink appear through in-line code blocks. For example, `VAR` would appear like this.
+Diverts are represented as in-line code blocks. For example, the divert `-> Example` would be shown with both its arrow and the name of the knots or stitch it uses.
 
-When discussing other scripting or programming languages, emphasis is used for properties and function names. Strong emphasis is used for the name of objects or other complex data structures.
+Keywords in Ink also appear throughout using in-line code blocks. For example, `VAR` would appear like this.
+
+Choices are written using *emphasis*. However, their output is enclosed in quotation marks.
+
+## Other Programming Languages
+
+When discussing other scripting or programming languages such as JavaScript or C#, *emphasis* is used for properties. Strong emphasis is used for the name of objects, methods, or other complex data structures.

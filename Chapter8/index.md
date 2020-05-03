@@ -5,17 +5,21 @@
   - [Single Line](#single-line)
   - [Multiple lines](#multiple-lines)
   - [Variables](#variables)
-    - [Types of Data Values](#types-of-data-values)
+    - [Types of Data](#types-of-data)
       - [Numbers](#numbers)
       - [Strings](#strings)
       - [Booleans](#booleans)
       - [Text of Diverts](#text-of-diverts)
+      - [Knots](#knots)
     - [Types of Variables](#types-of-variables)
       - [Global Variables](#global-variables)
       - [Temporary Variables](#temporary-variables)
       - [Constant Variables](#constant-variables)
   - [Conditional Logic](#conditional-logic)
     - [Chaining Testing (Switch Statements)](#chaining-testing-switch-statements)
+    - [Testing Knot Values](#testing-knot-values)
+    - [Multiple Conditionals](#multiple-conditionals)
+    - [Advanced Choices](#advanced-choices)
     - [Working with Alternatives](#working-with-alternatives)
   - [Try It](#try-it)
 
@@ -60,7 +64,7 @@ The values of variables can be shown through using opening and closing curly bra
 You have {health}.
 ```
 
-### Types of Data Values
+### Types of Data
 
 Ink supports saving and using many different types of data. These include numbers, strings, Booleans, and even the text of diverts.
 
@@ -142,6 +146,24 @@ VAR someDivert = -> Next
 === Next ==
 This was!
 -> DONE
+```
+
+#### Knots
+
+When the name of a knot is placed in curly brackets, `{}`, its *value* can be used. In Ink, the value of a knot is a Boolean value. If it has not been visited, its value is 0 (`false`). If it has, its value is 1 (`true`).
+
+```ink
+// Value of Example_Knot will be 0 to start.
+The knot Example_Knot has not been visited. Its value is {Example_Knot}.
+
+-> Example_Knot
+
+=== Example_Knot ===
+// Knot has been visited.
+// Its value will now be 1.
+This knot has been visited! Its value is now {Example_Knot}.
+-> DONE
+
 ```
 
 ### Types of Variables
@@ -327,6 +349,42 @@ The amount of drink left is {drink}.
  + {stopDrinking} [Stop Drinking]
     -> DONE
 ```
+
+### Testing Knot Values
+
+The value of a knot (0 or 1) can be used to *conditionally* show content.
+
+the choice will show the text or not based on the name of the knot.
+
+Combining diverts and knots, choices can also be conditionally shown. Because Knots have unique names, code can check if they have been visited or not.
+
+### Multiple Conditionals
+
+Conditionals checking if a knot has been visited can also be used together, checking if the player has seen (or not) a set of different knots.
+
+These can create a series of choices that have to be progressed through in order to continue, looping back and checking if other knots have been seen yet or not.
+
+### Advanced Choices
+
+Knot labels are not strictly Boolean (true or false) values. They are actually integers (numbers) and a count of how many times the player has seen the knot.
+
+```ink
+-> Pizza_Choices
+=== Pizza_Choices ===
++ [Pizza?]
+    -> Pizza
++ {Pizza > 0} [Salad?]
+    We picked salad.
+    -> DONE
+
+=== Pizza ===
+He shook his head. "I don't like pizza."
+-> Pizza_Choices
+```
+
+Testing if the value of the knot label is less than one is the same as testing if it has not been seen yet. If it has been seen multiple times, the value will be higher.
+
+Testing for multiple values allows for repeating the loop between choices and knots, allowing for the same choice to be chosen and the outcome changing when repeated.
 
 ### Working with Alternatives
 
