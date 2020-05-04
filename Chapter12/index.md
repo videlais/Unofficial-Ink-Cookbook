@@ -5,7 +5,7 @@
   - [Folder Organization](#folder-organization)
     - [Editing Files](#editing-files)
     - [Using Images](#using-images)
-    - [Using Multiple Images](#using-multiple-images)
+    - [Images Do Not Appear in Inky Preview](#images-do-not-appear-in-inky-preview)
   - [Meta Instructions](#meta-instructions)
     - [Author](#author)
     - [Theme](#theme)
@@ -33,27 +33,55 @@ When used for the first time with a project, Inky will save the project based on
 
 Inside the exported project folder will be five files: `index.html`, `ink.js`, `main.js`, `style.css`, and `nameOfProject.js`.
 
+[TODO: Add screenshot of folder structure in Windows and MacOS X]
+
 To play the project locally, open the `index.html` file in a web browser. It should appear as it did in the editor view, but with the name of the project included at the top.
+
+[TODO: Add screenshot of Ink for Web in browser]
 
 ### Editing Files
 
 To prepare a project for others to play, two files are more important than the others: `index.html` and `style.css`. Unfortunately, these two files will be replaced each time the Export to Web process is completed!
 
-When editing the style.css file (to change CSS rules), use the "Export story.js only..." option from the File menu and select the `nameOfProject.js` file to replace only that file each time.
+When editing the `style.css file` (to change CSS rules), use the "Export story.js only..." option from the File menu and select the `nameOfProject.js` file to replace only that file each time.
 
 ### Using Images
 
-Starting with release version 0.10 and onwards, the Inky editor has the ability to build versions of Ink for the web with images using a new tag: `# IMAGE`.
+Starting with release version 0.10, the Inky editor has the ability to build versions of Ink for the web with images using a new tag: `# IMAGE`.
 
-When used in Inky, tags are created using the hash symbol, `#`, and then additional instructions. The image tag is used with the capitalized word IMAGE and a colon. Images are then referenced either in the current directory or with a slash and its location in relation to the `index.html` file.
+**Reminder:** When used in Inky, tags are created using the hash symbol, `#`, and then additional instructions.
 
-When used in the Inky editor, tags will appear as-is within the preview area. Images will not be loaded nor shown. To see the images, use either File –> Export to Web (for first time exporting) or File –> "Export story.js only..." (for additional exporting).
+The image tag is used with the capitalized word `IMAGE` and a colon. Images are then referenced either in the current directory or with a relative path in relation to the `index.html` file.
 
-**Note:** If a previous version of Ink was used to build the project, the entire project will need to be built (Export to Web) with the new version.
+**Note:** A *relative path* is a term meaning a location of a file that is not *absolute*. A relative path includes symbols like the period, `.` and slash, `/`. These define the location of a file *in relation* to another.
 
-### Using Multiple Images
+```ink
+The vast dunes stretch off into the horizon. # IMAGE: dunes.png
+```
 
-Multiple images can be used throughout a project in Ink as well. Using the IMAGE tag within choices, for example, will show the image upon making that choice.
+In the above example, the file `dunes.png` has a relative path of the same folder as the `index.html` file. It would be loaded by the Ink for Web option.
+
+### Images Do Not Appear in Inky Preview
+
+When used in the Inky editor, tags will appear as-is within the preview area. *Images will not be loaded nor shown*.
+
+To see the images, use either File –> Export to Web (for first time exporting) or File –> "Export story.js only..." (for additional exporting).
+
+The reason for this is simple: the `# IMAGE` tag is just that, a *tag*. Ink, and Inky by extension, simply records tags and saves their values. *It does not process them.* It is the Ink for Web functionality that is processing the image tag and adding the image to the final, HTML output.
+
+The following code would show only that a tag was being used, not load the image:
+
+**Code:**
+
+```ink
+The vast dunes stretch off into the horizon. # IMAGE: dunes.png
+```
+
+**Output:**
+
+```ink
+The vast dunes stretch off into the horizon.
+```
 
 ## Meta Instructions
 
@@ -63,9 +91,21 @@ Along with understanding code commands, the tagging system in Inky also allows f
 
 The author tag allows for adding an author to the project. Once added, the "author" area will appear under the title in the web version.
 
+```ink
+# AUTHOR: Jane Doe
+
+My life really began after I died.
+```
+
 ### Theme
 
 By default, the "theme" (CSS style rules) is set to "white". As with other tags, including the keyword "theme:" and a new choice will change it. Version 0.10 introduced a new theme option: dark.
+
+```ink
+# THEME: dark
+
+The rain pounded on the windows. Its staccato pace matched my own heart as its unsteady beat echoed each other. I had seen a ghost -- or, at least, I thought I did. Could this house really be haunted?
+```
 
 ### Clear
 

@@ -121,6 +121,18 @@ In the above example, *mood* is used as part of a tag with a colon and then a va
 
 **Note:** Tags are parsed between story 'stopping points'. In Ink, the story continues until it finds a choice. At that point, it waits for input. Internally, Ink would process all tags up to that point and then also stop.
 
+Tags are also associated with a single line. If used at the end of a line, they would be associated with that line. If a tag is used before a line, it becomes associated with the next output line.
+
+For example, the following example's use of a tag would be associated with the next line.
+
+```ink
+# AUTHOR: Jane
+
+My life really began after I died.
+```
+
+**Note:** Determining which line a tag is associated with can be determined in the Inky preview pane through verifying where they show up. If they are shown after a line in the preview, they are associated with that line.
+
 ## Creating Flows
 
 More text can be added to a choice by placing it "under" each.
