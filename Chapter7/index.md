@@ -6,6 +6,8 @@
 
 **Summary:** In this chapter, you will learn about *Gather Points*, how they are used, and the shorthand they provide for larger and more complex projects.
 
+---
+
 ## Gather Points
 
 Ink uses the concept of the Weave to understand choices and their connection to each other. Gather Points act as a way to see the relationship between Knots and the Diverts that connect them together.

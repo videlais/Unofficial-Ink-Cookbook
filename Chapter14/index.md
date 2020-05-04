@@ -38,6 +38,8 @@
 
 **Summary:** In this chapter, you will learn about Unity, how to import and use the Ink Unity Integration plugin, and how to work with the Story API to create a simple button-based example project.
 
+---
+
 ## Unity Basics
 
 The creators of Ink, Inkle Studio, have created an Ink Unity Integration plugin for working with Ink in the game engine Unity, providing ways to test compiled Ink files, make new Ink files, and work with the Story API in Unity game object scripts to load blocks of a story and its choices.

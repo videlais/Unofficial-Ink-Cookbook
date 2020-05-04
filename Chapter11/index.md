@@ -2,7 +2,7 @@
 
 - [Chapter 11: LIST-ing to a Side](#chapter-11-list-ing-to-a-side)
   - [LIST](#list)
-  - [Automatically Set to False](#automatically-set-to-false)
+  - [Automatically Set to `false`](#automatically-set-to-false)
   - [Enabling Values](#enabling-values)
   - [Built-in Functions](#built-in-functions)
     - [`LIST_COUNT()`](#listcount)
@@ -26,6 +26,8 @@
 
 **Summary:** In this chapter, you will learn how to work with LISTs, some of the basic functionality, and how they can be used within projects.
 
+---
+
 ## LIST
 
 Beyond using variables, Ink also provides a data type call a `LIST`. These store collections of values that can be accessed, changed, and manipulated in different ways in connection to each other.
@@ -40,13 +42,13 @@ Rules for Lists:
 - Ordering matters
 - Positions start with 1 (unless overwritten)
 - Will create variables if they do not already exist
-- Created variables are set to false
+- Created variables are set to `false`
 
-Because lists will create new variables if included and not previous created, this allows for creating a list of possibilities and then having a new, separate variable with the current state.
+Because lists will create new variables if included and not previous created, this allows for creating a list of possibilities and then having a new, separate variable.
 
 These can also be used as part of the flow once set earlier, allowing for changing states throughout a story.
 
-## Automatically Set to False
+## Automatically Set to `false`
 
 The values used in a `LIST` are automatically set to `false`. What this means in practice is that any values include in a `LIST` are in it, but do not count toward its total unless they are "enabled," set to true.
 
@@ -58,13 +60,13 @@ LIST moods = happy, angry, sad
 { LIST_COUNT(moods) }
 ```
 
-The function `LIST_COUNT()` returns the total number of enabled entries in a `LIST`. If they are not true, they are not counted toward its total.
+**Note:** function `LIST_COUNT()` returns the total number of enabled entries in a `LIST`. If they are not `true`, they are not counted toward its total.
 
 ## Enabling Values
 
 Values in a `LIST` are considered `true` if they have opening and closing parentheses around them.
 
-The same code which shown a total of zero will change to three when all of its values are now set to true.
+The same code which shown a total of zero will change to three when all of its values are now set to `true`.
 
 ```ink
 LIST moods = (happy), (angry), (sad)
@@ -78,7 +80,7 @@ For dealing directly with lists, Ink also has several specific functions. As a `
 
 ### `LIST_COUNT()`
 
-The function `LIST_COUNT()` returns the number of values in the `LIST` that are set to true.
+The function `LIST_COUNT()` returns the number of values in the `LIST` that are set to `true` .
 
 ```ink
 LIST moods = (happy), angry, (sad)
@@ -152,7 +154,7 @@ LIST moods = happy, angry, sad, melancholy
 
 ### `LIST_RANDOM()`
 
-The function `LIST_RANDOM()` returns a random true entry from a `LIST`. If there are no true entries, the function returns nothing.
+The function `LIST_RANDOM()` returns a random `true` entry from a `LIST`. If there are no `true` entries, the function returns nothing.
 
 ```ink
 LIST moods = (happy), (angry), (sad), (melancholy)
@@ -237,7 +239,7 @@ Current Clues: {clues}
 
 ## Conflicting Values and Variable Names
 
-One of the rules of `LIST` is that must contain unique variable names. A value cannot exist in two separate `LIST`s! Therefore, when moving values from one `LIST` to another, it is recommended to remove first and then add to the new `LIST`.
+One of the rules of `LIST` is that they must contain unique variable names. A value cannot exist in two separate `LIST`s! Therefore, when moving values from one `LIST` to another, it is recommended to remove first and then add to the new `LIST`.
 
 ```ink
 LIST Items = (Dagger), (Lead_Pipe), (Spanner), (Candlestick), (Revolver), (Rope)

@@ -19,6 +19,8 @@
 
 **Summary:** In this chapter, you will learn more about the Ink for Web option, how it works, and special tags that can be used as part of Ink for Web.
 
+---
+
 ## Ink for Web
 
 So far in this book, Ink was shown running as part of Inky Editor. There is also another option for running Ink, Ink for the Web! As part of the Ink Editor, a website version of the Ink code can be created using the File → "Export for web..." option.
@@ -35,7 +37,7 @@ To play the project locally, open the `index.html` file in a web browser. It sho
 
 ### Editing Files
 
-To prepare a project for others to play, two files are more important than the others: `index.html` and `style.css`. Unfortunately, these two files will be replaced each time the Export to Web process is completed.
+To prepare a project for others to play, two files are more important than the others: `index.html` and `style.css`. Unfortunately, these two files will be replaced each time the Export to Web process is completed!
 
 When editing the style.css file (to change CSS rules), use the "Export story.js only..." option from the File menu and select the `nameOfProject.js` file to replace only that file each time.
 

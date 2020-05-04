@@ -10,6 +10,8 @@
 
 **Summary:** In this chapter, you will learn more about the JavaScript Story API, how to use it, and how its functionality relate to each other.
 
+---
+
 ## JavaScript Story API
 
 Building from the last chapter, the Ink for Web option in Inky can be used to build more complex projects using the JavaScript Story API as part of inkjs. In fact, as it is integrated into the Inky Editor, editing the `main.js` file it produces shows an example of how to use the Story API in JavaScript!
@@ -22,7 +24,7 @@ There is not direct documentation for the JavaScript API. However, the C# docume
 
 ### Properties
 
-- *canContinue*: Returns true if the story can continue to run or false otherwise.
+- *canContinue*: Returns `true` if the story can continue to run or `false` otherwise.
 - *currentChoices*: An array of the current choices. Each entry’s text property contains their text.
 - *currentTags*: An array of any tags as part of current block.
 - *globalTags*: An array of all the tags used in the story
@@ -30,7 +32,6 @@ There is not direct documentation for the JavaScript API. However, the C# docume
 ### Methods
 
 - *Continue()*: Returns the next text block and loads the next choices, if any.
-
 - *ChooseChoiceIndex()*: Supplying a valid index matching the length of the array of currentChoices will consider that entry "clicked."
 
 ## Creating a JSON Story file

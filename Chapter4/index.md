@@ -19,6 +19,8 @@
 
 **Summary:** In this chapter, you will learn about Choices and their different types in Ink.
 
+---
+
 ## Making Choices
 
 Agency is at the center of how games are played. If a player feels like their decisions matter, they will invest in the story more. Presenting ways a player can choose is central to making an engaging story and Ink project.
@@ -124,7 +126,7 @@ A *Knot* is a selection of content. They are created through using two or more e
 
 ### Diverts
 
-Moving between knots is done through a *Divert*. In Ink, this is an arrow, `->` that "points at" the Knot to move to next.
+Moving between knots is done through a *divert*. In Ink, this is an arrow, `->` that "points at" the Knot to move to next.
 
 Simply creating knots is not enough. Knots **must not create dead ends in Ink**. At a minimum, a knot must divert to a specially-named label called "DONE" to complete it.
 

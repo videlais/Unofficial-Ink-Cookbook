@@ -25,6 +25,8 @@
 
 **Summary:** In this chapter, you will learn about global, temporary, and constant variables in Ink and how to use them for different purposes.
 
+---
+
 ## Working with Code
 
 Like many other scripting languages, Ink also has the concepts of variables. Used to store and react to values during a program, variables in Ink can take different forms and be used for various uses.
