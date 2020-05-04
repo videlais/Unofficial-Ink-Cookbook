@@ -2,15 +2,18 @@
 
 - [Chapter 3: Writing Your First Ink Story](#chapter-3-writing-your-first-ink-story)
   - [Common Terms](#common-terms)
-  - [Creating a New Project and Weave](#creating-a-new-project-and-weave)
+  - [Creating a New Project](#creating-a-new-project)
     - [Playing with Preview](#playing-with-preview)
     - [Comments](#comments)
+    - [Tags](#tags)
   - [Creating Flows](#creating-flows)
     - [Styling Choice Output](#styling-choice-output)
     - [Adding More Choices](#adding-more-choices)
   - [Try It](#try-it)
 
-**Summary:** In this chapter, the terms Weave, Flow, and Divert will be reviewed and the basics of writing and using the Preview pane in the Inky editor will be explained.
+**Summary:** In this chapter, the terms weave, flow, and divert will be reviewed and the basics of writing and using the Preview pane in the Inky editor will be explained.
+
+---
 
 ## Common Terms
 
@@ -24,7 +27,7 @@ Ink uses the metaphor of threads and sewing to describe projects. The total coll
 
 **Note:** This book uses the term *option* for what the user sees and clicks on to interact with in an Inky project. *Choices* are what an author creates; a user interacts with *options*.
 
-## Creating a New Project and Weave
+## Creating a New Project
 
 Using the Inky editor, go to File → New Project to create a new project. In the editor pane, write the following:
 
@@ -79,6 +82,44 @@ Anything from the two slashes to the end of the line is a comment and ignored by
 
 Hello! // Comments can also be written after code, too!
 ```
+
+### Tags
+
+If comments are text written for authors and other developers, *tags* can be thought of as instructions for *other programs*.
+
+Ink supports adding *tags*, text starting with a hash, `#` and extending to the end of a line. When Ink encounters these, it ignores them.
+
+```ink
+This is an example using tags. # See?
+```
+
+In the above example, the output would be the following:
+
+```text
+This is an example using tags.
+```
+
+When using the Inky preview pane, it would also show the following on a separate line in a lighter color:
+
+```ink
+ # See?
+```
+
+In Ink, tags are optional text that it ignores as part of the story output. However, internally, it keeps track of the tags it encounters and, when working with other programs, these tags can have special meaning.
+
+For example, when working with the Ink for Web output option in Inky, the tag `# CLEAR` has a special meaning: it clears the text from the screen!
+
+When working with other programs like Unity, tags can also be used to add greater semantic meaning to the text, adding in, for example, tone, confidence, or other information to what a character is speaking in a part of the story.
+
+```ink
+Your dad slams his hand on the table. "No! I won't allow you to date her! I forbid you from seeing that girl!" # mood: angry
+
+"But dad!" you scream. "I love her!" # mood: pleading
+```
+
+In the above example, *mood* is used as part of a tag with a colon and then a value. In Ink, this would simply be another tag and ignore. However, in Unity or another program, it could read and parse the tag to add greater emotional context to a scene or how a character's text should be displayed.
+
+**Note:** Tags are parsed between story 'stopping points'. In Ink, the story continues until it finds a choice. At that point, it waits for input. Internally, Ink would process all tags up to that point and then also stop.
 
 ## Creating Flows
 
@@ -139,118 +180,42 @@ Create a new Ink project called “FirstStory.ink” and save the file. In the c
 You stand before a cave entrance. There are three passages forward.
 ```
 
-This will be a cave exploration example.
-
-There will be two initial choices of passages that will expand out into different areas. At each, the player will have the choice to retreat back the way they came in the cave.
+This will be a cave exploration example with two initial choices.
 
 Copy or type the following code for the first set of choices:
 
 ```ink
-* Go North
-* Go South
-* Go East
+* Go Deeper
+* Retreat
 ```
 
-For each new path, there will be two choices. The first will allow the player to continue and the second will allow them to retreat from the cave.
-
-Let’s look at the first choice and its branches:
+Under the choice *Go Deeper*, add the following text:
 
 ```ink
-* Go North
     It gets very dark quickly.
-    ** Do you continue onward?
-        You walk into the darkness. You reach out your hand to the wall and trace it into the utter darkness.
-        *** Do you keep going?
+        ** Do you keep going?
             You keep going and going into the cave. You believe you see some light and head towards it as the darkness recedes.
 
             You see what looks like an exit from the cave.
 
             You take it and find yourself emerging into a forest.
-            -> DONE
-        *** Retreat
-            -> DONE
-    ** Retreat
-        You have had enough and leave the cave the way you came.
-        -> DONE
 ```
 
-*What’s with the arrow?*
+Now, as the player enters the save, they are given a choice that leads to another. The flow is a path from one to another, but there is only ever one choice per set.
 
-As will be covered in the next chapter, the arrow is a *Divert*. It is a way to move between different sections of a story. In this example, it is used to direct the story to move to its end, *DONE*. Any time a player selects the Retreat option, it ends the current story.
-
-Let’s now consider the next set of choices and their branches.
+**Example:**
 
 ```ink
-* Go South
-    You make it 10 minutes into the cave and realize there is nothing but a dead end.
-    -> DONE
-```
+You stand before a cave entrance.
 
-This part ends very quickly!
-
-The final part, however, expands outward into other branches.
-
-```ink
-* Go East
-    You make your way through some moss and the occasional small trickle of water.
-    ** Do you continue deeper?
-        You make your way deeper into the cave system and find an underground lake. Peering at it, you see something shiny under the water.
-        *** Do you dive into the water?
-            You dive into the water and try to get closer.
-
-            You go deeper and deeper, trying to make your way.
-
-            Finally, you reach out and grab the item. You pick up a sword.
-
-            You swim to the surface.
-        *** Retreat
-            -> DONE
-    ** Retreat
-        -> DONE
-```
-
-Through using multiple levels of indentation and asterisks, choices were added under others, creating a branching structure that started with three and then moved outward.
-
-A Divert was also introduced as a way to quickly collapse certain paths to prevent the story from becoming too complex.
-
-**Full Example:**
-
-```ink
-You stand before a cave entrance. There are three passages forward.
-
-* Go North
+* Go Deeper
     It gets very dark quickly.
-    ** Do you continue onward?
-        You walk into the darkness. You reach out your hand to the wall and trace it into the utter darkness.
-        *** Do you keep going?
+        ** Do you keep going?
             You keep going and going into the cave. You believe you see some light and head towards it as the darkness recedes.
 
             You see what looks like an exit from the cave.
 
             You take it and find yourself emerging into a forest.
-            -> DONE
-        *** Retreat
-            -> DONE
-    ** Retreat
-        You have had enough and leave the cave the way you came.
-        -> DONE
-* Go South
-    You make it 10 minutes into the cave and realize there is nothing but a dead end.
-    -> DONE
-* Go East
-    You make your way through some moss and the occasional small trickle of water.
-    ** Do you continue deeper?
-        You make your way deeper into the cave system and find an underground lake. Peering at it, you see something shiny under the water.
-        *** Do you dive into the water?
-            You dive into the water and try to get closer.
-
-            You go deeper and deeper, trying to make your way.
-
-            Finally, you reach out and grab the item. You pick up a sword.
-
-            You swim to the surface.
-        *** Retreat
-            -> DONE
-    ** Retreat
-        -> DONE
+* Retreat
+  You leave the cave.
 ```
