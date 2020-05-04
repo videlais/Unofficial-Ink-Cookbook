@@ -645,7 +645,7 @@ foreach (Choice choice in story.currentChoices)
    choiceButton.onClick.AddListener(delegate {
       OnClickChoiceButton(choice);
    });
- 
+
 }
 ```
 
