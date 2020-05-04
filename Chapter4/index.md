@@ -7,7 +7,11 @@
   - [Selective Output](#selective-output)
     - [Selective Output Code Example](#selective-output-code-example)
   - [Knots](#knots)
+    - [**DONE** and **END**](#done-and-end)
+      - [**DONE**](#done)
+      - [**END**](#end)
     - [Diverts](#diverts)
+    - [Diverting to **DONE** and **END**](#diverting-to-done-and-end)
     - [Knot Code Example](#knot-code-example)
   - [Revisiting Flow](#revisiting-flow)
   - [Loops with Knots](#loops-with-knots)
@@ -17,7 +21,7 @@
   - [Glue](#glue)
   - [Try It](#try-it)
 
-**Summary:** In this chapter, you will learn about Choices and their different types in Ink.
+**Summary:** In this chapter, you will learn about choices, diverts, and their different patterns in Ink.
 
 ---
 
@@ -25,7 +29,7 @@
 
 Agency is at the center of how games are played. If a player feels like their decisions matter, they will invest in the story more. Presenting ways a player can choose is central to making an engaging story and Ink project.
 
-The ability to choose a path through a story’s Weave is core to how Ink works. By showing the user different options, they can pick one and then follow different paths through the story.
+The ability to choose a path through a story’s weave is core to how Ink works. By showing the user different options, they can pick one and then follow different paths through the story.
 
 Choices are created with the asterisk, `*`. When a line starts with this symbol, it becomes a choice for the player. When multiple are used, they are all options in that set.
 
@@ -36,7 +40,7 @@ Choices are created with the asterisk, `*`. When a line starts with this symbol,
 * Second Choice
 ```
 
-When used in a Flow, Inky will present the choices in the middle of the Preview pane.
+When used in a flow, Inky will present the choices in the middle of the Preview pane.
 
 Multiple uses of the `*` symbols signal new levels (sets) of choices. A single `*` symbol is the first and more `*` symbols signal that those choices lead to more.
 
@@ -124,11 +128,27 @@ A *Knot* is a selection of content. They are created through using two or more e
 
 **Note:** The name of a knot cannot contain spaces or other special characters, but they can use the underscore in their names.
 
+### **DONE** and **END**
+
+Ink reserves two knot names that cannot be used in a story. These are **DONE** and **END**. In Ink, these carry special meaning.
+
+#### **DONE**
+
+The **DONE** knot signals that a knot, stitch, or thread is done. In other words, if there is a point where a dead end would have happened, the knot **DONE** can be used to close off that dead end.
+
+If there is no more content in a story, **DONE** also ends the story itself.
+
+#### **END**
+
+The knot **END** signals that the story should stop. It can be used to close off a complicated flow or to end a story in a certain location after a player reaches a natural end of a story.
+
+Unlike **DONE** where a section comes to a close, **END**, as its name implies, *ends* the story.
+
 ### Diverts
 
 Moving between knots is done through a *divert*. In Ink, this is an arrow, `->` that "points at" the Knot to move to next.
 
-Simply creating knots is not enough. Knots **must not create dead ends in Ink**. At a minimum, a knot must divert to a specially-named label called "DONE" to complete it.
+Simply creating knots is not enough. Knots **must not create dead ends in Ink**. At a minimum, a knot must divert to a specially-named knot called "DONE" to complete it.
 
 ```ink
 -> Next
@@ -138,6 +158,23 @@ The end!
 ```
 
 Combined with brackets for choices, the output of an option can be placed in knots.
+
+### Diverting to **DONE** and **END**
+
+As was mentioned above, the knots **DONE** and **END** have special meanings. When a knot diverts to **DONE**, `-> DONE`, it marks that the knot is done. (If there is no more content, this also serves to end the story.)
+
+```ink
+There is no more content here. It's time to end this story!
+-> The_End
+
+=== The_End ===
+Yup, this is end!
+-> DONE
+```
+
+If code diverts to **END**, `-> END`, it ends the story.
+
+Both can be used to prevent dead ends in the flow of a story and to create natural points where a story can move to another section or come to an end.
 
 ### Knot Code Example
 
