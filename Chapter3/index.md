@@ -25,7 +25,7 @@ Every language has its own terms for its elements. Ink is no different, and expl
 
 Ink uses the metaphor of threads and sewing to describe projects. The total collection of all choices is a project's *weave*. Through making *choices*, a user creates a *flow* through the overall *weave*.
 
-**Note:** This book uses the term *option* for what the user sees and clicks on to interact with in an Inky project. *Choices* are what an author creates; a user interacts with *options*.
+> **Note:** This book uses the term *option* for what the user sees and clicks on to interact with in an Inky project. *Choices* are what an author creates; a user interacts with *options*.
 
 ## Creating a New Project
 
@@ -54,7 +54,7 @@ Testing a project in the Inky Editor is one of the most important skills to lear
 
 First, click on the "Choose to Write More" option in the Preview pane. It will be shown and then the End of Story text will be shown.
 
-**Note:** Whenever a story ends, the "End of Story" text is shown in the Inky Editor. This signals that there is no more content in the story.
+> **Note:** Whenever a story ends, the "End of Story" text is shown in the Inky Editor. This signals that there is no more content in the story.
 
 Click the "Restart" button in the Inky Editor. (It is the double-arrow, the rightmost icon above the Preview Pane area.) This will restart the story back before any choices were made.
 
@@ -119,7 +119,7 @@ Your dad slams his hand on the table. "No! I won't allow you to date her! I forb
 
 In the above example, *mood* is used as part of a tag with a colon and then a value. In Ink, this would simply be another tag and ignore. However, in Unity or another program, it could read and parse the tag to add greater emotional context to a scene or how a character's text should be displayed.
 
-**Note:** Tags are parsed between story 'stopping points'. In Ink, the story continues until it finds a choice. At that point, it waits for input. Internally, Ink would process all tags up to that point and then also stop.
+> **Note:** Tags are parsed between story 'stopping points'. In Ink, the story continues until it finds a choice. At that point, it waits for input. Internally, Ink would process all tags up to that point and then also stop.
 
 Tags are also associated with a single line. If used at the end of a line, they would be associated with that line. If a tag is used before a line, it becomes associated with the next output line.
 
@@ -131,7 +131,7 @@ For example, the following example's use of a tag would be associated with the n
 My life really began after I died.
 ```
 
-**Note:** Determining which line a tag is associated with can be determined in the Inky preview pane through verifying where they show up. If they are shown after a line in the preview, they are associated with that line.
+> **Note:** Determining which line a tag is associated with can be determined in the Inky preview pane through verifying where they show up. If they are shown after a line in the preview, they are associated with that line.
 
 ## Creating Flows
 

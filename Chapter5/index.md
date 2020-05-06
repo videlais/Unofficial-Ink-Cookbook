@@ -21,7 +21,7 @@ Projects are created through the File menu using File -> New Project.
 
 Once a project has been created, new files can be added to it. When editing a project, use the File → New Included File option to create a new file and have it automatically included in the project.
 
-**Note:** It is always good to save a project to a new directory when working with the Inky Editor. Inky will detect files with the `.ink` filetype and add them to the project.
+> **Note:** It is always good to save a project to a new directory when working with the Inky Editor. Inky will detect files with the `.ink` filetype and add them to the project.
 
 For better organization in more complex projects, Ink stories can be broken up into different files. These can then be "included" through using the `INCLUDE` keyword. (This is automatically generated when the New Included File option is used. The file will be added, and the `INCLUDE` keyword will be added to the project file.)
 

@@ -80,7 +80,7 @@ This example will be using a project called "Ink Testing".
 
 In the new project, go to Window -> Asset Store to open a new tab to the Asset Store.
 
-**Note:** Only signed-in users can use assets from the store. Before going forward, double-check there is a user signed-in to the Unity Store.
+> **Note:** Only signed-in users can use assets from the store. Before going forward, double-check there is a user signed-in to the Unity Store.
 
 In the search bar, search for "Ink Unity" until the Ink logo is visible on an asset called "Ink Unity Integration" created by Inkle.
 

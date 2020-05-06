@@ -126,7 +126,7 @@ A *Knot* is a selection of content. They are created through using two or more e
 === ConfrontCaptain ===
 ```
 
-**Note:** The name of a knot cannot contain spaces or other special characters, but they can use the underscore in their names.
+> **Note:** The name of a knot cannot contain spaces or other special characters, but they can use the underscore in their names.
 
 ### **DONE** and **END**
 

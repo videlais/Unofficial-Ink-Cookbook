@@ -60,7 +60,7 @@ LIST moods = happy, angry, sad
 { LIST_COUNT(moods) }
 ```
 
-**Note:** function `LIST_COUNT()` returns the total number of enabled entries in a `LIST`. If they are not `true`, they are not counted toward its total.
+> **Note:** function `LIST_COUNT()` returns the total number of enabled entries in a `LIST`. If they are not `true`, they are not counted toward its total.
 
 ## Enabling Values
 

@@ -8,6 +8,7 @@
       - [Concepts](#concepts)
       - [Representations](#representations)
   - [Other Programming Languages](#other-programming-languages)
+  - [Notes and Reminders](#notes-and-reminders)
 
 ## Who This Book is For
 
@@ -51,3 +52,13 @@ Choices are written using *emphasis*. However, their output is enclosed in quota
 ## Other Programming Languages
 
 When discussing other scripting or programming languages such as JavaScript or C#, *emphasis* is used for properties. Strong emphasis is used for the name of objects, methods, or other complex data structures.
+
+## Notes and Reminders
+
+Notes appear as blockquotes:
+
+> **Note:** Notes appear in blockquotes throughout the book to clarify or explain certain concepts.
+
+Reminders also appear as blockquotes:
+
+> **Reminder:** Some chapters have reminders on previous topics and concepts covered in the book.
