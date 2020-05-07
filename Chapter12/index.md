@@ -15,6 +15,10 @@
     - [Changing CSS](#changing-css)
       - [Adding New Declarations](#adding-new-declarations)
       - [Changing Existing CSS](#changing-existing-css)
+  - [Built-In CSS Classes](#built-in-css-classes)
+    - [`.end`](#end)
+    - [`.byline`](#byline)
+    - [`.choice`](#choice)
   - [Working with HTML](#working-with-html)
   - [Inline CSS and Choices](#inline-css-and-choices)
   - [Try It](#try-it)
@@ -262,6 +266,64 @@ Any additional rules or changes can be made to the `style.css` file. However, tw
 1) Making changes in Inky means doing a File –> "Export story.js only..." before refreshing the `index.html` file to see those changes.
 2) Tags work on sections of text. When used after a selection of text on the same line, it will wrap that text in those styles. Otherwise, tags will work on the next section of text.
 
+---
+
+## Built-In CSS Classes
+
+### `.end`
+
+The class `.end`, as explained in the `style.css` file, can be used for changing how the presentation of the text "The End" (or other story ending) appears.
+
+```css
+/* Built in class if you want to write:
+     The End # CLASS: end
+*/
+.end {
+  text-align: center;
+  font-weight: bold;
+  color: black;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.dark .end {
+  color: white;
+}
+```
+
+### `.byline`
+
+When the `# author: name` tag is used, its content is placed in an element with the class of "byline".
+
+```css
+.byline {
+  font-style: italic;
+}
+```
+
+### `.choice`
+
+All choices are given the class "choice" by default. Changes to the `.choice` and `.choice a` will affect how choices (and their hyperlinks) appear to players.
+
+```css
+.choice {
+  text-align: center;
+  line-height: 1.7em;
+}
+
+/* first choice */
+:not(.choice) + .choice {
+  padding-top: 1em;
+}
+
+
+.choice a {
+  font-size: 15pt;
+}
+```
+
+---
+
 ## Working with HTML
 
 Along with using text in Inky, it is also possible to use HTML directly. Style elements such as `<strong>` and `<em>` can be used within the editor and their effects will show up in the preview pane.
@@ -291,6 +353,8 @@ This means that text can be arranged within the Inky Editor through using HTML d
 <h1>And this?</h1>
 ```
 
+---
+
 ## Inline CSS and Choices
 
 Normally, all of the choice text in the story will appear the same way. Even with changing the styling of all of the choice text in a story by editing the rules of `p.choices` in the `style.css` file, they would appear the same. Every individual choice would be styled in the same way, which can be somewhat limiting.
@@ -313,6 +377,8 @@ What is your favorite color?
 + <p style="color:green;">Green!</p>
   -> DONE
 ```
+
+---
 
 ## Try It
 
