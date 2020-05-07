@@ -18,6 +18,8 @@ Wherever possible, terms are explained and examples given. However, as this is a
 
 Submit an [Issue](https://github.com/videlais/Unofficial-Ink-Cookbook/issues) to help improve the book for future audiences!
 
+---
+
 ## Style Conventions
 
 This book uses some style conventions to visually explain concepts.
@@ -49,9 +51,13 @@ Keywords in Ink also appear throughout using in-line code blocks. For example, `
 
 Choices are written using *emphasis*. However, their output is enclosed in quotation marks.
 
+---
+
 ## Other Programming Languages
 
 When discussing other scripting or programming languages such as JavaScript or C#, *emphasis* is used for properties. Strong emphasis is used for the name of objects, methods, or other complex data structures.
+
+---
 
 ## Notes and Reminders
 

@@ -48,6 +48,8 @@ Because lists will create new variables if included and not previous created, th
 
 These can also be used as part of the flow once set earlier, allowing for changing states throughout a story.
 
+---
+
 ## Automatically Set to `false`
 
 The values used in a `LIST` are automatically set to `false`. What this means in practice is that any values include in a `LIST` are in it, but do not count toward its total unless they are "enabled," set to true.
@@ -73,6 +75,8 @@ LIST moods = (happy), (angry), (sad)
 
 { LIST_COUNT(moods) }
 ```
+
+---
 
 ## Built-in Functions
 
@@ -162,6 +166,8 @@ LIST moods = (happy), (angry), (sad), (melancholy)
 { LIST_RANDOM(moods) }
 ```
 
+---
+
 ## Inclusion Testing
 
 Beyond functions to work with `LIST` values, Ink also has special symbols for working with testing for inclusion in a `LIST`. When comparing multiple values, they should be within an opening and closing parentheses.
@@ -237,6 +243,8 @@ LIST clues = Main_Room
 Current Clues: {clues}
 ```
 
+---
+
 ## Conflicting Values and Variable Names
 
 One of the rules of `LIST` is that they must contain unique variable names. A value cannot exist in two separate `LIST`s! Therefore, when moving values from one `LIST` to another, it is recommended to remove first and then add to the new `LIST`.
@@ -291,6 +299,8 @@ LIST_A <= LIST_B
 ```
 
 The smallest value is A is smaller than all values in B, and the largest value in A smaller than the largest value in B.
+
+---
 
 ## Multi-listed Lists
 

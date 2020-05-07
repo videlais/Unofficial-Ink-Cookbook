@@ -25,15 +25,21 @@
 
 Ink is a "narrative scripting language" (ink, 2020). It was designed to create narrative game-like experiences through authoring different interactions. Ink is a *scripting language* created in order to help with the common problems of writing narrative games: giving the player choices, acting on those choices, and keeping track of information related to the game.
 
+---
+
 ## Using Ink
 
 Many projects use Ink as their narrative or dialog system. It helps writers construct a story that has multiple choices, paths, and outcomes for a player while other members of a team work with the finished product and interact with it through other tools like its Story API or the Unity Plugin. It is also a tool designed to produce a file that can be read by other tools. As part of a *toolchain*, a collection of tools where the output of one feeds another, it works well as something in which a writer or developer can write and test the story in one tool and then use its output as part of a graphical system or other tools.
+
+---
 
 ## Creating with Ink
 
 Ink is designed to produce text-based projects. Inky, the editor covered in this book, is focused on writing text-heavy projects. It works best with projects that have choices and outcomes, and has been designed around handling how to connect what a user sees with how they interact with the game.
 
 That does not mean Ink has not been used in other, more graphical projects. *Heaven’s Vault* (2019), a game written in Ink and using the Unity game engine, was created by Inkle Studios, the inventor and maintainers of Ink. They integrated a story-rich game with animations, 3D models, and large worlds. Yet, its basis is in Ink itself, and their dialogue system, a central part of the game, is run directly from Ink.
+
+---
 
 ## Inky Editor
 
@@ -61,6 +67,8 @@ When downloaded in Windows, Ink will be in a ZIP file. Uncompress the ZIP file a
 ### MacOS X
 
 For MacOS X users, Inky will be in a DMG file. These can be opened and the Inky application moved into the Applications directory. Run Inky from inside the Application directory or directly from the Launchpad.
+
+---
 
 ## Using the Inky Editor
 
@@ -109,6 +117,8 @@ While a story is being run, the Inky editor remembers each choice. At any point,
 #### Restart a Story
 
 Similar to the Rewind a Single Choice button, the Restart Story button rewinds a story back to the first set of choices.
+
+---
 
 ## Try It
 

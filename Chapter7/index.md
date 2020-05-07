@@ -143,6 +143,8 @@ She didn't look at me as she answered. "Thanks, Dee," she replied, moving the bo
 
 In the above example, there are two sets of choices. However, only one of each set has a consequence for the story. For these choices, the value of *relationship* is changed. Otherwise, the story proceeds to the gathering point.
 
+---
+
 ## Labelled Options
 
 Like knots, choices can also be labelled. If a name is put into parentheses before the output of the option, it becomes the *label* for the option.

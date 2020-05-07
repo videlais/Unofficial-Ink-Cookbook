@@ -89,6 +89,8 @@ Their structure was the following:
             -> DONE
 ```
 
+---
+
 ## Selective Output
 
 When brackets are used within a choice, it is only shown in the choice itself. It is not part of the output. This is known as *selective output*.
@@ -117,6 +119,8 @@ How do you respond?
 * [Flirty]
     "Come on, general. You don't want to shoot me," you say, cupping the pistol and slowly moving your hands down it.
 ```
+
+---
 
 ## Knots
 
@@ -196,6 +200,8 @@ You look over your ship and its crew. Yes, it is time to set out again.
     -> DONE
 ```
 
+---
+
 ## Revisiting Flow
 
 Diverts, as their name implies, *diverts* a story to a knot in the story. As was introduced in the previous chapter, a *flow* is a player's journey through all possible choices (the story's *weave*).
@@ -213,6 +219,8 @@ One possible flow through this story would start with the know **Sailing** and t
 ```
 
 As neither choice has content yet, and diverts cannot have dead ends, they also each contain a divert, `-> DONE` that ends the story.
+
+---
 
 ## Loops with Knots
 
@@ -264,6 +272,8 @@ Assassin! You watch the woman as she inches closer to you. As you move the candl
 
 As the divert points back at the knot, multiple choices can be made. Yet, as the number of options reduce, the final one must, at some point, be picked in order to progress the story.
 
+---
+
 ## Sticky Choices
 
 By default, an option will remove itself once chosen. As designed, a choice is a one-time event. It is chosen and the others in the set are ignored. However, choices can become "sticky" through using the plus `+` symbol. Instead of being removed, these choices will "stick around."
@@ -298,6 +308,8 @@ You awake on the shore. As the waves lap at you, your memory tries to fills itse
     -> DONE
 ```
 
+---
+
 ## Glue
 
 The default action is for each new line of text to have its own new line in the output. However, this can be changed using *glue*, a pairing of less-than and greater-than signs, `<>`.
@@ -322,6 +334,8 @@ runs together <>
 as the same line.
 -> DONE
 ```
+
+---
 
 ## Try It
 

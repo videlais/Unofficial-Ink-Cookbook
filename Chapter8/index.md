@@ -35,6 +35,8 @@ When using variables in Ink, more direct coding is required. While variables can
 
 Previously, programming in Ink consisted of using Knots, Diverts, and Alternatives. These were used to move around in a story or cycle through a collection of values. When working with variables and manipulating their values in Ink, this changes and takes on two different forms: single line or multiple lines.
 
+---
+
 ## Single Line
 
 A single line of programming in Ink starts with the tilde character, ~. It signifies that something will happen only on that single line and Ink should show or otherwise parse the next line as it normally work outside of programming.
@@ -42,6 +44,8 @@ A single line of programming in Ink starts with the tilde character, ~. It signi
 ```ink
 ~ health = health - 1
 ```
+
+---
 
 ## Multiple lines
 
@@ -55,6 +59,8 @@ For programming that may take multiple lines, opening and closing curly brackets
     -> DEATH
 }
 ```
+
+---
 
 ## Variables
 
@@ -241,6 +247,8 @@ CONST swordDamage = 4
     -> FIGHT
 ```
 
+---
+
 ## Conditional Logic
 
 Like testing if a player has visited a knot or stitch a certain number of times, conditional logic can be used to test the values of variables and react accordingly.
@@ -399,6 +407,8 @@ VAR day = ""
 
 ~ day = {~Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday}
 ```
+
+---
 
 ## Try It
 

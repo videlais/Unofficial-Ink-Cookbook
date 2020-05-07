@@ -32,6 +32,8 @@ In Ink, the concept of functions comes in two ways. The first is in Knot Paramet
 
 For Ink, these divisions help authors to think through how to divide up their code and calculations in ways that may be more narrative or mechanically focused, depending on their needs.
 
+---
+
 ## Knot Parameters
 
 When working with functions and their related concepts, the most commonly associated term is *parameters*. In programming terminology, a *parameter* is one or more values passed to a function or other function-like programming concept. In Ink, this means that data can be passed to a knot that can then act on it in some way.
@@ -51,6 +53,8 @@ I smiled when I saw him. He said, "{greetingPhrase}"
 ```
 
 In the above example, the value "Hi, there!" is being passed to the knot **Greeting**. Inside the knot, the temporary variable *greetingPhrase* is given this value. It can then be accessed inside the knot to, in the above example, display the value of the variable when the story is run.
+
+---
 
 ## Ink Functions
 
@@ -87,6 +91,8 @@ Functions can:
 
 In Ink, functions are the most useful as tools to calculate or adjust values. As they cannot contain diverts or use choices, this makes them ideal as a way to logically divide up more programming-related tasks to better organize a project.
 
+---
+
 ## Passing By Reference
 
 Functions in Ink are also capable of another common programming concept called *passing by reference*. Normally, values are copied when a function is used. Within the function, some action is taken and maybe a value is returned. The values passed to the function, however, do not change inside of the function itself.
@@ -105,6 +111,8 @@ The new name is {changeName(name)} {name}.
 === function changeName(ref newName) ===
 ~ newName = "Fred"
 ```
+
+---
 
 ## Variable Naming Issues
 
@@ -135,6 +143,8 @@ I smiled when I saw him. He said, "{greeting_phrase}"
 ```
 
 **Reminder:** Variable names *cannot* contain spaces. The two common approaches to naming variables as to use alternating capital letters or underscores to separate words in the name of a variable.
+
+---
 
 ## Built-in Functions
 

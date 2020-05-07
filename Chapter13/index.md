@@ -34,11 +34,15 @@ There is not direct documentation for the JavaScript API. However, the C# docume
 - *Continue()*: Returns the next text block and loads the next choices, if any.
 - *ChooseChoiceIndex()*: Supplying a valid index matching the length of the array of currentChoices will consider that entry "clicked."
 
+---
+
 ## Creating a JSON Story file
 
 The Story API is created from reading a JSON file with a compiled story. In order to get that, an Ink file must be run through either inklecate, a command-line tool, or via the Inky editor using the File -> "Export to JSON.." option.
 
 The difference between the `story.js` and the JSON file is actually only that the `story.js` has its JSON contents set as the value for variable called *storyContent*. It is often easier to simply load this file into the global namespace via a SCRIPT tag and then parse the object when working in a browser.
+
+---
 
 ## Getting and Setting Variables
 

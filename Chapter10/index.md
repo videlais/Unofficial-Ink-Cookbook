@@ -128,6 +128,8 @@ I don't know why.
 
 **Reminder:** The use of `<>` is *glue*. It runs the next line into the current, *gluing* them together. It can be used across knots and stitches to combine output on one line.
 
+---
+
 ## Threads
 
 *Threads* provide a way to "collapse" a weave and "pull together" knots and diverts.

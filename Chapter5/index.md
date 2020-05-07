@@ -17,6 +17,8 @@ In Inky, each new story is a new project. Understanding projects, then, becomes 
 
 Projects are created through the File menu using File -> New Project.
 
+---
+
 ## Adding New Files
 
 Once a project has been created, new files can be added to it. When editing a project, use the File → New Included File option to create a new file and have it automatically included in the project.
@@ -28,6 +30,8 @@ For better organization in more complex projects, Ink stories can be broken up i
 ```ink
 INCLUDE Example.ink
 ```
+
+---
 
 ## Knots Across Files
 
@@ -52,6 +56,8 @@ I'm in another file!
 ```
 
 In the above code, the story begins in the file `KnotsAcrossFiles.ink`. When the divert is encountered, the story moves across files to `Example.ink`. However, as far as Ink was concerned, it was all one story!
+
+---
 
 ## Stitches
 
@@ -134,6 +140,8 @@ CHAPTER 3: EATING DINNER
   I just grabbed some clothes off the floor and ran out.
   -> Chapter_3
 ```
+
+---
 
 ## Try It
 

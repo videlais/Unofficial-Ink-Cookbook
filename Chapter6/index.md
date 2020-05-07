@@ -33,6 +33,8 @@ In Ink, alternatives are usually text within curly brackets, `{}`. When used wit
 
 Each element in an alternative is separated by the pipe character, `|`. Some alternative forms also use special characters at the start to differentiate their forms from others.
 
+---
+
 ## Sequences
 
 A *sequence* is a series of values. Ink will move from one to another *in sequence* until there are no more to show.
@@ -53,6 +55,8 @@ Using diverts and knots to loop, it is possible to view all entries in a sequenc
     {What should I do? | What if I didn't say anything? | Should I ask him out?}
     -> Freaking_Out
 ```
+
+---
 
 ## Cycles
 
@@ -75,6 +79,8 @@ If a cycle is encountered again, it will move to the next element in order. Usin
     -> New_Day
 ```
 
+---
+
 ## Once-Only
 
 Instead of cycling text, Ink also provides a "once-only" alternative that runs through its entries and then stops at the end showing nothing. It only runs through its entries "once."
@@ -85,6 +91,8 @@ Cycles start with the exclamation point, `!`.
 {!"I don't want you around"|"You need to leave"|"Get out"}, I said.
 ```
 
+---
+
 ## Shuffles
 
 A *shuffle* is a special type of alternative. Instead of using entries in sequence, it uses them *randomly*. It will pick a new, random element from the entries each time it is encountered.
@@ -94,6 +102,8 @@ Shuffles start with a tilde, `~`.
 ```ink
 It was {~Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday}.
 ```
+
+---
 
 ## Multi-Line Alternatives
 
@@ -148,6 +158,8 @@ Multi-line shuffles use the `shuffle` keyword.
   - King of Clubs
 }
 ```
+
+---
 
 ## Advanced Shuffles
 
@@ -266,6 +278,8 @@ Alternatives can be used as part of the choice text of an option. However, to av
 + Hello. {& Hey there!|Welcome!|Have a good time!}
     -> GreetShoppers
 ```
+
+---
 
 ## Try It
 

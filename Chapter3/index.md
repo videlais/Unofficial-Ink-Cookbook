@@ -27,6 +27,8 @@ Ink uses the metaphor of threads and sewing to describe projects. The total coll
 
 > **Note:** This book uses the term *option* for what the user sees and clicks on to interact with in an Inky project. *Choices* are what an author creates; a user interacts with *options*.
 
+---
+
 ## Creating a New Project
 
 Using the Inky editor, go to File → New Project to create a new project. In the editor pane, write the following:
@@ -135,6 +137,8 @@ My life really began after I died.
 
 ## Creating Flows
 
+---
+
 More text can be added to a choice by placing it "under" each.
 
 Consider the following code:
@@ -149,6 +153,8 @@ Nope. I have given up writing in Ink!
 Add the same new lines under each choice and then restart the project.
 
 This time, choose the "Give up on a New Project" option. Now, not only will the text of the choice show up, but so will the text "underneath" it as well! The same is also true of the other choice if the story is restarted and the other option picked instead.
+
+---
 
 ### Styling Choice Output
 
@@ -183,6 +189,8 @@ Restart the story.
 Following the above code, one path through the story is to click on "Choose to Write More" and then "Do I continue?" before the story finally ends.
 
 It has two *choices*, one *weave*, and two possible *flows* composed of the paths through the project!
+
+---
 
 ## Try It
 
