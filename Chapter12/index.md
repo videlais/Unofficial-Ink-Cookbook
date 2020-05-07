@@ -25,9 +25,15 @@
 
 ## Ink for Web
 
-So far in this book, Ink was shown running as part of Inky Editor. There is also another option for running Ink, Ink for the Web! As part of the Ink Editor, a website version of the Ink code can be created using the File → "Export for web..." option.
+So far in this book, Ink was shown running as part of Inky Editor. There is also another option for running Ink, Ink for the Web!
 
-When using the Inky Editor, code written in Ink can be exported for the web. When used in this way, a compiled Ink project can be played in a web browser and shared on sites for others to see.
+As part of the Ink Editor, a website version of the Ink code can be created using the File → "Export for web..." option.
+
+![Export for Web](chapter12-export-for-web.png)
+
+*Figure 1:* File -> Export for web... menu option
+
+When using the Inky Editor, code written in Ink can be exported for the web. When used in this way, a compiled Ink project can be played in a web browser and shared on websites for others to see.
 
 When used for the first time with a project, Inky will save the project based on the file name, creating a folder based on what is inputted in the Save As field.
 
@@ -35,11 +41,25 @@ When used for the first time with a project, Inky will save the project based on
 
 Inside the exported project folder will be five files: `index.html`, `ink.js`, `main.js`, `style.css`, and `nameOfProject.js`.
 
-[TODO: Add screenshot of folder structure in Windows and MacOS X]
+![MacOS X File Structure](chapter12-file-structure.png)
+
+*Figure 2:* MacOS X File Structure
+
+- `index.html`: Combines the story, engine, and CSS code to be run in a web browser.
+
+- `ink.js`: Ink engine code.
+
+- `main.js`: JavaScript code to feed the story into the Ink engine code and process player interactions in the browser.
+
+- `style.css`: CSS rules for the story.
+
+- `Example.js`: Story compiled into a JSON format and set to the value of a variable.
 
 To play the project locally, open the `index.html` file in a web browser. It should appear as it did in the editor view, but with the name of the project included at the top.
 
-[TODO: Add screenshot of Ink for Web in browser]
+![Running in Browser](chapter12-index.png)
+
+*Figure 3:* Running in Browser
 
 ### Editing Files
 
@@ -51,7 +71,7 @@ When editing the `style.css file` (to change CSS rules), use the "Export story.j
 
 Starting with release version 0.10, the Inky editor has the ability to build versions of Ink for the web with images using a new tag: `# IMAGE`.
 
-**Reminder:** When used in Inky, tags are created using the hash symbol, `#`, and then additional instructions.
+> **Reminder:** When used in Inky, tags are created using the hash symbol, `#`, and then additional instructions.
 
 The image tag is used with the capitalized word `IMAGE` and a colon. Images are then referenced either in the current directory or with a relative path in relation to the `index.html` file.
 
@@ -65,7 +85,11 @@ In the above example, the file `dunes.png` has a relative path of the same folde
 
 ### Images Do Not Appear in Inky Preview
 
-When used in the Inky editor, tags will appear as-is within the preview area. *Images will not be loaded nor shown*.
+When used in the Inky editor, tags will appear as-is within the preview area. *Images will not be loaded or shown*.
+
+![Image Tag in Preview](chapter12-image-tag.png)
+
+*Figure 4:* Image Tags in Preview
 
 To see the images, use either File –> Export to Web (for first time exporting) or File –> "Export story.js only..." (for additional exporting).
 
@@ -94,24 +118,38 @@ Along with understanding code commands, the tagging system in Inky also allows f
 The author tag allows for adding an author to the project. Once added, the "author" area will appear under the title in the web version.
 
 ```ink
-# AUTHOR: Jane Doe
+# author: Jane Doe
 
 My life really began after I died.
 ```
+
+![Author Tag](chapter12-author.png)
+
+*Figure 5:* Author Tag
+
+> **Note** The author tag is always written in lowercase as `# author`.
 
 ### Theme
 
 By default, the "theme" (CSS style rules) is set to "white". As with other tags, including the keyword "theme:" and a new choice will change it. Version 0.10 introduced a new theme option: dark.
 
 ```ink
-# THEME: dark
+# theme: dark
 
 The rain pounded on the windows. Its staccato pace matched my own heart as its unsteady beat echoed each other. I had seen a ghost -- or, at least, I thought I did. Could this house really be haunted?
 ```
 
+![Theme Tag](chapter12-theme.png)
+
+*Figure 6:* Theme Tag
+
+> **Note** The author tag is always written in lowercase as `# theme`.
+
 ### Clear
 
 While other instructions change code properties, `# CLEAR` works only in the web-export version. It "clears" all other instructions and starts at the top of the screen with the next set of instructions.
+
+> **Note** `# CLEAR` should usually only be used after the player has made a choice. If used in the middle of a flow, it will clear all the text before the player has a chance to read it!
 
 ```ink
 You enter the commands in the console and pause before pressing the last key.
@@ -121,11 +159,17 @@ You enter the commands in the console and pause before pressing the last key.
   The screen flashes before resetting. Were you successful?
 ```
 
-**Note** `# CLEAR` should usually only be used after the player has made a choice. If used in the middle of a flow, it will clear all the text before the player has a chance to read it!
+![Clear Tag](chapter12-clear.png)
+
+*Figure 7:* Clear Tag
+
+> **Note** The clear tag is always written in uppercase as `# CLEAR`.
 
 ### Restart
 
 Like `# CLEAR`, `# RESTART` also only works in the web-exported version of Ink. Instead of removing things, however, `# RESTART` does as its name implies: it restarts the project.
+
+> **Note:** Like `# CLEAR`, it is best to use `# RESTART` after the player has made a choice, since it clears all the text on the screen as well.
 
 ```ink
 You pick up the treasure. After many trials and challenges, you have finally come to the end of your journey.
@@ -134,7 +178,11 @@ You pick up the treasure. After many trials and challenges, you have finally com
   # RESTART
 ```
 
-> **Note:** Like `# CLEAR`, it is best to use `# RESTART` after the player has made a choice, since it clears all the text on the screen as well.
+![Restart Tag](chapter12-restart.png)
+
+*Figure 8:* Restart Tag
+
+> **Note** The Restart tag is always written in uppercase as `# RESTART`.
 
 ## Adding CLASS
 
