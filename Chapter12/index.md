@@ -196,7 +196,27 @@ When used at the end of a line, the Inky web-exported version will apply any CSS
 
 Adding or changing rules in this file will be reflected when the `index.html` file is refreshed in the web browser.
 
-> **Note:** When adding a new `# CLASS` tag in a project, it will need to be exported again before those changes will appear. Be sure to use File –> "Export story.js only..." and replace the story before refreshing the `index.html` file!
+**Example Ink:**
+
+```ink
+This will use a special CSS class! # CLASS: green
+```
+
+**Example Addition to `style.css`:**
+
+```css
+.green {
+  color: green;
+}
+```
+
+**Example Presentation:**
+
+![CSS Class](chapter12-css-class.png)
+
+> **Note:** When adding a new `# CLASS` tag in a project, it will need to be exported again before those changes will appear.
+>
+> Be sure to use File –> "Export story.js only..." and replace the story before refreshing the `index.html` file!
 
 ### Changing CSS
 
@@ -208,7 +228,9 @@ The default CSS can also be updated adding new declarations or changing the exis
 
 It make a class for larger text, a new class, *biggerText*, could be added to the bottom of the `style.css` file with new CSS declarations.
 
-> **Note:** A *declaration* is the official name for what is commonly known as a "CSS rule." It is written in the format of `property: value` with a known property on the left-hand side, a colon, `:`, and then the value to update. This format *declares* a property to have a certain new value.
+> **Note:** A *declaration* is the official name for what is commonly known as a "CSS rule."
+>
+> It is written in the format of `property: value` with a known property on the left-hand side, a colon, `:`, and then the value to update. This format *declares* a property to have a certain new value.
 
 ```css
 .biggerText {
@@ -222,7 +244,9 @@ After add a new class *biggerText*, it can be used with the `# CLASS` tag.
 "WHAT!?" you shout. "THIS IS A SUPER IMPORTANT PART AND THE FONT IS LARGER THAN NORMAL." # CLASS: biggerFont
 ```
 
-> **Note:** Instead of using "Export to web" a second time, the menu option "Export story.js only..." should be used. This will export a new `story.js` file (where "story" is replaced with the name of the project. Select the existing `story.js` file and replace it.
+> **Note:** Instead of using "Export to web" a second time, the menu option "Export story.js only..." should be used.
+>
+> This will export a new `story.js` file (where "story" is replaced with the name of the project. Select the existing `story.js` file and replace it.
 
 When run in a browser, the HTML produced would be the following:
 
@@ -235,7 +259,9 @@ When run in a browser, the HTML produced would be the following:
 
 Any of the existing CSS declarations can be changed in the `style.css` file. Changing the rules for the *p* selector, for example could make the text bigger for all output shown.
 
-> **Note:** In CSS, a *selector* is what is used to "select" what content in a HTML document should be affects by its declarations. There are [many different forms of selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors), but a common usage is to find all of the elements of a certain type. For example, using the selector `p` would find all of the `<p>` elements in a document and apply certain style rules.
+> **Note:** In CSS, a *selector* is what is used to "select" what content in a HTML document should be affects by its declarations. There are [many different forms of selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors), but a common usage is to find all of the elements of a certain type.
+>
+> For example, using the selector `p` would find all of the `<p>` elements in a document and apply certain style rules.
 
 Finding the *p* selector in the `style.css` file shows the following declarations in its block.
 
@@ -259,7 +285,9 @@ p {
 }
 ```
 
-> **Note:** In the above example, the use of `/* */` marks a comment in CSS. This is different than Ink! In CSS, comments begin with `/*` and end with `*/`. The use of the double-slash format used in Ink, `//`, is not allowed in CSS.
+> **Note:** In the above example, the use of `/* */` marks a comment in CSS. This is different than Ink!
+>
+> In CSS, comments begin with `/*` and end with `*/`. The use of the double-slash format used in Ink, `//`, is not allowed in CSS.
 
 Any additional rules or changes can be made to the `style.css` file. However, two things need to be remembered:
 
@@ -272,7 +300,7 @@ Any additional rules or changes can be made to the `style.css` file. However, tw
 
 ### `.end`
 
-The class `.end`, as explained in the `style.css` file, can be used for changing how the presentation of the text "The End" (or other story ending) appears.
+The class `.end`, as explained in the `style.css` file, can be used for changing how the presentation of the text "The End" (or any other story ending) appears.
 
 ```css
 /* Built in class if you want to write:
@@ -328,7 +356,9 @@ All choices are given the class "choice" by default. Changes to the `.choice` an
 
 Along with using text in Inky, it is also possible to use HTML directly. Style elements such as `<strong>` and `<em>` can be used within the editor and their effects will show up in the preview pane.
 
-> **Note:** In HTML, the element `<em>` is used to give some selection *emphasis*. The `<strong>` element gives a selection **strong emphasis**.
+> **Note:** In HTML, the element `<em>` is used to give some selection *emphasis*.
+>
+> The `<strong>` element gives a selection **strong emphasis**.
 
 While the styling of elements must happen through CSS rules, any HTML that has a structural or styling factor can be used in Inky and "passed through" to the Ink for Web usage as well.
 
@@ -339,6 +369,10 @@ While the styling of elements must happen through CSS rules, any HTML that has a
 
 "I don't care where she came from," you reply. "<strong>I love her!</strong>"
 ```
+
+**Example Preview in Inky:**
+
+![HTML Preview](chapter12-html-preview.png)
 
 This means that text can be arranged within the Inky Editor through using HTML directly, too.
 
@@ -357,11 +391,13 @@ This means that text can be arranged within the Inky Editor through using HTML d
 
 ## Inline CSS and Choices
 
-Normally, all of the choice text in the story will appear the same way. Even with changing the styling of all of the choice text in a story by editing the rules of `p.choices` in the `style.css` file, they would appear the same. Every individual choice would be styled in the same way, which can be somewhat limiting.
+Normally, all of the choice text in the story will appear the same way. Even with changing the styling of all of the choice text in a story by editing the rules of `.choices` in the `style.css` file, they would appear the same. Every individual choice would be styled in the same way, which can be somewhat limiting.
 
 Luckily, there is a workaround within Ink to style individual choices! This workaround involves using inline CSS within the text of a choice to change the styling of that individual choice. Using the attribute *style* inside of an element, in-line CSS can be applied.
 
-> **Note:** In HTML, anything inside of the opening tag of an element is an *attribute*. These define settings and values that affect the structure or presentation of the element. The *style* attribute can contain CSS declarations that will be applied only to that single element.
+> **Note:** In HTML, anything inside of the opening tag of an element is an *attribute*. These define settings and values that affect the structure or presentation of the element.
+>
+> The *style* attribute can contain CSS declarations that will be applied only to that single element.
 
 Consider the following example:
 
@@ -377,6 +413,10 @@ What is your favorite color?
 + <p style="color:green;">Green!</p>
   -> DONE
 ```
+
+**Example Inky Preview:**
+
+![Inline Preview](chapter12-inline-preview.png)
 
 ---
 
