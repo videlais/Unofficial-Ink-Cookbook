@@ -8,9 +8,14 @@
       - [Parsing Tags](#parsing-tags)
         - [Example Tag Parsing](#example-tag-parsing)
     - [Loading Choices](#loading-choices)
+      - [Click to Load](#click-to-load)
+    - [Summarizing `main.js`](#summarizing-mainjs)
   - [JavaScript Story API](#javascript-story-api)
-    - [Properties](#properties)
-    - [Methods](#methods)
+    - [Story Object](#story-object)
+      - [Story Properties](#story-properties)
+      - [Story Methods](#story-methods)
+    - [Choice Object](#choice-object)
+      - [Choice Properties](#choice-properties)
   - [Creating a JSON Story file](#creating-a-json-story-file)
   - [Getting and Setting Variables](#getting-and-setting-variables)
     - [*EvaluateFunction()*](#evaluatefunction)
@@ -118,23 +123,103 @@ function splitPropertyTag(tag) {
 
 ### Loading Choices
 
+While the *canContinue* and **Continue()** pattern appears earlier in the `main.js` file, it is most frequently *called* inside of another part of the code: creating choices!
 
+> **Note:** The method **Continue()** must be called at least once to populate the property *currentChoices*!
+
+In JavaScript, the property *currentChoices* is an Array of **Choice** objects. (Each has the properties *text*, the output of the choice, and *index*, its position within the current set of choices.)
+
+In `main.js`, the iterator function **forEach()** is used to create content based on its elements. For each one, a new `<p>` is added with the class `.choice` and a hyperlink with the *text* of the **Choice** object.
+
+```javascript
+story.currentChoices.forEach(function(choice) {
+
+  // Create paragraph with anchor element
+  var choiceParagraphElement = document.createElement('p');
+  choiceParagraphElement.classList.add("choice");
+  choiceParagraphElement.innerHTML = `<a href='#'>${choice.text}</a>`
+  storyContainer.appendChild(choiceParagraphElement);
+});
+```
+
+#### Click to Load
+
+Next in the code is the creation of *event listeners* for the hyperlinks of the choice generated previously through iterating through the property *currentChoices*.
+
+> **Note:** In JavaScript terminology, an *event listener* is some code that "listens" for an event like clicking or the user typing and responds in some way to it.
+
+```javascript
+// Click on choice
+var choiceAnchorEl = choiceParagraphElement.querySelectorAll("a")[0];
+
+choiceAnchorEl.addEventListener("click", function(event) {
+
+  // Don't follow <a> link
+  event.preventDefault();
+
+  // Remove all existing choices
+  removeAll(".choice");
+
+  // Tell the story where to go next
+  story.ChooseChoiceIndex(choice.index);
+
+  // And loop
+  continueStory();
+});
+```
+
+A choice is chosen when using the `main.js` JavaScript code when its hyperlink is clicked on by a user. When this happens, four things happen in order based on the above code:
+
+- The use of the method **preventDefault()** stops the default action of the hyperlink, `<a>` element.
+
+- All other choices are removed from the document based on their class, `.choice`.
+
+- The method **ChooseChoiceIndex()** is used.
+
+- The function **continueStory()** is called to load the next part of the story.
+
+When passed a number (the *index* of a **Choice**), **ChooseChoiceIndex()** method tells Ink that a choice was chosen.
+
+In the next *canContinue* and **Continue()** loop, the results of this choice would then be loaded next. And, in fact, that is the next line after using the **ChooseChoiceIndex()** method: calling *continueStory()* and looping again.
+
+### Summarizing `main.js`
+
+The control flow of the major activities of the `main.js` file can be summarized in the following way as it relates the Story API in JavaScript:
+
+- Call `<Story>`.**Continue()** first. This initial load setup of the properties *canContinue*, *currentTags*, and *currentChoices*.
+
+- If *canContinue* is `true`, call **Continue()**. Parse any tags using *currentTags*.
+
+- Parse any existing choices using *currentChoice*. For each choice, setup an event listener to react on click events passing the method **ChooseChoiceIndex()** what choice was made.
+
+- Continue the *canContinue* and **Continue()** pattern until there is no more content.
 
 ## JavaScript Story API
 
-The Ink for Web option in Inky can be used to build more complex projects using the JavaScript Story API as part of InkJS.
+The Ink for Web option in Inky bundles the file `ink.js` that contains the JavaScript API for Ink.
 
-### Properties
+It contains the following objects with their own properties and methods.
+
+### Story Object
+
+#### Story Properties
 
 - *canContinue*: Returns `true` if the story can continue to run or `false` otherwise.
-- *currentChoices*: An array of the current choices. Each entry’s text property contains their text.
-- *currentTags*: An array of any tags as part of current block.
-- *globalTags*: An array of all the tags used in the story
+- *currentChoices*: An array of the current choices as **Choice** elements.
+- *currentTags*: An array of any tags as part of current block as strings.
+- *globalTags*: An array of all the tags used in the story as strings.
 
-### Methods
+#### Story Methods
 
 - *Continue()*: Returns the next text block and loads the next choices, if any.
 - *ChooseChoiceIndex()*: Supplying a valid index matching the length of the array of currentChoices will consider that entry "clicked."
+
+### Choice Object
+
+#### Choice Properties
+
+- *index*: Position of choice within current set
+- *text*: Output content of choice
 
 ## Creating a JSON Story file
 
