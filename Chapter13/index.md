@@ -13,7 +13,10 @@
   - [Getting and Setting Variables](#getting-and-setting-variables)
     - [Variables State Example](#variables-state-example)
     - [Accessing Variables State Properties](#accessing-variables-state-properties)
+    - [Fallback **Proxy** Support](#fallback-proxy-support)
   - [*EvaluateFunction()*](#evaluatefunction)
+    - [Passing Arguments](#passing-arguments)
+    - [Capturing Function Output](#capturing-function-output)
   - [Observing Variables](#observing-variables)
 
 **Summary:** In this chapter, you will learn more about the JavaScript Story API, how to use it, and how its functionality relate to each other.
@@ -236,15 +239,166 @@ Something that is not possible, however, is creating new properties using the **
 
 While it is possible to access variables created in Ink, more cannot be added. The Proxy acts as a way to *access* existing variables only.
 
+### Fallback **Proxy** Support
+
+On platforms that do not support Proxies in JavaScript (Node.js v5, IE 11, Safari 9 and everything below), variables cannot be used through the proxy. However, the property *$* of the **variablesState** object can be used to provide the same access.
+
+**Example:**
+
+```javascript
+story.variablesState.$("player_health", 100);
+//story.variablesState["player_health"] = 100;
+
+let health = story.variablesState.$("player_health");
+//let health = story.variablesState["player_health"];
+```
+
 ## *EvaluateFunction()*
 
-The function *EvaluateFunction()* is used to call Ink functions. It accepts the name of the function as a string, an optional array of arguments, and if both the result of the function and any text it would have displayed should be returned.
+The Story API provides the method **EvaluateFunction()** for calling Ink functions externally.
 
-As the documentation mentions, if the third parameter is true, the returned object with have both returned, returned results, and output, the text of the function, as its properties.
+**Example Ink:**
 
-Since it is possible to write functions that change the values of variables within Ink, the use of *EvaluateFunction()* means that they can be called from outside of the story with values passed into the function via the call.
+```ink
+What is it?
 
-In other words, it is possible to create an interface within an Ink story to changes its variables via different functions. These can then be called via *EvaluateFunction()* and passed values. Instead of needing to use variablesState directly, values can be changed and other work done from within the Ink story via different usages of *EvaluateFunction()*.
+== function ExampleFunction() ==
+~ return "It's it!"
+```
+
+**Example JavaScript:**
+
+```javascript
+let story = new inkjs.Story(storyContent);
+
+let result = story.EvaluateFunction("ExampleFunction");
+
+let paragraphText = story.Continue();
+paragraphText += result;
+
+console.log(paragraphText);
+```
+
+**Example Final Output:**
+
+```ink
+What is it?
+It's it!
+```
+
+In the above code, a function is created in the Ink code. It is then saved with the Ink for Web option (or using the "Export story.js file..." option).
+
+In the JavaScript code, the story is loaded and then the **story.EvaluateFunction()** method is called with the argument "ExampleFunction".
+
+The variable *result* then holds the returning value from the internal Ink function (the String "It's it!"). This is then appended to the existing output.
+
+Finally, the method **console.log()** is called with the new, combined value and showing it in the console.
+
+### Passing Arguments
+
+It is also possible to pass arguments into Ink functions using a second argument to the **story.EvaluateFunction()** method.
+
+```javascript
+story.EvaluateFunction("ink_function", ["arg1", "arg2"]);
+```
+
+Using an Array, any values sent will be passed to the internal Ink function and mapped to its own parameters in the same exact order of elements.
+
+**Example Ink:**
+
+```ink
+I had visions, I was in them
+
+== function ExampleFunction(arg1, arg2, arg3) ==
+~ return "{arg1}<br>{arg2}<br>{arg3}"
+```
+
+**Example JavaScript:**
+
+```javascript
+let story = new inkjs.Story(storyContent);
+
+let result = story.EvaluateFunction(
+  "ExampleFunction",
+  [
+    "I was looking into the mirror",
+    "To see a little bit clearer",
+    "The rottenness and evil in me"
+  ]
+);
+
+let paragraphText = story.Continue();
+paragraphText += result;
+
+console.log(paragraphText);
+```
+
+**Example Output:**
+
+```ink
+I had visions, I was in them
+I was looking into the mirror To see a little bit clearer The rottenness and evil in me
+```
+
+In the above code, a function is created in Ink. It accepts three arguments that are combined and returned using its `return` statement.
+
+In the JavaScript, the story is loaded and the internal function is called using its name of "ExampleFunction". It is also passed three arguments as part of the second argument to **story.EvaluateFunction()**.
+
+Finally, like the previous example code, the output from the internal function is added to the existing story content.
+
+### Capturing Function Output
+
+The method **story.EvaluateFunction()** also accepts a third argument, a Boolean value.
+
+```javascript
+let result = story.EvaluateFunction("ink_function", ["arg1", "arg2"], true);
+```
+
+If the third argument is `true`, **story.EvaluateFunction()** will return an object instead of string output with two properties:
+
+- *returned*: The returned value or `null` if there is no return value
+- *output*: All output shown during the function
+
+**Example Ink:**
+
+```ink
+Words like violence
+
+== function ExampleFunction() ==
+Break the silence
+Come crashing in
+Into my little world
+~ return
+```
+
+**Example JavaScript:**
+
+```javascript
+let story = new inkjs.Story(storyContent);
+
+let result = story.EvaluateFunction("ExampleFunction", [], true);
+
+console.log(result);
+
+let paragraphText = story.Continue();
+paragraphText += result.output;
+
+console.log(paragraphText);
+```
+
+**Example Output:**
+
+```ink
+Words like violence
+Break the silence
+Come crashing in
+Into my little world
+```
+
+In the above code, a function is created in Ink that has output and does not return a value.
+
+In the JavaScript code, the method **story.EvaluateFunction()** is given three parameters: the name of the function "ExampleFunction", an empty array of arguments, and the Boolean value `true`.
+
+Because of the third argument, an object is returned from the method **story.EvaluateFunction()**. The property *output* of the returned object is then combined together with the previous story output.
 
 ## Observing Variables
-
