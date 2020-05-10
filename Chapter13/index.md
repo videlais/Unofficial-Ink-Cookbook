@@ -18,6 +18,8 @@
     - [Passing Arguments](#passing-arguments)
     - [Capturing Function Output](#capturing-function-output)
   - [Observing Variables](#observing-variables)
+    - [**ObserveVariable()** Example](#observevariable-example)
+    - [**ObserveVariables()** Example](#observevariables-example)
 
 **Summary:** In this chapter, you will learn more about the JavaScript Story API, how to use it, and how its functionality relate to each other.
 
@@ -402,3 +404,141 @@ In the JavaScript code, the method **story.EvaluateFunction()** is given three p
 Because of the third argument, an object is returned from the method **story.EvaluateFunction()**. The property *output* of the returned object is then combined together with the previous story output.
 
 ## Observing Variables
+
+For the common task of accessing and using the value of a variable from within Ink, the previously covered tools of the Proxy object **story.variablesStates** and the method **story.EvaluateFunction()** are not ideal.
+
+The use of **story.variablesStates** would require constantly polling the values to see if had changed and then reacting in some way. The same is also true of **story.EvaluateFunction()**: an Ink function would need to be written whose sole purpose is reporting on a variable. That is a waste of time and code.
+
+Instead, and to help with these use cases, the Story API provides two methods: **story.ObserveVariable()** and **story.ObserveVariables()**. These differ from the earlier code in one very important way: instead of needing to poll values, each method accepts a callback function that is called if the values of the variable(s) change!
+
+> **Note:** In JavaScript, a *callback function* is a common pattern where usually an anonymous function (one without a name) is written to be called when something happens. As functions are a type of value in JavaScript, they can be passed into functions and called in another context.
+
+### **ObserveVariable()** Example
+
+The method **story.ObserveVariable()** accepts two arguments. The first, like with using **story.variablesStates**, is the name of the variable in quotation marks. The second is a callback function.
+
+```javascript
+story.ObserveVariable("variableName", function(variableName, variableValue) {});
+```
+
+Variables are *global* in Ink. Once they are created, they can be accessed from any knot, stitch, or function. This also means their values can be changed from different points as well.
+
+**Example Ink:**
+
+```ink
+VAR confidence = 0
+
+-> Voting
+
+=== Voting ===
+Confidence: {confidence}
+
++ [Raise Confidence]
+  ~ confidence += 10
+  -> Voting
++ [Lower Confidence]
+  ~ confidence -= 10
+  -> Voting
+```
+
+**Example JavaScript:**
+
+```javascript
+let story = new inkjs.Story(storyContent);
+
+story.ObserveVariable("confidence", function(variableName, variableValue) {
+  console.log(variableName, variableValue);
+});
+
+let storyContainer = document.querySelector('#story');
+
+continueStory();
+
+function continueStory(firstTime) {
+
+  // Generate story text - loop through available content
+  while(story.canContinue) {
+
+    // Get ink to generate the next paragraph
+    var paragraphText = story.Continue();
+
+    // Create paragraph element (initially hidden)
+    let paragraphElement = document.createElement('p');
+    paragraphElement.innerHTML = paragraphText;
+    storyContainer.appendChild(paragraphElement);
+
+  }
+
+  // Create HTML choices from ink choices
+  story.currentChoices.forEach(function(choice) {
+
+    // Create paragraph with anchor element
+    var choiceParagraphElement = document.createElement('p');
+    choiceParagraphElement.classList.add("choice");
+    choiceParagraphElement.innerHTML = `<a href='#'>${choice.text}</a>`
+    storyContainer.appendChild(choiceParagraphElement);
+
+    // Click on choice
+    var choiceAnchorEl = choiceParagraphElement.querySelectorAll("a")[0];
+    choiceAnchorEl.addEventListener("click", function(event) {
+
+      // Don't follow <a> link
+      event.preventDefault();
+
+      // Remove all existing choices
+      removeAll(".choice");
+
+      // Tell the story where to go next
+      story.ChooseChoiceIndex(choice.index);
+
+      // And loop
+      continueStory();
+    });
+  });
+}
+
+// Remove all elements that match the given selector.
+function removeAll(selector) {
+  let allElements = storyContainer.querySelectorAll(selector);
+  for(var i=0; i<allElements.length; i++) {
+    let el = allElements[i];
+    el.parentNode.removeChild(el);
+  }
+}
+```
+
+**Example Output:**
+
+```ink
+confidence 10
+confidence 0
+confidence -10
+confidence -20
+confidence -10
+```
+
+In the above code, a variable *confidence* is created in Ink. A knot **Voting** is also created with two internal, sticky choices of *Raise Confidence* and *Lower Confidence*. For each, they adjust the value of *confidence* and then loop back to the start of the knot.
+
+In the JavaScript code, things are slightly more complex. In order to handle clicking on the links, more code was needed to load the story, create its content, and allow for using the choices in HTML. However, the important line is the following:
+
+```javascript
+story.ObserveVariable("confidence", function(variableName, variableValue) {
+  console.log(variableName, variableValue);
+});
+```
+
+The use of the **story.ObserveVariable()** method sets up a "listener" for the internal, Ink variable *confidence*. Every time it changes, the callback function will be passed two arguments:
+
+- *variableName*: Name of the variable being watched
+- *variableValue*: Current value of the variable
+
+> **Note:** Like other functionality when using the Story API, the **story.ObserveVariable()** method is affected by **Continue()**. If a variable is updated as part of internal Ink code, the method **story.ObserveVariable()** will only have the last updated value.
+>
+> However, as variables can be accessed via the Proxy object **story.variablesState**, this will also trigger the **story.ObserveVariable()** method. If a variable is updated via the Story API, it will trigger the **story.ObserveVariable()** method.
+
+Inside the callback function, the variable name and its value are passed to the method **console.log()** and shown to the user via the console.
+
+If either of the choices are made, the value of *confidence* is updated in Ink. This then signals to the Story API the values have been changed, which, in turn, uses the callback function setup with the **story.ObserveVariable()** method.
+
+### **ObserveVariables()** Example
+
