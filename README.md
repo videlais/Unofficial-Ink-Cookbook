@@ -22,6 +22,10 @@ The *Unofficial Ink Cookbook* is a collaboration between [Dan Cox](https://githu
 - [Chapter 13: JavaScript Story API](Chapter13/index.md)
 - Examples
 
+## Version
+
+1.0 (May 2020)
+
 ## Copyright
 
 Ink, its logo, and other associated branding are copyright inkle studios.
