@@ -20,6 +20,7 @@
   - [Observing Variables](#observing-variables)
     - [**ObserveVariable()** Example](#observevariable-example)
     - [**ObserveVariables()** Example](#observevariables-example)
+    - [Removing Observers](#removing-observers)
 
 **Summary:** In this chapter, you will learn more about the JavaScript Story API, how to use it, and how its functionality relate to each other.
 
@@ -418,7 +419,9 @@ Instead, and to help with these use cases, the Story API provides two methods: *
 The method **story.ObserveVariable()** accepts two arguments. The first, like with using **story.variablesStates**, is the name of the variable in quotation marks. The second is a callback function.
 
 ```javascript
-story.ObserveVariable("variableName", function(variableName, variableValue) {});
+story.ObserveVariable(
+  "variableName",
+  function(variableName, variableValue) {});
 ```
 
 Variables are *global* in Ink. Once they are created, they can be accessed from any knot, stitch, or function. This also means their values can be changed from different points as well.
@@ -460,7 +463,7 @@ function continueStory(firstTime) {
   while(story.canContinue) {
 
     // Get ink to generate the next paragraph
-    var paragraphText = story.Continue();
+    let paragraphText = story.Continue();
 
     // Create paragraph element (initially hidden)
     let paragraphElement = document.createElement('p');
@@ -473,13 +476,13 @@ function continueStory(firstTime) {
   story.currentChoices.forEach(function(choice) {
 
     // Create paragraph with anchor element
-    var choiceParagraphElement = document.createElement('p');
+    let choiceParagraphElement = document.createElement('p');
     choiceParagraphElement.classList.add("choice");
     choiceParagraphElement.innerHTML = `<a href='#'>${choice.text}</a>`
     storyContainer.appendChild(choiceParagraphElement);
 
     // Click on choice
-    var choiceAnchorEl = choiceParagraphElement.querySelectorAll("a")[0];
+    let choiceAnchorEl = choiceParagraphElement.querySelectorAll("a")[0];
     choiceAnchorEl.addEventListener("click", function(event) {
 
       // Don't follow <a> link
@@ -522,9 +525,12 @@ In the above code, a variable *confidence* is created in Ink. A knot **Voting** 
 In the JavaScript code, things are slightly more complex. In order to handle clicking on the links, more code was needed to load the story, create its content, and allow for using the choices in HTML. However, the important line is the following:
 
 ```javascript
-story.ObserveVariable("confidence", function(variableName, variableValue) {
-  console.log(variableName, variableValue);
-});
+story.ObserveVariable(
+  "confidence",
+  function(variableName, variableValue) {
+    console.log(variableName, variableValue);
+  }
+);
 ```
 
 The use of the **story.ObserveVariable()** method sets up a "listener" for the internal, Ink variable *confidence*. Every time it changes, the callback function will be passed two arguments:
@@ -542,3 +548,275 @@ If either of the choices are made, the value of *confidence* is updated in Ink. 
 
 ### **ObserveVariables()** Example
 
+The method **story.ObserveVariables()** accepts two arguments. The first is an Array of variables to observe and the second is an Array of callback functions.
+
+> **Note:** The order of each Array argument maps the other for **story.ObserveVariables()**. In other words, the first callback function is connected to the first variable. The second of each are also connected. This continues for each element in each array.
+
+```javascript
+story.ObserveVariables(
+  [
+    "variableName1",
+    "variableName2"
+  ],
+  [
+    function(variableName, variableValue) {},
+    function(variableName, variableValue) {}
+  ]
+);
+```
+
+**Example Ink:**
+
+```ink
+VAR confidence = 0
+VAR evidence = 0
+
+-> Voting
+
+=== Voting ===
+Confidence: {confidence}
+Evidence: {evidence}
+
++ [Raise Confidence]
+  ~ confidence += 10
+  -> Voting
++ [Lower Confidence]
+  ~ confidence -= 10
+  -> Voting
++ [Introduce Evidence]
+  ~ evidence += 1
+  -> Voting
++ [Remove Evidence]
+  ~ evidence -= 1
+  { evidence < 0:
+    ~ evidence = 0
+  }
+  -> Voting
+```
+
+**Example JavaScript:**
+
+```javascript
+let story = new inkjs.Story(storyContent);
+
+story.ObserveVariables(
+  [
+    "confidence",
+    "evidence"
+  ],
+  [
+    function(variableName, variableValue) {
+      console.log("Confidence:", variableName, variableValue)
+    },
+    function(variableName, variableValue) {
+      console.log("Evidence:", variableName, variableValue)
+    }
+  ]
+);
+
+let storyContainer = document.querySelector('#story');
+
+continueStory();
+
+function continueStory(firstTime) {
+
+  // Generate story text - loop through available content
+  while(story.canContinue) {
+
+    // Get ink to generate the next paragraph
+    let paragraphText = story.Continue();
+
+    // Create paragraph element (initially hidden)
+    let paragraphElement = document.createElement('p');
+    paragraphElement.innerHTML = paragraphText;
+    storyContainer.appendChild(paragraphElement);
+
+  }
+
+  // Create HTML choices from ink choices
+  story.currentChoices.forEach(function(choice) {
+
+    // Create paragraph with anchor element
+    let choiceParagraphElement = document.createElement('p');
+    choiceParagraphElement.classList.add("choice");
+    choiceParagraphElement.innerHTML = `<a href='#'>${choice.text}</a>`
+    storyContainer.appendChild(choiceParagraphElement);
+
+    // Click on choice
+    let choiceAnchorEl = choiceParagraphElement.querySelectorAll("a")[0];
+    choiceAnchorEl.addEventListener("click", function(event) {
+
+      // Don't follow <a> link
+      event.preventDefault();
+
+      // Remove all existing choices
+      removeAll(".choice");
+
+      // Tell the story where to go next
+      story.ChooseChoiceIndex(choice.index);
+
+      // And loop
+      continueStory();
+    });
+  });
+}
+
+// Remove all elements that match the given selector.
+function removeAll(selector)
+{
+    let allElements = storyContainer.querySelectorAll(selector);
+    for(let i=0; i<allElements.length; i++) {
+        let el = allElements[i];
+        el.parentNode.removeChild(el);
+    }
+}
+```
+
+**Example Output:**
+
+```ink
+Confidence: confidence 10
+Evidence: evidence 1
+```
+
+In the above code, two variables are created in Ink. When making choices in the knot **Voting**, their values are adjusted and a divert is used to loop.
+
+In the JavaScript code, the method **story.ObserveVariables()** is used. It observes both the Ink variable *confidence* and *evidence*. If these values change, their associated callback functions are called.
+
+> **Note:** Like with **ObserveVariable()**, all variables are affected by the Story API and **Continue()**.
+>
+> In the Ink code, the value of *evidence* is decreased in 1 in its section of the code. A conditional test then resets its value to 0 if it is below that. However, as these happen back-to-back and most importantly *before* the next use of **Continue()**, the JavaScript code will never see a negative value for Ink variable *evidence*.
+
+### Removing Observers
+
+The method **RemoveVariableObserver()**, as part of the Story API, *removes* observer functions from watching variables.
+
+Unlike its sister methods **ObserveVariable()** and **ObserveVariables()**, **RemoveVariableObserver()** accepts either the function *or* the name of the variable to stop watching.
+
+```javascript
+story.RemoveVariableObserver(observerFunction, watchedVariable);
+```
+
+> **Note:** As anonymous functions are often used for callbacks, the optional use of a function argument is very helpful. Supplying only the name of the variable to stop watching is more common.
+
+**Example Ink:**
+
+```ink
+VAR confidence = 0
+VAR evidence = 0
+
+-> Voting
+
+=== Voting ===
+Confidence: {confidence}
+Evidence: {evidence}
+
++ [Raise Confidence]
+  ~ confidence += 10
+  -> Voting
++ [Lower Confidence]
+  ~ confidence -= 10
+  -> Voting
++ [Introduce Evidence]
+  ~ evidence += 1
+  -> Voting
++ [Remove Evidence]
+  ~ evidence -= 1
+  { evidence < 0:
+    ~ evidence = 0
+  }
+  -> Voting
+```
+
+**Example JavaScript:**
+
+```javascript
+let story = new inkjs.Story(storyContent);
+
+story.ObserveVariables(
+  [
+    "confidence",
+    "evidence"
+  ],
+  [
+    function(variableName, variableValue) {
+      console.log("Confidence:", variableName, variableValue)
+    },
+    function(variableName, variableValue) {
+      console.log("Evidence:", variableName, variableValue)
+    }
+  ]
+);
+
+story.RemoveVariableObserver(undefined, "confidence");
+
+let storyContainer = document.querySelector('#story');
+
+continueStory();
+
+function continueStory(firstTime) {
+
+  // Generate story text - loop through available content
+  while(story.canContinue) {
+
+    // Get ink to generate the next paragraph
+    let paragraphText = story.Continue();
+
+    // Create paragraph element (initially hidden)
+    let paragraphElement = document.createElement('p');
+    paragraphElement.innerHTML = paragraphText;
+    storyContainer.appendChild(paragraphElement);
+
+  }
+
+  // Create HTML choices from ink choices
+  story.currentChoices.forEach(function(choice) {
+
+    // Create paragraph with anchor element
+    let choiceParagraphElement = document.createElement('p');
+    choiceParagraphElement.classList.add("choice");
+    choiceParagraphElement.innerHTML = `<a href='#'>${choice.text}</a>`
+    storyContainer.appendChild(choiceParagraphElement);
+
+    // Click on choice
+    let choiceAnchorEl = choiceParagraphElement.querySelectorAll("a")[0];
+    choiceAnchorEl.addEventListener("click", function(event) {
+
+      // Don't follow <a> link
+      event.preventDefault();
+
+      // Remove all existing choices
+      removeAll(".choice");
+
+      // Tell the story where to go next
+      story.ChooseChoiceIndex(choice.index);
+
+      // And loop
+      continueStory();
+    });
+  });
+}
+
+// Remove all elements that match the given selector.
+function removeAll(selector)
+{
+    let allElements = storyContainer.querySelectorAll(selector);
+    for(let i=0; i<allElements.length; i++) {
+        let el = allElements[i];
+        el.parentNode.removeChild(el);
+    }
+}
+```
+
+**Example Output:**
+
+```ink
+Evidence: evidence 1
+Evidence: evidence 0
+```
+
+In the above code, variables are created and their values changed in the Ink code.
+
+In JavaScript, the method **ObserveVariables()** is used to create two observer functions on two Ink variables. However, the **RemoveVariableObserver()** method is then used to remove any observer functions on the Ink variable *confidence*.
+
+In the use of the method **console.log()**, only the changes to the Ink variable *evidence* would be reported. The observer function for the Ink variable *confidence* was removed.
