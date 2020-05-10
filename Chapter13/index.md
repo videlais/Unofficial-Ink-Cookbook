@@ -10,15 +10,11 @@
     - [Loading Choices](#loading-choices)
       - [Click to Load](#click-to-load)
     - [Summarizing `main.js`](#summarizing-mainjs)
-  - [JavaScript Story API](#javascript-story-api)
-    - [Story Object](#story-object)
-      - [Story Properties](#story-properties)
-      - [Story Methods](#story-methods)
-    - [Choice Object](#choice-object)
-      - [Choice Properties](#choice-properties)
-  - [Creating a JSON Story file](#creating-a-json-story-file)
   - [Getting and Setting Variables](#getting-and-setting-variables)
-    - [*EvaluateFunction()*](#evaluatefunction)
+    - [Variables State Example](#variables-state-example)
+    - [Accessing Variables State Properties](#accessing-variables-state-properties)
+  - [*EvaluateFunction()*](#evaluatefunction)
+  - [Observing Variables](#observing-variables)
 
 **Summary:** In this chapter, you will learn more about the JavaScript Story API, how to use it, and how its functionality relate to each other.
 
@@ -194,48 +190,53 @@ The control flow of the major activities of the `main.js` file can be summarized
 
 - Continue the *canContinue* and **Continue()** pattern until there is no more content.
 
-## JavaScript Story API
-
-The Ink for Web option in Inky bundles the file `ink.js` that contains the JavaScript API for Ink.
-
-It contains the following objects with their own properties and methods.
-
-### Story Object
-
-#### Story Properties
-
-- *canContinue*: Returns `true` if the story can continue to run or `false` otherwise.
-- *currentChoices*: An array of the current choices as **Choice** elements.
-- *currentTags*: An array of any tags as part of current block as strings.
-- *globalTags*: An array of all the tags used in the story as strings.
-
-#### Story Methods
-
-- *Continue()*: Returns the next text block and loads the next choices, if any.
-- *ChooseChoiceIndex()*: Supplying a valid index matching the length of the array of currentChoices will consider that entry "clicked."
-
-### Choice Object
-
-#### Choice Properties
-
-- *index*: Position of choice within current set
-- *text*: Output content of choice
-
-## Creating a JSON Story file
-
-The Story API is created from reading a JSON file with a compiled story. In order to get that, an Ink file must be run through either inklecate, a command-line tool, or via the Inky editor using the File -> "Export to JSON.." option.
-
-The difference between the `story.js` and the JSON file is actually only that the `story.js` has its JSON contents set as the value for variable called *storyContent*. It is often easier to simply load this file into the global namespace via a SCRIPT tag and then parse the object when working in a browser.
-
 ## Getting and Setting Variables
 
-While the Story API provides access to the **Story** object and its properties and methods, global variables can also be accessed through the **variablesState** object.
+The Story API provides access to the property *variablesState*. This acts as a [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) object to the running Ink code, allowing access to variables via their name.
 
-Once a story has been created, its variables can be accessed through a Proxy via the **variablesState** property on the Story object. That is, the variables are not technically a part of the object, but act as a way to gain access and change their values.
+### Variables State Example
 
-For example, to change the variable name in the above code, it could be accessed via its name, name: `variablesState["name"]`. Changing this value would change it in the story itself.
+**Example Ink:**
 
-### *EvaluateFunction()*
+```ink
+VAR example = "Looking good!"
+
+Hi there! {example}
+```
+
+**Example JavaScript:**
+
+```javascript
+story.variablesState["example"] = "Looking awesome!";
+```
+
+**Example Output:**
+
+```ink
+Hi there! Looking awesome!
+```
+
+In the above Ink code, a variable named *example* is created. When the resulting HTML from the Ink for Web option is used, an additional line of JavaScript is added.
+
+The use of `story.variablesState["example"]` gives access, via the **variablesState** proxy object, to the variable named "example". Its value can then be changed to a different value.
+
+> **Reminder:** Variables exist with respect to story state and the use of the **Continue()** method. They are created or changed up to the last use of **Continue()** method, and any changes made to their values will not be reflected in output until it is called again.
+
+### Accessing Variables State Properties
+
+As a Proxy object in JavaScript, **variablesState** also allows access to variables via their "dot notation." Instead of using square brackets, variables can be accessed as properties of the **variablesState** object.
+
+```javascript
+story.variablesState.example = "Looking awesome!";
+```
+
+> **Note:** **variablesState** is a [*Proxy*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy). This means it seems like an object literal in JavaScript, but **is not**. Internally, it has its own methods for accessing and changing the variable property names.
+
+Something that is not possible, however, is creating new properties using the **variablesState** Proxy object. It **is not** an object literal.
+
+While it is possible to access variables created in Ink, more cannot be added. The Proxy acts as a way to *access* existing variables only.
+
+## *EvaluateFunction()*
 
 The function *EvaluateFunction()* is used to call Ink functions. It accepts the name of the function as a string, an optional array of arguments, and if both the result of the function and any text it would have displayed should be returned.
 
@@ -244,3 +245,6 @@ As the documentation mentions, if the third parameter is true, the returned obje
 Since it is possible to write functions that change the values of variables within Ink, the use of *EvaluateFunction()* means that they can be called from outside of the story with values passed into the function via the call.
 
 In other words, it is possible to create an interface within an Ink story to changes its variables via different functions. These can then be called via *EvaluateFunction()* and passed values. Instead of needing to use variablesState directly, values can be changed and other work done from within the Ink story via different usages of *EvaluateFunction()*.
+
+## Observing Variables
+
