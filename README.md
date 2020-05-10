@@ -26,6 +26,12 @@ The *Unofficial Ink Cookbook* is a collaboration between [Dan Cox](https://githu
 
 1.0 (May 2020)
 
+## Contributions and Code of Conduct
+
+Be sure to review the [Code of Conduct](./CODE_OF_CONDUCT.md) before submitting an issue or pull-request.
+
+This project emphatically supports inclusivity and rejects unacceptable behaviors.
+
 ## Copyright
 
 Ink, its logo, and other associated branding are copyright inkle studios.
