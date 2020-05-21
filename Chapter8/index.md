@@ -398,15 +398,17 @@ Testing for multiple values allows for repeating the loop between choices and kn
 
 ### Working with Alternatives
 
-It is possible to save the result of an alternative in Ink. However, it cannot be the initial value of a variable. The reason for this is that alternatives collapse their possibilities when played; before the story starts, the alternatives is all of its possible values!
+It is possible to save the result of an alternative in Ink. However, it cannot be the initial value of a variable. The reason for this is that alternatives collapse their possibilities when played; before the story starts, each alternative is all of its possible values!
 
-Setting an initial default value works for working with alternatives, though. This value can be then be overridden by a single line of code that changes the value of the variable.
+Setting an initial default value is a good approach for working with alternatives, though. This value can be then be overridden by a single line of code that changes the value of the variable.
 
 ```ink
 VAR day = ""
 
-~ day = {~Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday}
+~ day = "{~Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday}"
 ```
+
+The variable *day* would then retain whatever element was chosen by the shuffle until it was changed again by another line of code or the shuffle was used again in the same way.
 
 ---
 
