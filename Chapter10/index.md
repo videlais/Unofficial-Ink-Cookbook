@@ -14,7 +14,7 @@
 
 ## Tunnels
 
-Because of the complex nature of connections between knows and diverts, sometimes a way to move "through" a complex weave is needed. Tunnels provide that.
+Because of the complex nature of connections between knots and diverts, sometimes a way to move "through" a complex weave is needed. Tunnels provide that.
 
 In Ink, it can often be useful to create a knot that is returned to multiple times throughout a flow. Instead of a complex series of diverts and knots, Ink has functionality to quickly go to a knot and then return called a tunnel.
 
