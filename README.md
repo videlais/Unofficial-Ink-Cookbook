@@ -36,4 +36,6 @@ This project emphatically supports inclusivity and rejects unacceptable behavior
 
 Ink, its logo, and other associated branding are copyright inkle studios.
 
-The text, images, and code examples of this book are licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/). Share and remix this work, but please attribute us.
+The text and screenshots of the book are licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/). Share and remix this work, but please attribute us.
+
+All code examples are public domain.
