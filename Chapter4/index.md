@@ -208,7 +208,7 @@ Diverts, as their name implies, *diverts* a story to a knot in the story. As was
 
 In the above example, the first divert `-> Sailing` moves the story to its knot, **Sailing**. Inside this knots is a set of choices, *Pirate Island* and *Port Anderson*.
 
-One possible flow through this story would start with the know **Sailing** and then follow one of its choices (*Pirate Island* and *Port Anderson*).
+One possible flow through this story would start with the knot **Sailing** and then follow one of its choices (*Pirate Island* and *Port Anderson*).
 
 ```ink
 -> Sailing
