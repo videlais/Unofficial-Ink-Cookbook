@@ -1,1 +1,37 @@
-theme: jekyll-theme-minimal
+title: Unofficial Ink Cookbook
+description: >-
+  An open textbook for learning Ink - inkle's narrative scripting language for creating
+  interactive fiction and narrative games.
+baseurl: "/Unofficial-Ink-Cookbook"
+url: "https://videlais.github.io"
+
+remote_theme: videlais/opentextbook-theme
+
+author:
+  name: Dan Cox and Taylor Howard
+
+license:
+  text: "Creative Commons Attribution-ShareAlike 4.0 International License"
+  url: "https://creativecommons.org/licenses/by-sa/4.0/"
+  code: "Public Domain (CC0 1.0 Universal)"
+  code_url: "https://creativecommons.org/publicdomain/zero/1.0/"
+
+# Build settings
+plugins:
+  - jekyll-remote-theme
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Collections
+collections:
+  chapters:
+    output: true
+    permalink: /:collection/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "chapters"
+    values:
+      layout: "chapter"
