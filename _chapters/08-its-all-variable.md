@@ -5,9 +5,9 @@ chapter_number: 8
 layout: chapter
 ---
 
-# Chapter 8: It's All Variable
+## Learning Objectives
 
-**Learning Objectives:** By the end of this chapter, you will be able to:
+By the end of this chapter, you will be able to:
 
 - Differentiate between global, temporary, and constant variables
 - Manipulate numerical, string, and boolean data types
@@ -15,30 +15,35 @@ layout: chapter
 - Construct switch statements for multi-condition testing
 - Evaluate knot values to create conditional story branches
 
-- [Chapter 8: It's All Variable](#chapter-8-its-all-variable)
-  - [Working with Code](#working-with-code)
-  - [Single Line](#single-line)
-  - [Multiple lines](#multiple-lines)
-  - [Variables](#variables)
-    - [Types of Data](#types-of-data)
-      - [Numbers](#numbers)
-      - [Strings](#strings)
-      - [Booleans](#booleans)
-      - [Text of Diverts](#text-of-diverts)
-      - [Knots](#knots)
-    - [Types of Variables](#types-of-variables)
-      - [Global Variables](#global-variables)
-      - [Temporary Variables](#temporary-variables)
-      - [Constant Variables](#constant-variables)
-  - [Conditional Logic](#conditional-logic)
-    - [Chaining Testing (Switch Statements)](#chaining-testing-switch-statements)
-    - [Testing Knot Values](#testing-knot-values)
-    - [Multiple Conditionals](#multiple-conditionals)
-    - [Advanced Choices](#advanced-choices)
-    - [Working with Alternatives](#working-with-alternatives)
-  - [Try It](#try-it)
+## Summary
 
-**Summary:** In this chapter, you will learn about global, temporary, and constant variables in Ink and how to use them for different purposes.
+In this chapter, you will learn about global, temporary, and constant variables in Ink and how to use them for different purposes.
+
+---
+
+- [Learning Objectives](#learning-objectives)
+- [Summary](#summary)
+- [Working with Code](#working-with-code)
+- [Single Line](#single-line)
+- [Multiple lines](#multiple-lines)
+- [Variables](#variables)
+  - [Types of Data](#types-of-data)
+    - [Numbers](#numbers)
+    - [Strings](#strings)
+    - [Booleans](#booleans)
+    - [Text of Diverts](#text-of-diverts)
+    - [Knots](#knots)
+  - [Types of Variables](#types-of-variables)
+    - [Global Variables](#global-variables)
+    - [Temporary Variables](#temporary-variables)
+    - [Constant Variables](#constant-variables)
+- [Conditional Logic](#conditional-logic)
+  - [Chaining Testing (Switch Statements)](#chaining-testing-switch-statements)
+  - [Testing Knot Values](#testing-knot-values)
+  - [Multiple Conditionals](#multiple-conditionals)
+  - [Advanced Choices](#advanced-choices)
+  - [Working with Alternatives](#working-with-alternatives)
+- [Try It](#try-it)
 
 ---
 

@@ -5,34 +5,39 @@ chapter_number: 2
 layout: chapter
 ---
 
-# Chapter 2: Ink and the Inky Editor
+## Learning Objectives
 
-**Learning Objectives:** By the end of this chapter, you will be able to:
+By the end of this chapter, you will be able to:
 
 - Define Ink as a narrative scripting language and describe its purpose
 - Install the Inky Editor on your operating system
 - Demonstrate basic file operations including opening, saving, and creating projects
 - Utilize the Preview pane to test and review your Ink stories
 
-- [Chapter 2: Ink and the Inky Editor](#chapter-2-ink-and-the-inky-editor)
-  - [Making Narrative Games](#making-narrative-games)
-  - [Using Ink](#using-ink)
-  - [Creating with Ink](#creating-with-ink)
-  - [Inky Editor](#inky-editor)
-  - [Installing Inky](#installing-inky)
-    - [Windows](#windows)
-    - [macOS](#macos)
-  - [Using the Inky Editor](#using-the-inky-editor)
-    - [Opening an Ink File](#opening-an-ink-file)
-    - [Saving an Ink File](#saving-an-ink-file)
-    - [Creating a New Project](#creating-a-new-project)
-    - [Adding a New Included Ink File](#adding-a-new-included-ink-file)
-    - [Working with an Inky Project](#working-with-an-inky-project)
-      - [Rewind a Single Choice](#rewind-a-single-choice)
-      - [Restart a Story](#restart-a-story)
-  - [Try It](#try-it)
+## Summary
 
-**Summary**: In this chapter, you will learn about Ink, where to find the Inky Editor, and generally how to install and use it through basics like opening, editing, and saving an Ink file.
+In this chapter, you will learn about Ink, where to find the Inky Editor, and generally how to install and use it through basics like opening, editing, and saving an Ink file.
+
+---
+
+- [Learning Objectives](#learning-objectives)
+- [Summary](#summary)
+- [Making Narrative Games](#making-narrative-games)
+- [Using Ink](#using-ink)
+- [Creating with Ink](#creating-with-ink)
+- [Inky Editor](#inky-editor)
+- [Installing Inky](#installing-inky)
+  - [Windows](#windows)
+  - [macOS](#macos)
+- [Using the Inky Editor](#using-the-inky-editor)
+  - [Opening an Ink File](#opening-an-ink-file)
+  - [Saving an Ink File](#saving-an-ink-file)
+  - [Creating a New Project](#creating-a-new-project)
+  - [Adding a New Included Ink File](#adding-a-new-included-ink-file)
+  - [Working with an Inky Project](#working-with-an-inky-project)
+    - [Rewind a Single Choice](#rewind-a-single-choice)
+    - [Restart a Story](#restart-a-story)
+- [Try It](#try-it)
 
 ---
 

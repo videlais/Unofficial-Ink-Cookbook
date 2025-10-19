@@ -5,9 +5,9 @@ chapter_number: 6
 layout: chapter
 ---
 
-# Chapter 6: Alternatives
+## Learning Objectives
 
-**Learning Objectives:** By the end of this chapter, you will be able to:
+By the end of this chapter, you will be able to:
 
 - Distinguish between sequences, cycles, once-only, and shuffles
 - Implement single-line and multi-line alternative formats
@@ -15,28 +15,33 @@ layout: chapter
 - Create nested alternatives for complex randomization
 - Integrate alternatives with choices and diverts
 
-- [Chapter 6: Alternatives](#chapter-6-alternatives)
-  - [Alternatives](#alternatives)
-  - [Sequences](#sequences)
-  - [Cycles](#cycles)
-  - [Once-Only](#once-only)
-  - [Shuffles](#shuffles)
-  - [Multi-Line Alternatives](#multi-line-alternatives)
-    - [Multi-Line Sequences](#multi-line-sequences)
-    - [Multiline Cycles](#multiline-cycles)
-    - [Multiline Once-Only](#multiline-once-only)
-    - [Multi-line Shuffles](#multi-line-shuffles)
-  - [Advanced Shuffles](#advanced-shuffles)
-    - [Shuffle Once](#shuffle-once)
-    - [Shuffle Stopping](#shuffle-stopping)
-    - [Advanced Alternatives](#advanced-alternatives)
-      - [Blank Elements](#blank-elements)
-      - [Nested Alternatives](#nested-alternatives)
-      - [Alternatives and Diverts](#alternatives-and-diverts)
-    - [Choice Text and Alternatives](#choice-text-and-alternatives)
-  - [Try It](#try-it)
+## Summary
 
-**Summary:** In this chapter, you will learn about alternatives and how to use sequences, cycles, and shuffles.
+In this chapter, you will learn about alternatives and how to use sequences, cycles, and shuffles.
+
+---
+
+- [Learning Objectives](#learning-objectives)
+- [Summary](#summary)
+- [Alternatives](#alternatives)
+- [Sequences](#sequences)
+- [Cycles](#cycles)
+- [Once-Only](#once-only)
+- [Shuffles](#shuffles)
+- [Multi-Line Alternatives](#multi-line-alternatives)
+  - [Multi-Line Sequences](#multi-line-sequences)
+  - [Multiline Cycles](#multiline-cycles)
+  - [Multiline Once-Only](#multiline-once-only)
+  - [Multi-line Shuffles](#multi-line-shuffles)
+- [Advanced Shuffles](#advanced-shuffles)
+  - [Shuffle Once](#shuffle-once)
+  - [Shuffle Stopping](#shuffle-stopping)
+  - [Advanced Alternatives](#advanced-alternatives)
+    - [Blank Elements](#blank-elements)
+    - [Nested Alternatives](#nested-alternatives)
+    - [Alternatives and Diverts](#alternatives-and-diverts)
+  - [Choice Text and Alternatives](#choice-text-and-alternatives)
+- [Try It](#try-it)
 
 ---
 

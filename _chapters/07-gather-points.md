@@ -5,9 +5,9 @@ chapter_number: 7
 layout: chapter
 ---
 
-# Chapter 7: Gather Points
+## Learning Objectives
 
-**Learning Objectives:** By the end of this chapter, you will be able to:
+By the end of this chapter, you will be able to:
 
 - Explain the purpose of gather points in collapsing branching narratives
 - Construct chained gather points for multi-stage conversations
@@ -15,16 +15,21 @@ layout: chapter
 - Apply label scopes across knots and stitches
 - Design multi-level gather point structures for complex flows
 
-- [Chapter 7: Gather Points](#chapter-7-gather-points)
-  - [Gather Points](#gather-points)
-    - [Explaining Gather Points](#explaining-gather-points)
-    - [Chaining Gathering Points](#chaining-gathering-points)
-  - [Labelled Options](#labelled-options)
-    - [Label Scopes](#label-scopes)
-    - [Diverting to Labels](#diverting-to-labels)
-    - [Labels and Gathering Point Levels](#labels-and-gathering-point-levels)
+## Summary
 
-**Summary:** In this chapter, you will learn about *gather points*, how they are used, and the shorthand they provide for larger and more complex projects.
+In this chapter, you will learn about gather points, how they are used, and the shorthand they provide for larger and more complex projects.
+
+---
+
+- [Learning Objectives](#learning-objectives)
+- [Summary](#summary)
+- [Gather Points](#gather-points)
+  - [Explaining Gather Points](#explaining-gather-points)
+  - [Chaining Gathering Points](#chaining-gathering-points)
+- [Labelled Options](#labelled-options)
+  - [Label Scopes](#label-scopes)
+  - [Diverting to Labels](#diverting-to-labels)
+  - [Labels and Gathering Point Levels](#labels-and-gathering-point-levels)
 
 ---
 

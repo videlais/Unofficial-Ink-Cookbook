@@ -5,9 +5,9 @@ chapter_number: 4
 layout: chapter
 ---
 
-# Chapter 4: Understanding Choices
+## Learning Objectives
 
-**Learning Objectives:** By the end of this chapter, you will be able to:
+By the end of this chapter, you will be able to:
 
 - Create multi-level choice structures using asterisks
 - Implement selective output to control what players see
@@ -15,24 +15,31 @@ layout: chapter
 - Differentiate between regular choices and sticky choices
 - Construct looping patterns while avoiding infinite loops
 
-- [Chapter 4: Understanding Choices](#chapter-4-understanding-choices)
-  - [Making Choices](#making-choices)
-    - [Set Structure](#set-structure)
-    - [Set Code Example](#set-code-example)
-  - [Selective Output](#selective-output)
-    - [Selective Output Code Example](#selective-output-code-example)
-  - [Knots](#knots)
-    - [**DONE** and **END**](#done-and-end)
-      - [**DONE**](#done)
-      - [**END**](#end)
-    - [Diverts](#diverts)
-    - [Diverting to **DONE** and **END**](#diverting-to-done-and-end)
-    - [Knot Code Example](#knot-code-example)
-  - [Loops with Knots](#loops-with-knots)
-    - [Avoiding Infinite Looping](#avoiding-infinite-looping)
-  - [Sticky Choices](#sticky-choices)
-    - [Sticky Choice Code Example](#sticky-choice-code-example)
-  - [Try It](#try-it)
+## Summary
+
+In this chapter, you will learn about choices, diverts, and their different patterns in Ink.
+
+---
+
+- [Learning Objectives](#learning-objectives)
+- [Summary](#summary)
+- [Making Choices](#making-choices)
+  - [Set Structure](#set-structure)
+  - [Set Code Example](#set-code-example)
+- [Selective Output](#selective-output)
+  - [Selective Output Code Example](#selective-output-code-example)
+- [Knots](#knots)
+  - [**DONE** and **END**](#done-and-end)
+    - [**DONE**](#done)
+    - [**END**](#end)
+  - [Diverts](#diverts)
+  - [Diverting to **DONE** and **END**](#diverting-to-done-and-end)
+  - [Knot Code Example](#knot-code-example)
+- [Loops with Knots](#loops-with-knots)
+  - [Avoiding Infinite Looping](#avoiding-infinite-looping)
+- [Sticky Choices](#sticky-choices)
+  - [Sticky Choice Code Example](#sticky-choice-code-example)
+- [Try It](#try-it)
 
 **Summary:** In this chapter, you will learn about choices, diverts, and their different patterns in Ink.
 
@@ -197,7 +204,6 @@ Both can be used to prevent dead ends in the flow of a story and to create natur
 
 Knots provide an easy way to divide up a project into logical sections. For example, consider the following code where a knot is used to contain a set of choices:
 
-```ink
 ```ink
 The first-mate leans against the edge of the pier and looks out across the water.
 

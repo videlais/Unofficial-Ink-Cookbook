@@ -5,23 +5,28 @@ chapter_number: 5
 layout: chapter
 ---
 
-# Chapter 5: Managing Project Files
+## Learning Objectives
 
-**Learning Objectives:** By the end of this chapter, you will be able to:
+By the end of this chapter, you will be able to:
 
 - Organize larger projects by creating multiple Ink files
 - Apply the INCLUDE keyword to combine files into a single project
 - Design stitches as subsections within knots
 - Navigate between knots and stitches across different files
 
-- [Chapter 5: Managing Project Files](#chapter-5-managing-project-files)
-  - [Projects](#projects)
-  - [Adding New Files](#adding-new-files)
-  - [Knots Across Files](#knots-across-files)
-  - [Stitches](#stitches)
-  - [Try It](#try-it)
+## Summary
 
-**Summary:** In this chapter, you will learn about managing a project through adding new files, working with stitches, and including other files in a project.
+In this chapter, you will learn about managing a project through adding new files, working with stitches, and including other files in a project.
+
+---
+
+- [Learning Objectives](#learning-objectives)
+- [Summary](#summary)
+- [Projects](#projects)
+- [Adding New Files](#adding-new-files)
+- [Knots Across Files](#knots-across-files)
+- [Stitches](#stitches)
+- [Try It](#try-it)
 
 ---
 

@@ -5,9 +5,9 @@ chapter_number: 12
 layout: chapter
 ---
 
-# Chapter 12: Ink for the Web
+## Learning Objectives
 
-**Learning Objectives:** By the end of this chapter, you will be able to:
+By the end of this chapter, you will be able to:
 
 - Export Ink projects for web deployment using the Inky Editor
 - Organize exported files and understand their roles in web presentation
@@ -16,30 +16,35 @@ layout: chapter
 - Create CLASS tags to apply custom styling to story elements
 - Integrate HTML and inline CSS within Ink stories
 
-- [Chapter 12: Ink for the Web](#chapter-12-ink-for-the-web)
-  - [Ink for Web](#ink-for-web)
-  - [Folder Organization](#folder-organization)
-    - [Editing Files](#editing-files)
-    - [Using Images](#using-images)
-    - [Images Do Not Appear in Inky Preview](#images-do-not-appear-in-inky-preview)
-  - [Meta Instructions](#meta-instructions)
-    - [Author](#author)
-    - [Theme](#theme)
-    - [Clear](#clear)
-    - [Restart](#restart)
-  - [Adding CLASS](#adding-class)
-    - [Changing CSS](#changing-css)
-      - [Adding New Declarations](#adding-new-declarations)
-      - [Changing Existing CSS](#changing-existing-css)
-  - [Built-In CSS Classes](#built-in-css-classes)
-    - [`.end`](#end)
-    - [`.byline`](#byline)
-    - [`.choice`](#choice)
-  - [Working with HTML](#working-with-html)
-  - [Inline CSS and Choices](#inline-css-and-choices)
-  - [Try It](#try-it)
+## Summary
 
-**Summary:** In this chapter, you will learn more about the Ink for Web option, how it works, and special tags that can be used as part of Ink for Web.
+In this chapter, you will learn more about the Ink for Web option, how it works, and special tags that can be used as part of Ink for Web.
+
+---
+
+- [Learning Objectives](#learning-objectives)
+- [Summary](#summary)
+- [Ink for Web](#ink-for-web)
+- [Folder Organization](#folder-organization)
+  - [Editing Files](#editing-files)
+  - [Using Images](#using-images)
+  - [Images Do Not Appear in Inky Preview](#images-do-not-appear-in-inky-preview)
+- [Meta Instructions](#meta-instructions)
+  - [Author](#author)
+  - [Theme](#theme)
+  - [Clear](#clear)
+  - [Restart](#restart)
+- [Adding CLASS](#adding-class)
+  - [Changing CSS](#changing-css)
+    - [Adding New Declarations](#adding-new-declarations)
+    - [Changing Existing CSS](#changing-existing-css)
+- [Built-In CSS Classes](#built-in-css-classes)
+  - [`.end`](#end)
+  - [`.byline`](#byline)
+  - [`.choice`](#choice)
+- [Working with HTML](#working-with-html)
+- [Inline CSS and Choices](#inline-css-and-choices)
+- [Try It](#try-it)
 
 ---
 

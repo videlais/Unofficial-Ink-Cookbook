@@ -5,9 +5,9 @@ chapter_number: 11
 layout: chapter
 ---
 
-# Chapter 11: LIST-ing to a Side
+## Learning Objectives
 
-**Learning Objectives:** By the end of this chapter, you will be able to:
+By the end of this chapter, you will be able to:
 
 - Create and manipulate LISTs for tracking collections of values
 - Apply built-in LIST functions including LIST_COUNT(), LIST_MIN(), and LIST_MAX()
@@ -16,43 +16,48 @@ layout: chapter
 - Construct multi-listed lists for tracking object properties across categories
 - Evaluate list containment and equality for conditional logic
 
-- [Chapter 11: LIST-ing to a Side](#chapter-11-list-ing-to-a-side)
-  - [LIST](#list)
-  - [Automatically Set to `false`](#automatically-set-to-false)
-  - [Enabling Values](#enabling-values)
-  - [Built-in Functions](#built-in-functions)
-    - [`LIST_COUNT()`](#list_count)
-    - [`LIST_MIN()`](#list_min)
-    - [`LIST_MAX()`](#list_max)
-    - [`LIST_ALL()`](#list_all)
-    - [`LIST_RANGE()`](#list_range)
-    - [`LIST_VALUE()`](#list_value)
-    - [`LIST_INVERT()`](#list_invert)
-    - [`LIST_RANDOM()`](#list_random)
-  - [Inclusion Testing](#inclusion-testing)
-    - [Manipulating List Values](#manipulating-list-values)
-      - [Addition](#addition)
-      - [Subtraction](#subtraction)
-      - [Setting Multiple Values](#setting-multiple-values)
-  - [Conflicting Values and Variable Names](#conflicting-values-and-variable-names)
-  - [Comparing LISTS](#comparing-lists)
-    - [Equality Testing](#equality-testing)
-    - [Containment vs Equality](#containment-vs-equality)
-    - [Less Than](#less-than)
-      - [Greater Than](#greater-than)
-      - [Greater Than Or Equal To](#greater-than-or-equal-to)
-      - [Less Than Or Equal To](#less-than-or-equal-to)
-  - [List Intersection](#list-intersection)
-  - [Using Lists as State Machines](#using-lists-as-state-machines)
-  - [Using Lists for Flags and Tracking](#using-lists-for-flags-and-tracking)
-  - [Multi-listed Lists](#multi-listed-lists)
-    - [Tracking Objects with Lists](#tracking-objects-with-lists)
-    - [Tracking Multiple Properties](#tracking-multiple-properties)
-  - [Advanced: Custom List Values](#advanced-custom-list-values)
-  - [Practical Example: Inventory and State Management](#practical-example-inventory-and-state-management)
-  - [Try It](#try-it)
+## Summary
 
-**Summary:** In this chapter, you will learn how to work with LISTs, some of the basic functionality, and how they can be used within projects.
+In this chapter, you will learn how to work with LISTs, some of the basic functionality, and how they can be used within projects.
+
+---
+
+- [Learning Objectives](#learning-objectives)
+- [Summary](#summary)
+- [LIST](#list)
+- [Automatically Set to `false`](#automatically-set-to-false)
+- [Enabling Values](#enabling-values)
+- [Built-in Functions](#built-in-functions)
+  - [`LIST_COUNT()`](#list_count)
+  - [`LIST_MIN()`](#list_min)
+  - [`LIST_MAX()`](#list_max)
+  - [`LIST_ALL()`](#list_all)
+  - [`LIST_RANGE()`](#list_range)
+  - [`LIST_VALUE()`](#list_value)
+  - [`LIST_INVERT()`](#list_invert)
+  - [`LIST_RANDOM()`](#list_random)
+- [Inclusion Testing](#inclusion-testing)
+  - [Manipulating List Values](#manipulating-list-values)
+    - [Addition](#addition)
+    - [Subtraction](#subtraction)
+    - [Setting Multiple Values](#setting-multiple-values)
+- [Conflicting Values and Variable Names](#conflicting-values-and-variable-names)
+- [Comparing LISTS](#comparing-lists)
+  - [Equality Testing](#equality-testing)
+  - [Containment vs Equality](#containment-vs-equality)
+  - [Less Than](#less-than)
+    - [Greater Than](#greater-than)
+    - [Greater Than Or Equal To](#greater-than-or-equal-to)
+    - [Less Than Or Equal To](#less-than-or-equal-to)
+- [List Intersection](#list-intersection)
+- [Using Lists as State Machines](#using-lists-as-state-machines)
+- [Using Lists for Flags and Tracking](#using-lists-for-flags-and-tracking)
+- [Multi-listed Lists](#multi-listed-lists)
+  - [Tracking Objects with Lists](#tracking-objects-with-lists)
+  - [Tracking Multiple Properties](#tracking-multiple-properties)
+- [Advanced: Custom List Values](#advanced-custom-list-values)
+- [Practical Example: Inventory and State Management](#practical-example-inventory-and-state-management)
+- [Try It](#try-it)
 
 ---
 

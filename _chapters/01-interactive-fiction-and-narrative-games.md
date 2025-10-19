@@ -5,27 +5,32 @@ chapter_number: 1
 layout: chapter
 ---
 
-# Chapter 1: Interactive Fiction and Narrative Games
+## Learning Objectives
 
-**Learning Objectives:** By the end of this chapter, you will be able to:
+By the end of this chapter, you will be able to:
 
 - Explain the historical development of interactive fiction from text-parsers to modern narrative games
 - Compare and contrast interactive fiction with Choose-Your-Own-Adventure books
 - Analyze the key characteristics of nonlinear storytelling
 - Evaluate how player agency functions in narrative games
 
-- [Chapter 1: Interactive Fiction and Narrative Games](#chapter-1-interactive-fiction-and-narrative-games)
-  - [Introduction to Interactive Fiction](#introduction-to-interactive-fiction)
-  - [Choose Your Own Adventure (CYOA)](#choose-your-own-adventure-cyoa)
-  - [Nonlinear Storytelling](#nonlinear-storytelling)
-  - [Narrative Games](#narrative-games)
-  - [Adventure Games](#adventure-games)
-  - [Hypertext](#hypertext)
-  - [Choice-Based](#choice-based)
-  - [Enter Ink](#enter-ink)
-  - [References](#references)
+## Summary
 
-**Summary**: In this chapter, you will learn about the connection between interactive fiction and choose-your-own-adventure books, how nonlinear stories work, and the rise of the term "narrative games" to describe projects that are similar to text-only games but have more graphical elements.
+In this chapter, you will learn about the connection between interactive fiction and choose-your-own-adventure books, how nonlinear stories work, and the rise of the term "narrative games" to describe projects that are similar to text-only games but have more graphical elements.
+
+---
+
+- [Learning Objectives](#learning-objectives)
+- [Summary](#summary)
+- [Introduction to Interactive Fiction](#introduction-to-interactive-fiction)
+- [Choose Your Own Adventure (CYOA)](#choose-your-own-adventure-cyoa)
+- [Nonlinear Storytelling](#nonlinear-storytelling)
+- [Narrative Games](#narrative-games)
+- [Adventure Games](#adventure-games)
+- [Hypertext](#hypertext)
+- [Choice-Based](#choice-based)
+- [Enter Ink](#enter-ink)
+- [References](#references)
 
 ---
 

@@ -5,9 +5,9 @@ chapter_number: 13
 layout: chapter
 ---
 
-# Chapter 13: JavaScript Story API
+## Learning Objectives
 
-**Learning Objectives:** By the end of this chapter, you will be able to:
+By the end of this chapter, you will be able to:
 
 - Analyze the canContinue and Continue() pattern for loading story content
 - Implement choice selection using ChooseChoiceIndex() method
@@ -16,31 +16,36 @@ layout: chapter
 - Design variable observers to respond to state changes
 - Integrate the Story API with custom JavaScript implementations
 
-- [Chapter 13: JavaScript Story API](#chapter-13-javascript-story-api)
-  - [Reviewing Ink for Web](#reviewing-ink-for-web)
-    - [Examining `main.js`](#examining-mainjs)
-      - [Looping Story Content](#looping-story-content)
-      - [*canContinue* and **Continue()** Pattern](#cancontinue-and-continue-pattern)
-      - [Parsing Tags](#parsing-tags)
-        - [Example Tag Parsing](#example-tag-parsing)
-    - [Loading Choices](#loading-choices)
-      - [Click to Load](#click-to-load)
-    - [Summarizing `main.js`](#summarizing-mainjs)
-  - [Getting and Setting Variables](#getting-and-setting-variables)
-    - [Variables State Example](#variables-state-example)
-    - [Accessing Variables State Properties](#accessing-variables-state-properties)
-    - [Fallback **Proxy** Support](#fallback-proxy-support)
-  - [*EvaluateFunction()*](#evaluatefunction)
-    - [Passing Arguments](#passing-arguments)
-    - [Capturing Function Output](#capturing-function-output)
-  - [Observing Variables](#observing-variables)
-    - [**ObserveVariable()** Example](#observevariable-example)
-    - [**ObserveVariables()** Example](#observevariables-example)
-    - [Removing Observers](#removing-observers)
+## Summary
 
-**Summary:** In this chapter, you will learn more about the JavaScript Story API, how to use it, and how its functionality relate to each other.
+In this chapter, you will learn more about the JavaScript Story API, how to use it, and how its functionality relate to each other.
 
 > **Note:** Much of the code in this chapter assumes you know and can read JavaScript. Some of the underlining concepts and representations are explained, but this chapter's focus is on the Story API and not necessarily JavaScript itself.
+
+---
+
+- [Learning Objectives](#learning-objectives)
+- [Summary](#summary)
+- [Reviewing Ink for Web](#reviewing-ink-for-web)
+  - [Examining `main.js`](#examining-mainjs)
+    - [Looping Story Content](#looping-story-content)
+    - [*canContinue* and **Continue()** Pattern](#cancontinue-and-continue-pattern)
+    - [Parsing Tags](#parsing-tags)
+      - [Example Tag Parsing](#example-tag-parsing)
+  - [Loading Choices](#loading-choices)
+    - [Click to Load](#click-to-load)
+  - [Summarizing `main.js`](#summarizing-mainjs)
+- [Getting and Setting Variables](#getting-and-setting-variables)
+  - [Variables State Example](#variables-state-example)
+  - [Accessing Variables State Properties](#accessing-variables-state-properties)
+  - [Fallback **Proxy** Support](#fallback-proxy-support)
+- [*EvaluateFunction()*](#evaluatefunction)
+  - [Passing Arguments](#passing-arguments)
+  - [Capturing Function Output](#capturing-function-output)
+- [Observing Variables](#observing-variables)
+  - [**ObserveVariable()** Example](#observevariable-example)
+  - [**ObserveVariables()** Example](#observevariables-example)
+  - [Removing Observers](#removing-observers)
 
 ---
 

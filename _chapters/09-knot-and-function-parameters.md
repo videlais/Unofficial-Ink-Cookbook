@@ -5,9 +5,9 @@ chapter_number: 9
 layout: chapter
 ---
 
-# Chapter 9: Knot and Function Parameters
+## Learning Objectives
 
-**Learning Objectives:** By the end of this chapter, you will be able to:
+By the end of this chapter, you will be able to:
 
 - Compare knot parameters with Ink functions and their capabilities
 - Design functions that accept parameters and return values
@@ -15,25 +15,30 @@ layout: chapter
 - Utilize built-in functions like RANDOM(), POW(), and FLOOR()
 - Implement proper variable naming conventions to avoid conflicts
 
-- [Chapter 9: Knot and Function Parameters](#chapter-9-knot-and-function-parameters)
-  - [Functions](#functions)
-  - [Knot Parameters](#knot-parameters)
-    - [Knot Parameter Code Example](#knot-parameter-code-example)
-  - [Ink Functions](#ink-functions)
-    - [Ink Function Rules](#ink-function-rules)
-  - [Passing By Reference](#passing-by-reference)
-  - [Variable Naming Issues](#variable-naming-issues)
-  - [Built-in Functions](#built-in-functions)
-    - [`POW(number, to-the-power-of)`](#pownumber-to-the-power-of)
-    - [`RANDOM(min, max)`](#randommin-max)
-    - [`FLOOR()`](#floor)
-    - [`INT()`](#int)
-    - [`FLOAT()`](#float)
-    - [`CHOICE_COUNT()`](#choicecount)
-    - [`TURNS()`](#turns)
-    - [`SEED_RANDOM(seed)`](#seedrandomseed)
+## Summary
 
-**Summary:** In this chapter, you will learn about knot parameters, functions, and the differences between the two.
+In this chapter, you will learn about knot parameters, functions, and the differences between the two.
+
+---
+
+- [Learning Objectives](#learning-objectives)
+- [Summary](#summary)
+- [Functions](#functions)
+- [Knot Parameters](#knot-parameters)
+  - [Knot Parameter Code Example](#knot-parameter-code-example)
+- [Ink Functions](#ink-functions)
+  - [Ink Function Rules](#ink-function-rules)
+- [Passing By Reference](#passing-by-reference)
+- [Variable Naming Issues](#variable-naming-issues)
+- [Built-in Functions](#built-in-functions)
+  - [`POW(number, to-the-power-of)`](#pownumber-to-the-power-of)
+  - [`RANDOM(min, max)`](#randommin-max)
+  - [`FLOOR()`](#floor)
+  - [`INT()`](#int)
+  - [`FLOAT()`](#float)
+  - [`CHOICE_COUNT()`](#choice_count)
+  - [`TURNS()`](#turns)
+  - [`SEED_RANDOM(seed)`](#seed_randomseed)
 
 ---
 

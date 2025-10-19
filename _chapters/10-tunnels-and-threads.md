@@ -5,9 +5,9 @@ chapter_number: 10
 layout: chapter
 ---
 
-# Chapter 10: Tunnels and Threads
+## Learning Objectives
 
-**Learning Objectives:** By the end of this chapter, you will be able to:
+By the end of this chapter, you will be able to:
 
 - Construct tunnels to navigate through story sections and return
 - Design nested tunnels for complex narrative structures
@@ -15,15 +15,20 @@ layout: chapter
 - Contrast tunnels and threads to select the appropriate technique
 - Combine knots and diverts with tunnels and threads effectively
 
-- [Chapter 10: Tunnels and Threads](#chapter-10-tunnels-and-threads)
-  - [Tunnels](#tunnels)
-    - [Tunnel Code Example](#tunnel-code-example)
-    - [Tunnels to Tunnels](#tunnels-to-tunnels)
-  - [Threads](#threads)
-    - [Thread Code Example](#thread-code-example)
-    - [Combining Knots](#combining-knots)
+## Summary
 
-**Summary:** In this chapter, you will learn about Tunnels, Threads, and how they can be used in larger projects.
+In this chapter, you will learn about Tunnels, Threads, and how they can be used in larger projects.
+
+---
+
+- [Learning Objectives](#learning-objectives)
+- [Summary](#summary)
+- [Tunnels](#tunnels)
+  - [Tunnel Code Example](#tunnel-code-example)
+  - [Tunnels to Tunnels](#tunnels-to-tunnels)
+- [Threads](#threads)
+  - [Thread Code Example](#thread-code-example)
+  - [Combining Knots](#combining-knots)
 
 ---
 

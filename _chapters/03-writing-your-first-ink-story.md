@@ -5,27 +5,32 @@ chapter_number: 3
 layout: chapter
 ---
 
-# Chapter 3: Writing Your First Ink Story
+## Learning Objectives
 
-**Learning Objectives:** By the end of this chapter, you will be able to:
+By the end of this chapter, you will be able to:
 
 - Define key Ink terminology including weave, flow, and choices
 - Construct basic choices and flows in the Inky Editor
 - Apply comments and tags to document and annotate your code
 - Experiment with the Preview pane to test different story paths
 
-- [Chapter 3: Writing Your First Ink Story](#chapter-3-writing-your-first-ink-story)
-  - [Common Terms](#common-terms)
-  - [Creating a New Project](#creating-a-new-project)
-    - [Playing with Preview](#playing-with-preview)
-    - [Comments](#comments)
-    - [Tags](#tags)
-  - [Creating Flows](#creating-flows)
-    - [Styling Choice Output](#styling-choice-output)
-    - [Adding More Choices](#adding-more-choices)
-  - [Try It](#try-it)
+## Summary
 
-**Summary:** In this chapter, the terms weave, flow, and divert will be reviewed and the basics of writing and using the Preview pane in the Inky editor will be explained.
+In this chapter, the terms weave, flow, and divert will be reviewed and the basics of writing and using the Preview pane in the Inky editor will be explained.
+
+---
+
+- [Learning Objectives](#learning-objectives)
+- [Summary](#summary)
+- [Common Terms](#common-terms)
+- [Creating a New Project](#creating-a-new-project)
+  - [Playing with Preview](#playing-with-preview)
+  - [Comments](#comments)
+  - [Tags](#tags)
+- [Creating Flows](#creating-flows)
+  - [Styling Choice Output](#styling-choice-output)
+  - [Adding More Choices](#adding-more-choices)
+- [Try It](#try-it)
 
 ---
 

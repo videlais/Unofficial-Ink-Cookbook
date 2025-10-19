@@ -5,23 +5,30 @@ chapter_number: 0
 layout: chapter
 ---
 
-# Introduction
+## Learning Objectives
 
-**Learning Objectives:** By the end of this introduction, you will be able to:
+By the end of this introduction, you will be able to:
 
 - Identify the target audience and prerequisites for this book
 - Recognize the style conventions used throughout the chapters
 - Distinguish between different types of emphasis and code formatting
 
-- [Introduction](#introduction)
-  - [Who This Book is For](#who-this-book-is-for)
-  - [Style Conventions](#style-conventions)
-    - [Code](#code)
-    - [Emphasis](#emphasis)
-      - [Concepts](#concepts)
-      - [Representations](#representations)
-  - [Other Programming Languages](#other-programming-languages)
-  - [Notes and Reminders](#notes-and-reminders)
+## Summary
+
+This introduction explains who this book is for, the style conventions used throughout, and how to read and interpret the various formatting elements you'll encounter in the chapters.
+
+---
+
+- [Learning Objectives](#learning-objectives)
+- [Summary](#summary)
+- [Who This Book is For](#who-this-book-is-for)
+- [Style Conventions](#style-conventions)
+  - [Code](#code)
+  - [Emphasis](#emphasis)
+    - [Concepts](#concepts)
+    - [Representations](#representations)
+- [Other Programming Languages](#other-programming-languages)
+- [Notes and Reminders](#notes-and-reminders)
 
 ## Who This Book is For
 
