@@ -41,7 +41,10 @@ See [JEKYLL_SETUP.md](JEKYLL_SETUP.md) for detailed setup instructions.
 
 ## Version
 
-1.0 (May 2020)
+2.0 (October 2025) - Jekyll Edition
+
+- **v2.0** (October 2025): Converted to Jekyll with opentextbook-theme for enhanced accessibility and modern web standards
+- **v1.0** (May 2020): Original release
 
 ## Contributions and Code of Conduct
 

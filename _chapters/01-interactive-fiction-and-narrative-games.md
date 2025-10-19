@@ -7,6 +7,13 @@ layout: chapter
 
 # Chapter 1: Interactive Fiction and Narrative Games
 
+**Learning Objectives:** By the end of this chapter, you will be able to:
+
+- Explain the historical development of interactive fiction from text-parsers to modern narrative games
+- Compare and contrast interactive fiction with Choose-Your-Own-Adventure books
+- Analyze the key characteristics of nonlinear storytelling
+- Evaluate how player agency functions in narrative games
+
 - [Chapter 1: Interactive Fiction and Narrative Games](#chapter-1-interactive-fiction-and-narrative-games)
   - [Introduction to Interactive Fiction](#introduction-to-interactive-fiction)
   - [Choose Your Own Adventure (CYOA)](#choose-your-own-adventure-cyoa)
@@ -18,7 +25,7 @@ layout: chapter
   - [Enter Ink](#enter-ink)
   - [References](#references)
 
-**Summary**: In this chapter, you will learn about the connection between interactive fiction and choose-you-own-adventure books, how nonlinear stories work, and the rise of the term of "narrative games" to describe projects that are similar to text-only games but have more graphical elements.
+**Summary**: In this chapter, you will learn about the connection between interactive fiction and choose-your-own-adventure books, how nonlinear stories work, and the rise of the term "narrative games" to describe projects that are similar to text-only games but have more graphical elements.
 
 ---
 
@@ -26,7 +33,7 @@ layout: chapter
 
 Much of what we have come to know as "video games" today had its roots in a genre now called *text-parsers*. Playing these games consisted of entering and reading text. The player would enter a command, and the game would respond to them.
 
-The first of what would become this genre was *Colossal Cave* (1977), a game about, as it name implies, exploring a large cave system. It was the first to use different directions for movement and to feature an inventory. The game most people think of when they consider this time in video games, however, is *Zork I* (1983), which was heavily inspired by *Colossal Cave* (1977) and classically used the most famous command of these types of games:
+The first of what would become this genre was *Colossal Cave* (1977), a game about, as its name implies, exploring a large cave system. It was the first to use different directions for movement and to feature an inventory. The game most people think of when they consider this time in video games, however, is *Zork I* (1980), which was heavily inspired by *Colossal Cave* (1977) and classically used the most famous command of these types of games:
 
 ```bash
 >get lamp
@@ -40,7 +47,7 @@ All of the instructions to the game were also typed. When a player interacted wi
 
 ## Choose Your Own Adventure (CYOA)
 
-Around the same time as *Colossal Cave* (1977), the Choose-Your-Own-Adventure (CYOA) series of books first started coming out. These books were not written to be read linear, page-by-page manner. Every few pages, the reader had to make a decision and then turn to a different page in the book where the story picked back up. Depending on the decisions made by the reader, they might even end up with an ending!
+Around the same time as *Colossal Cave* (1977), the Choose-Your-Own-Adventure (CYOA) series of books first started coming out. These books were not written to be read in a linear, page-by-page manner. Every few pages, the reader had to make a decision and then turn to a different page in the book where the story picked back up. Depending on the decisions made by the reader, they might even end up with an ending!
 
 Through working through the story, the reader was making choices of where they wanted to go next. While not always thought of in this sense, they were "interactive" fiction as well. They presented a way for a reader decide what to do next and the story supported those choices! The player had to turn pages and make decisions.
 
@@ -66,7 +73,7 @@ To help label games that may be more textual in nature, many people have used th
 
 ## Adventure Games
 
-With improvements to graphical technologies, videos game moved away from strictly text input and started to use more interactive forms. Players were given the ability to click on different elements and work with graphical interfaces. More narrative-based games moved from text-parsers to what became *adventure games*. These began by combining text commands with graphical elements such as backgrounds and characters, but quickly became a way of describing games that were more click-based. The player would click on something on the screen and the player would see short descriptions or ways to interact with more elements.
+With improvements to graphical technologies, video games moved away from strictly text input and started to use more interactive forms. Players were given the ability to click on different elements and work with graphical interfaces. More narrative-based games moved from text-parsers to what became *adventure games*. These began by combining text commands with graphical elements such as backgrounds and characters, but quickly became a way of describing games that were more click-based. The player would click on something on the screen and the player would see short descriptions or ways to interact with more elements.
 
 Adventure games borrowed from works like the earlier CYOA books, but used different interfaces. Famous games from this genre and period include *Wizard and the Princess* (1980), *The Secret of Monkey Island* (1990), and *Myst* (1993).
 

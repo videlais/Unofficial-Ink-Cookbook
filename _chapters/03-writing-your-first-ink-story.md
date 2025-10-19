@@ -7,6 +7,13 @@ layout: chapter
 
 # Chapter 3: Writing Your First Ink Story
 
+**Learning Objectives:** By the end of this chapter, you will be able to:
+
+- Define key Ink terminology including weave, flow, and choices
+- Construct basic choices and flows in the Inky Editor
+- Apply comments and tags to document and annotate your code
+- Experiment with the Preview pane to test different story paths
+
 - [Chapter 3: Writing Your First Ink Story](#chapter-3-writing-your-first-ink-story)
   - [Common Terms](#common-terms)
   - [Creating a New Project](#creating-a-new-project)
@@ -55,7 +62,7 @@ Underneath the previous text, add the following:
 
 Choices will be covered more in the next chapter, but they are the basic building block of any Ink project. They are what a user interacts with when playing an Ink game, and how the other key concepts in Ink relate to each other within the Flow of a project.
 
-Through adding Choices, the preview pane in Inky can be used to "choose," and then rewind or restart a story. When working with the Inky Editor, this can help in moving through a story’s *weave*, and in testing how different parts.
+Through adding Choices, the preview pane in Inky can be used to "choose," and then rewind or restart a story. When working with the Inky Editor, this can help in moving through a story's *weave*, and in testing how different parts work together.
 
 ### Playing with Preview
 
@@ -178,7 +185,7 @@ This styling approach also extends to multiple levels of choice output. If one c
 
 ### Adding More Choices
 
-Adding an additional choices to the existing code is as easy as including extra asterisks and then more text of the choice option for the user.
+Adding additional choices to the existing code is as easy as including extra asterisks and then more text of the choice option for the user.
 
 ```ink
 * Choose to Write More
@@ -228,7 +235,7 @@ Under the choice *Go Deeper*, add the following text:
             You take it and find yourself emerging into a forest.
 ```
 
-Now, as the player enters the save, they are given a choice that leads to another. The flow is a path from one to another, but there is only ever one choice per set.
+Now, as the player enters the cave, they are given a choice that leads to another. The flow is a path from one to another, but there is only ever one choice per set.
 
 **Example:**
 

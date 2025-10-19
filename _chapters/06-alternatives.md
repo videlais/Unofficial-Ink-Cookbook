@@ -7,6 +7,14 @@ layout: chapter
 
 # Chapter 6: Alternatives
 
+**Learning Objectives:** By the end of this chapter, you will be able to:
+
+- Distinguish between sequences, cycles, once-only, and shuffles
+- Implement single-line and multi-line alternative formats
+- Combine shuffles with once and stopping keywords for advanced patterns
+- Create nested alternatives for complex randomization
+- Integrate alternatives with choices and diverts
+
 - [Chapter 6: Alternatives](#chapter-6-alternatives)
   - [Alternatives](#alternatives)
   - [Sequences](#sequences)
@@ -67,7 +75,7 @@ Using diverts and knots to loop, it is possible to view all entries in a sequenc
 
 ## Cycles
 
-A *cycle* is an alternative that repeats. It "cycles" all of entries in order and them starts back at the first element again.
+A *cycle* is an alternative that repeats. It "cycles" all of entries in order and then starts back at the first element again.
 
 Cycles start with the ampersand, `&`.
 

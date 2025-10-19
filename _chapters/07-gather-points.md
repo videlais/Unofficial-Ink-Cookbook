@@ -7,6 +7,14 @@ layout: chapter
 
 # Chapter 7: Gather Points
 
+**Learning Objectives:** By the end of this chapter, you will be able to:
+
+- Explain the purpose of gather points in collapsing branching narratives
+- Construct chained gather points for multi-stage conversations
+- Create labelled options to track player choices
+- Apply label scopes across knots and stitches
+- Design multi-level gather point structures for complex flows
+
 - [Chapter 7: Gather Points](#chapter-7-gather-points)
   - [Gather Points](#gather-points)
     - [Explaining Gather Points](#explaining-gather-points)

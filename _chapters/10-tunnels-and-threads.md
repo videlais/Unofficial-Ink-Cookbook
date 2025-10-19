@@ -7,6 +7,14 @@ layout: chapter
 
 # Chapter 10: Tunnels and Threads
 
+**Learning Objectives:** By the end of this chapter, you will be able to:
+
+- Construct tunnels to navigate through story sections and return
+- Design nested tunnels for complex narrative structures
+- Implement threads to collapse weaves into central points
+- Contrast tunnels and threads to select the appropriate technique
+- Combine knots and diverts with tunnels and threads effectively
+
 - [Chapter 10: Tunnels and Threads](#chapter-10-tunnels-and-threads)
   - [Tunnels](#tunnels)
     - [Tunnel Code Example](#tunnel-code-example)
@@ -63,7 +71,7 @@ Next, a tunnel is returned to via the double-divert, `->->`.
 
 Back to the original place in the code, the next divert, `-> Show_Time` is run. This moves to the knot **Show_Time**.
 
-This uses two shuffles to first time a number between 1 and 12 and then to pick either "am" or "pm".
+This uses two shuffles to first pick a number between 1 and 12 and then to pick either "am" or "pm".
 
 Next, the tunnel is returned to using another double-divert `->->`.
 
@@ -117,7 +125,7 @@ why.
 ->->
 ```
 
-In the above, complicate example, the story starts with one tunnel as a series of diverts: `-> One -> Two -> Three -> Four -> Five -> Six -> DONE`.
+In the above, complicated example, the story starts with one tunnel as a series of diverts: `-> One -> Two -> Three -> Four -> Five -> Six -> DONE`.
 
 Each numbered knot adds a single word (using glue) and then returns to the tunnel. Finally, the tunnel reaches knot **Six**.
 

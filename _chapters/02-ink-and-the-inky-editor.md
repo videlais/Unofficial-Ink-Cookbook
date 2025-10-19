@@ -7,13 +7,21 @@ layout: chapter
 
 # Chapter 2: Ink and the Inky Editor
 
+**Learning Objectives:** By the end of this chapter, you will be able to:
+
+- Define Ink as a narrative scripting language and describe its purpose
+- Install the Inky Editor on your operating system
+- Demonstrate basic file operations including opening, saving, and creating projects
+- Utilize the Preview pane to test and review your Ink stories
+
 - [Chapter 2: Ink and the Inky Editor](#chapter-2-ink-and-the-inky-editor)
   - [Making Narrative Games](#making-narrative-games)
   - [Using Ink](#using-ink)
   - [Creating with Ink](#creating-with-ink)
   - [Inky Editor](#inky-editor)
+  - [Installing Inky](#installing-inky)
     - [Windows](#windows)
-    - [MacOS X](#macos-x)
+    - [macOS](#macos)
   - [Using the Inky Editor](#using-the-inky-editor)
     - [Opening an Ink File](#opening-an-ink-file)
     - [Saving an Ink File](#saving-an-ink-file)
@@ -24,7 +32,7 @@ layout: chapter
       - [Restart a Story](#restart-a-story)
   - [Try It](#try-it)
 
-**Summary**: In this chapter, you will learn about Ink, where to find the Inky Editor, and generally how to install and use it through basics like opening, editing, and saving Ink file.
+**Summary**: In this chapter, you will learn about Ink, where to find the Inky Editor, and generally how to install and use it through basics like opening, editing, and saving an Ink file.
 
 ---
 
@@ -72,9 +80,9 @@ Builds exist for Windows, Mac, and Linux systems and can be found on the Release
 
 When downloaded in Windows, Ink will be in a ZIP file. Uncompress the ZIP file and look for the Ink.exe executable file. Running this will open the Inky Editor.
 
-### MacOS X
+### macOS
 
-For MacOS X users, Inky will be in a DMG file. These can be opened and the Inky application moved into the Applications directory. Run Inky from inside the Application directory or directly from the Launchpad.
+For macOS users, Inky will be in a DMG file. These can be opened and the Inky application moved into the Applications directory. Run Inky from inside the Application directory or directly from the Launchpad.
 
 ---
 
@@ -148,11 +156,11 @@ Over in the Preview pane, the results of the code will be shown.
 
 *Figure 6:* Results Preview
 
-Be default, the name of a new Ink project is "Untitled.ink".
+By default, the name of a new Ink project is "Untitled.ink".
 
 Choose "Save Project" from the File menu. File → Save Project.
 
-In the Save As filed, name this file `Chapter2.ink`, select a location to save the file, and then click the "Save" button.
+In the Save As field, name this file `Chapter2.ink`, select a location to save the file, and then click the "Save" button.
 
 The Inky Editor will update its name to the new file. The project is now called "Chapter2.ink".
 

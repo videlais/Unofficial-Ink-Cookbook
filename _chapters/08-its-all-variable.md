@@ -7,6 +7,14 @@ layout: chapter
 
 # Chapter 8: It's All Variable
 
+**Learning Objectives:** By the end of this chapter, you will be able to:
+
+- Differentiate between global, temporary, and constant variables
+- Manipulate numerical, string, and boolean data types
+- Implement conditional logic using comparison operators
+- Construct switch statements for multi-condition testing
+- Evaluate knot values to create conditional story branches
+
 - [Chapter 8: It's All Variable](#chapter-8-its-all-variable)
   - [Working with Code](#working-with-code)
   - [Single Line](#single-line)
@@ -61,7 +69,7 @@ For programming that may take multiple lines, opening and closing curly brackets
 ```ink
 {- health > 0:
     health = health - 1
- else health <= 0:
+ - else health <= 0:
     You die.
     -> DEATH
 }

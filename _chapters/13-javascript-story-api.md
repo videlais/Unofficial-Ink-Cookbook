@@ -7,6 +7,15 @@ layout: chapter
 
 # Chapter 13: JavaScript Story API
 
+**Learning Objectives:** By the end of this chapter, you will be able to:
+
+- Analyze the canContinue and Continue() pattern for loading story content
+- Implement choice selection using ChooseChoiceIndex() method
+- Access and modify Ink variables through the variablesState proxy
+- Evaluate Ink functions from JavaScript using EvaluateFunction()
+- Design variable observers to respond to state changes
+- Integrate the Story API with custom JavaScript implementations
+
 - [Chapter 13: JavaScript Story API](#chapter-13-javascript-story-api)
   - [Reviewing Ink for Web](#reviewing-ink-for-web)
     - [Examining `main.js`](#examining-mainjs)

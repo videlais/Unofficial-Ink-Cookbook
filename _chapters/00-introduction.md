@@ -7,6 +7,12 @@ layout: chapter
 
 # Introduction
 
+**Learning Objectives:** By the end of this introduction, you will be able to:
+
+- Identify the target audience and prerequisites for this book
+- Recognize the style conventions used throughout the chapters
+- Distinguish between different types of emphasis and code formatting
+
 - [Introduction](#introduction)
   - [Who This Book is For](#who-this-book-is-for)
   - [Style Conventions](#style-conventions)
@@ -19,7 +25,7 @@ layout: chapter
 
 ## Who This Book is For
 
-This is an open source textbook written in markdown for a public audience. Some things such as the ability to navigate the book and copy and paste text are assumed.
+This is an open educational resource designed for a public audience. Some things such as the ability to navigate the book and copy and paste text are assumed.
 
 Wherever possible, terms are explained and examples given. However, as this is an open source book, additional clarification can be requested!
 

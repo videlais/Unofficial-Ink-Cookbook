@@ -7,6 +7,14 @@ layout: chapter
 
 # Chapter 9: Knot and Function Parameters
 
+**Learning Objectives:** By the end of this chapter, you will be able to:
+
+- Compare knot parameters with Ink functions and their capabilities
+- Design functions that accept parameters and return values
+- Apply the pass-by-reference technique to modify variables
+- Utilize built-in functions like RANDOM(), POW(), and FLOOR()
+- Implement proper variable naming conventions to avoid conflicts
+
 - [Chapter 9: Knot and Function Parameters](#chapter-9-knot-and-function-parameters)
   - [Functions](#functions)
   - [Knot Parameters](#knot-parameters)

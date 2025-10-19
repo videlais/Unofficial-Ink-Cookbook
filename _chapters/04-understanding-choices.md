@@ -7,6 +7,14 @@ layout: chapter
 
 # Chapter 4: Understanding Choices
 
+**Learning Objectives:** By the end of this chapter, you will be able to:
+
+- Create multi-level choice structures using asterisks
+- Implement selective output to control what players see
+- Design knots and diverts to organize story structure
+- Differentiate between regular choices and sticky choices
+- Construct looping patterns while avoiding infinite loops
+
 - [Chapter 4: Understanding Choices](#chapter-4-understanding-choices)
   - [Making Choices](#making-choices)
     - [Set Structure](#set-structure)
@@ -20,12 +28,10 @@ layout: chapter
     - [Diverts](#diverts)
     - [Diverting to **DONE** and **END**](#diverting-to-done-and-end)
     - [Knot Code Example](#knot-code-example)
-  - [Revisiting Flow](#revisiting-flow)
   - [Loops with Knots](#loops-with-knots)
     - [Avoiding Infinite Looping](#avoiding-infinite-looping)
   - [Sticky Choices](#sticky-choices)
     - [Sticky Choice Code Example](#sticky-choice-code-example)
-  - [Glue](#glue)
   - [Try It](#try-it)
 
 **Summary:** In this chapter, you will learn about choices, diverts, and their different patterns in Ink.
@@ -192,13 +198,15 @@ Both can be used to prevent dead ends in the flow of a story and to create natur
 Knots provide an easy way to divide up a project into logical sections. For example, consider the following code where a knot is used to contain a set of choices:
 
 ```ink
+```ink
 The first-mate leans against the edge of the pier and looks out across the water.
 
-"Everything is all set," they say, turning away from the rising run across the water to look at you. "We can set sail at any time."
+"Everything is all set," they say, turning away from the rising sun across the water to look at you. "We can set sail at any time."
 
 You look over your ship and its crew. Yes, it is time to set out again.
 
 -> Sailing
+```
 
 === Sailing ===
 * Pirate Island
@@ -295,9 +303,11 @@ By default, an option will remove itself once chosen. As designed, a choice is a
 Normally, choices disappear after they are "used." Sticky choices, on the other hand, do not. As it comes to looping knots and those cases where revisiting a particular knot is the case, sticky choices can be very useful.
 
 ```ink
-You awake on the shore. As the waves lap at you, your memory tries to fills itself back in from the night before and how you came to be here. There was a storm, yes. A mighty storm. And then... well, you are not as sure. Something about a storm, for sure.
+```ink
+You awake on the shore. As the waves lap at you, your memory tries to fill itself back in from the night before and how you came to be here. There was a storm, yes. A mighty storm. And then... well, you are not as sure. Something about a storm, for sure.
 
 -> Explore_the_Island
+```
 
 === Explore_the_Island ===
 + [Drink Water]
@@ -356,8 +366,8 @@ The story should have at least two choices, and player should have a set of at l
 
 You should pay attention to the narrative content of your story as you write, but don’t worry about the length of the story: focus more on creating the necessary Ink code to tell a short story that makes sense.
 
-Now, revise your story: make at least one of the options inside of one of your two choices use selective output. Introduce at least one loop using a knot into the story and use a sticky choice inside it so that it works properly - but be sure it isn’t an infinite loop!
+Now, revise your story: make at least one of the options inside of one of your two choices use selective output. Introduce at least one loop using a knot into the story and use a sticky choice inside it so that it works properly - but be sure it isn't an infinite loop!
 
 While modifying the story you created may be a challenge because you have to rewrite some of the story content, think about ways you can change the narrative you created to include that kind of content instead of creating a new story from scratch.
 
-Finally, revise your story again: add at least two conditional choices to the story. Make one of those into an advanced choice. Once you have done so, check the story for consistency: make sure the narrative still makes sense! You might also want to have someone else play through it to see if there are problems that you have not caught on your own.
+Once you have done so, check the story for consistency: make sure the narrative still makes sense! You might also want to have someone else play through it to see if there are problems that you have not caught on your own.

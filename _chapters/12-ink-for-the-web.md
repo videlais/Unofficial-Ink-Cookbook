@@ -7,6 +7,15 @@ layout: chapter
 
 # Chapter 12: Ink for the Web
 
+**Learning Objectives:** By the end of this chapter, you will be able to:
+
+- Export Ink projects for web deployment using the Inky Editor
+- Organize exported files and understand their roles in web presentation
+- Implement special tags including IMAGE, CLEAR, RESTART, and theme
+- Modify CSS stylesheets to customize story appearance
+- Create CLASS tags to apply custom styling to story elements
+- Integrate HTML and inline CSS within Ink stories
+
 - [Chapter 12: Ink for the Web](#chapter-12-ink-for-the-web)
   - [Ink for Web](#ink-for-web)
   - [Folder Organization](#folder-organization)
@@ -52,9 +61,9 @@ When used for the first time with a project, Inky will save the project based on
 
 Inside the exported project folder will be five files: `index.html`, `ink.js`, `main.js`, `style.css`, and `nameOfProject.js`.
 
-![MacOS X File Structure](chapter12-file-structure.png)
+![macOS File Structure](chapter12-file-structure.png)
 
-*Figure 2:* MacOS X File Structure
+*Figure 2:* macOS File Structure
 
 - `index.html`: Combines the story, engine, and CSS code to be run in a web browser.
 
@@ -154,7 +163,7 @@ The rain pounded on the windows. Its staccato pace matched my own heart as its u
 
 *Figure 6:* Theme Tag
 
-> **Note** The author tag is always written in lowercase as `# theme`.
+> **Note** The theme tag is always written in lowercase as `# theme`.
 
 ### Clear
 
