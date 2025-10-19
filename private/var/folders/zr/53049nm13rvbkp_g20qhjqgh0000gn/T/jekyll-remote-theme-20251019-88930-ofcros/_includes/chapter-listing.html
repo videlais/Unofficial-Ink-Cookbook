@@ -1,0 +1,16 @@
+<nav aria-label="Chapter listing" role="navigation">
+  <ol class="chapters-list">
+    {% for chapter in chapters %}
+      {% if chapter.chapter_number %}
+      <li class="chapter-item">
+        <a href="{{ chapter.url | relative_url }}">
+          {% if chapter.chapter_number > 0 %}
+            Chapter {{ chapter.chapter_number }}: 
+          {% endif %}
+          {{ chapter.title }}
+        </a>
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ol>
+</nav>

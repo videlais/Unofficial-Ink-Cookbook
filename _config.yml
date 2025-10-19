@@ -5,7 +5,7 @@ description: >-
 baseurl: "/Unofficial-Ink-Cookbook"
 url: "https://videlais.github.io"
 
-remote_theme: videlais/opentextbook-theme
+remote_theme: videlais/opentextbook-theme@v1.0.0
 
 author:
   name: Dan Cox and Taylor Howard

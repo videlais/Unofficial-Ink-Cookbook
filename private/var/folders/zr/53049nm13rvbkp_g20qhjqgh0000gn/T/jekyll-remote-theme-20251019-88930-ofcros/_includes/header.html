@@ -1,0 +1,25 @@
+<header class="site-header" role="banner">
+  <div class="wrapper">
+    {%- assign default_paths = site.pages | map: "path" -%}
+    {%- assign page_paths = site.header_pages | default: default_paths -%}
+    
+    <div class="site-header-inner">
+      <a class="site-title" rel="author" href="{{ "/" | relative_url }}" aria-label="{{ site.title | escape }} - Home">
+        {{ site.title | escape }}
+      </a>
+
+      <nav class="site-nav" role="navigation" aria-label="Main navigation">
+        <div class="trigger">
+          <a class="page-link" href="{{ "/" | relative_url }}" 
+             {% if page.url == "/" %}aria-current="page"{% endif %}>
+            Home
+          </a>
+          <a class="page-link" href="{{ "/chapters/" | relative_url }}"
+             {% if page.url contains "/chapters/" %}aria-current="page"{% endif %}>
+            All Chapters
+          </a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>

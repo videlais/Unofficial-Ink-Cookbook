@@ -1,0 +1,66 @@
+# OpenTextbook Theme Configuration
+# This is a base Jekyll configuration for the OpenTextbook theme
+# Projects using this theme should override these settings
+
+# Site settings (override in your project)
+title: Your Textbook Title
+description: >-
+  An open source textbook designed to be remixed, reused, 
+  or improved through submitting issues and pull requests on GitHub!
+baseurl: "" # Override with your project's base URL
+url: "" # Override with your project's URL
+
+# Author settings (override in your project)
+author:
+  name: Author Name
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Exclude from processing
+exclude:
+  - node_modules/
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - package.json
+  - package-lock.json
+  - README.md
+  - LICENSE
+
+# Collections for chapters
+collections:
+  chapters:
+    output: true
+    permalink: /:collection/:name/
+
+# Defaults for front matter
+defaults:
+  - scope:
+      path: ""
+      type: "chapters"
+    values:
+      layout: "chapter"
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+
+# Site license (override in your project)
+license:
+  text: "Creative Commons Attribution-ShareAlike 4.0 International License"
+  url: "https://creativecommons.org/licenses/by-sa/4.0/"
+  code: "Public Domain (CC0 1.0 Universal)"
+  code_url: "https://creativecommons.org/publicdomain/zero/1.0/"

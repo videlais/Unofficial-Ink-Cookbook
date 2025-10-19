@@ -1,0 +1,48 @@
+---
+layout: default
+---
+
+<article class="chapter">
+  <header class="chapter-header">
+    <h1 class="chapter-title">Chapter {{ page.chapter_number }}:</br> {{ page.title | escape }}</h1>
+  </header>
+
+  <div class="chapter-content">
+    {{ content }}
+  </div>
+
+  <nav class="chapter-navigation" role="navigation" aria-label="Chapter navigation">
+    <h2 class="screen-reader-text">Navigate between chapters</h2>
+    {%- assign chapters = site.chapters | sort: 'order' -%}
+    {%- for chapter in chapters -%}
+      {%- if chapter.url == page.url -%}
+        {%- assign current_index = forloop.index0 -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+    
+    {%- assign prev_index = current_index | minus: 1 -%}
+    {%- assign next_index = current_index | plus: 1 -%}
+    {%- assign max_index = chapters.size | minus: 1 -%}
+    
+    <div class="chapter-nav-links">
+      {%- if prev_index >= 0 -%}
+        {%- assign prev_chapter = chapters[prev_index] -%}
+        <a href="{{ prev_chapter.url | relative_url }}" class="chapter-nav prev" aria-label="Previous chapter: {{ prev_chapter.title }}">
+          <span aria-hidden="true">←</span> Previous
+        </a>
+      {%- else -%}
+        <span class="chapter-nav prev disabled" aria-hidden="true"></span>
+      {%- endif -%}
+      
+      {%- if next_index <= max_index -%}
+        {%- assign next_chapter = chapters[next_index] -%}
+        <a href="{{ next_chapter.url | relative_url }}" class="chapter-nav next" aria-label="Next chapter: {{ next_chapter.title }}">
+          Next <span aria-hidden="true">→</span>
+        </a>
+      {%- else -%}
+        <span class="chapter-nav next disabled" aria-hidden="true"></span>
+      {%- endif -%}
+    </div>
+  </nav>
+</article>

@@ -1,0 +1,50 @@
+<footer class="site-footer h-card" role="contentinfo">
+  <data class="u-url" href="{{ "/" | relative_url }}"></data>
+  
+  <div class="wrapper">
+    <h2 class="footer-heading">{{ site.title | escape }}</h2>
+    
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <p>{{ site.description | escape }}</p>
+      </div>
+      
+      <div class="footer-col footer-col-2">
+        <section class="license-info">
+          <h3 class="screen-reader-text">License Information</h3>
+          {%- if site.license -%}
+          <p>
+            <small>
+              <strong>Text and images licensed under:</strong><br>
+              <a href="{{ site.license.url }}" rel="license">{{ site.license.text }}</a>
+            </small>
+          </p>
+          {%- if site.license.code -%}
+          <p>
+            <small>
+              <strong>Code examples licensed under:</strong><br>
+              <a href="{{ site.license.code_url }}" rel="license">{{ site.license.code }}</a>
+            </small>
+          </p>
+          {%- endif -%}
+          {%- endif -%}
+        </section>
+      </div>
+      
+      <div class="footer-col footer-col-3">
+        <section class="accessibility-info">
+          <h3 class="screen-reader-text">Accessibility</h3>
+          <p>
+            <small>
+              This site is designed to meet 
+              <a href="https://www.w3.org/WAI/WCAG21/Understanding/conformance#level-aaa" 
+                 rel="external">WCAG 2.1 AAA accessibility standards</a>.
+              <br>
+              <a href="{{ "/accessibility/" | relative_url }}" rel="accessibility">View accessibility statement</a>
+            </small>
+          </p>
+        </section>
+      </div>
+    </div>
+  </div>
+</footer>
