@@ -37,6 +37,10 @@ In this chapter, you will learn about Ink, where to find the Inky Editor, and ge
   - [Working with an Inky Project](#working-with-an-inky-project)
     - [Rewind a Single Choice](#rewind-a-single-choice)
     - [Restart a Story](#restart-a-story)
+- [Reviewing File Exports](#reviewing-file-exports)
+  - [JSON Export](#json-export)
+  - [Web Export](#web-export)
+  - [Export Process](#export-process)
 - [Try It](#try-it)
 
 ---
@@ -138,6 +142,45 @@ While a story is being run, the Inky editor remembers each choice. At any point,
 #### Restart a Story
 
 Similar to the Rewind a Single Choice button, the Restart Story button rewinds a story back to the first set of choices.
+
+## Reviewing File Exports
+
+The Inky Editor provides several export options to convert your Ink stories into formats that can be used by other applications and platforms. Understanding these export formats is crucial for integrating your Ink stories into games, web applications, or other interactive media.
+
+### JSON Export
+
+The most common export format is JSON (JavaScript Object Notation). When you compile your Ink story, Inky generates a `.json` file that contains the compiled story data. This JSON file can be read by:
+
+- The Ink JavaScript runtime for web applications
+- Unity projects using the Ink Unity plugin
+- Custom applications using Ink runtime libraries
+
+To export to JSON, simply save your project in Inky, and the editor will automatically generate a corresponding `.json` file with the same name as your `.ink` file.
+
+### Web Export
+
+Inky also provides a "Export for web..." option under the File menu. This creates a standalone HTML file that includes:
+
+- Your compiled story in JSON format
+- The Ink JavaScript runtime
+- A basic web interface for playing the story
+- CSS styling for a clean, readable presentation
+
+This web export is perfect for:
+
+- Sharing your story online
+- Testing your story in a web browser
+- Creating prototypes for web-based narrative games
+
+### Export Process
+
+1. Complete writing your Ink story
+2. Save your project (File → Save Project)
+3. For web export: go to File → Export for web...
+4. Choose a location and filename for your exported file
+5. The exported file(s) will be ready to use in your target application
+
+The JSON export happens automatically whenever you save, making it easy to integrate your Ink stories into development workflows where other tools monitor for file changes.
 
 ---
 

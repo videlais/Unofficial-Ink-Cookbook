@@ -24,7 +24,7 @@ In this chapter, you will learn about choices, diverts, and their different patt
 - [Learning Objectives](#learning-objectives)
 - [Summary](#summary)
 - [Making Choices](#making-choices)
-  - [Set Structure](#set-structure)
+  - [Weave Structure](#weave-structure)
   - [Set Code Example](#set-code-example)
 - [Selective Output](#selective-output)
   - [Selective Output Code Example](#selective-output-code-example)
@@ -55,7 +55,7 @@ The ability to choose a path through a story’s weave is core to how Ink works.
 
 Choices are created with the asterisk, `*`. When a line starts with this symbol, it becomes a choice for the player. When multiple are used, they are all options in that set.
 
-**Set:** A *set of choices* are all choices at its current level. These choices with the same number of asterisks, `*`, within that section of the story.
+**Weave:** A *weave* are all choices at its current level. These choices with the same number of asterisks, `*`, within that section of the story.
 
 ```ink
 * First Choice
@@ -74,7 +74,7 @@ Multiple uses of the `*` symbols signal new levels (sets) of choices. A single `
 
 When one option leads to others, those will be shown after the content of the first one in the Preview Pane.
 
-### Set Structure
+### Weave Structure
 
 Consider how, in the previous chapter's **Try It** example, multiple levels were indented and asterisks were used to create flows through the example.
 
