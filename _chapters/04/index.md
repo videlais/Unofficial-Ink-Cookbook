@@ -35,10 +35,12 @@ In this chapter, you will learn about choices, diverts, and their different patt
   - [Diverts](#diverts)
   - [Diverting to **DONE** and **END**](#diverting-to-done-and-end)
   - [Knot Code Example](#knot-code-example)
+- [Revisiting Flow](#revisiting-flow)
 - [Loops with Knots](#loops-with-knots)
   - [Avoiding Infinite Looping](#avoiding-infinite-looping)
 - [Sticky Choices](#sticky-choices)
   - [Sticky Choice Code Example](#sticky-choice-code-example)
+- [Glue](#glue)
 - [Try It](#try-it)
 
 **Summary:** In this chapter, you will learn about choices, diverts, and their different patterns in Ink.
@@ -212,7 +214,6 @@ The first-mate leans against the edge of the pier and looks out across the water
 You look over your ship and its crew. Yes, it is time to set out again.
 
 -> Sailing
-```
 
 === Sailing ===
 * Pirate Island
@@ -309,11 +310,9 @@ By default, an option will remove itself once chosen. As designed, a choice is a
 Normally, choices disappear after they are "used." Sticky choices, on the other hand, do not. As it comes to looping knots and those cases where revisiting a particular knot is the case, sticky choices can be very useful.
 
 ```ink
-```ink
 You awake on the shore. As the waves lap at you, your memory tries to fill itself back in from the night before and how you came to be here. There was a storm, yes. A mighty storm. And then... well, you are not as sure. Something about a storm, for sure.
 
 -> Explore_the_Island
-```
 
 === Explore_the_Island ===
 + [Drink Water]
