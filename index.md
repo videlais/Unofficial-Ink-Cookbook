@@ -9,25 +9,44 @@ Interested in using [Ink](https://www.inklestudios.com/ink/) to make narrative g
 
 The *Unofficial Ink Cookbook* is a collaboration between [Dan Cox](https://github.com/videlais) and [Taylor Howard](https://github.com/KentonTaylorHoward) to create an open textbook on GitHub for students and hobbyists alike to learn Ink.
 
-## About This Book
+## View Online
 
-This textbook covers everything from the basics of interactive fiction to advanced Ink programming concepts, including:
+Visit the textbook online at: **[https://videlais.github.io/Unofficial-Ink-Cookbook/](https://videlais.github.io/Unofficial-Ink-Cookbook/)**
 
-- Understanding interactive fiction and narrative games
-- Installing and using the Inky editor
-- Working with choices, knots, and stitches
-- Managing variables and functions
-- Using lists and advanced flow control
-- Integrating Ink with web projects
-- Working with the JavaScript Story API
+## Local Development
 
-## Getting Started
+This project uses Jekyll with a custom [opentextbook-theme](https://github.com/videlais/opentextbook-theme).
 
-[Browse All Chapters](/Unofficial-Ink-Cookbook/chapters/) to begin your journey into Ink programming.
+To run locally:
+
+```bash
+bundle install
+bundle exec jekyll serve
+```
+
+## Table of Contents
+
+- [Introduction](_chapters/00/)
+- [Chapter 1: Interactive Fiction and Narrative Games](_chapters/01/)
+- [Chapter 2: Installing and Using the Inky Editor](_chapters/02/)
+- [Chapter 3: Writing Your First Ink Story](_chapters/03/)
+- [Chapter 4: Understanding Choices](_chapters/04/)
+- [Chapter 5: Managing Project Files](_chapters/05/)
+- [Chapter 6: Alternatives](_chapters/06/)
+- [Chapter 7: Gather Points](_chapters/07/)
+- [Chapter 8: It's All Variable](_chapters/08/)
+- [Chapter 9: Knot and Function Parameters](_chapters/09/)
+- [Chapter 10: Tunnels and Threads](_chapters/10/)
+- [Chapter 11: LIST-ing to a Side](_chapters/11/)
+- [Chapter 12: Ink for the Web](_chapters/12/)
+- [Chapter 13: JavaScript Story API](_chapters/13/)
 
 ## Version
 
-1.0 (May 2020)
+2.0 (October 2025) - Jekyll Edition
+
+- **v2.0** (October 2025): Converted to Jekyll with opentextbook-theme for enhanced accessibility and modern web standards
+- **v1.0** (May 2020): Original release
 
 ## Contributions and Code of Conduct
 
