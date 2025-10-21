@@ -32,6 +32,8 @@ In this chapter, you will learn about choices, diverts, and their different patt
   - [**DONE** and **END**](#done-and-end)
     - [**DONE**](#done)
     - [**END**](#end)
+    - [**DONE** Example](#done-example)
+    - [**END** Example](#end-example)
   - [Diverts](#diverts)
   - [Diverting to **DONE** and **END**](#diverting-to-done-and-end)
   - [Knot Code Example](#knot-code-example)
@@ -169,6 +171,36 @@ If there is no more content in a story, **DONE** also ends the story itself.
 The knot **END** signals that the story should stop. It can be used to close off a complicated flow or to end a story in a certain location after a player reaches a natural end of a story.
 
 Unlike **DONE** where a section comes to a close, **END**, as its name implies, *ends* the story.
+
+#### **DONE** Example
+
+```ink
+You find yourself at a crossroads in the forest.
+
+* Take the left path
+    You walk down the winding left path through dense trees. After a while, you reach a peaceful clearing with a small pond. You decide to rest here for the night.
+    -> DONE
+
+* Take the right path  
+    You follow the right path up a steep hill. At the top, you discover an abandoned watchtower. There's nothing more to explore here.
+    -> DONE
+```
+
+#### **END** Example
+
+```ink
+The dragon approaches, fire building in its throat.
+
+* Try to negotiate
+    "Wait!" you shout. "I come in peace!" The dragon pauses, considers your words, then nods slowly. You have made an unlikely ally.
+    
+    This ends your quest successfully. You and the dragon become friends and protect the kingdom together.
+    -> END
+
+* Attack with your sword
+    You charge forward with your blade raised. The dragon breathes fire, and your adventure comes to a swift conclusion.
+    -> END
+```
 
 ### Diverts
 

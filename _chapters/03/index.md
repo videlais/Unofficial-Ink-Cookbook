@@ -9,7 +9,7 @@ layout: chapter
 
 By the end of this chapter, you will be able to:
 
-- Define key Ink terminology including weave, flow, and choices
+- Define key ink terminology including weave, flow, and choices
 - Construct basic choices and flows in the Inky Editor
 - Apply comments and tags to document and annotate your code
 - Experiment with the Preview pane to test different story paths
@@ -36,11 +36,11 @@ In this chapter, the terms weave, flow, and divert will be reviewed and the basi
 
 ## Common Terms
 
-Every language has its own terms for its elements. Ink is no different, and explains how to write and understand code in relationship to a project through the following terms:
+Every language has its own terms for its elements. ink is no different, and explains how to write and understand code in relationship to a project through the following terms:
 
 - *Choice:* Some text defining a possible branching path
 - *Weave:* Collection of choices
-- *Flow:* A user-created path through the available choices
+- *Flow:* A path through the available choices
 
 Ink uses the metaphor of threads and sewing to describe projects. The total collection of all choices is a project's *weave*. Through making *choices*, a user creates a *flow* through the overall *weave*.
 
@@ -61,11 +61,11 @@ After text has been added to a project, the Preview pane shows it. This updates 
 Underneath the previous text, add the following:
 
 ```ink
-* Choose to Write More
-* Give up on a New Project
+Choose to Write More
+Give up on a New Project
 ```
 
-Choices will be covered more in the next chapter, but they are the basic building block of any Ink project. They are what a user interacts with when playing an Ink game, and how the other key concepts in Ink relate to each other within the Flow of a project.
+Choices are the basic building block of any ink project. They are what a user interacts with when playing an Ink game, and how the other key concepts in Ink relate to each other within the Flow of a project.
 
 Through adding Choices, the preview pane in Inky can be used to "choose," and then rewind or restart a story. When working with the Inky Editor, this can help in moving through a story's *weave*, and in testing how different parts work together.
 
@@ -213,7 +213,7 @@ It has two *choices*, one *weave*, and two possible *flows* composed of the path
 
 ## Try It
 
-Create a new Ink project called “FirstStory.ink” and save the file. In the code area, add the following:
+Create a new Ink project called "FirstStory.ink" and save the file. In the code area, add the following:
 
 ```ink
 You stand before a cave entrance. There are three passages forward.
