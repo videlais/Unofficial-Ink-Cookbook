@@ -99,7 +99,7 @@ Anything from the two slashes to the end of the line is a comment and ignored by
 
 ```ink
 // These are all comments.
-// Ink skips over anything written with two forward-slashes
+// ink skips over anything written with two forward-slashes.
 
 Hello! // Comments can also be written after code, too!
 ```

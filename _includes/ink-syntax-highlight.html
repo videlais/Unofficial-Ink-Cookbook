@@ -1,0 +1,100 @@
+<!-- Ink Syntax Highlighting CSS -->
+<link rel="stylesheet" href="{{ '/assets/css/ink-syntax.css' | relative_url }}">
+
+<!-- Syntax highlighting accessibility features -->
+<script>
+// Add keyboard navigation support for code blocks
+document.addEventListener('DOMContentLoaded', function() {
+  const codeBlocks = document.querySelectorAll('.highlight');
+  
+  codeBlocks.forEach(function(block, index) {
+    // Make code blocks focusable for keyboard navigation
+    block.setAttribute('tabindex', '0');
+    block.setAttribute('role', 'region');
+    block.setAttribute('aria-label', 'Code example ' + (index + 1));
+    
+    // Add copy functionality if supported
+    if (navigator.clipboard) {
+      const copyButton = document.createElement('button');
+      copyButton.textContent = 'Copy code';
+      copyButton.className = 'copy-code-btn';
+      copyButton.setAttribute('aria-label', 'Copy code to clipboard');
+      
+      copyButton.addEventListener('click', function() {
+        const code = block.textContent || block.innerText;
+        navigator.clipboard.writeText(code).then(function() {
+          copyButton.textContent = 'Copied!';
+          setTimeout(function() {
+            copyButton.textContent = 'Copy code';
+          }, 2000);
+        });
+      });
+      
+      // Insert copy button
+      const container = document.createElement('div');
+      container.className = 'code-container';
+      block.parentNode.insertBefore(container, block);
+      container.appendChild(copyButton);
+      container.appendChild(block);
+    }
+  });
+});
+</script>
+
+<style>
+.code-container {
+  position: relative;
+  margin: 1em 0;
+}
+
+.copy-code-btn {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  background: #0066cc;
+  color: white;
+  border: none;
+  padding: 0.25em 0.5em;
+  border-radius: 3px;
+  font-size: 0.8em;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.copy-code-btn:hover,
+.copy-code-btn:focus {
+  background: #0052a3;
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+.copy-code-btn:active {
+  background: #003d7a;
+}
+
+/* High contrast mode adjustments */
+@media (prefers-contrast: high) {
+  .copy-code-btn {
+    background: #000000;
+    border: 2px solid #ffffff;
+  }
+  
+  .copy-code-btn:hover,
+  .copy-code-btn:focus {
+    background: #333333;
+  }
+}
+
+/* Dark theme adjustments */
+@media (prefers-color-scheme: dark) {
+  .copy-code-btn {
+    background: #0088ff;
+    color: #000000;
+  }
+  
+  .copy-code-btn:hover,
+  .copy-code-btn:focus {
+    background: #66aaff;
+  }
+}
+</style>

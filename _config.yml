@@ -17,6 +17,11 @@ license:
   code_url: "https://creativecommons.org/publicdomain/zero/1.0/"
 
 # Build settings
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  syntax_highlighter: rouge
+
 plugins:
   - jekyll-remote-theme
   - jekyll-sitemap
@@ -26,7 +31,7 @@ plugins:
 collections:
   chapters:
     output: true
-    permalink: /:collection/:name/
+    permalink: /:collection/:path/
 
 # Defaults
 defaults:

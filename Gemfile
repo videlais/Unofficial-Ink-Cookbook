@@ -8,6 +8,9 @@ gem "csv"
 gem "logger"
 gem "base64"
 
+# Syntax highlighting
+gem "rouge", "~> 4.0"
+
 # Jekyll plugins
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.12"
