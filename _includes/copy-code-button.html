@@ -1,0 +1,91 @@
+<!-- Copy button functionality for code blocks -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Add copy buttons to all code blocks
+  const codeBlocks = document.querySelectorAll('.highlight pre code');
+  
+  codeBlocks.forEach(function(codeBlock, index) {
+    const pre = codeBlock.parentElement;
+    const container = pre.parentElement;
+    
+    // Create copy button
+    const copyButton = document.createElement('button');
+    copyButton.className = 'copy-code-button';
+    copyButton.setAttribute('type', 'button');
+    copyButton.setAttribute('aria-label', 'Copy code to clipboard');
+    copyButton.setAttribute('title', 'Copy code to clipboard');
+    copyButton.setAttribute('data-code-block', index);
+    
+    // Button content with accessible text
+    copyButton.innerHTML = `
+      <span class="copy-icon" aria-hidden="true">📋</span>
+      <span class="copy-text">Copy</span>
+      <span class="copy-feedback" aria-live="polite" aria-atomic="true"></span>
+    `;
+    
+    // Position button container
+    container.style.position = 'relative';
+    container.appendChild(copyButton);
+    
+    // Copy functionality
+    copyButton.addEventListener('click', function() {
+      const code = codeBlock.textContent;
+      const feedback = this.querySelector('.copy-feedback');
+      const copyText = this.querySelector('.copy-text');
+      
+      navigator.clipboard.writeText(code).then(function() {
+        // Success feedback
+        copyText.textContent = 'Copied!';
+        feedback.textContent = 'Code copied to clipboard';
+        copyButton.classList.add('copied');
+        
+        // Reset after 2 seconds
+        setTimeout(function() {
+          copyText.textContent = 'Copy';
+          feedback.textContent = '';
+          copyButton.classList.remove('copied');
+        }, 2000);
+      }).catch(function() {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = code;
+        textArea.style.position = 'fixed';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.select();
+        
+        try {
+          document.execCommand('copy');
+          copyText.textContent = 'Copied!';
+          feedback.textContent = 'Code copied to clipboard';
+          copyButton.classList.add('copied');
+          
+          setTimeout(function() {
+            copyText.textContent = 'Copy';
+            feedback.textContent = '';
+            copyButton.classList.remove('copied');
+          }, 2000);
+        } catch (err) {
+          copyText.textContent = 'Failed';
+          feedback.textContent = 'Copy failed - please select and copy manually';
+          
+          setTimeout(function() {
+            copyText.textContent = 'Copy';
+            feedback.textContent = '';
+          }, 3000);
+        }
+        
+        document.body.removeChild(textArea);
+      });
+    });
+    
+    // Keyboard support
+    copyButton.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.click();
+      }
+    });
+  });
+});
+</script>
