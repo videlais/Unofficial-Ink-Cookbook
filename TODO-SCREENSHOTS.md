@@ -10,58 +10,6 @@ This file tracks all image references in the Unofficial Ink Cookbook that need s
 
 ---
 
-## Chapter 2: Ink and the Inky Editor (6 screenshots)
-
-### 1. Inky Website
-
-- **File**: `chapter2-ink-website.png`
-- **Location**: Line 72 of `02-ink-and-the-inky-editor.md`
-- **Description**: Screenshot of the Ink webpage
-- **Figure Number**: Figure 1
-- **Notes**: Should show the main Ink website with the Download button visible
-
-### 2. Inky Download Links
-
-- **File**: `chapter2-download-links.png`
-- **Location**: Line 78 of `02-ink-and-the-inky-editor.md`
-- **Description**: Screenshot of Inky download links on GitHub Releases page
-- **Figure Number**: Figure 2
-- **Notes**: Should show Windows, Mac, and Linux download options
-
-### 3. Ink Editor
-
-- **File**: `chapter2-ink-editor.png`
-- **Location**: Line 96 of `02-ink-and-the-inky-editor.md`
-- **Description**: Screenshot of the main Inky Editor interface
-- **Figure Number**: Figure 3
-- **Notes**: Should show the two-pane layout (code on left, preview on right)
-
-### 4. New Project
-
-- **File**: `chapter2-new-project.png`
-- **Location**: Line 112 of `02-ink-and-the-inky-editor.md`
-- **Description**: Screenshot of creating a new project in Inky
-- **Figure Number**: Figure 4
-- **Notes**: Should show the File → New Project menu or resulting window
-
-### 5. Rewind and Restart
-
-- **File**: `chapter2-rewind.png`
-- **Location**: Line 126 of `02-ink-and-the-inky-editor.md`
-- **Description**: Screenshot highlighting the Rewind and Restart buttons
-- **Figure Number**: Figure 5
-- **Notes**: Should clearly show the two control buttons above the Preview pane
-
-### 6. Preview
-
-- **File**: `chapter2-preview.png`
-- **Location**: Line 160 of `02-ink-and-the-inky-editor.md`
-- **Description**: Screenshot showing preview results of "Greetings, Universe!"
-- **Figure Number**: Figure 6
-- **Notes**: Should show the code on left and preview output on right
-
----
-
 ## Chapter 12: Ink for the Web (11 screenshots)
 
 ### 7. Export for Web

@@ -341,6 +341,16 @@ By default, an option will remove itself once chosen. As designed, a choice is a
 
 Normally, choices disappear after they are "used." Sticky choices, on the other hand, do not. As it comes to looping knots and those cases where revisiting a particular knot is the case, sticky choices can be very useful.
 
+**Try it yourself:** The interactive example below demonstrates sticky choices in action. Notice how the color choices (marked with `+`) remain available, while the final choice (marked with `*`) disappears after use.
+
+{% include ink-player.html 
+   story="chapter04/sticky-choices" 
+   title="Interactive Example: Sticky Choices"
+   height="350px"
+%}
+
+Here's the complete code for the example above:
+
 ```ink
 You awake on the shore. As the waves lap at you, your memory tries to fill itself back in from the night before and how you came to be here. There was a storm, yes. A mighty storm. And then... well, you are not as sure. Something about a storm, for sure.
 

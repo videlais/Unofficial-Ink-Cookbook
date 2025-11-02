@@ -1,0 +1,8 @@
+<figure{% if include.id %} id="{{ include.id }}"{% endif %}{% if include.role %} role="{{ include.role }}"{% endif %}>
+  <img src="{{ site.baseurl }}/{{ include.src }}" 
+       alt="{{ include.alt }}"
+       {% if include.loading %}loading="{{ include.loading }}"{% endif %}
+       {% if include.width %}width="{{ include.width }}"{% endif %}
+       {% if include.height %}height="{{ include.height }}"{% endif %}>
+  <figcaption>{{ include.caption }}</figcaption>
+</figure>

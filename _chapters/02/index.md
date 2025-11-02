@@ -9,22 +9,19 @@ layout: chapter
 
 By the end of this chapter, you will be able to:
 
-- Define Ink as a narrative scripting language and describe its purpose
-- Install the Inky Editor on your operating system
-- Demonstrate basic file operations including opening, saving, and creating projects
-- Utilize the Preview pane to test and review your Ink stories
+- Define ink as a narrative scripting language and describe its purpose.
+- Install the Inky Editor on your operating system.
+- Demonstrate basic file operations including opening, saving, and creating projects.
+- Utilize the Preview pane to test and review your ink stories.
 
 ## Summary
 
-In this chapter, you will learn about Ink, where to find the Inky Editor, and generally how to install and use it through basics like opening, editing, and saving an Ink file.
+In this chapter, you will learn about ink, where to find the Inky Editor, and generally how to install and use it through basics like opening, editing, and saving an ink file.
 
 ---
 
 - [Learning Objectives](#learning-objectives)
 - [Summary](#summary)
-- [Making Narrative Games](#making-narrative-games)
-- [Using Ink](#using-ink)
-- [Creating with Ink](#creating-with-ink)
 - [Inky Editor](#inky-editor)
 - [Installing Inky](#installing-inky)
   - [Windows](#windows)
@@ -45,45 +42,17 @@ In this chapter, you will learn about Ink, where to find the Inky Editor, and ge
 
 ---
 
-## Making Narrative Games
-
-Ink is a "narrative scripting language" (ink, 2020). It was designed to create narrative game-like experiences through authoring different interactions. Ink is a *scripting language* created in order to help with the common problems of writing narrative games: giving the player choices, acting on those choices, and keeping track of information related to the game.
-
----
-
-## Using Ink
-
-Many projects use Ink as their narrative or dialog system. It helps writers construct a story that has multiple choices, paths, and outcomes for a player while other members of a team work with the finished product and interact with it through other tools like its Story API or the Unity Plugin. It is also a tool designed to produce a file that can be read by other tools. As part of a *toolchain*, a collection of tools where the output of one feeds another, it works well as something in which a writer or developer can write and test the story in one tool and then use its output as part of a graphical system or other tools.
-
----
-
-## Creating with Ink
-
-Ink is designed to produce text-based projects. Inky, the editor covered in this book, is focused on writing text-heavy projects. It works best with projects that have choices and outcomes, and has been designed around handling how to connect what a user sees with how they interact with the game.
-
-That does not mean Ink has not been used in other, more graphical projects. *Heaven's Vault* (2019), a game written in Ink and using the Unity game engine, was created by Inkle Studios, the inventor and maintainers of Ink. They integrated a story-rich game with animations, 3D models, and large worlds. Yet, its basis is in Ink itself, and their dialogue system, a central part of the game, is run directly from Ink.
-
----
-
 ## Inky Editor
 
-Ink can be written in anything that can handle text. Some authors prefer to work in their favorite text editor and only move to another tool when it is time to create a compiled, final product. The choice, as always, is up to individual authors. However, the Inky Editor has something most other text editing programs do not: the Preview pane.
+ink can be written in anything that can handle text. Some authors prefer to work in their favorite text editor and only move to another tool when it is time to create a compiled, final product. The choice, as always, is up to individual authors. However, the Inky Editor has something most other text editing programs do not: the Preview pane.
 
-When writing Ink using the Inky Editor, the code will be previewed on the right-hand side. Every time there is a stop in writing, the code preview will be updated and the compiled product shown to the user. This helps in not only seeing how the code will look when run, but the previewing area allows for rewinding through choices and restarting the story, providing a quick way to see how taking other paths through the story might also look to a player.
+When writing ink using the Inky Editor, the code will be previewed on the right-hand side. Every time there is a stop in writing, the code preview will be updated and the compiled product shown to the user. This helps in not only seeing how the code will look when run, but the previewing area allows for rewinding through choices and restarting the story, providing a quick way to see how taking other paths through the story might also look to a player.
 
 ## Installing Inky
 
-![Inky Website](chapter2-ink-website.png)
+{% include figure.html src="chapters/02/chapter2-ink-website.png" alt="Screenshot of the ink website homepage showing the download section with a blue Download Inky button" caption="Figure 2.1: The ink website with download options for the Inky Editor" id="fig-2-1" %}
 
-*Figure 1:* The Inky Website
-
-The Ink webpage has a link to the Inky editor. Scroll down the page and click on the "Download" button under the name Inky.
-
-![Inky Download Links](chapter2-download-links.png)
-
-*Figure 2:* Inky Download Links
-
-Builds exist for Windows, Mac, and Linux systems and can be found on the Releases page for the product on GitHub. (Always download the most-current build to get the newest features and bug fixes!)
+The [ink webpage](https://www.inklestudios.com/ink/) has a link to the Inky editor. Scroll down the page and click on the "Download" button under the name Inky. Builds exist for Windows, Mac, and Linux systems and can be found on the [Releases page](https://github.com/inkle/inky/releases/) for the product on GitHub. (Always download the most-current build to get the newest features and bug fixes!)
 
 ### Windows
 
@@ -97,9 +66,7 @@ For macOS users, Inky will be in a DMG file. These can be opened and the Inky ap
 
 ## Using the Inky Editor
 
-![Ink Editor](chapter2-ink-editor.png)
-
-*Figure 3:* Inky Editor
+{% include figure.html src="chapters/02/chapter2-ink-editor.png" alt="Screenshot of Inky Editor interface with code editor pane on the left containing ink script and preview pane on the right showing the compiled output" caption="Figure 2.2: The Inky Editor showing the dual-pane interface with code on the left and live preview on the right." id="fig-2-2" %}
 
 When opened, the Inky Editor will show two main panes. The first, on the left, is where the code is written. As it is run in the editor, the results will be previewed on the right pane.
 
@@ -113,10 +80,6 @@ A collection of Ink files is called a project. Even if a project only contains o
 
 ### Creating a New Project
 
-![New Project](chapter2-new-project.png)
-
-*Figure 4:* Inky Editor
-
 A new project can be created through going to File → New Project. This will open a new window of the Inky Editor.
 
 By default, Inky will list all current Ink files in the same directory of a newly created and saved Ink project.
@@ -127,9 +90,7 @@ To more directly add a new Ink file to an existing project, the File → New Inc
 
 ### Working with an Inky Project
 
-![Rewind and Restart](chapter2-rewind.png)
-
-*Figure 5:* Rewind and Restart
+{% include figure.html src="chapters/02/chapter2-rewind.png" alt="Close-up of Inky Editor preview pane header showing two buttons: a left-pointing arrow labeled Rewind and a circular arrow labeled Restart" caption="Figure 2.3: Rewind and Restart buttons in the Inky Editor preview pane." id="fig-2-3" %}
 
 Above the Preview pane where the Ink story is being run are two buttons: Rewind a Single Choice and Restart a Story.
 
@@ -151,9 +112,9 @@ The Inky Editor provides several export options to convert your Ink stories into
 
 The most common export format is JSON (JavaScript Object Notation). When you compile your Ink story, Inky generates a `.json` file that contains the compiled story data. This JSON file can be read by:
 
-- The Ink JavaScript runtime for web applications
-- Unity projects using the Ink Unity plugin
-- Custom applications using Ink runtime libraries
+- The Ink JavaScript runtime for web applications.
+- Unity projects using the Ink Unity plugin.
+- Custom applications using Ink runtime libraries.
 
 To export to JSON, simply save your project in Inky, and the editor will automatically generate a corresponding `.json` file with the same name as your `.ink` file.
 
@@ -161,32 +122,30 @@ To export to JSON, simply save your project in Inky, and the editor will automat
 
 Inky also provides a "Export for web..." option under the File menu. This creates a standalone HTML file that includes:
 
-- Your compiled story in JSON format
-- The Ink JavaScript runtime
-- A basic web interface for playing the story
-- CSS styling for a clean, readable presentation
+- Your compiled story in JSON format.
+- The Ink JavaScript runtime.
+- A basic web interface for playing the story.
+- CSS styling for a clean, readable presentation.
 
 This web export is perfect for:
 
-- Sharing your story online
-- Testing your story in a web browser
-- Creating prototypes for web-based narrative games
+- Sharing your story online.
+- Testing your story in a web browser.
+- Creating prototypes for web-based narrative games.
 
 ### Export Process
 
-1. Complete writing your Ink story
-2. Save your project (File → Save Project)
+1. Complete writing your ink story.
+2. Save your project (File → Save Project).
 3. For web export: go to File → Export for web...
-4. Choose a location and filename for your exported file
-5. The exported file(s) will be ready to use in your target application
-
-The JSON export happens automatically whenever you save, making it easy to integrate your Ink stories into development workflows where other tools monitor for file changes.
+4. Choose a location and filename for your exported file.
+5. The exported file(s) will be ready to use in your target application.
 
 ---
 
 ## Try It
 
-Let's practice working with Ink files!
+Let's practice working with ink files!
 
 First, make sure you have downloaded the Inky Editor for your operating system.
 
@@ -200,11 +159,9 @@ Greetings, Universe!
 
 Over in the Preview pane, the results of the code will be shown.
 
-![Preview](chapter2-preview.png)
+{% include figure.html src="chapters/02/chapter2-preview.png" alt="Screenshot of Inky Editor preview pane displaying the text 'Greetings, Universe!' as output" caption="Figure 2.4: Preview pane showing the output of a simple ink script" id="fig-2-4" %}
 
-*Figure 6:* Results Preview
-
-By default, the name of a new Ink project is "Untitled.ink".
+By default, the name of a new ink project is "Untitled.ink".
 
 Choose "Save Project" from the File menu. File → Save Project.
 

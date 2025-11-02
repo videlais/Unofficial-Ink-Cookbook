@@ -1,6 +1,7 @@
 ---
 layout: page
 title: All Chapters
+permalink: /chapters/
 ---
 
 # All Chapters

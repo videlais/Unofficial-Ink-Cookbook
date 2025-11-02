@@ -1,0 +1,25 @@
+{
+  "name": "unofficial-ink-cookbook",
+  "version": "2.0.0",
+  "description": "An open textbook for learning Ink",
+  "scripts": {
+    "compile-examples": "node scripts/compile-examples.js",
+    "compile-examples:watch": "nodemon --watch _examples --ext ink --exec 'node scripts/compile-examples.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/videlais/Unofficial-Ink-Cookbook.git"
+  },
+  "keywords": [
+    "ink",
+    "interactive-fiction",
+    "narrative",
+    "education"
+  ],
+  "author": "Dan Cox and Taylor Howard",
+  "license": "CC-BY-SA-4.0",
+  "devDependencies": {
+    "inkjs": "^2.2.3",
+    "nodemon": "^3.0.1"
+  }
+}

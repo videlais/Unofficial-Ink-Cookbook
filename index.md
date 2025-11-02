@@ -3,11 +3,14 @@ layout: default
 title: Home
 ---
 
-# Unofficial Ink Cookbook
+# Unofficial ink Cookbook
 
-Interested in using [Ink](https://www.inklestudios.com/ink/) to make narrative games and other interactive projects? You've come to the right place!
+The *Unofficial ink Cookbook* began as a collaboration between [Dan Cox](https://github.com/videlais) and [Taylor Howard](https://github.com/KentonTaylorHoward) to create an open textbook on GitHub for students and hobbyists alike to learn ink. It was originally shared online in early 2020. 
 
-The *Unofficial Ink Cookbook* is a collaboration between [Dan Cox](https://github.com/videlais) and [Taylor Howard](https://github.com/KentonTaylorHoward) to create an open textbook on GitHub for students and hobbyists alike to learn Ink.
+In 2021, Dan Cox worked on the first textbook on ink, *Dynamic Story Scripting with the ink Scripting Language* (2021), and Taylor Howard finished his dissertation using ink named *Critical Modding: A Design Framework for Exploring Representation in Games* (2021).
+
+In 2025, work was done to help update the materials for a 2.0 version with interactive examples and notes on advanced patterns.
+
 
 ## View Online
 
@@ -26,20 +29,7 @@ bundle exec jekyll serve
 
 ## Table of Contents
 
-- [Introduction](_chapters/00/)
-- [Chapter 1: Interactive Fiction and Narrative Games](_chapters/01/)
-- [Chapter 2: Installing and Using the Inky Editor](_chapters/02/)
-- [Chapter 3: Writing Your First Ink Story](_chapters/03/)
-- [Chapter 4: Understanding Choices](_chapters/04/)
-- [Chapter 5: Managing Project Files](_chapters/05/)
-- [Chapter 6: Alternatives](_chapters/06/)
-- [Chapter 7: Gather Points](_chapters/07/)
-- [Chapter 8: It's All Variable](_chapters/08/)
-- [Chapter 9: Knot and Function Parameters](_chapters/09/)
-- [Chapter 10: Tunnels and Threads](_chapters/10/)
-- [Chapter 11: LIST-ing to a Side](_chapters/11/)
-- [Chapter 12: Ink for the Web](_chapters/12/)
-- [Chapter 13: JavaScript Story API](_chapters/13/)
+{% include chapter-listing.html %}
 
 ## Version
 
@@ -56,7 +46,7 @@ This project emphatically supports inclusivity and rejects unacceptable behavior
 
 ## Copyright
 
-Ink, its logo, and other associated branding are copyright inkle studios.
+ink, its logo, and other associated branding are copyright inkle studios.
 
 The text and screenshots of the book are licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/). Share and remix this work, but please attribute us.
 

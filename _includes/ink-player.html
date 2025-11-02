@@ -1,0 +1,173 @@
+{% comment %}
+  Interactive Ink Player Component
+  
+  Usage in markdown:
+  {% include ink-player.html 
+     story="chapter04/sticky-choices" 
+     title="Sticky Choices Example"
+     height="400px"
+  %}
+  
+  Parameters:
+  - story: Path to the .ink file in _examples/ (without .ink extension)
+  - title: (optional) Title to display above the player
+  - height: (optional) Height of the player container (default: 400px)
+{% endcomment %}
+
+{% assign story_path = include.story %}
+{% assign player_title = include.title | default: "Interactive Example" %}
+{% assign player_height = include.height | default: "400px" %}
+{% assign player_id = story_path | replace: '/', '-' | append: '-player' %}
+
+<div class="ink-player-container" id="{{ player_id }}-container">
+  {% if player_title %}
+  <div class="ink-player-header">
+    <h4 class="ink-player-title">{{ player_title }}</h4>
+    <button class="ink-restart-btn" id="{{ player_id }}-restart" aria-label="Restart story">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+        <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+      </svg>
+      Restart
+    </button>
+  </div>
+  {% endif %}
+  
+  <div class="ink-player-content" id="{{ player_id }}" style="height: {{ player_height }}">
+    <div class="ink-loading">Loading story...</div>
+  </div>
+  
+  <div class="ink-player-footer">
+    <details class="ink-source-code">
+      <summary>View Ink Source</summary>
+      <pre><code class="language-ink" id="{{ player_id }}-source">Loading source...</code></pre>
+    </details>
+  </div>
+</div>
+
+<script type="module">
+  (async function() {
+    const playerId = '{{ player_id }}';
+    const storyPath = '{{ site.baseurl }}/examples/{{ story_path }}.json';
+    const sourcePath = '{{ site.baseurl }}/examples/{{ story_path }}.ink';
+    const container = document.getElementById(playerId);
+    const restartBtn = document.getElementById(playerId + '-restart');
+    const sourceCode = document.getElementById(playerId + '-source');
+    
+    // Load inkjs from CDN
+    if (!window.inkjs) {
+      await new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/inkjs@2.2.3/dist/ink.min.js';
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+    }
+    
+    let story = null;
+    
+    // Load and display the Ink source code
+    async function loadSource() {
+      try {
+        const response = await fetch(sourcePath);
+        if (response.ok) {
+          const source = await response.text();
+          sourceCode.textContent = source;
+        }
+      } catch (e) {
+        sourceCode.textContent = '// Source file not available';
+      }
+    }
+    
+    // Initialize the story
+    async function initStory() {
+      try {
+        const response = await fetch(storyPath);
+        if (!response.ok) {
+          throw new Error(`Failed to load story: ${response.statusText}`);
+        }
+        const storyJson = await response.json();
+        story = new inkjs.Story(storyJson);
+        
+        container.innerHTML = '';
+        continueStory();
+      } catch (error) {
+        container.innerHTML = `<div class="ink-error">Error loading story: ${error.message}</div>`;
+        console.error('Ink player error:', error);
+      }
+    }
+    
+    // Continue the story
+    function continueStory() {
+      while (story.canContinue) {
+        const text = story.Continue();
+        const tags = story.currentTags;
+        
+        if (text.trim()) {
+          const p = document.createElement('p');
+          p.className = 'ink-paragraph';
+          p.innerHTML = text.trim();
+          
+          // Handle tags (like CLASS, CLEAR, etc.)
+          tags.forEach(tag => {
+            if (tag.startsWith('CLASS:')) {
+              const className = tag.substring(6).trim();
+              p.classList.add(className);
+            } else if (tag === 'CLEAR') {
+              container.innerHTML = '';
+            }
+          });
+          
+          container.appendChild(p);
+        }
+      }
+      
+      // Show choices
+      if (story.currentChoices.length > 0) {
+        const choicesContainer = document.createElement('div');
+        choicesContainer.className = 'ink-choices';
+        
+        story.currentChoices.forEach((choice, index) => {
+          const button = document.createElement('button');
+          button.className = 'ink-choice';
+          button.textContent = choice.text;
+          button.onclick = () => makeChoice(index);
+          choicesContainer.appendChild(button);
+        });
+        
+        container.appendChild(choicesContainer);
+      } else if (!story.canContinue) {
+        // Story ended
+        const endMsg = document.createElement('p');
+        endMsg.className = 'ink-end';
+        endMsg.textContent = '— End —';
+        container.appendChild(endMsg);
+      }
+      
+      // Scroll to bottom
+      container.scrollTop = container.scrollHeight;
+    }
+    
+    // Make a choice
+    function makeChoice(index) {
+      story.ChooseChoiceIndex(index);
+      
+      // Remove choice buttons
+      const choicesContainer = container.querySelector('.ink-choices');
+      if (choicesContainer) {
+        choicesContainer.remove();
+      }
+      
+      continueStory();
+    }
+    
+    // Restart button handler
+    if (restartBtn) {
+      restartBtn.addEventListener('click', initStory);
+    }
+    
+    // Initialize
+    await Promise.all([initStory(), loadSource()]);
+  })();
+</script>

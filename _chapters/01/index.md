@@ -9,14 +9,14 @@ layout: chapter
 
 By the end of this chapter, you will be able to:
 
-- Explain the historical development of interactive fiction from text-parsers to modern narrative games
-- Compare and contrast interactive fiction with Choose-Your-Own-Adventure books
-- Analyze the key characteristics of nonlinear storytelling
-- Evaluate how player agency functions in narrative games
+- Explain the historical development of interactive fiction from text-parsers to modern narrative games.
+- Compare and contrast interactive fiction with Choose-Your-Own-Adventure books.
+- Analyze the key characteristics of nonlinear storytelling.
+- Evaluate how player agency functions in narrative games.
 
 ## Summary
 
-In this chapter, you will learn about the connection between interactive fiction and choose-your-own-adventure books, how nonlinear stories work, and the rise of the term "narrative games" to describe projects that are similar to text-only games but have more graphical elements.
+In this chapter, you will learn about the connection between interactive fiction and choose-your-own-adventure books. You will learn how nonlinear stories work. You will also learn about the term "narrative games." This term describes projects that are similar to text-only games but include graphical elements.
 
 ---
 
@@ -36,75 +36,84 @@ In this chapter, you will learn about the connection between interactive fiction
 
 ## Introduction to Interactive Fiction
 
-Much of what we have come to know as "video games" today had its roots in a genre now called *text-parsers*. Playing these games consisted of entering and reading text. The player would enter a command, and the game would respond to them.
+Much of what we know as "video games" today began with a genre called *text parsers*. These games involved entering and reading text. Players would type a command, and the game would respond with a text description.
 
-The first of what would become this genre was *Colossal Cave* (1977), a game about, as its name implies, exploring a large cave system. It was the first to use different directions for movement and to feature an inventory. The game most people think of when they consider this time in video games, however, is *Zork I* (1980), which was heavily inspired by *Colossal Cave* (1977) and classically used the most famous command of these types of games:
+The first game in this genre was *Colossal Cave* (1977). It pioneered directional commands for movement and featured an inventory system. The most famous example is *Zork I* (1980), which popularized the classic command:
 
 ```bash
->get lamp
+> get lamp
 ```
 
-The term *interactive fiction* is often used to describe games like these because of their textual nature. Playing them was like reading a story where the reader (player) could direct the story along different paths. They could take a moment to explore an area, read more about something, or merely move around in the game.
-
-All of the instructions to the game were also typed. When a player interacted with the fiction, they were reading and writing parts at the same time. They could take different actions and the game would respond accordingly based on how it was programmed.
+These games are called *interactive fiction* because they combine reading a story with directing its path. Players could explore areas, examine objects, and move through the game world using typed instructions. The game would respond based on its programming.
 
 ---
 
 ## Choose Your Own Adventure (CYOA)
 
-Around the same time as *Colossal Cave* (1977), the Choose-Your-Own-Adventure (CYOA) series of books first started coming out. These books were not written to be read in a linear, page-by-page manner. Every few pages, the reader had to make a decision and then turn to a different page in the book where the story picked back up. Depending on the decisions made by the reader, they might even end up with an ending!
+Around the same time as *Colossal Cave* (1977), a new type of book emerged. These books were called Choose-Your-Own-Adventure (CYOA), or "gamebooks." The series began with *The Cave of Time* (1979).
 
-Through working through the story, the reader was making choices of where they wanted to go next. While not always thought of in this sense, they were "interactive" fiction as well. They presented a way for a reader decide what to do next and the story supported those choices! The player had to turn pages and make decisions.
+Instead of reading page by page, readers would make decisions every few pages. They would then turn to different sections based on their choices. Depending on the decisions they made, readers might encounter different storylines or even reach one of several endings.
+
+These books were interactive fiction in print form. They gave readers control over where the story went next. The book's structure supported multiple paths through the narrative.
 
 ---
 
 ## Nonlinear Storytelling
 
-As a more general term, nonlinear storytelling consists of these two different aspects: making decisions and reacting to the consequences. Both *Colossal Cave* (1977) and the CYOA series of books are examples of how different mediums present these two aspects. When a reader or player interacts with the product, they are presented with choices. Choosing one sends them down one path or another in a story. Making choices and seeing different parts of the story are what make them nonlinear. Unlike other books, reading straight through a CYOA book would be no fun! Neither would seeing all the text of a game like *Colossal Cave* (1977) without also being about to play it through giving it commands of what to do next as well.
+As a broader concept, *nonlinear storytelling* includes two key elements:
+
+- some form of interactivity and
+- the ability to react to consequences. 
+  
+Both *Colossal Cave* (1977) and CYOA books demonstrate these elements. When a reader or player makes choices, they are sent down different narrative paths. Making these choices and experiencing various story branches is what makes the storytelling nonlinear.
+
+Reading a CYOA book straight through would miss the point entirely. The experience requires making choices and following their consequences. Similarly, *Colossal Cave* (1977) only becomes meaningful when you actively play it by entering commands.
 
 ---
 
 ## Narrative Games
 
-Early computers worked through users typing commands. They would type something, the computer would try to understand it, and then it would respond in some way. Many of the games created in the 1980s up through the 1990s followed this same model: they used typing commands as the many source of player input in order to navigate digital worlds. Players would "play" through using a keyboard and typing out what they wanted to happen next.
+Early computers operated through typed commands. Users would enter text, and the computer would interpret it and provide a response. Many games created during the 1980s and 1990s followed this pattern. Keyboard input was the primary way for players to navigate digital worlds.
 
-The software *Inform* (1993) helped users create these projects. Building on the work to reverse engineer a commercial format, users could write in a language, inform, to create new games that could be played using the existing tools. This language allowed for building worlds and defining relationships between objects where simple commands `go north` would understand both a "north" and "south."
+Software like *Inform* (1993) helped developers create these projects more easily. *Inform* provided a programming language that allowed creators to design interactive worlds with objects and locations. Simple commands like `go north` could be understood within a context where both northern and southern locations existed.
 
-As computer graphics improved, many games began to take the same nonlinear storytelling aspects of the earlier games and apply them in new ways. Decades after *Colossal Cave* (1977), large online games were possible through a number of different advances in graphical and communication technologies. Yet, at their root, many video games still have a heavier reliance on reading text and making choices, the central part of all nonlinear storytelling.
+As computer graphics improved, many games incorporated visual elements while keeping the nonlinear storytelling aspects of earlier text-based games. Decades after *Colossal Cave* (1977), advances in graphics and network technology made large online games possible. Despite these changes, many video games still rely heavily on reading text and making choices.
 
-To help label games that may be more textual in nature, many people have used the term *narrative games*. These often refer to games that have deeper stories, ask players to read and understand aspects of the world in order to better engage with them, and then ask players to make choices based on what they have learned. They share in the same lineage of *Zork I* (1980), but use advanced graphics, online functionality, or even multiplayer systems to convey their messages.
+The term *narrative games* emerged to describe games that emphasize story over action. These games typically feature complex narratives and require players to read and understand the game world. Players make meaningful choices based on what they've learned. While they share lineage with *Zork I* (1980), narrative games often incorporate modern graphics, online features, and multiplayer systems.
 
 ---
 
 ## Adventure Games
 
-With improvements to graphical technologies, video games moved away from strictly text input and started to use more interactive forms. Players were given the ability to click on different elements and work with graphical interfaces. More narrative-based games moved from text-parsers to what became *adventure games*. These began by combining text commands with graphical elements such as backgrounds and characters, but quickly became a way of describing games that were more click-based. The player would click on something on the screen and the player would see short descriptions or ways to interact with more elements.
+As graphical technology improved, video games began moving away from pure text input. Players could click on different elements and work with graphical interfaces. Story-focused games evolved from text parsers into what became known as *adventure games*.
 
-Adventure games borrowed from works like the earlier CYOA books, but used different interfaces. Famous games from this genre and period include *Wizard and the Princess* (1980), *The Secret of Monkey Island* (1990), and *Myst* (1993).
+These games initially combined text commands with graphical elements like backgrounds and character sprites. Over time, they developed into a genre characterized by puzzle-solving and exploration rather than action. Players would click on objects to receive descriptions or discover how to interact with other elements.
+
+Adventure games drew inspiration from CYOA books but used different interfaces. Notable examples include *Wizard and the Princess* (1980), *The Secret of Monkey Island* (1990), and *Myst* (1993).
 
 ---
 
 ## Hypertext
 
-The rise of the world wide web changed how people accessed information and thought about interfaces. While some users had come to use graphical user interfaces in operating systems such as Windows or MacOS, the mouse quickly became the focus for interactions. In roughly the same time as more graphical adventure games, software such as [Storyspace](https://en.wikipedia.org/wiki/Storyspace) (1987) and [Hypercard](https://en.wikipedia.org/wiki/HyperCard) (1987) introduced more text-based interactions as a user clicked on links and parts and different parts were loaded as a response.
+The rise of the World Wide Web transformed how people accessed information and thought about digital interfaces. While graphical operating systems like Windows and MacOS had introduced mouse-based interaction, the web made this interface widespread. During this period, software such as [Storyspace](https://en.wikipedia.org/wiki/Storyspace) (1987) and [Hypercard](https://en.wikipedia.org/wiki/HyperCard) (1987) pioneered text-based interactions. Users could click on links to navigate between different sections.
 
-The introduction of *hypertext*, documents designed for reading in a web browser, also helped people develop games and other projects easier. Using HTML, links could be constructed to move between documents or even among them. This allowed for more text-based projects and the rise of many works such as *afternoon, a story* (1987) and *Patchwork Girl* (1995).
+The introduction of *hypertext*—documents designed for web browsers—made creating interactive projects more accessible. Using HTML, creators could construct links between documents or within a single document. This capability enabled more text-based interactive works, leading to projects like *afternoon, a story* (1987) and *Patchwork Girl* (1995).
 
 ---
 
 ## Choice-Based
 
-*Twine 1* (2009) helped re-popularize using HTML for creating projects. Allowing users with little-to-no programming knowledge to quickly create projects, this type of *choice-based* games exploded within the independent development scene and opened a wider audience to personal essays and experimental projects that were often previously ignored. Many who were kept from creating games from a lack of access to the tools of creation were able to fully embrace Twine and build many projects that found an audience.
+*Twine 1* (2009) helped revitalize HTML-based interactive storytelling. It made creating projects accessible to people with little or no programming experience. This *choice-based* approach to game creation became popular in independent development circles. It opened the medium to personal narratives and experimental projects that had often been overlooked. Many creators who previously lacked access to game development tools embraced Twine. They built projects that found receptive audiences.
 
-Introduced with and proceeding *Twine 1* (2009) was a language called Twee that *Twine 1* (2009) could read and write. Instead of writing within the editor itself, Twee allowed users to write in a text format that used special characters for marking sections and design links between what Twine called "passages," parts of an overall story.
+Accompanying *Twine 1* (2009) was a text format called Twee. Rather than working exclusively within the editor, creators could write in Twee. They used special characters to mark sections and define links between "passages"—the individual segments of a story.
 
 ---
 
 ## Enter Ink
 
-Parts of what became Ink were introduced in *inklewriter* (2012), a tool for creating interactive stories. Designed to help users create stories with no programming knowledge and has been re-introduced as open source in 2020. In the years building to that, Inkle Studios introduced *Ink* (2016), a scripting language design to create narrative games and projects.
+Parts of what would become ink first appeared in *inklewriter* (2012), a tool designed for creating interactive stories. Later, Inkle Studios released *ink* (2016), a scripting language specifically designed for narrative games and interactive projects.
 
-Borrowing from previous tools, Ink allowed authors to write interactive, nonlinear stories. (It's the subject of this book!)
+Drawing on concepts from previous tools, ink enables authors to write interactive, nonlinear stories. Player choices can meaningfully affect the narrative.
 
 ---
 

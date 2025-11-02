@@ -40,3 +40,12 @@ defaults:
       type: "chapters"
     values:
       layout: "chapter"
+
+# Include examples directory for static files
+include:
+  - _examples
+
+# Exclude ink source files from being copied directly
+exclude:
+  - _examples/**/*.ink
+  - private/
