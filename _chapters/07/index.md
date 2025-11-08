@@ -1,240 +1,370 @@
----
-title: "Functions"
-order: 7
-chapter_number: 7
-layout: chapter
----
 
-## Learning Objectives
+# Chapter 11: LIST-ing to a Side
 
-By the end of this chapter, you will be able to:
+- [Chapter 11: LIST-ing to a Side](#chapter-11-list-ing-to-a-side)
+  - [LIST](#list)
+  - [Automatically Set to `false`](#automatically-set-to-false)
+  - [Enabling Values](#enabling-values)
+  - [Built-in Functions](#built-in-functions)
+    - [`LIST_COUNT()`](#list_count)
+    - [`LIST_MIN()`](#list_min)
+    - [`LIST_MAX()`](#list_max)
+    - [`LIST_ALL()`](#list_all)
+    - [`LIST_VALUE()`](#list_value)
+    - [`LIST_INVERT()`](#list_invert)
+    - [`LIST_RANDOM()`](#list_random)
+  - [Inclusion Testing](#inclusion-testing)
+    - [Manipulating List Values](#manipulating-list-values)
+      - [Addition](#addition)
+      - [Subtraction](#subtraction)
+  - [Conflicting Values and Variable Names](#conflicting-values-and-variable-names)
+    - [Comparing LISTS](#comparing-lists)
+      - [Less Than](#less-than)
+      - [Greater Than](#greater-than)
+      - [Greater Than Or Equal To](#greater-than-or-equal-to)
+      - [Less Than Or Equal To](#less-than-or-equal-to)
+  - [Multi-listed Lists](#multi-listed-lists)
 
-- Construct tunnels to navigate through story sections and return
-- Design nested tunnels for complex narrative structures
-- Implement threads to collapse weaves into central points
-- Contrast tunnels and threads to select the appropriate technique
-- Combine knots and diverts with tunnels and threads effectively
-
-## Summary
-
-In this chapter, you will learn about Tunnels, Threads, and how they can be used in larger projects.
-
----
-
-- [Learning Objectives](#learning-objectives)
-- [Summary](#summary)
-- [Tunnels](#tunnels)
-  - [Tunnel Code Example](#tunnel-code-example)
-  - [Tunnels to Tunnels](#tunnels-to-tunnels)
-- [Threads](#threads)
-  - [Thread Code Example](#thread-code-example)
-  - [Combining Knots](#combining-knots)
+**Summary:** In this chapter, you will learn how to work with LISTs, some of the basic functionality, and how they can be used within projects.
 
 ---
 
-## Tunnels
+## LIST
 
-Because of the complex nature of connections between knots and diverts, sometimes a way to move "through" a complex weave is needed. Tunnels provide that.
-
-In Ink, it can often be useful to create a knot that is returned to multiple times throughout a flow. Instead of a complex series of diverts and knots, Ink has functionality to quickly go to a knot and then return called a tunnel.
-
-As it names implies, tunnels are connections between sections where the flow is diverted to a knot or stitch and then returns again. The player passes through the "tunnel" and out the other side back to the same or different place in the story.
+Beyond using variables, Ink also provides a data type call a `LIST`. These store collections of values that can be accessed, changed, and manipulated in different ways in connection to each other.
 
 ```ink
--> Show_Day -> Show_Time -> DONE
+LIST moods = happy, angry, sad
 ```
 
-Tunnels are created using the divert (arrow) to "go to" a knot or stitch and then a second divert after the name of the knot or stitch.
+Rules for Lists:
 
-```ink
-=== Show_Day ===
-Today is {~Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday}
-->->
-```
+- Must contain unique variable names
+- Ordering matters
+- Positions start with 1 (unless overwritten)
+- Will create variables if they do not already exist
+- Created variables are set to `false`
 
-To return from the tunnel, use two divert symbols in a row. This will "twice divert" back to the original location.
+Because lists will create new variables if included and not previous created, this allows for creating a list of possibilities and then having a new, separate variable.
 
-### Tunnel Code Example
-
-```ink
--> Show_Day -> Show_Time -> DONE
-
-=== Show_Day ===
-Today is {~Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday}
-->->
-
-=== Show_Time ===
-It is {~1|2|3|4|5|6|7|8|9|10|11|12} {~am|pm}
-->->
-```
-
-In the above example, the first divert `-> Show-Day` moves to the knot **Show_Day**.
-
-Inside this knot, a shuffle alternative is used to select a random day from the existing elements.
-
-Next, a tunnel is returned to via the double-divert, `->->`.
-
-Back to the original place in the code, the next divert, `-> Show_Time` is run. This moves to the knot **Show_Time**.
-
-This uses two shuffles to first pick a number between 1 and 12 and then to pick either "am" or "pm".
-
-Next, the tunnel is returned to using another double-divert `->->`.
-
-In order, the above code runs the knot **Show_Day**, returns, runs the **Show_Time**, and then returns again before the story ends with `-> DONE`.
-
-### Tunnels to Tunnels
-
-As tunnels use diverts and knots, it is also possible to include tunnels inside other tunnels. This is completely safe!
-
-```ink
--> One -> Two -> Three -> Four -> Five -> Six -> DONE
-
-=== One ===
-It <>
-->->
-
-=== Two ===
-starts <>
-->->
-
-=== Three ===
-with <>
-->->
-
-=== Four ===
-one <>
-->->
-
-=== Five ===
-thing.
-->->
-
-=== Six ===
-
--> SixOne -> SixTwo -> SixThree -> SixFour ->->
-
-= SixOne
-I <>
-->->
-
-= SixTwo
-don't <>
-->->
-
-= SixThree
-know <>
-->->
-
-= SixFour
-why.
-->->
-```
-
-In the above, complicated example, the story starts with one tunnel as a series of diverts: `-> One -> Two -> Three -> Four -> Five -> Six -> DONE`.
-
-Each numbered knot adds a single word (using glue) and then returns to the tunnel. Finally, the tunnel reaches knot **Six**.
-
-Inside **Six** are four stitches. These are used as part of an internal tunnel. All of these add their own words.
-
-Finally, the inner **Six** tunnel returns back to the original and the story content ends.
-
-Combined together, it creates the following out:
-
-```ink
-It starts with one thing.
-
-I don't know why.
-```
-
-**Reminder:** The use of `<>` is *glue*. It runs the next line into the current, *gluing* them together. It can be used across knots and stitches to combine output on one line.
+These can also be used as part of the flow once set earlier, allowing for changing states throughout a story.
 
 ---
 
-## Threads
+## Automatically Set to `false`
 
-*Threads* provide a way to "collapse" a weave and "pull together" knots and diverts.
+The values used in a `LIST` are automatically set to `false`. What this means in practice is that any values include in a `LIST` are in it, but do not count toward its total unless they are "enabled," set to true.
 
-In some ways, threads are the opposite of tunnels and using diverts. Instead of "going out," threads "pull together" content as part of a flow.
-
-To use threading, the divert arrow changes and points in, `<-`.
+The following code will show a value of 0.
 
 ```ink
-<- FirstChoice
-<- SecondChoice
-<- ThirdChoice
+LIST moods = happy, angry, sad
+
+{ LIST_COUNT(moods) }
 ```
 
-Using threads helps separate knots into logical sections of code for the author and developer and then "thread" them all together again.
+> **Note:** function `LIST_COUNT()` returns the total number of enabled entries in a `LIST`. If they are not `true`, they are not counted toward its total.
 
-### Thread Code Example
+## Enabling Values
+
+Values in a `LIST` are considered `true` if they have opening and closing parentheses around them.
+
+The same code which shown a total of zero will change to three when all of its values are now set to `true`.
 
 ```ink
-This is a thread example:
-<- FirstChoice
-<- SecondChoice
-<- ThirdChoice
+LIST moods = (happy), (angry), (sad)
 
-=== FirstChoice ===
-* Pick me!
--> CollectChoices
-
-=== SecondChoice ===
-* No, pick me!
--> CollectChoices
-
-=== ThirdChoice ===
-* No, this one! Me!
--> CollectChoices
-
-=== CollectChoices ===
-All of the above knots are collected (threaded together) and end up here!
--> DONE
+{ LIST_COUNT(moods) }
 ```
 
-In the above example, the story starts and three threads are used: `<- FirstChoice`, `<- SecondChoice`, and `<- ThirdChoice`.
+---
 
-All three of these point to same knot **CollectChoices**, and thus are all "threaded" to that center point.
+## Built-in Functions
 
-### Combining Knots
+For dealing directly with lists, Ink also has several specific functions. As a `LIST` can have both `true` and `false` values, each of these functions deals with and understands the entries in a `LIST` in different ways.
 
-While a common example might use choices, this need not be the case. Threads can also be used for text content.
+### `LIST_COUNT()`
+
+The function `LIST_COUNT()` returns the number of values in the `LIST` that are set to `true` .
 
 ```ink
-This is a thread example:
-<- FirstChoice
-<- SecondChoice
-<- ThirdChoice
+LIST moods = (happy), angry, (sad)
 
-=== FirstChoice ===
-Show this thing!
--> CollectChoices
-
-=== SecondChoice ===
-Show this!
--> CollectChoices
-
-=== ThirdChoice ===
-Now show me!
--> CollectChoices
-
-=== CollectChoices ===
--> DONE
+{ LIST_COUNT(moods) }
 ```
 
-In fact, the earlier tunnel example could be re-written as example using threads instead:
+### `LIST_MIN()`
+
+The function `LIST_MIN()` returns the first true entry in a `LIST` or nothing if there are no true entries in the `LIST`.
 
 ```ink
-<- Show_Day
-<- Show_Time
+LIST moods = happy, angry, (sad)
 
-=== Show_Day ===
-Today is {~Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday}
--> Update
+{ LIST_MIN(moods) }
+```
 
-=== Show_Time ===
-It is {~1|2|3|4|5|6|7|8|9|10|11|12} {~am|pm}
--> Update
+### `LIST_MAX()`
 
-=== Update ===
--> DONE
+The function `LIST_MAX()` returns the last true entry in a `LIST` or nothing if there are no true entries in the `LIST`.
+
+```ink
+LIST moods = happy, angry, (sad)
+
+{ LIST_MAX(moods) }
+```
+
+### `LIST_ALL()`
+
+The function `LIST_ALL()` returns all entries regardless if true or not as comma-separated values.
+
+```ink
+LIST moods = happy, angry, (sad)
+
+{ LIST_ALL(moods) }
+
+LIST_RANGE(list_name, min_value, max_value)
+```
+
+The function `LIST_RANGE()` returns a selection from a `LIST` starting at the minimum value and extending to the maximum values of true values in the `LIST`. The minimum and maximum values are the numerical values, positions, starting at 1 (unless overwritten).
+
+If the minimum or maximum value is outside the list of values, its nearest correct values is used.
+
+```ink
+LIST moods = happy, (angry), sad, melancholy
+
+{ LIST_RANGE(moods, 2, 3) }
+```
+
+### `LIST_VALUE()`
+
+The function `LIST_VALUE()` returns the numerical value of a `LIST` entry regardless of if it is true or not.
+
+```ink
+LIST moods = happy, angry, sad, melancholy
+
+{ LIST_VALUE(sad) }
+```
+
+### `LIST_INVERT()`
+
+The function `LIST_INVERT()` returns a new `LIST` with each entry’s value to its opposite, `true` to `false` and `false` to `true`.
+
+```ink
+LIST moods = happy, angry, sad, melancholy
+
+{ LIST_COUNT(moods) }
+~ moods = LIST_INVERT(moods)
+{ LIST_COUNT(moods) }
+```
+
+### `LIST_RANDOM()`
+
+The function `LIST_RANDOM()` returns a random `true` entry from a `LIST`. If there are no `true` entries, the function returns nothing.
+
+```ink
+LIST moods = (happy), (angry), (sad), (melancholy)
+
+{ LIST_RANDOM(moods) }
+```
+
+---
+
+## Inclusion Testing
+
+Beyond functions to work with `LIST` values, Ink also has special symbols for working with testing for inclusion in a `LIST`. When comparing multiple values, they should be within an opening and closing parentheses.
+
+- `?`: If multiple entries are part of the list and `true`.
+
+```ink
+LIST moods = (happy), (angry), (sad), (melancholy)
+
+{ moods ? (happy, angry): Both happy and angry }
+```
+
+- `has`: If an entry is part of the list and is true
+
+The keyword has works the same as using the question mark, `?`.
+
+```ink
+LIST moods = (happy), (angry), (sad), (melancholy)
+
+{ moods has (happy, angry): Both happy and angry }
+```
+
+- `!?`: If multiple entries are not part of the list and not true
+
+The exclamation mark works as a negation to the inclusion, question mark, `?`, symbol.
+
+```ink
+LIST moods = happy, angry, sad, melancholy
+
+{ moods !? (happy, angry): Neither happy nor angry }
+```
+
+- `hasnt`: If an entry is not part of a list and not `true`
+
+The keyword `hasnt` is the same as using the symbols, `!?`
+
+```ink
+LIST moods = happy, angry, sad, melancholy
+
+{ moods hasnt (happy, angry): Neither happy nor angry }
+```
+
+### Manipulating List Values
+
+Like other variable values, a `LIST` can also use some of the same mathematical symbols others can. However, a `LIST` can only use values associated with either itself or another `LIST` within the same project.
+
+#### Addition
+
+Adding a value to a `LIST`, `VAR`, or `CONST` using existing `LIST` values works through the `+=` symbol pairing. It means "set the current value to itself plus this new value." When used with `LIST` values, they can be "added" to the existing `LIST`.
+
+```ink
+LIST Items = (Dagger), (Lead_Pipe), (Spanner), (Candlestick), (Revolver), (Rope)
+
+LIST clues = Main_Room
+
+~ clues += (Dagger)
+
+Current Clues: {clues}
+```
+
+#### Subtraction
+
+Removing values from a `LIST` or using `LIST` values works similar to addition. It uses the `-=` symbols to mean "set the current value to itself minus this new value."
+
+```ink
+LIST Items = (Dagger), (Lead_Pipe), (Spanner), (Candlestick), (Revolver), (Rope)
+
+LIST clues = Main_Room
+
+~ Items -= (Dagger)
+~ clues += (Dagger)
+
+Current Clues: {clues}
+```
+
+---
+
+## Conflicting Values and Variable Names
+
+One of the rules of `LIST` is that they must contain unique variable names. A value cannot exist in two separate `LIST`s! Therefore, when moving values from one `LIST` to another, it is recommended to remove first and then add to the new `LIST`.
+
+```ink
+LIST Items = (Dagger), (Lead_Pipe), (Spanner), (Candlestick), (Revolver), (Rope)
+
+LIST clues = Main_Room
+
+~ temp randomClue = LIST_RANDOM(Items)
+
+The random clue is {randomClue}.
+
+~ Items -= randomClue
+~ clues += randomClue
+
+Current Clues: {clues}
+```
+
+### Comparing LISTS
+
+While Ink supplies the ability to compare two different `LIST`s and their entries, it is not as helpful as it may first seem. Comparing `LIST`s only work on the numerical values of entries. However, the operators `>`, `<`, `>=`, and `<=` all work.
+
+#### Less Than
+
+```ink
+LIST_A < LIST_B
+```
+
+The smallest value in A is less than the smallest values in B.
+
+#### Greater Than
+
+```ink
+LIST_A > LIST_B
+```
+
+The smallest value in A is bigger than the largest values in B.
+
+#### Greater Than Or Equal To
+
+```ink
+LIST_A >= LIST_B
+```
+
+The smallest value in A is at least the smallest value in B, and the largest value in A is at least the largest value in B.
+
+#### Less Than Or Equal To
+
+```ink
+LIST_A <= LIST_B
+```
+
+The smallest value is A is smaller than all values in B, and the largest value in A smaller than the largest value in B.
+
+---
+
+## Multi-listed Lists
+
+Once a `LIST` value exists, it can be used by any `LIST`, `VAR`, or temp variable. Beyond moving values between `LIST`s, it is also possible to intermix values from `LIST`s once they are created.
+
+In more complex projects, this can be a way to define all possible values in a `LIST` and then use them to define different states or descriptions during the running of a project.
+
+```ink
+LIST Items = (Dagger), (Lead_Pipe), (Spanner), (Candlestick), (Revolver), (Rope)
+LIST Rooms = (Dining_Room), (Lounge), (Kitchen), (Study), (Hall), (Billiard_Room), (Conservatory), (Ballroom), (Library), (Cellar)
+
+VAR CLUE = ()
+
+~ temp item = LIST_RANDOM(Items)
+
+You found {item}
+
+~ temp room = LIST_RANDOM(Rooms)
+
+You are in the {room}
+
+~ CLUE += item
+~ CLUE += room
+
+Current clues are: {CLUE}
+```
+
+**Example:**
+
+```ink
+LIST allPeople = (Major_Mustard), (Lt_Lemon), (Sam_White)
+
+~ temp randomPerson = LIST_RANDOM(allPeople)
+
+VAR clues = ()
+~ clues += randomPerson
+
+Who do you accuse?
+* [Major Mustard]
+    {checkClues(Major_Mustard):
+    - 1:
+        It is her!
+     -0:
+        It is not her!
+    }
+    -> DONE
+* [Lt. Lemon]
+    {checkClues(Major_Mustard):
+    - 1:
+        It is him!
+     -0:
+        It is not him!
+    }
+    -> DONE
+* [Sam White]
+    { checkClues(Sam_White):
+    - 1:
+        It is them!
+     -0:
+        It is not them!
+    }
+    -> DONE
+
+=== function checkClues(x) ===
+~ return clues ? x
 ```
