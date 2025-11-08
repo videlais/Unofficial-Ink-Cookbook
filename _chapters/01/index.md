@@ -50,9 +50,14 @@ By the end of this chapter, you will be able to:
   - [Interactive Example 1.7: Complex Weaves](#interactive-example-17-complex-weaves)
   - [Code Example 1.8: Reading Weaves](#code-example-18-reading-weaves)
   - [Interactive Example 1.8: Reading Weaves](#interactive-example-18-reading-weaves)
+- [Gathering Points](#gathering-points)
+  - [Code Example 1.9: Using Gathering Points](#code-example-19-using-gathering-points)
+  - [Interactive Example 1.9: Using Gathering Points](#interactive-example-19-using-gathering-points)
+  - [Code Example 1.10: Multi-Level Gathering Points](#code-example-110-multi-level-gathering-points)
+  - [Interactive Example 1.10: Multi-Level Gathering Points](#interactive-example-110-multi-level-gathering-points)
 - [Comments](#comments)
-  - [Code Example 1.9: Using Comments](#code-example-19-using-comments)
-  - [Interactive Example 1.9: Using Comments](#interactive-example-19-using-comments)
+  - [Code Example 1.11: Using Comments](#code-example-111-using-comments)
+  - [Interactive Example 1.11: Using Comments](#interactive-example-111-using-comments)
 - [Summary](#summary)
 - [Review Questions](#review-questions)
 - [Try It](#try-it)
@@ -274,7 +279,96 @@ Because the spacing before a line does not affect its meaning, [Example 1.7](#co
    height="350px"
 %}
 
-As our code becomes more complex, we often want to add notes to ourselves and others.
+Weaves can easily become complex. To help us better manage them, ink has a companion concept named **gathering points**.
+
+## Gathering Points
+
+As we add more weaves to our code, we risk having multiple branches with their own branches with their own branches. This can quickly become too complex to easily understand!
+
+In ink, we can "collapse" a weave back down to a point. We call this a **gathering point**.
+
+> **Warning** In narrative design, we use the term *combinatorial explosion* to describe how branches can lead to more and more branches, creating seemingly endless choices for a player.
+
+When a hyphen, `-`, is on a line following a weave, all choices within the weave "gather" to that point.
+
+### Code Example 1.9: Using Gathering Points
+
+```ink
+The emperor stands before you.
+
+"Pick your reward," he states, motioning to servants to bring treasures into the room.
+
+* [Jewels]
+* [Gold]
+* [Swords]
+-
+
+The emperor nods. "Very good. Now take your treasure and leave."
+```
+
+### Interactive Example 1.9: Using Gathering Points
+
+{% include ink-player.html
+   story="chapter01/emperor"
+   title="Example: Using Gathering Points"
+   height="350px"
+%}
+
+Each level of a weave can use its own gathering point. This can be important to allow complex structures to "bottleneck" as choices would otherwise branch outward.
+
+For each "level" of a weave, we need the same number of hyphens. For example, if there are two asterisks, `**`, two hyphens, `--`, would be needed to gather the level.
+
+### Code Example 1.10: Multi-Level Gathering Points
+
+```ink
+You enter a mysterious shop.
+
+* Browse the weapons
+    ** [Pick up a sword]
+        The sword feels heavy in your hand.
+    ** [Pick up a bow]
+        The bow is beautifully carved.
+    --
+    The shopkeeper nods approvingly at your selection.
+    
+* Browse the potions
+    ** [Red potion]
+        It smells of cinnamon.
+    ** [Blue potion]
+        It glows faintly.
+    --
+    "Careful with those," warns the shopkeeper.
+    
+-
+
+"Will you be purchasing today?" asks the shopkeeper.
+
+* "Yes, I'll take it."
+* "No, just looking."
+-
+
+You leave the shop.
+```
+
+In this example:
+
+- The double hyphen (`--`) gathers the weapon sub-choices and the potion sub-choices separately.
+- The single hyphen (`-`) gathers the main shop browsing choices together.
+- Another single hyphen (`-`) gathers the final purchase decision.
+
+This creates a structure where different branches can converge at different points, giving you fine control over your narrative flow.
+
+### Interactive Example 1.10: Multi-Level Gathering Points
+
+{% include ink-player.html
+   story="chapter01/multi-gather"
+   title="Example: Multi-Level Gathering Points"
+   height="450px"
+%}
+
+> **Important** Each level of weave (marked by the number of asterisks) has its own corresponding level of gathering point (marked by the same number of hyphens). A `**` choice gathers at `--`, while a `*` choice gathers at `-`.
+
+As our stories become more complex, we often want to add notes for ourselves and others. To help us with this, ink has an important concept named **comments**.
 
 ## Comments
 
@@ -284,7 +378,7 @@ There is also another type of text that can be added that helps with understandi
 
 Comments in ink are added through using two forward slashes, `//`. Anything that follows the slashes until the next line is considered a comment. This also includes adding comments on lines after code as well. In later chapters, you'll see how comments help document complex logic and game state.
 
-### Code Example 1.9: Using Comments
+### Code Example 1.11: Using Comments
 
 ```ink
 // These are all comments.
@@ -293,7 +387,7 @@ Comments in ink are added through using two forward slashes, `//`. Anything that
 Hello! // Comments can also be written after code, too!
 ```
 
-### Interactive Example 1.9: Using Comments
+### Interactive Example 1.11: Using Comments
 
 {% include ink-player.html
    story="chapter01/ninth-ink"
@@ -309,6 +403,8 @@ This chapter introduced the fundamental concepts of writing in ink. You learned 
 
 **Choices,** marked with asterisks (`*`), allow players to make decisions that branch the story in different directions. Multiple choices form a **weave**, and weaves can be nested to create complex branching narratives.
 
+You learned how **gathering points**, marked with hyphens (`-`), allow you to collapse multiple branches back to a single point in the story. Multi-level weaves require matching levels of gathering points—`**` choices gather at `--`, `***` choices at `---`, and so on.
+
 You also learned how to use **selective output** with square brackets (`[]`) to control what text appears to players, and how to add **comments** using double slashes (`//`) to document your code.
 
 ## Review Questions
@@ -319,7 +415,8 @@ Before moving on, test your understanding:
 2. How do you "glue" text together to prevent line breaks?
 3. What's the difference between a *choice* and a *weave*?
 4. How do you prevent choice text from appearing in the story output?
-5. What happens to text written after `//` in your ink code?
+5. What symbol creates a gathering point, and how many do you need for a `**` choice?
+6. What happens to text written after `//` in your ink code?
 
 ## Try It
 
@@ -330,18 +427,19 @@ You stand before a cave entrance.
 
 * Go Deeper
     It gets very dark quickly.
-        ** Do you keep going?
-            You keep going and going into the cave. You believe you see some light and head towards it as the darkness recedes.
+    ** Do you keep going?
+        You keep going and going into the cave. You believe you see some light and head towards it as the darkness recedes.
 
-            You see what looks like an exit from the cave.
+        You see what looks like an exit from the cave.
 
-            You take it and find yourself emerging into a forest.
+        You take it and find yourself emerging into a forest.
 * Retreat
-  You leave the cave.
+    You leave the cave.
 ```
 
 **Challenge:** Extend this story by adding:
 
-- A third initial choice at the cave entrance.
-- More nested choices in the forest scene.
-- Comments explaining what each branch does.
+- A third initial choice at the cave entrance
+- More nested choices in the forest scene
+- Gathering points to bring branches back together
+- Comments explaining what each branch does

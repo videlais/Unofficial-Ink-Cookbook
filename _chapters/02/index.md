@@ -9,252 +9,412 @@ layout: chapter
 
 By the end of this chapter, you will be able to:
 
-- Define key ink terminology including weave, flow, and choices
-- Construct basic choices and flows in the Inky Editor
-- Apply comments and tags to document and annotate your code
-- Experiment with the Preview pane to test different story paths
+- Create multi-level choice structures using asterisks
+- Implement selective output to control what players see
+- Design knots and diverts to organize story structure
+- Differentiate between regular choices and sticky choices
+- Construct looping patterns while avoiding infinite loops
 
 ## Summary
 
-In this chapter, the terms weave, flow, and divert will be reviewed and the basics of writing and using the Preview pane in the Inky editor will be explained.
+In this chapter, you will learn about choices, diverts, and their different patterns in Ink.
 
 ---
 
 - [Learning Objectives](#learning-objectives)
 - [Summary](#summary)
-- [Common Terms](#common-terms)
-- [Creating a New Project](#creating-a-new-project)
-  - [Playing with Preview](#playing-with-preview)
-  - [Comments](#comments)
-  - [Tags](#tags)
-- [Creating Flows](#creating-flows)
-  - [Styling Choice Output](#styling-choice-output)
-  - [Adding More Choices](#adding-more-choices)
+- [Making Choices](#making-choices)
+  - [Weave Structure](#weave-structure)
+  - [Set Code Example](#set-code-example)
+- [Selective Output](#selective-output)
+  - [Selective Output Code Example](#selective-output-code-example)
+- [Knots](#knots)
+  - [**DONE** and **END**](#done-and-end)
+    - [**DONE**](#done)
+    - [**END**](#end)
+    - [**DONE** Example](#done-example)
+    - [**END** Example](#end-example)
+  - [Diverts](#diverts)
+  - [Diverting to **DONE** and **END**](#diverting-to-done-and-end)
+  - [Knot Code Example](#knot-code-example)
+- [Revisiting Flow](#revisiting-flow)
+- [Loops with Knots](#loops-with-knots)
+  - [Avoiding Infinite Looping](#avoiding-infinite-looping)
+- [Sticky Choices](#sticky-choices)
+  - [Sticky Choice Code Example](#sticky-choice-code-example)
+- [Glue](#glue)
 - [Try It](#try-it)
 
----
-
-## Common Terms
-
-Every language has its own terms for its elements. ink is no different, and explains how to write and understand code in relationship to a project through the following terms:
-
-- *Choice:* Some text defining a possible branching path
-- *Weave:* Collection of choices
-- *Flow:* A path through the available choices
-
-Ink uses the metaphor of threads and sewing to describe projects. The total collection of all choices is a project's *weave*. Through making *choices*, a user creates a *flow* through the overall *weave*.
-
-> **Note:** This book uses the term *option* for what the user sees and clicks on to interact with in an Inky project. *Choices* are what an author creates; a user interacts with *options*.
+**Summary:** In this chapter, you will learn about choices, diverts, and their different patterns in Ink.
 
 ---
 
-## Creating a New Project
+## Making Choices
 
-Using the Inky editor, go to File → New Project to create a new project. In the editor pane, write the following:
+Agency is at the center of how games are played. If a player feels like their decisions matter, they will invest in the story more. Presenting ways a player can choose is central to making an engaging story and Ink project.
 
-```ink
-Hello, handsome!
-```
+The ability to choose a path through a story’s weave is core to how Ink works. By showing the user different options, they can pick one and then follow different paths through the story.
 
-After text has been added to a project, the Preview pane shows it. This updates every time there is a pause in the typing.
+Choices are created with the asterisk, `*`. When a line starts with this symbol, it becomes a choice for the player. When multiple are used, they are all options in that set.
 
-Underneath the previous text, add the following:
+**Weave:** A *weave* are all choices at its current level. These choices with the same number of asterisks, `*`, within that section of the story.
 
 ```ink
-Choose to Write More
-Give up on a New Project
+* First Choice
+* Second Choice
 ```
 
-Choices are the basic building block of any ink project. They are what a user interacts with when playing an Ink game, and how the other key concepts in Ink relate to each other within the Flow of a project.
+When used in a flow, Inky will present the choices in the middle of the Preview pane.
 
-Through adding Choices, the preview pane in Inky can be used to "choose," and then rewind or restart a story. When working with the Inky Editor, this can help in moving through a story's *weave*, and in testing how different parts work together.
-
-### Playing with Preview
-
-Testing a project in the Inky Editor is one of the most important skills to learn when working with Ink. Based on the example now written in the editor, its different choices and their outcomes can be examined.
-
-First, click on the "Choose to Write More" option in the Preview pane. It will be shown and then the End of Story text will be shown.
-
-> **Note:** Whenever a story ends, the "End of Story" text is shown in the Inky Editor. This signals that there is no more content in the story.
-
-Click the "Restart" button in the Inky Editor. (It is the double-arrow, the rightmost icon above the Preview Pane area.) This will restart the story back before any choices were made.
-
-This time, click on the "Give up on a New Project" option. Notice that it too will be shown and then the same "End of Story" text is shown.
-
-Right now, these two choices do not amount to much. Clicking on either will choose that option and then end the story right there.
-
-### Comments
-
-So far, only code has been added to Ink projects. There is also another type of text that can be added that helps with understanding how code works: comments.
-
-In programming terminology, a comment is some text that is included in code but is ignored when it is run.
-
-*A comment is text written for an author or as a reminder of how something works*.
-
-Comments can also simply be used as notes to help keep track of things in a project as an author works on it.
-
-Comments in Ink are added through using two forward slashes, `//`. Anything that follows the slashes until the next line is considered a new comment. This also includes adding comments on lines after code as well.
-
-Anything from the two slashes to the end of the line is a comment and ignored by Ink.
+Multiple uses of the `*` symbols signal new levels (sets) of choices. A single `*` symbol is the first and more `*` symbols signal that those choices lead to more.
 
 ```ink
-// These are all comments.
-// ink skips over anything written with two forward-slashes.
-
-Hello! // Comments can also be written after code, too!
+* First Choice
+** Sub-Choice
+*** Sub-sub Choice
 ```
 
-### Tags
+When one option leads to others, those will be shown after the content of the first one in the Preview Pane.
 
-If comments are text written for authors and other developers, *tags* can be thought of as instructions for *other programs*.
+### Weave Structure
 
-Ink supports adding *tags*, text starting with a hash, `#` and extending to the end of a line. When Ink encounters these, it ignores them.
+Consider how, in the previous chapter's **Try It** example, multiple levels were indented and asterisks were used to create flows through the example.
+
+The first set started with the choice to *Go North*.
+
+Inside that was also a single choice: *Do you continue onward?*.
+
+Inside that were two choices in a single set: *Do you keep going?* and *Retreat*.
+
+Their structure was the following:
 
 ```ink
-This is an example using tags. # See?
+* Go North
+  ** Do you continue onward?
+    *** Do you keep going?
+    *** Retreat
 ```
 
-In the above example, the output would be the following:
-
-```text
-This is an example using tags.
-```
-
-When using the Inky preview pane, it would also show the following on a separate line in a lighter color:
+### Set Code Example
 
 ```ink
- # See?
+* Go North
+    It gets very dark quickly.
+    ** Do you continue onward?
+        You walk into the darkness. You reach out your hand to the wall and trace it into the utter darkness.
+        *** Do you keep going?
+            You keep going into the cave. You believe you see some light and head towards it as the darkness recedes.
+
+            You see what looks like an exit from the cave.
+
+            You take it and find yourself emerging into a forest.
+            -> DONE
+        *** Retreat
+            -> DONE
 ```
-
-In Ink, tags are optional text that it ignores as part of the story output. However, internally, it keeps track of the tags it encounters and, when working with other programs, these tags can have special meaning.
-
-For example, when working with the Ink for Web output option in Inky, the tag `# CLEAR` has a special meaning: it clears the text from the screen!
-
-When working with other programs like Unity, tags can also be used to add greater semantic meaning to the text, adding in, for example, tone, confidence, or other information to what a character is speaking in a part of the story.
-
-```ink
-Your dad slams his hand on the table. "No! I won't allow you to date her! I forbid you from seeing that girl!" # mood: angry
-
-"But dad!" you scream. "I love her!" # mood: pleading
-```
-
-In the above example, *mood* is used as part of a tag with a colon and then a value. In Ink, this would simply be another tag and ignore. However, in Unity or another program, it could read and parse the tag to add greater emotional context to a scene or how a character's text should be displayed.
-
-> **Note:** Tags are parsed between story 'stopping points'. In Ink, the story continues until it finds a choice. At that point, it waits for input. Internally, Ink would process all tags up to that point and then also stop.
-
-Tags are also associated with a single line. If used at the end of a line, they would be associated with that line. If a tag is used before a line, it becomes associated with the next output line.
-
-For example, the following example's use of a tag would be associated with the next line.
-
-```ink
-# AUTHOR: Jane
-
-My life really began after I died.
-```
-
-> **Note:** Determining which line a tag is associated with can be determined in the Inky preview pane through verifying where they show up. If they are shown after a line in the preview, they are associated with that line.
-
-## Creating Flows
 
 ---
 
-More text can be added to a choice by placing it "under" each.
+## Selective Output
 
-Consider the following code:
+When brackets are used within a choice, it is only shown in the choice itself. It is not part of the output. This is known as *selective output*.
 
 ```ink
-* Choose to Write More
-Look! I am writing more!
-* Give up on a New Project
-Nope. I have given up writing in Ink!
+* [Sneak in]
 ```
 
-Add the same new lines under each choice and then restart the project.
+This can be combined with other text in the option to show one part in the option (what the player clicks) and other in the result of the action.
 
-This time, choose the "Give up on a New Project" option. Now, not only will the text of the choice show up, but so will the text "underneath" it as well! The same is also true of the other choice if the story is restarted and the other option picked instead.
+Any text not in brackets will be shown in the output.
+
+### Selective Output Code Example
+
+Normally, the text of the choice is shown. With selective output, however, the tone of a choice rather than its exact words can be shown to the user. This could allow a player to choose how they want to respond without directly showing any extended output as part of the choice.
+
+Consider the following example where selective output is used to remove the text of the choices while also presenting its emotional tone instead.
+
+```ink
+The general rejects your advances and pulls a pistol. "I don't know who you are, but you are not welcome here. Leave now!"
+
+How do you respond?
+
+* [Mad]
+    You get angry with the general and also pull a pistol. "Don't you know who I am!?" you scream and you aim your pistol.
+* [Flirty]
+    "Come on, general. You don't want to shoot me," you say, cupping the pistol and slowly moving your hands down it.
+```
 
 ---
 
-### Styling Choice Output
+## Knots
 
-To avoid confusion, the common style when adding text to the output of a choice is to indent it. Pressing the TAB key or using two spaces between the edge of the editor and the content of the choice is the preferred way of showing that certain text is associated with a choice.
-
-```ink
-* Choose to Write More
-    Look! I am writing more!
-* Give up on a New Project
-    Nope. I have given up writing in Ink!
-```
-
-This styling approach also extends to multiple levels of choice output. If one choice is "under" another, the amount of indentation would continue. It is not uncommon, in larger projects, to see many different levels of indentation, each signaling various choices and their output all coexisting at once.
-
-### Adding More Choices
-
-Adding additional choices to the existing code is as easy as including extra asterisks and then more text of the choice option for the user.
+A *Knot* is a selection of content. They are created through using two or more equal signs (`=`) and the name of the knot. Optionally, and more commonly, they are also closed with three equal signs (`===`).
 
 ```ink
-* Choose to Write More
-    Look! I am writing more!
-    ** Do I continue?
-        Yes, I do!
-* Give up on a New Project
-    Nope. I have given up writing in Ink!
+=== ConfrontCaptain ===
 ```
 
-Like with the indentation, additional asterisks for choices mark that some are also "under" others. Enter the above code into the project or otherwise add a new choice option under one of the first ones.
+> **Note:** The name of a knot cannot contain spaces or other special characters, but they can use the underscore in their names.
 
-Restart the story.
+### **DONE** and **END**
 
-Following the above code, one path through the story is to click on "Choose to Write More" and then "Do I continue?" before the story finally ends.
+Ink reserves two knot names that cannot be used in a story. These are **DONE** and **END**. In Ink, these carry special meaning.
 
-It has two *choices*, one *weave*, and two possible *flows* composed of the paths through the project!
+#### **DONE**
+
+The **DONE** knot signals that a knot, stitch, or thread is done. In other words, if there is a point where a dead end would have happened, the knot **DONE** can be used to close off that dead end.
+
+If there is no more content in a story, **DONE** also ends the story itself.
+
+#### **END**
+
+The knot **END** signals that the story should stop. It can be used to close off a complicated flow or to end a story in a certain location after a player reaches a natural end of a story.
+
+Unlike **DONE** where a section comes to a close, **END**, as its name implies, *ends* the story.
+
+#### **DONE** Example
+
+```ink
+You find yourself at a crossroads in the forest.
+
+* Take the left path
+    You walk down the winding left path through dense trees. After a while, you reach a peaceful clearing with a small pond. You decide to rest here for the night.
+    -> DONE
+
+* Take the right path  
+    You follow the right path up a steep hill. At the top, you discover an abandoned watchtower. There's nothing more to explore here.
+    -> DONE
+```
+
+#### **END** Example
+
+```ink
+The dragon approaches, fire building in its throat.
+
+* Try to negotiate
+    "Wait!" you shout. "I come in peace!" The dragon pauses, considers your words, then nods slowly. You have made an unlikely ally.
+    
+    This ends your quest successfully. You and the dragon become friends and protect the kingdom together.
+    -> END
+
+* Attack with your sword
+    You charge forward with your blade raised. The dragon breathes fire, and your adventure comes to a swift conclusion.
+    -> END
+```
+
+### Diverts
+
+Moving between knots is done through a *divert*. In Ink, this is an arrow, `->` that "points at" the Knot to move to next.
+
+Simply creating knots is not enough. Knots **must not create dead ends in Ink**. At a minimum, a knot must divert to a specially-named knot called "DONE" to complete it.
+
+```ink
+-> Next
+=== Next ===
+The end!
+-> DONE
+```
+
+Combined with brackets for choices, the output of an option can be placed in knots.
+
+### Diverting to **DONE** and **END**
+
+As was mentioned above, the knots **DONE** and **END** have special meanings. When a knot diverts to **DONE**, `-> DONE`, it marks that the knot is done. (If there is no more content, this also serves to end the story.)
+
+```ink
+There is no more content here. It's time to end this story!
+-> The_End
+
+=== The_End ===
+Yup, this is end!
+-> DONE
+```
+
+If code diverts to **END**, `-> END`, it ends the story.
+
+Both can be used to prevent dead ends in the flow of a story and to create natural points where a story can move to another section or come to an end.
+
+### Knot Code Example
+
+Knots provide an easy way to divide up a project into logical sections. For example, consider the following code where a knot is used to contain a set of choices:
+
+```ink
+The first-mate leans against the edge of the pier and looks out across the water.
+
+"Everything is all set," they say, turning away from the rising sun across the water to look at you. "We can set sail at any time."
+
+You look over your ship and its crew. Yes, it is time to set out again.
+
+-> Sailing
+
+=== Sailing ===
+* Pirate Island
+    -> DONE
+* Port Anderson
+    -> DONE
+```
+
+---
+
+## Revisiting Flow
+
+Diverts, as their name implies, *diverts* a story to a knot in the story. As was introduced in the previous chapter, a *flow* is a player's journey through all possible choices (the story's *weave*).
+
+In the above example, the first divert `-> Sailing` moves the story to its knot, **Sailing**. Inside this knots is a set of choices, *Pirate Island* and *Port Anderson*.
+
+One possible flow through this story would start with the knot **Sailing** and then follow one of its choices (*Pirate Island* and *Port Anderson*).
+
+```ink
+-> Sailing
+  * Pirate Island
+    -> DONE
+  * Port Anderson
+    -> DONE
+```
+
+As neither choice has content yet, and diverts cannot have dead ends, they also each contain a divert, `-> DONE` that ends the story.
+
+---
+
+## Loops with Knots
+
+With both Knots and Diverts, a loop can be created where an option has a Divert that points to a Knot containing the original choice.
+
+```ink
+-> Next
+== Next ==
++ [This is next!]
+    -> Next
+```
+
+With a single choice within the set "pointing to" a DONE label, the others can be used to loop by diverting to the knot holding the choice.
+
+### Avoiding Infinite Looping
+
+When using knots and diverts to create a looping structure, it is important to include both choices and a way to break out of loop somehow.
+
+A very common mistake when writing a looping pattern of knots and diverts is to not include a choice and have the Inky Editor become unresponsive when it tries to follow the divert back to the knot over and over.
+
+**Bad Example:**
+
+```ink
+-> Next
+== Next ==
+-> Next
+```
+
+**Example:**
+
+The use of a Divert to point to a Knot allows for looping back to a single knot within the story. Instead of moving between them, a single Knot can serve as the central "hub" for choices. Consider the following code:
+
+```ink
+Assassin! You watch the woman as she inches closer to you. As you move the candle to get a better look, her sword reflects its light back to you.
+
+-> Escape
+
+== Escape ==
+* [Try to fight her]
+    You know there is no way you can win against her. You are just a monk and barely trained
+    -> Escape
+* [Run the other way]
+    This seems like the best option. You take off running.
+    -> DONE
+* [Throw your candle at her]
+    If you throw your candle, it could go out and you can barely see as it is.
+    -> Escape
+```
+
+As the divert points back at the knot, multiple choices can be made. Yet, as the number of options reduce, the final one must, at some point, be picked in order to progress the story.
+
+---
+
+## Sticky Choices
+
+By default, an option will remove itself once chosen. As designed, a choice is a one-time event. It is chosen and the others in the set are ignored. However, choices can become "sticky" through using the plus `+` symbol. Instead of being removed, these choices will "stick around."
+
+```ink
++ This sticks around!
+* This does not!
+```
+
+### Sticky Choice Code Example
+
+Normally, choices disappear after they are "used." Sticky choices, on the other hand, do not. As it comes to looping knots and those cases where revisiting a particular knot is the case, sticky choices can be very useful.
+
+**Try it yourself:** The interactive example below demonstrates sticky choices in action. Notice how the color choices (marked with `+`) remain available, while the final choice (marked with `*`) disappears after use.
+
+{% include ink-player.html 
+   story="chapter04/sticky-choices" 
+   title="Interactive Example: Sticky Choices"
+   height="350px"
+%}
+
+Here's the complete code for the example above:
+
+```ink
+You awake on the shore. As the waves lap at you, your memory tries to fill itself back in from the night before and how you came to be here. There was a storm, yes. A mighty storm. And then... well, you are not as sure. Something about a storm, for sure.
+
+-> Explore_the_Island
+
+=== Explore_the_Island ===
++ [Drink Water]
+    You drink some water from a stream in the forest.
+    -> Explore_the_Island
++ [Hunt for Food]
+    You find some small berries and roots.
+    -> Explore_the_Island
+* [Try to Sleep]
+    You try to find a good place to take a nap. As you sleep, your mind fills in the pieces. There was a storm, yes, but before that there was a murder.
+
+    You remember two shots ringing out during the rain. There was screaming.
+
+    You wake up with the sun bearing down on you. Time has passed. You dust yourself off and try to make a fire before it gets too dark.
+    -> DONE
+```
+
+---
+
+## Glue
+
+The default action is for each new line of text to have its own new line in the output. However, this can be changed using *glue*, a pairing of less-than and greater-than signs, `<>`.
+
+```ink
+This text <>
+run together <>
+as the same line.
+```
+
+When working with diverts and knots, glue can be helpful to run text together across them, linking the text even if the story is broken up into different parts.
+
+```ink
+This text <>
+-> Next
+
+== Next ==
+runs together <>
+-> Final
+
+== Final ==
+as the same line.
+-> DONE
+```
 
 ---
 
 ## Try It
 
-Create a new Ink project called "FirstStory.ink" and save the file. In the code area, add the following:
+As seen in this chapter’s examples, it is easy to create a complex branching story using a combination of choices, knots, and diverts. These basic building blocks of Ink will form the backbone of most stories you create. Practicing with these kinds of Ink code will help you get used to how Ink works and will also prepare you for some of the more advanced content found in later chapters of this book.
 
-```ink
-You stand before a cave entrance. There are three passages forward.
-```
+As practice, try doing the following:
 
-This will be a cave exploration example with two initial choices.
+First, create a simple branching story that uses choices, knots, and diverts.
 
-Copy or type the following code for the first set of choices:
+The story should have at least two choices, and player should have a set of at least two options within each of those two choices. The story should use at least two diverts, and those diverts should go to two different knots.
 
-```ink
-* Go Deeper
-* Retreat
-```
+You should pay attention to the narrative content of your story as you write, but don’t worry about the length of the story: focus more on creating the necessary Ink code to tell a short story that makes sense.
 
-Under the choice *Go Deeper*, add the following text:
+Now, revise your story: make at least one of the options inside of one of your two choices use selective output. Introduce at least one loop using a knot into the story and use a sticky choice inside it so that it works properly - but be sure it isn't an infinite loop!
 
-```ink
-    It gets very dark quickly.
-        ** Do you keep going?
-            You keep going and going into the cave. You believe you see some light and head towards it as the darkness recedes.
+While modifying the story you created may be a challenge because you have to rewrite some of the story content, think about ways you can change the narrative you created to include that kind of content instead of creating a new story from scratch.
 
-            You see what looks like an exit from the cave.
-
-            You take it and find yourself emerging into a forest.
-```
-
-Now, as the player enters the cave, they are given a choice that leads to another. The flow is a path from one to another, but there is only ever one choice per set.
-
-**Example:**
-
-```ink
-You stand before a cave entrance.
-
-* Go Deeper
-    It gets very dark quickly.
-        ** Do you keep going?
-            You keep going and going into the cave. You believe you see some light and head towards it as the darkness recedes.
-
-            You see what looks like an exit from the cave.
-
-            You take it and find yourself emerging into a forest.
-* Retreat
-  You leave the cave.
-```
+Once you have done so, check the story for consistency: make sure the narrative still makes sense! You might also want to have someone else play through it to see if there are problems that you have not caught on your own.
