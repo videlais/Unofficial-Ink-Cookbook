@@ -1,0 +1,1 @@
+﻿{"inkVersion":21,"root":[["^This story has multiple sections.","\n",{"->":"Section_1"},["done",{"#n":"g-0"}],null],"done",{"Section_1":["^This is section 1!","\n",{"->":"Section_2"},null],"Section_2":["^This is section 2!","\n",{"->":"Section_3"},null],"Section_3":["^This is section 3!","\n","end",null]}],"listDefs":{}}
