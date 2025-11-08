@@ -1,5 +1,5 @@
 ---
-title: "LIST-ing to a Side"
+title: "External Functions"
 order: 11
 chapter_number: 11
 layout: chapter
@@ -9,721 +9,835 @@ layout: chapter
 
 By the end of this chapter, you will be able to:
 
-- Create and manipulate LISTs for tracking collections of values
-- Apply built-in LIST functions including LIST_COUNT(), LIST_MIN(), and LIST_MAX()
-- Implement list operations for addition, subtraction, and intersection
-- Design state machines using LISTs to model changing conditions
-- Construct multi-listed lists for tracking object properties across categories
-- Evaluate list containment and equality for conditional logic
+- Analyze the canContinue and Continue() pattern for loading story content
+- Implement choice selection using ChooseChoiceIndex() method
+- Access and modify Ink variables through the variablesState proxy
+- Evaluate Ink functions from JavaScript using EvaluateFunction()
+- Design variable observers to respond to state changes
+- Integrate the Story API with custom JavaScript implementations
 
 ## Summary
 
-In this chapter, you will learn how to work with LISTs, some of the basic functionality, and how they can be used within projects.
+In this chapter, you will learn more about the JavaScript Story API, how to use it, and how its functionality relate to each other.
+
+> **Note:** Much of the code in this chapter assumes you know and can read JavaScript. Some of the underlining concepts and representations are explained, but this chapter's focus is on the Story API and not necessarily JavaScript itself.
 
 ---
 
 - [Learning Objectives](#learning-objectives)
 - [Summary](#summary)
-- [LIST](#list)
-- [Automatically Set to `false`](#automatically-set-to-false)
-- [Enabling Values](#enabling-values)
-- [Built-in Functions](#built-in-functions)
-  - [`LIST_COUNT()`](#list_count)
-  - [`LIST_MIN()`](#list_min)
-  - [`LIST_MAX()`](#list_max)
-  - [`LIST_ALL()`](#list_all)
-  - [`LIST_RANGE()`](#list_range)
-  - [`LIST_VALUE()`](#list_value)
-  - [`LIST_INVERT()`](#list_invert)
-  - [`LIST_RANDOM()`](#list_random)
-- [Inclusion Testing](#inclusion-testing)
-  - [Manipulating List Values](#manipulating-list-values)
-    - [Addition](#addition)
-    - [Subtraction](#subtraction)
-    - [Setting Multiple Values](#setting-multiple-values)
-- [Conflicting Values and Variable Names](#conflicting-values-and-variable-names)
-- [Comparing LISTS](#comparing-lists)
-  - [Equality Testing](#equality-testing)
-  - [Containment vs Equality](#containment-vs-equality)
-  - [Less Than](#less-than)
-    - [Greater Than](#greater-than)
-    - [Greater Than Or Equal To](#greater-than-or-equal-to)
-    - [Less Than Or Equal To](#less-than-or-equal-to)
-- [List Intersection](#list-intersection)
-- [Using Lists as State Machines](#using-lists-as-state-machines)
-- [Using Lists for Flags and Tracking](#using-lists-for-flags-and-tracking)
-- [Multi-listed Lists](#multi-listed-lists)
-  - [Tracking Objects with Lists](#tracking-objects-with-lists)
-  - [Tracking Multiple Properties](#tracking-multiple-properties)
-- [Advanced: Custom List Values](#advanced-custom-list-values)
-- [Practical Example: Inventory and State Management](#practical-example-inventory-and-state-management)
-- [Try It](#try-it)
+- [Reviewing Ink for Web](#reviewing-ink-for-web)
+  - [Examining `main.js`](#examining-mainjs)
+    - [Looping Story Content](#looping-story-content)
+    - [*canContinue* and **Continue()** Pattern](#cancontinue-and-continue-pattern)
+    - [Parsing Tags](#parsing-tags)
+      - [Example Tag Parsing](#example-tag-parsing)
+  - [Loading Choices](#loading-choices)
+    - [Click to Load](#click-to-load)
+  - [Summarizing `main.js`](#summarizing-mainjs)
+- [Getting and Setting Variables](#getting-and-setting-variables)
+  - [Variables State Example](#variables-state-example)
+  - [Accessing Variables State Properties](#accessing-variables-state-properties)
+  - [Fallback **Proxy** Support](#fallback-proxy-support)
+- [*EvaluateFunction()*](#evaluatefunction)
+  - [Passing Arguments](#passing-arguments)
+  - [Capturing Function Output](#capturing-function-output)
+- [Observing Variables](#observing-variables)
+  - [**ObserveVariable()** Example](#observevariable-example)
+  - [**ObserveVariables()** Example](#observevariables-example)
+  - [Removing Observers](#removing-observers)
 
 ---
 
-## LIST
+## Reviewing Ink for Web
 
-Beyond using variables, Ink also provides a data type call a `LIST`. These store collections of values that can be accessed, changed, and manipulated in different ways in connection to each other.
+The "Ink for Web" functionality is used as part of Inky to make three JavaScript files: `ink.js`, `main.js`, and the `story.js`.
 
-```ink
-LIST moods = happy, angry, sad
-```
+- `ink.js`: Ink engine in JavaScript
+- `main.js`: JavaScript code to run the story
+- `story.js`: Story encoded as JSON. (If a project does not have a name, Inky defaults to the `story.js` name.)
 
-Rules for Lists:
+### Examining `main.js`
 
-- Must contain unique variable names
-- Ordering matters
-- Positions start with 1 (unless overwritten)
-- Will create variables if they do not already exist
-- Created variables are set to `false`
+As the code to run the Ink story using its engine (API), the `main.js` file shows some of the ways in which JavaScript code can be written to work with an Ink story.
 
-Because lists will create new variables if included and not previous created, this allows for creating a list of possibilities and then having a new, separate variable.
+#### Looping Story Content
 
-These can also be used as part of the flow once set earlier, allowing for changing states throughout a story.
+About a third through the `main.js` file will be the use of a property called *canContinue*. When using Ink with JavaScript, this is access into understanding the connection between the Ink engine and the story code!
 
----
+```javascript
+while(story.canContinue) {
+  // Get ink to generate the next paragraph
+  var paragraphText = story.Continue();
+  var tags = story.currentTags;
 
-## Automatically Set to `false`
-
-The values used in a `LIST` are automatically set to `false`. What this means in practice is that any values include in a `LIST` are in it, but do not count toward its total unless they are "enabled," set to true.
-
-The following code will show a value of 0.
-
-```ink
-LIST moods = happy, angry, sad
-
-{ LIST_COUNT(moods) }
-```
-
-> **Note:** function `LIST_COUNT()` returns the total number of enabled entries in a `LIST`. If they are not `true`, they are not counted toward its total.
-
-## Enabling Values
-
-Values in a `LIST` are considered `true` if they have opening and closing parentheses around them.
-
-The same code which shown a total of zero will change to three when all of its values are now set to `true`.
-
-```ink
-LIST moods = (happy), (angry), (sad)
-
-{ LIST_COUNT(moods) }
-```
-
----
-
-## Built-in Functions
-
-For dealing directly with lists, Ink also has several specific functions. As a `LIST` can have both `true` and `false` values, each of these functions deals with and understands the entries in a `LIST` in different ways.
-
-### `LIST_COUNT()`
-
-The function `LIST_COUNT()` returns the number of values in the `LIST` that are set to `true` .
-
-```ink
-LIST moods = (happy), angry, (sad)
-
-{ LIST_COUNT(moods) }
-```
-
-### `LIST_MIN()`
-
-The function `LIST_MIN()` returns the first true entry in a `LIST` or nothing if there are no true entries in the `LIST`.
-
-```ink
-LIST moods = happy, angry, (sad)
-
-{ LIST_MIN(moods) }
-```
-
-### `LIST_MAX()`
-
-The function `LIST_MAX()` returns the last true entry in a `LIST` or nothing if there are no true entries in the `LIST`.
-
-```ink
-LIST moods = happy, angry, (sad)
-
-{ LIST_MAX(moods) }
-```
-
-### `LIST_ALL()`
-
-The function `LIST_ALL()` returns all entries regardless if true or not as comma-separated values.
-
-```ink
-LIST moods = happy, angry, (sad)
-
-{ LIST_ALL(moods) }
-```
-
-This is particularly useful when you want to access the complete set of possible values in a list, rather than just the currently enabled ones.
-
-### `LIST_RANGE()`
-
-The function `LIST_RANGE()` returns a selection from a `LIST` starting at the minimum value and extending to the maximum values. The minimum and maximum values are the numerical values, positions, starting at 1 (unless overwritten).
-
-If the minimum or maximum value is outside the list of values, its nearest correct values is used.
-
-```ink
-LIST moods = happy, (angry), sad, melancholy
-
-{ LIST_RANGE(moods, 2, 3) }
-```
-
-You can also use `LIST_RANGE` with `LIST_ALL()` to get a slice of all possible values:
-
-```ink
-LIST primeNumbers = two, three, five, seven, eleven, thirteen, seventeen, nineteen
-
-{LIST_RANGE(LIST_ALL(primeNumbers), 3, 6)} // five, seven, eleven, thirteen
-```
-
-### `LIST_VALUE()`
-
-The function `LIST_VALUE()` returns the numerical value of a `LIST` entry regardless of if it is true or not.
-
-```ink
-LIST moods = happy, angry, sad, melancholy
-
-{ LIST_VALUE(sad) }
-```
-
-### `LIST_INVERT()`
-
-The function `LIST_INVERT()` returns a new `LIST` with each entry’s value to its opposite, `true` to `false` and `false` to `true`.
-
-```ink
-LIST moods = happy, angry, sad, melancholy
-
-{ LIST_COUNT(moods) }
-~ moods = LIST_INVERT(moods)
-{ LIST_COUNT(moods) }
-```
-
-### `LIST_RANDOM()`
-
-The function `LIST_RANDOM()` returns a random `true` entry from a `LIST`. If there are no `true` entries, the function returns nothing.
-
-```ink
-LIST moods = (happy), (angry), (sad), (melancholy)
-
-{ LIST_RANDOM(moods) }
-```
-
----
-
-## Inclusion Testing
-
-Beyond functions to work with `LIST` values, Ink also has special symbols for working with testing for inclusion in a `LIST`. When comparing multiple values, they should be within an opening and closing parentheses.
-
-- `?`: If multiple entries are part of the list and `true`.
-
-```ink
-LIST moods = (happy), (angry), (sad), (melancholy)
-
-{ moods ? (happy, angry): Both happy and angry }
-```
-
-- `has`: If an entry is part of the list and is true
-
-The keyword has works the same as using the question mark, `?`.
-
-```ink
-LIST moods = (happy), (angry), (sad), (melancholy)
-
-{ moods has (happy, angry): Both happy and angry }
-```
-
-- `!?`: If multiple entries are not part of the list and not true
-
-The exclamation mark works as a negation to the inclusion, question mark, `?`, symbol.
-
-```ink
-LIST moods = happy, angry, sad, melancholy
-
-{ moods !? (happy, angry): Neither happy nor angry }
-```
-
-- `hasnt`: If an entry is not part of a list and not `true`
-
-The keyword `hasnt` is the same as using the symbols, `!?`
-
-```ink
-LIST moods = happy, angry, sad, melancholy
-
-{ moods hasnt (happy, angry): Neither happy nor angry }
-```
-
-### Manipulating List Values
-
-Like other variable values, a `LIST` can also use some of the same mathematical symbols others can. However, a `LIST` can only use values associated with either itself or another `LIST` within the same project.
-
-#### Addition
-
-Adding a value to a `LIST`, `VAR`, or `CONST` using existing `LIST` values works through the `+=` symbol pairing. It means "set the current value to itself plus this new value." When used with `LIST` values, they can be "added" to the existing `LIST`.
-
-```ink
-LIST Items = (Dagger), (Lead_Pipe), (Spanner), (Candlestick), (Revolver), (Rope)
-
-LIST clues = Main_Room
-
-~ clues += (Dagger)
-
-Current Clues: {clues}
-```
-
-#### Subtraction
-
-Removing values from a `LIST` or using `LIST` values works similar to addition. It uses the `-=` symbols to mean "set the current value to itself minus this new value."
-
-```ink
-LIST Items = (Dagger), (Lead_Pipe), (Spanner), (Candlestick), (Revolver), (Rope)
-
-LIST clues = Main_Room
-
-~ Items -= (Dagger)
-~ clues += (Dagger)
-
-Current Clues: {clues}
-```
-
-Trying to add an entry that's already in the list does nothing. Trying to remove an entry that's not there also does nothing. Neither produces an error, and a list can never contain duplicate entries.
-
-#### Setting Multiple Values
-
-You can assign multiple values to a list at once using parentheses:
-
-```ink
-LIST DoctorsInSurgery = Adams, Bernard, Cartwright, Denver, Eamonn
-
-~ DoctorsInSurgery = (Adams, Bernard)  // Only Adams and Bernard are now true
-```
-
-You can also assign the empty list to clear a list out:
-
-```ink
-~ DoctorsInSurgery = ()  // Everyone has gone home
-```
-
-And you can add or remove multiple entries at once:
-
-```ink
-~ DoctorsInSurgery += (Eamonn, Denver)
-~ DoctorsInSurgery -= (Adams, Bernard)
-```
-
----
-
-## Conflicting Values and Variable Names
-
-One of the rules of `LIST` is that they must contain unique variable names. A value cannot exist in two separate `LIST`s! Therefore, when moving values from one `LIST` to another, it is recommended to remove first and then add to the new `LIST`.
-
-```ink
-LIST Items = (Dagger), (Lead_Pipe), (Spanner), (Candlestick), (Revolver), (Rope)
-
-LIST clues = Main_Room
-
-~ temp randomClue = LIST_RANDOM(Items)
-
-The random clue is {randomClue}.
-
-~ Items -= randomClue
-~ clues += randomClue
-
-Current Clues: {clues}
-```
-
-## Comparing LISTS
-
-Ink provides several ways to compare lists. Some comparisons test for equality or containment, while others compare the numerical values of entries.
-
-### Equality Testing
-
-Testing multi-valued lists is slightly more complex than single-valued ones. Equality (`==`) means 'set equality' - that is, all entries are identical.
-
-```ink
-LIST DoctorsInSurgery = (Adams), (Bernard), Cartwright
-
-{ DoctorsInSurgery == (Adams, Bernard):
-    Dr Adams and Dr Bernard are having a loud argument in one corner.
+  // Create paragraph element
+  var paragraphElement = document.createElement('p');
+  paragraphElement.innerHTML = paragraphText;
+  storyContainer.appendChild(paragraphElement);
 }
 ```
 
-If Dr Cartwright is also present, the two won't argue, as the lists being compared won't be equal - DoctorsInSurgery will have a Cartwright that the list (Adams, Bernard) doesn't have.
+In the reduced code example above, the object **story** is a variable holding a reference to a **Story** object. It represents the entire story!
 
-Not equals (`!=`) works as expected:
+> **Note:** In object-oriented programming (OOP), data is stored in *objects*. These are special data structures with values that describe themselves and their status (*properties*) and have ways to access data or communicate with other code (*methods*).
 
-```ink
-{ DoctorsInSurgery != (Adams, Bernard):
-    At least Adams and Bernard aren't arguing.
+One of its properties, *canContinue*, signals if there is more content in the story or not. It has either a `true` or `false` value. If there is more content (the story has not reached "End of Story"), it will be `true`.
+
+Inside the `while()` loop are two other important things: the method **Continue()** and property *currentTags*.
+
+#### *canContinue* and **Continue()** Pattern
+
+Nearly all code that works with Ink and story content use some combination of the *canContinue* and **Continue()** pattern.
+
+When working with Ink in JavaScript, it often appears as it does in the above example:
+
+```javascript
+while(story.canContinue) {
+  let paragraphText = story.Continue();
 }
 ```
 
-### Containment vs Equality
+The property *canContinue* lets the code know if there is more story content. Inside of loop checking this will also be the use of the method **Continue()**.
 
-The `?` (or `has`) operator tests for containment, not equality:
+Assuming there is story content to load, the method **Continue()** loads it and returns any output. (This loads but **does not** return choices.)
 
-```ink
-{ DoctorsInSurgery ? (Adams, Bernard):
-    Dr Adams and Dr Bernard are present (and possibly others too).
+The text loaded is determined through two factors:
+
+- Is there a choice?
+- Is this the end of of the story?
+
+**Continue()** only continues up to the next set of choices in the story. It then pauses and waits for the methods related to choices to run.
+
+Because there is a possibly of the story ending, **Continue()** will read through to the end and then change the value of *canContinue* internally.
+
+If there is no more story content, **Continue()** should not be called. This will cause an error!
+
+#### Parsing Tags
+
+Inside of the looping pattern of *canContinue* and **Continue()** is often the use of the property *currentTags*.
+
+After the method **Continue()** is called, this property will be populated with any tags related to the current text output loaded up to the next set of choices.
+
+*currentTags* is an **Array** with each element the string contents of a tag starting after the use of the hash, `#`, and up to the end of the line. This means that additional code must be written to parse and understand these tags in order to use them.
+
+##### Example Tag Parsing
+
+In the `main.js` file, the use of `<String>`,**indexOf()** is used in the function **splitPropertyTag()** to find a colon, `:`, and then split the string value.
+
+```javascript
+// Helper for parsing out tags of the form:
+//  # PROPERTY: value
+// e.g. IMAGE: source path
+function splitPropertyTag(tag) {
+  var propertySplitIdx = tag.indexOf(":");
+  if( propertySplitIdx != null ) {
+    var property = tag.substr(0, propertySplitIdx).trim();
+    var val = tag.substr(propertySplitIdx+1).trim();
+    return {
+      property: property,
+      val: val
+    };
+  }
+
+  return null;
 }
 ```
 
-This is different from equality because it only checks if Adams and Bernard are in the list, not whether they're the *only* ones in the list.
+### Loading Choices
 
-### Less Than
+While the *canContinue* and **Continue()** pattern appears earlier in the `main.js` file, it is most frequently *called* inside of another part of the code: creating choices!
 
-```ink
-LIST_A < LIST_B
+> **Note:** The method **Continue()** must be called at least once to populate the property *currentChoices*!
+
+In JavaScript, the property *currentChoices* is an Array of **Choice** objects. (Each has the properties *text*, the output of the choice, and *index*, its position within the current set of choices.)
+
+In `main.js`, the iterator function **forEach()** is used to create content based on its elements. For each one, a new `<p>` is added with the class `.choice` and a hyperlink with the *text* of the **Choice** object.
+
+```javascript
+story.currentChoices.forEach(function(choice) {
+
+  // Create paragraph with anchor element
+  var choiceParagraphElement = document.createElement('p');
+  choiceParagraphElement.classList.add("choice");
+  choiceParagraphElement.innerHTML = `<a href='#'>${choice.text}</a>`
+  storyContainer.appendChild(choiceParagraphElement);
+});
 ```
 
-The smallest value in A is less than the smallest values in B.
+#### Click to Load
 
-#### Greater Than
+Next in the code is the creation of *event listeners* for the hyperlinks of the choice generated previously through iterating through the property *currentChoices*.
 
-```ink
-LIST_A > LIST_B
+> **Note:** In JavaScript terminology, an *event listener* is some code that "listens" for an event like clicking or the user typing and responds in some way to it.
+
+```javascript
+// Click on choice
+var choiceAnchorEl = choiceParagraphElement.querySelectorAll("a")[0];
+
+choiceAnchorEl.addEventListener("click", function(event) {
+
+  // Don't follow <a> link
+  event.preventDefault();
+
+  // Remove all existing choices
+  removeAll(".choice");
+
+  // Tell the story where to go next
+  story.ChooseChoiceIndex(choice.index);
+
+  // And loop
+  continueStory();
+});
 ```
 
-The smallest value in A is bigger than the largest values in B.
+A choice is chosen when using the `main.js` JavaScript code when its hyperlink is clicked on by a user. When this happens, four things happen in order based on the above code:
 
-#### Greater Than Or Equal To
+- The use of the method **preventDefault()** stops the default action of the hyperlink, `<a>` element.
+
+- All other choices are removed from the document based on their class, `.choice`.
+
+- The method **ChooseChoiceIndex()** is used.
+
+- The function **continueStory()** is called to load the next part of the story.
+
+When passed a number (the *index* of a **Choice**), **ChooseChoiceIndex()** method tells Ink that a choice was chosen.
+
+In the next *canContinue* and **Continue()** loop, the results of this choice would then be loaded next. And, in fact, that is the next line after using the **ChooseChoiceIndex()** method: calling *continueStory()* and looping again.
+
+### Summarizing `main.js`
+
+The control flow of the major activities of the `main.js` file can be summarized in the following way as it relates the Story API in JavaScript:
+
+- Call `<Story>`.**Continue()** first. This initial load setup of the properties *canContinue*, *currentTags*, and *currentChoices*.
+
+- If *canContinue* is `true`, call **Continue()**. Parse any tags using *currentTags*.
+
+- Parse any existing choices using *currentChoice*. For each choice, setup an event listener to react on click events passing the method **ChooseChoiceIndex()** what choice was made.
+
+- Continue the *canContinue* and **Continue()** pattern until there is no more content.
+
+## Getting and Setting Variables
+
+The Story API provides access to the property *variablesState*. This acts as a [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) object to the running Ink code, allowing access to variables via their name.
+
+### Variables State Example
+
+**Example Ink:**
 
 ```ink
-LIST_A >= LIST_B
+VAR example = "Looking good!"
+
+Hi there! {example}
 ```
 
-The smallest value in A is at least the smallest value in B, and the largest value in A is at least the largest value in B.
+**Example JavaScript:**
 
-#### Less Than Or Equal To
-
-```ink
-LIST_A <= LIST_B
+```javascript
+story.variablesState["example"] = "Looking awesome!";
 ```
 
-The smallest value in A is smaller than all values in B, and the largest value in A is smaller than the largest value in B.
-
-> **Note:** These comparison operators work on the numerical values of list entries, not on containment. They're most useful when using lists as state machines where the order matters.
-
----
-
-## List Intersection
-
-The intersection operator (`^`) allows you to find the overlap between two lists. This returns a new list containing only the values that appear in both lists.
+**Example Output:**
 
 ```ink
-LIST CoreValues = strength, courage, compassion, greed, nepotism, self_belief, delusions_of_godhood
-VAR desiredValues = (strength, courage, compassion, self_belief)
-VAR actualValues = (greed, nepotism, self_belief, delusions_of_godhood)
-
-{desiredValues ^ actualValues} // prints "self_belief"
+Hi there! Looking awesome!
 ```
 
-The result is a new list, so you can test it:
+In the above Ink code, a variable named *example* is created. When the resulting HTML from the Ink for Web option is used, an additional line of JavaScript is added.
+
+The use of `story.variablesState["example"]` gives access, via the **variablesState** proxy object, to the variable named "example". Its value can then be changed to a different value.
+
+> **Reminder:** Variables exist with respect to story state and the use of the **Continue()** method. They are created or changed up to the last use of **Continue()** method, and any changes made to their values will not be reflected in output until it is called again.
+
+### Accessing Variables State Properties
+
+As a Proxy object in JavaScript, **variablesState** also allows access to variables via their "dot notation." Instead of using square brackets, variables can be accessed as properties of the **variablesState** object.
+
+```javascript
+story.variablesState.example = "Looking awesome!";
+```
+
+> **Note:** **variablesState** is a [*Proxy*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy). This means it seems like an object literal in JavaScript, but **is not**. Internally, it has its own methods for accessing and changing the variable property names.
+
+Something that is not possible, however, is creating new properties using the **variablesState** Proxy object. It **is not** an object literal.
+
+While it is possible to access variables created in Ink, more cannot be added. The Proxy acts as a way to *access* existing variables only.
+
+### Fallback **Proxy** Support
+
+On platforms that do not support Proxies in JavaScript (Node.js v5, IE 11, Safari 9 and everything below), variables cannot be used through the proxy. However, the property *$* of the **variablesState** object can be used to provide the same access.
+
+**Example:**
+
+```javascript
+story.variablesState.$("player_health", 100);
+//story.variablesState["player_health"] = 100;
+
+let health = story.variablesState.$("player_health");
+//let health = story.variablesState["player_health"];
+```
+
+## *EvaluateFunction()*
+
+The Story API provides the method **EvaluateFunction()** for calling Ink functions externally.
+
+**Example Ink:**
 
 ```ink
-{desiredValues ^ actualValues: 
-    The new president has at least one desirable quality.
+What is it?
+
+== function ExampleFunction() ==
+~ return "It's it!"
+```
+
+**Example JavaScript:**
+
+```javascript
+let story = new inkjs.Story(storyContent);
+
+let result = story.EvaluateFunction("ExampleFunction");
+
+let paragraphText = story.Continue();
+paragraphText += result;
+
+console.log(paragraphText);
+```
+
+**Example Final Output:**
+
+```ink
+What is it?
+It's it!
+```
+
+In the above code, a function is created in the Ink code. It is then saved with the Ink for Web option (or using the "Export story.js file..." option).
+
+In the JavaScript code, the story is loaded and then the **story.EvaluateFunction()** method is called with the argument "ExampleFunction".
+
+The variable *result* then holds the returning value from the internal Ink function (the String "It's it!"). This is then appended to the existing output.
+
+Finally, the method **console.log()** is called with the new, combined value and showing it in the console.
+
+### Passing Arguments
+
+It is also possible to pass arguments into Ink functions using a second argument to the **story.EvaluateFunction()** method.
+
+```javascript
+story.EvaluateFunction("ink_function", ["arg1", "arg2"]);
+```
+
+Using an Array, any values sent will be passed to the internal Ink function and mapped to its own parameters in the same exact order of elements.
+
+**Example Ink:**
+
+```ink
+I had visions, I was in them
+
+== function ExampleFunction(arg1, arg2, arg3) ==
+~ return "{arg1}<br>{arg2}<br>{arg3}"
+```
+
+**Example JavaScript:**
+
+```javascript
+let story = new inkjs.Story(storyContent);
+
+let result = story.EvaluateFunction(
+  "ExampleFunction",
+  [
+    "I was looking into the mirror",
+    "To see a little bit clearer",
+    "The rottenness and evil in me"
+  ]
+);
+
+let paragraphText = story.Continue();
+paragraphText += result;
+
+console.log(paragraphText);
+```
+
+**Example Output:**
+
+```ink
+I had visions, I was in them
+I was looking into the mirror To see a little bit clearer The rottenness and evil in me
+```
+
+In the above code, a function is created in Ink. It accepts three arguments that are combined and returned using its `return` statement.
+
+In the JavaScript, the story is loaded and the internal function is called using its name of "ExampleFunction". It is also passed three arguments as part of the second argument to **story.EvaluateFunction()**.
+
+Finally, like the previous example code, the output from the internal function is added to the existing story content.
+
+### Capturing Function Output
+
+The method **story.EvaluateFunction()** also accepts a third argument, a Boolean value.
+
+```javascript
+let result = story.EvaluateFunction("ink_function", ["arg1", "arg2"], true);
+```
+
+If the third argument is `true`, **story.EvaluateFunction()** will return an object instead of string output with two properties:
+
+- *returned*: The returned value or `null` if there is no return value
+- *output*: All output shown during the function
+
+**Example Ink:**
+
+```ink
+Words like violence
+
+== function ExampleFunction() ==
+Break the silence
+Come crashing in
+Into my little world
+~ return
+```
+
+**Example JavaScript:**
+
+```javascript
+let story = new inkjs.Story(storyContent);
+
+let result = story.EvaluateFunction("ExampleFunction", [], true);
+
+console.log(result);
+
+let paragraphText = story.Continue();
+paragraphText += result.output;
+
+console.log(paragraphText);
+```
+
+**Example Output:**
+
+```ink
+Words like violence
+Break the silence
+Come crashing in
+Into my little world
+```
+
+In the above code, a function is created in Ink that has output and does not return a value.
+
+In the JavaScript code, the method **story.EvaluateFunction()** is given three parameters: the name of the function "ExampleFunction", an empty array of arguments, and the Boolean value `true`.
+
+Because of the third argument, an object is returned from the method **story.EvaluateFunction()**. The property *output* of the returned object is then combined together with the previous story output.
+
+## Observing Variables
+
+For the common task of accessing and using the value of a variable from within Ink, the previously covered tools of the Proxy object **story.variablesStates** and the method **story.EvaluateFunction()** are not ideal.
+
+The use of **story.variablesStates** would require constantly polling the values to see if had changed and then reacting in some way. The same is also true of **story.EvaluateFunction()**: an Ink function would need to be written whose sole purpose is reporting on a variable. That is a waste of time and code.
+
+Instead, and to help with these use cases, the Story API provides two methods: **story.ObserveVariable()** and **story.ObserveVariables()**. These differ from the earlier code in one very important way: instead of needing to poll values, each method accepts a callback function that is called if the values of the variable(s) change!
+
+> **Note:** In JavaScript, a *callback function* is a common pattern where usually an anonymous function (one without a name) is written to be called when something happens. As functions are a type of value in JavaScript, they can be passed into functions and called in another context.
+
+### **ObserveVariable()** Example
+
+The method **story.ObserveVariable()** accepts two arguments. The first, like with using **story.variablesStates**, is the name of the variable in quotation marks. The second is a callback function.
+
+```javascript
+story.ObserveVariable(
+  "variableName",
+  function(variableName, variableValue) {});
+```
+
+Variables are *global* in Ink. Once they are created, they can be accessed from any knot, stitch, or function. This also means their values can be changed from different points as well.
+
+**Example Ink:**
+
+```ink
+VAR confidence = 0
+
+-> Voting
+
+=== Voting ===
+Confidence: {confidence}
+
++ [Raise Confidence]
+  ~ confidence += 10
+  -> Voting
++ [Lower Confidence]
+  ~ confidence -= 10
+  -> Voting
+```
+
+**Example JavaScript:**
+
+```javascript
+let story = new inkjs.Story(storyContent);
+
+story.ObserveVariable("confidence", function(variableName, variableValue) {
+  console.log(variableName, variableValue);
+});
+
+let storyContainer = document.querySelector('#story');
+
+continueStory();
+
+function continueStory(firstTime) {
+
+  // Generate story text - loop through available content
+  while(story.canContinue) {
+
+    // Get ink to generate the next paragraph
+    let paragraphText = story.Continue();
+
+    // Create paragraph element (initially hidden)
+    let paragraphElement = document.createElement('p');
+    paragraphElement.innerHTML = paragraphText;
+    storyContainer.appendChild(paragraphElement);
+
+  }
+
+  // Create HTML choices from ink choices
+  story.currentChoices.forEach(function(choice) {
+
+    // Create paragraph with anchor element
+    let choiceParagraphElement = document.createElement('p');
+    choiceParagraphElement.classList.add("choice");
+    choiceParagraphElement.innerHTML = `<a href='#'>${choice.text}</a>`
+    storyContainer.appendChild(choiceParagraphElement);
+
+    // Click on choice
+    let choiceAnchorEl = choiceParagraphElement.querySelectorAll("a")[0];
+    choiceAnchorEl.addEventListener("click", function(event) {
+
+      // Don't follow <a> link
+      event.preventDefault();
+
+      // Remove all existing choices
+      removeAll(".choice");
+
+      // Tell the story where to go next
+      story.ChooseChoiceIndex(choice.index);
+
+      // And loop
+      continueStory();
+    });
+  });
 }
 
-{LIST_COUNT(desiredValues ^ actualValues) == 1: 
-    Correction, the new president has only one desirable quality. 
-    {desiredValues ^ actualValues == self_belief: 
-        It's the scary one.
+// Remove all elements that match the given selector.
+function removeAll(selector) {
+  let allElements = storyContainer.querySelectorAll(selector);
+  for(var i=0; i<allElements.length; i++) {
+    let el = allElements[i];
+    el.parentNode.removeChild(el);
+  }
+}
+```
+
+**Example Output:**
+
+```ink
+confidence 10
+confidence 0
+confidence -10
+confidence -20
+confidence -10
+```
+
+In the above code, a variable *confidence* is created in Ink. A knot **Voting** is also created with two internal, sticky choices of *Raise Confidence* and *Lower Confidence*. For each, they adjust the value of *confidence* and then loop back to the start of the knot.
+
+In the JavaScript code, things are slightly more complex. In order to handle clicking on the links, more code was needed to load the story, create its content, and allow for using the choices in HTML. However, the important line is the following:
+
+```javascript
+story.ObserveVariable(
+  "confidence",
+  function(variableName, variableValue) {
+    console.log(variableName, variableValue);
+  }
+);
+```
+
+The use of the **story.ObserveVariable()** method sets up a "listener" for the internal, Ink variable *confidence*. Every time it changes, the callback function will be passed two arguments:
+
+- *variableName*: Name of the variable being watched
+- *variableValue*: Current value of the variable
+
+> **Note:** Like other functionality when using the Story API, the **story.ObserveVariable()** method is affected by **Continue()**. If a variable is updated as part of internal Ink code, the method **story.ObserveVariable()** will only have the last updated value.
+>
+> However, as variables can be accessed via the Proxy object **story.variablesState**, this will also trigger the **story.ObserveVariable()** method. If a variable is updated via the Story API, it will trigger the **story.ObserveVariable()** method.
+
+Inside the callback function, the variable name and its value are passed to the method **console.log()** and shown to the user via the console.
+
+If either of the choices are made, the value of *confidence* is updated in Ink. This then signals to the Story API the values have been changed, which, in turn, uses the callback function setup with the **story.ObserveVariable()** method.
+
+### **ObserveVariables()** Example
+
+The method **story.ObserveVariables()** accepts two arguments. The first is an Array of variables to observe and the second is an Array of callback functions.
+
+> **Note:** The order of each Array argument maps the other for **story.ObserveVariables()**. In other words, the first callback function is connected to the first variable. The second of each are also connected. This continues for each element in each array.
+
+```javascript
+story.ObserveVariables(
+  [
+    "variableName1",
+    "variableName2"
+  ],
+  [
+    function(variableName, variableValue) {},
+    function(variableName, variableValue) {}
+  ]
+);
+```
+
+**Example Ink:**
+
+```ink
+VAR confidence = 0
+VAR evidence = 0
+
+-> Voting
+
+=== Voting ===
+Confidence: {confidence}
+Evidence: {evidence}
+
++ [Raise Confidence]
+  ~ confidence += 10
+  -> Voting
++ [Lower Confidence]
+  ~ confidence -= 10
+  -> Voting
++ [Introduce Evidence]
+  ~ evidence += 1
+  -> Voting
++ [Remove Evidence]
+  ~ evidence -= 1
+  { evidence < 0:
+    ~ evidence = 0
+  }
+  -> Voting
+```
+
+**Example JavaScript:**
+
+```javascript
+let story = new inkjs.Story(storyContent);
+
+story.ObserveVariables(
+  [
+    "confidence",
+    "evidence"
+  ],
+  [
+    function(variableName, variableValue) {
+      console.log("Confidence:", variableName, variableValue)
+    },
+    function(variableName, variableValue) {
+      console.log("Evidence:", variableName, variableValue)
+    }
+  ]
+);
+
+let storyContainer = document.querySelector('#story');
+
+continueStory();
+
+function continueStory(firstTime) {
+
+  // Generate story text - loop through available content
+  while(story.canContinue) {
+
+    // Get ink to generate the next paragraph
+    let paragraphText = story.Continue();
+
+    // Create paragraph element (initially hidden)
+    let paragraphElement = document.createElement('p');
+    paragraphElement.innerHTML = paragraphText;
+    storyContainer.appendChild(paragraphElement);
+
+  }
+
+  // Create HTML choices from ink choices
+  story.currentChoices.forEach(function(choice) {
+
+    // Create paragraph with anchor element
+    let choiceParagraphElement = document.createElement('p');
+    choiceParagraphElement.classList.add("choice");
+    choiceParagraphElement.innerHTML = `<a href='#'>${choice.text}</a>`
+    storyContainer.appendChild(choiceParagraphElement);
+
+    // Click on choice
+    let choiceAnchorEl = choiceParagraphElement.querySelectorAll("a")[0];
+    choiceAnchorEl.addEventListener("click", function(event) {
+
+      // Don't follow <a> link
+      event.preventDefault();
+
+      // Remove all existing choices
+      removeAll(".choice");
+
+      // Tell the story where to go next
+      story.ChooseChoiceIndex(choice.index);
+
+      // And loop
+      continueStory();
+    });
+  });
+}
+
+// Remove all elements that match the given selector.
+function removeAll(selector)
+{
+    let allElements = storyContainer.querySelectorAll(selector);
+    for(let i=0; i<allElements.length; i++) {
+        let el = allElements[i];
+        el.parentNode.removeChild(el);
     }
 }
 ```
 
-This is particularly useful for checking if there's "some overlap" between lists, which is different from the `?` operator that checks if one list entirely contains another.
-
----
-
-## Using Lists as State Machines
-
-One of the most powerful uses of lists is as state machines. Each list entry represents a state, and you can move between states using simple operations.
+**Example Output:**
 
 ```ink
-LIST KettleState = cold, boiling, recently_boiled
-
-VAR kettleState = cold
-
-* [Turn on kettle]
-    The kettle begins to bubble and boil.
-    ~ kettleState = boiling
-    
-* {kettleState == boiling} [Turn off kettle]
-    You turn off the kettle.
-    ~ kettleState = recently_boiled
-    
-* {kettleState == recently_boiled} [Make tea]
-    Perfect timing for tea!
+Confidence: confidence 10
+Evidence: evidence 1
 ```
 
-You can use `++` and `--` to step through states:
+In the above code, two variables are created in Ink. When making choices in the knot **Voting**, their values are adjusted and a divert is used to loop.
+
+In the JavaScript code, the method **story.ObserveVariables()** is used. It observes both the Ink variable *confidence* and *evidence*. If these values change, their associated callback functions are called.
+
+> **Note:** Like with **ObserveVariable()**, all variables are affected by the Story API and **Continue()**.
+>
+> In the Ink code, the value of *evidence* is decreased in 1 in its section of the code. A conditional test then resets its value to 0 if it is below that. However, as these happen back-to-back and most importantly *before* the next use of **Continue()**, the JavaScript code will never see a negative value for Ink variable *evidence*.
+
+### Removing Observers
+
+The method **RemoveVariableObserver()**, as part of the Story API, *removes* observer functions from watching variables.
+
+Unlike its sister methods **ObserveVariable()** and **ObserveVariables()**, **RemoveVariableObserver()** accepts either the function *or* the name of the variable to stop watching.
+
+```javascript
+story.RemoveVariableObserver(observerFunction, watchedVariable);
+```
+
+> **Note:** As anonymous functions are often used for callbacks, the optional use of a function argument is very helpful. Supplying only the name of the variable to stop watching is more common.
+
+**Example Ink:**
 
 ```ink
-LIST VolumeLevel = off, quiet, medium, loud, deafening
+VAR confidence = 0
+VAR evidence = 0
 
-VAR volume = quiet
+-> Voting
 
-* [Turn up volume]
-    ~ volume++
-    {volume == deafening:
-        The sound is overwhelming!
-    - else:
-        The volume increases.
+=== Voting ===
+Confidence: {confidence}
+Evidence: {evidence}
+
++ [Raise Confidence]
+  ~ confidence += 10
+  -> Voting
++ [Lower Confidence]
+  ~ confidence -= 10
+  -> Voting
++ [Introduce Evidence]
+  ~ evidence += 1
+  -> Voting
++ [Remove Evidence]
+  ~ evidence -= 1
+  { evidence < 0:
+    ~ evidence = 0
+  }
+  -> Voting
+```
+
+**Example JavaScript:**
+
+```javascript
+let story = new inkjs.Story(storyContent);
+
+story.ObserveVariables(
+  [
+    "confidence",
+    "evidence"
+  ],
+  [
+    function(variableName, variableValue) {
+      console.log("Confidence:", variableName, variableValue)
+    },
+    function(variableName, variableValue) {
+      console.log("Evidence:", variableName, variableValue)
     }
-```
+  ]
+);
 
-When a list is used as a state machine, it typically contains only one value at a time, representing the current state.
+story.RemoveVariableObserver(undefined, "confidence");
 
----
+let storyContainer = document.querySelector('#story');
 
-## Using Lists for Flags and Tracking
+continueStory();
 
-Lists are excellent for tracking game flags - things that have happened or been discovered. Unlike using multiple boolean variables, a list keeps everything organized in one place.
+function continueStory(firstTime) {
 
-```ink
-LIST GameEvents = foundSword, openedCasket, metGorgon, solvedRiddle
+  // Generate story text - loop through available content
+  while(story.canContinue) {
 
-VAR completedEvents = ()
+    // Get ink to generate the next paragraph
+    let paragraphText = story.Continue();
 
-* [Open the casket]
-    You open the ancient casket with a creak.
-    ~ completedEvents += openedCasket
-    {completedEvents ? foundSword:
-        You place the sword inside carefully.
-    - else:
-        It's empty. You'll need to find something to put in it.
+    // Create paragraph element (initially hidden)
+    let paragraphElement = document.createElement('p');
+    paragraphElement.innerHTML = paragraphText;
+    storyContainer.appendChild(paragraphElement);
+
+  }
+
+  // Create HTML choices from ink choices
+  story.currentChoices.forEach(function(choice) {
+
+    // Create paragraph with anchor element
+    let choiceParagraphElement = document.createElement('p');
+    choiceParagraphElement.classList.add("choice");
+    choiceParagraphElement.innerHTML = `<a href='#'>${choice.text}</a>`
+    storyContainer.appendChild(choiceParagraphElement);
+
+    // Click on choice
+    let choiceAnchorEl = choiceParagraphElement.querySelectorAll("a")[0];
+    choiceAnchorEl.addEventListener("click", function(event) {
+
+      // Don't follow <a> link
+      event.preventDefault();
+
+      // Remove all existing choices
+      removeAll(".choice");
+
+      // Tell the story where to go next
+      story.ChooseChoiceIndex(choice.index);
+
+      // And loop
+      continueStory();
+    });
+  });
+}
+
+// Remove all elements that match the given selector.
+function removeAll(selector)
+{
+    let allElements = storyContainer.querySelectorAll(selector);
+    for(let i=0; i<allElements.length; i++) {
+        let el = allElements[i];
+        el.parentNode.removeChild(el);
     }
-
-* {completedEvents ? openedCasket && not completedEvents ? foundSword}
-    [Search for a sword]
-    After searching, you find an ancient sword!
-    ~ completedEvents += foundSword
-```
-
-You can test for multiple flags at once:
-
-```ink
-{completedEvents ? (foundSword, openedCasket, solvedRiddle):
-    With the sword placed in the casket and the riddle solved, the door opens!
 }
 ```
 
-This pattern is much cleaner than having separate variables for each flag and manually checking them all.
-
----
-
-## Multi-listed Lists
-
-One of the most powerful features of lists is that a single variable can contain values from multiple different list families. This allows you to use lists for world modeling and object tracking.
-
-### Tracking Objects with Lists
-
-You can define lists for different types of things, then combine them to track what's where:
+**Example Output:**
 
 ```ink
-LIST Characters = Alfred, Batman, Robin
-LIST Props = champagne_glass, newspaper
-
-VAR BallroomContents = (Alfred, Batman, newspaper)
-VAR HallwayContents = (Robin, champagne_glass)
-
-=== function describe_room(roomState)
-    {roomState ? Alfred: Alfred is here, standing quietly in a corner.}
-    {roomState ? Batman: Batman's presence dominates all.}
-    {roomState ? Robin: Robin is all but forgotten.}
-    {roomState ? champagne_glass: A champagne glass lies discarded on the floor.}
-    {roomState ? newspaper: A newspaper headline screams WHO IS THE BATMAN?}
-
-{describe_room(BallroomContents)}
+Evidence: evidence 1
+Evidence: evidence 0
 ```
 
-This produces:
+In the above code, variables are created and their values changed in the Ink code.
 
-```
-Alfred is here, standing quietly in a corner.
-Batman's presence dominates all.
-A newspaper headline screams WHO IS THE BATMAN?
-```
+In JavaScript, the method **ObserveVariables()** is used to create two observer functions on two Ink variables. However, the **RemoveVariableObserver()** method is then used to remove any observer functions on the Ink variable *confidence*.
 
-You can then move things between rooms:
-
-```ink
-* [Move to hallway]
-    ~ BallroomContents -= Batman
-    ~ HallwayContents += Batman
-    Batman strides into the hallway.
-```
-
-### Tracking Multiple Properties
-
-You can also use multi-valued lists to track different properties of the same object:
-
-```ink
-LIST OnOff = on, off
-LIST HotCold = cold, warm, hot
-
-VAR kettleState = (off, cold)
-
-=== function turnOnKettle()
-    {kettleState ? hot:
-        You turn on the kettle, but it immediately flips off again.
-    - else:
-        The water in the kettle begins to heat up.
-        ~ kettleState -= off
-        ~ kettleState += on
-    }
-
-=== function can_make_tea()
-    ~ return kettleState ? (hot, off)
-```
-
-Here, `kettleState` tracks both whether the kettle is on/off AND whether it's hot/cold simultaneously. This is much cleaner than having two separate variables.
-
-To make changing states easier, you can create a helper function:
-
-```ink
-=== function changeStateTo(ref stateVariable, stateToReach)
-    // Remove all states of this type
-    ~ stateVariable -= LIST_ALL(stateToReach)
-    // Put back the state we want
-    ~ stateVariable += stateToReach
-
-~ changeStateTo(kettleState, on)
-~ changeStateTo(kettleState, warm)
-```
-
----
-
-## Advanced: Custom List Values
-
-By default, list values start at 1 and increment by 1, but you can specify your own numerical values:
-
-```ink
-LIST PrimeNumbers = two = 2, three = 3, five = 5, seven = 7, eleven = 11
-
-{LIST_VALUE(seven)}  // 7
-```
-
-If you specify a value but not the next one, Ink will assume an increment of 1:
-
-```ink
-LIST PrimeNumbers = two = 2, three, five = 5
-// 'three' will automatically be 3
-```
-
-This is useful when the numerical values have meaning in your game, such as damage values, prices, or difficulty levels.
-
----
-
-## Practical Example: Inventory and State Management
-
-Here's a practical example showing how to use lists for a simple inventory and puzzle system:
-
-```ink
-LIST Inventory = (none), key, torch, rope, map
-LIST RoomItems = (chest), (door), (window)
-LIST DoorState = locked, unlocked, open
-
-VAR playerInventory = ()
-VAR currentRoom = (chest, door)
-VAR doorState = locked
-
--> room
-
-=== room ===
-You are in a dark room.
-{currentRoom ? chest: There is a wooden chest here.}
-{currentRoom ? door: There is a locked door to the north.}
-{currentRoom ? window: A window lets in some light.}
-
-- (choices)
-* {currentRoom ? chest && playerInventory !? key} [Search the chest]
-    You search the chest and find a key!
-    ~ playerInventory += key
-    ~ currentRoom -= chest
-    -> choices
-
-* {currentRoom ? door && doorState == locked && playerInventory ? key}
-    [Unlock the door]
-    You use the key to unlock the door.
-    ~ doorState = unlocked
-    -> choices
-
-* {currentRoom ? door && doorState == unlocked} [Open the door]
-    You open the door and escape!
-    ~ doorState = open
-    -> escaped
-
-* {playerInventory != ()} [Check inventory]
-    You are carrying: {playerInventory}.
-    -> choices
-
-+ {choices > 2} [Wait]
-    Time passes...
-    -> choices
-
-=== escaped ===
-You have escaped! Congratulations!
--> END
-```
-
-This example demonstrates:
-- Using lists for inventory tracking
-- Using lists for room contents
-- Using lists as state machines (door state)
-- Testing list contents for conditional choices
-- Adding and removing items from lists
-
----
-
-## Try It
-
-Lists are one of Ink's most powerful features, but they take practice to master. Here are some exercises to help you understand them better:
-
-**Exercise 1: Basic List Operations**
-
-Create a simple mood tracker:
-- Define a LIST of different moods (happy, sad, angry, excited, calm)
-- Start with one mood active
-- Create choices that change the mood
-- Display the current mood to the player
-- Try using `++` and `--` to move between moods in order
-
-**Exercise 2: Inventory System**
-
-Build a basic inventory system:
-- Create a LIST of items the player can find
-- Create a VAR to hold the player's current inventory
-- Add choices to pick up items (add them to inventory)
-- Add choices to use or drop items (remove them from inventory)
-- Display the inventory contents
-- Create a conditional choice that only appears when the player has a specific item
-
-**Exercise 3: Multi-Property Tracking**
-
-Create an object with multiple states:
-- Define two LISTs: one for on/off states, one for temperature states
-- Create a variable that tracks both properties
-- Write functions to change each property independently
-- Create conditional text that reacts to different combinations of states
-
-**Exercise 4: Flag Tracking**
-
-Build a simple quest system:
-- Create a LIST of quest events (talked_to_guard, found_key, opened_chest, etc.)
-- Track which events have been completed
-- Create choices that only appear after certain events are completed
-- Use the `?` operator to check for multiple completed events before showing a final choice
-
-**Exercise 5: Advanced Challenge**
-
-Combine everything you've learned:
-- Create a mystery game with suspects, locations, and clues as separate LISTs
-- Track which clues have been found
-- Track suspect locations
-- Use list intersection to find overlaps (e.g., which suspects were in a certain location AND have a certain clue)
-- Create a final accusation that checks if the player has gathered enough evidence
-
-The key to mastering lists is understanding when to use them as state machines (one value at a time), flags (multiple values tracking what's happened), or properties (mixing values from different list families). Experiment with all three approaches!
+In the use of the method **console.log()**, only the changes to the Ink variable *evidence* would be reported. The observer function for the Ink variable *confidence* was removed.

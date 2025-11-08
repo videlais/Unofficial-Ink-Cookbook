@@ -1,5 +1,5 @@
 ---
-title: "Gather Points"
+title: "Conditionals"
 order: 7
 chapter_number: 7
 layout: chapter
@@ -9,300 +9,233 @@ layout: chapter
 
 By the end of this chapter, you will be able to:
 
-- Explain the purpose of gather points in collapsing branching narratives
-- Construct chained gather points for multi-stage conversations
-- Create labelled options to track player choices
-- Apply label scopes across knots and stitches
-- Design multi-level gather point structures for complex flows
+- Compare knot parameters with Ink functions and their capabilities
+- Design functions that accept parameters and return values
+- Apply the pass-by-reference technique to modify variables
+- Utilize built-in functions like RANDOM(), POW(), and FLOOR()
+- Implement proper variable naming conventions to avoid conflicts
 
 ## Summary
 
-In this chapter, you will learn about gather points, how they are used, and the shorthand they provide for larger and more complex projects.
+In this chapter, you will learn about knot parameters, functions, and the differences between the two.
 
 ---
 
 - [Learning Objectives](#learning-objectives)
 - [Summary](#summary)
-- [Gather Points](#gather-points)
-  - [Explaining Gather Points](#explaining-gather-points)
-  - [Chaining Gathering Points](#chaining-gathering-points)
-- [Labelled Options](#labelled-options)
-  - [Label Scopes](#label-scopes)
-  - [Diverting to Labels](#diverting-to-labels)
-  - [Labels and Gathering Point Levels](#labels-and-gathering-point-levels)
+- [Functions](#functions)
+- [Knot Parameters](#knot-parameters)
+  - [Knot Parameter Code Example](#knot-parameter-code-example)
+- [Ink Functions](#ink-functions)
+  - [Ink Function Rules](#ink-function-rules)
+- [Passing By Reference](#passing-by-reference)
+- [Variable Naming Issues](#variable-naming-issues)
+- [Built-in Functions](#built-in-functions)
+  - [`POW(number, to-the-power-of)`](#pownumber-to-the-power-of)
+  - [`RANDOM(min, max)`](#randommin-max)
+  - [`FLOOR()`](#floor)
+  - [`INT()`](#int)
+  - [`FLOAT()`](#float)
+  - [`CHOICE_COUNT()`](#choice_count)
+  - [`TURNS()`](#turns)
+  - [`SEED_RANDOM(seed)`](#seed_randomseed)
 
 ---
 
-## Gather Points
+## Functions
 
-Through presenting a series of choices, an author can create a complex path through a story.
+To help with processing data, Ink provides ways to pass information between different parts of a story. When working with variables, these provide a way to process or test data in different ways.
 
-```ink
-* Choice 1
-  ** Choice 1.1
-  ** Choice 1.2
-* Choice 2
-  ** Choice 2.1
-  ** Choice 2.2
-* Choice 3
-  ** Choice 3.1
-  ** Choice 3.2
-```
+In programming terminology, a *function* is some section of code designed around some task. It borrows the term from mathematical functions in which data is changed through applying a set of rules.
 
-One choice can lead to another that connects to a third. These can be both in the same file or across files using the `INCLUDE` keyword.
+In Ink, the concept of functions comes in two ways. The first is in Knot Parameters and then second is in Functions themselves.
 
-However, there is often a need to show some output after a choice is made or regardless of how a choice was made. The existing structures for doing such a thing do not work well or are potentially wasteful.
-
-Consider the following example:
-
-```ink
-He leaned against the wall and waited. I could tell he was tense and the wrong thing could drive him away.
-
-* "We can make it, just give me a second chance!"
-* "I know I messed up, babe, but we can work it out!"
-* "Are you really going to give up on five years of a relationship!"
-```
-
-In the above code, there are three choices. Each could, potentially, lead to other places using diverts or show more output. However, what if the outcome of all the choices needed to be the same?
-
-One solution might be put the same text under each choice.
-
-```ink
-He leaned against the wall and waited. I could tell he was tense and the wrong thing could drive him away.
-
-* "We can make it, just give me a second chance!"
-  He paused and shook his head. "We are done. Please leave."
-* "I know I messed up, babe, but we can work it out!"
-  He paused and shook his head. "We are done. Please leave."
-* "Are you really going to give up on five years of a relationship!"
-  He paused and shook his head. "We are done. Please leave."
-```
-
-However, that's repetitive. There should not be a need to have the exact same text in multiple places!
-
-Another solution might also be to simply have all the choices divert to the same knot:
-
-```ink
-He leaned against the wall and waited. I could tell he was tense and the wrong thing could drive him away.
-
-* "We can make it, just give me a second chance!"
-  -> Outcome
-* "I know I messed up, babe, but we can work it out!"
-  -> Outcome
-* "Are you really going to give up on five years of a relationship!"
-  -> Outcome
-
-=== Outcome ==
-He paused and shook his head. "We are done. Please leave."
-
--> DONE
- ```
-
-While less wasteful than the previous solution, the outcome is still the same: the choices are using the result. While cleaner, in that the code is not as wasteful, there is a far better way to solve this issue.
-
-### Explaining Gather Points
-
-In previous code in the above examples, each choice could potentially branch the code or have used diverts. There needed to be a way to "gather" all the branches together!
-
-In Ink, *gather points* use the minus sign, `-`, and serve as their name suggests, they *gather*.
-
-```ink
-He leaned against the wall and waited. I could tell he was tense and the wrong thing could drive him away.
-
-* "We can make it, just give me a second chance!"
-* "I know I messed up, babe, but we can work it out!"
-* "Are you really going to give up on five years of a relationship!"
--  He paused and shook his head. "We are done. Please leave."
-```
-
-Using a *gather point* with a set of choices *gathers* the outcomes together. The result of all of the options would be the same: the gather point! No matter what was picked, all of the choices would "collapse" to the use of the `-` minus sign at the end of the set of choices.
-
-However, this need not always be the case. The use of gather points *gather* all of the *eventual* output together. One usage of gather points is to make choices that all *gather* to a single output. A second usage could be to have output per choice that *eventually gathers* at a single outcome.
-
-```ink
-He leaned against the wall and waited. I could tell he was tense and the wrong thing could drive him away.
-
-* "We can make it, just give me a second chance!"
-  I took a step forward.
-* "I know I messed up, babe, but we can work it out!"
-  I tried not to look at his eyes.
-* "Are you really going to give up on five years of a relationship!"
-  I was trying not to scream at him.
--  He paused and shook his head. "We are done. Please leave."
-```
-
-In the above adjusted example, each choice has its own output that make it different than the others. However, the use of the gather point at the end of the set of choices *gathers* all of the eventual output together at the end.
-
-With a gather point in a set of choices, and assuming no diverts are used, the outcome will always arrive at the gather point. After all, its purpose is to *gather* branches in a story.
-
-### Chaining Gathering Points
-
-Gathering points work well when "chained" together. When used with multiple sets of choices (and assuming no diverts are used), each gathering point will always be reached.
-
-A quick way to create conversations where only one choice in a set has a consequence is through using gathering points. For the choice with the consequence, a line of code or additional output could be added, knowing the gathering point will move the story toward the next "chain" of dialogue.
-
-```ink
-VAR relationship = 50
-
-"Can you reach that for me?" she asked, motioning up to the mixing bowls at the top of the shelf. Even stretching, and I tried not to look at her as she tried a couple times to reach it, she could not quite get a grip on them.
-"Sure," I replied, getting up and walking over. As I reached for the shelf, I thought she would move, but she just stood there. "You gonna step back?"
-"Do you want me to?" she asked, her eyes seemingly blinking at me innocently, but the question was more emotionally loaded than simply asking about the bowls.
-
-* "I thought we were over this, J."
-  ~ relationship -= 20
-* I stood there silently waiting.
-- "Fine," she said, a note of frustration in her voice as she finally moved out of my space.
-
-* I considered reminding her that we had broken up two weeks ago and I would be moving away soon.
-* Could I turn my back on months together for a new job? Was it more important than our life together?
-  ~ relationship += 20
-- My hand found the bowls. I pulled them down and handed them over.
-
-She didn't look at me as she answered. "Thanks, Dee," she replied, moving the bowls, and herself, across the room from me.
-```
-
-In the above example, there are two sets of choices. However, only one of each set has a consequence for the story. For these choices, the value of *relationship* is changed. Otherwise, the story proceeds to the gathering point.
+For Ink, these divisions help authors to think through how to divide up their code and calculations in ways that may be more narrative or mechanically focused, depending on their needs.
 
 ---
 
-## Labelled Options
+## Knot Parameters
 
-Like knots, choices can also be labelled. If a name is put into parentheses before the output of the option, it becomes the *label* for the option.
+When working with functions and their related concepts, the most commonly associated term is *parameters*. In programming terminology, a *parameter* is one or more values passed to a function or other function-like programming concept. In Ink, this means that data can be passed to a knot that can then act on it in some way.
 
-```ink
-As I paused at the door, I heard a noise in the kitchen.
+Data is passed as a parameter to a knot through including its name and opening and closing parentheses. Within these, a value or the name of an existing variable can be placed. Multiple parameters are separated by commas.
 
-* (investigate) Might as well go see what it is.
-* (ignore) "It's nothing, I'm sure," I said.
+Within the knot itself, the new names for the values passed it as parameters are defined through open and closing parentheses. These new named variables exist within the context of the knot and act like temporary variables -- they can only be used within the knot itself.
 
-```
-
-Knots, stitches, and labels all have values. Like what was done with conditional choices, labelled options work the same way. The use of curly brackets can check to see if an option has been chosen and react accordingly.
-
-> **Note:** Labels, like with the name of knots, can be used as if they were variables. When included in curly brackets, the value of the variable is used as if it was a conditional statement. In these cases, 0 is `false` and other values are `true`.
+### Knot Parameter Code Example
 
 ```ink
-As I paused at the door, I heard a noise in the kitchen.
+-> Greeting("Hi, there!")
 
-* (investigate) Might as well go see what it is.
-* (ignore) "It's nothing, I'm sure," I said.
--
-
-* {investigate} I walked to the kitchen.
-* {ignore} I walked back to my bedroom.
-```
-
-In the above code, if the player picks the option to investigate, the label *investigate* gains the value of 1 (and is thus `true`). If, instead, they pick the option to ignore, choosing the label *ignore*, its value is increased to 1.
-
-A gathering point is then used to *gather* the output together with the minus sign, `-`, at the end of the set of choices.
-
-> **Note:** The use of the gathering point is important in the above example. It serves to *gather* the otherwise potentially branching paths back together before the next set of choices. Without it, the story ends after the first set of choices!
-
-For the next set of choices, the values of the labels are tested. If the player chose to investigate earlier, the label *investigate* will be `true` and a new option will be shown. If the label *ignore* was picked, its option would appear, instead.
-
-When combined with gathering points, labelled options can optimize writing structures where different paths can be picked, gathered, and then tested without needing to use diverts or knots for the same task.
-
-### Label Scopes
-
-In programming terminology, a *scope* is a way of describing access to a variable. If something has a *local* scope, it can only be accessed within its block of code. If it has a *higher* scope, it can be accessed in its block of code and in another. If a variable has a *global* scope, it can be accessed anywhere in the code.
-
-Labels have a *local* scope to the weave block in which they were created. However, like with stitches, they can be accessed through the name of the knots and stitch in which they were created.
-
-For example, to access a stitch, *StitchExample*, inside of a knot, *KnotExample*, it would use the address of `KnotExample.StitchExample`. Both the knot and stitch names are needed, with a period, `.`, between them.
-
-```ink
--> KnotExample.StitchExample
-
-=== KnotExample ===
-
-= StitchExample
-Show this!
+=== Greeting(greetingPhrase) ===
+I smiled when I saw him. He said, "{greetingPhrase}"
 -> DONE
 ```
 
-This is also true of labels. They can be accessed through their knot and stitch names.
+In the above example, the value "Hi, there!" is being passed to the knot **Greeting**. Inside the knot, the temporary variable *greetingPhrase* is given this value. It can then be accessed inside the knot to, in the above example, display the value of the variable when the story is run.
+
+---
+
+## Ink Functions
+
+Functions in Ink act like knots with parameters. They can define the name of variables and those act as temporarily variables within their context. They can also perform small tasks and make calculations using code. However, knots with parameters and functions have a small very key difference: *functions can return data*.
+
+Functions are a special type of knot but use the keyword `function`. This also enables them to use additional functionality not available to regular knots and stitches: returning data using the `return` keyword.
+
+Similar to many other scripting languages, functions in Ink can be called, perform some task, and then return the result of the task.
 
 ```ink
+Today is {getRandomDay()}.
 
--> KnotExample.StitchExample
+=== function getRandomDay() ===
+~ return "{~Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday}"
+```
 
-=== KnotExample ===
+In programming terminology, the phrase "calling a function" means running any code inside that function. In common syntax, it also means including opening and closing parentheses after the name of the function. For example, to call the function **getRandomDay**, the form would be **getRandomDay()**.
 
-= StitchExample
-* (LabelExample) This is a label
--
--> DifferentKnot
+### Ink Function Rules
 
-=== DifferentKnot ===
+While functions enable the useful feature of being able to react and respond with a return value, they also have some rules.
 
-{KnotExample.StitchExample.LabelExample: You picked the label option! Great job!}
+Functions cannot:
 
+- contain stitches
+- use diverts or offer choices
+
+Functions can:
+
+- call other functions
+- include printed content
+- return a value of any type
+- recurse safely
+
+In Ink, functions are the most useful as tools to calculate or adjust values. As they cannot contain diverts or use choices, this makes them ideal as a way to logically divide up more programming-related tasks to better organize a project.
+
+---
+
+## Passing By Reference
+
+Functions in Ink are also capable of another common programming concept called *passing by reference*. Normally, values are copied when a function is used. Within the function, some action is taken and maybe a value is returned. The values passed to the function, however, do not change inside of the function itself.
+
+Using a concept called passing by reference, values *passed* to a function can be changed. The term "by reference" takes is meaning from an early programming term of where the location of a variable in computer memory was its *reference*. By knowing a variable's reference, it was possible to change its value directly.
+
+In Ink, this terminology means that using the keyword `ref` a variable is available to be changed inside of the function. Instead of copying its value, its reference is passed to the function.
+
+```ink
+VAR name = "Dan"
+
+The current name is {name}.
+
+The new name is {changeName(name)} {name}.
+
+=== function changeName(ref newName) ===
+~ newName = "Fred"
+```
+
+---
+
+## Variable Naming Issues
+
+As was mentioned in an earlier chapter, variables created using the keyword `VAR` are global. This means they can be accessed anywhere in a story. This also means that their names are reserved. **Two variables cannot have the same name.**
+
+In the earlier section explaining how parameters are temporary variables within a knot or function, this means *they cannot share names with other, existing variables in a project*. Naming variables and parameters, then, becomes a matter of trying to use the most descriptive names for their purpose.
+
+To help avoid this issue, it is recommended to name the parameters of a function or knot using the name of the knot itself.
+
+```ink
+-> Greeting("Hi, there!")
+
+=== Greeting(greetingPhrase) ===
+I smiled when I saw him. He said, "{greetingPhrase}"
 -> DONE
 ```
 
-In the above code, in order to test the label *LabelExample* (which is in a stitch inside of another knot), its full address is needed. This is `KnotExample.StitchExample.LabelExample`.
+In the above code, the variable needed was *phrase*. However, as it is a temporary variable (because it is a knot parameter), it was named based on the knot, **Greeting**, it is associated with internally. This became *greetingPhrase*.
 
-In the second knot, **DifferentKnot**, this address is used and the example, once the option "This is a label" is picked by the player, would show the output of "You picked the label option! Great job!".
-
-### Diverting to Labels
-
-All content in Ink is a weave. This means that labels, like knots and stitches, can also be diverted to as well.
-
-For example, it is possible to divert directly to a choice if it has a label.
+In camel-case naming is not the preferred style, using an underscore is another choices. The above code could have also been written as the following:
 
 ```ink
+-> Greeting("Hi, there!")
 
--> KnotExample.StitchExample.LabelExample
-
-=== KnotExample ===
-
-= StitchExample
-- (LabelExample) Go here!
+=== Greeting(greeting_phrase) ===
+I smiled when I saw him. He said, "{greeting_phrase}"
 -> DONE
 ```
 
-In the above example, the divert address of `KnotExample.StitchExample.LabelExample` is used. This moves directly to the label option of **LabelExample** (which is inside of **KnotExample** and **StitchExample**).
+**Reminder:** Variable names *cannot* contain spaces. The two common approaches to naming variables as to use alternating capital letters or underscores to separate words in the name of a variable.
 
-> **Note:** The combination of the words *labelled options* is important. Labels are part of options and thus must use choice syntax. This means that they must use choices, `*`, sticky choices, `+`, or gathering point, `-`, symbols in from of them. The labels are fo the *options*.
+---
 
-While labels are used with choices, when treated as addresses for diverts, they are no longer "choices." After all, if the story has diverted to that exact point, the choice has already been made!
+## Built-in Functions
 
-For example, in the following code, the divert `-> LabelExample` is used.
+To help with common mathematical operations, Ink has several built-in functions that can be called anywhere in a project. They include the following:
 
-```ink
--> LabelExample
+### `POW(number, to-the-power-of)`
 
-* (LabelExample) This is a label using a gathering point!
-  -> DONE
-```
-
-The output of the above code, however, would not be a choice *This is a label using a gathering point!*, but the output of "This is a label using a gathering point!". The choice was "made" when the divert happened.
-
-### Labels and Gathering Point Levels
-
-Labels work with any choice syntax. Gathering points *gather* the output of choices and collapse branches to a single point. Through adding a label at any point in a set of choices, it can be diverted to and used as if it was the output.
+The function `POW()` computes and returns a number multiplied by itself the number of times supplied by the second parameter. It is the to-the-power-of function.
 
 ```ink
-He leaned against the wall and waited. I could tell he was tense and the wrong thing could drive him away.
-
-* "We can make it, just give me a second chance!"
-  - - (ending) He paused and shook his head. "We are done. Please leave."
-* "I know I messed up, babe, but we can work it out!"
-  -> ending
-* "Are you really going to give up on five years of a relationship!"
-  -> ending
--
+{ POW(4, 2) }
 ```
 
-In a revision of earlier code in this chapter, it could be re-written to use a label under the first choice. All other choices, then, could then divert to this label, showing the same output every time.
+### `RANDOM(min, max)`
 
-However, using this more advanced pattern requires two things:
+The `RANDOM()` function returns a random number between ranges of the minimum and maximum numbers passed to it.
 
-- Using a gathering point at the end of the choices to avoid running out of content.
-- Using *second level* gathering point for the label.
+```ink
+{ RANDOM(1, 6) }
+```
 
-Without the second gathering point, the choices would be gathered after the first one. The story would show the first choice *"We can make it, just give me a second chance!"* and then gather before moving to the second set of choices that would then begin with *"I know I messed up, babe, but we can work it out!"*.
+### `FLOOR()`
 
-With a second level gathering point, it works with the gathering *two levels out.* In other words, instead of gathering at the end of first choice, it works wih the larger set of choices, two levels up from itself.
+The `FLOOR()` function rounds down a decimal number to the nearest whole number.
 
-In the new code, all options divert to the inner label, which is a second level gathering point. As this works with the gathering point of the set of choices, it serves as the output for all of the choices before they are ultimately gathered at the end of the set of choices.
+```ink
+{ FLOOR(3.14159) }
+```
+
+### `INT()`
+
+The `INT()` function converts a decimal number into a whole number by removing its decimal value.
+
+```ink
+{ INT(3.01) }
+```
+
+### `FLOAT()`
+
+The `FLOAT()` function converts a whole number into a decimal number, adding a decimal value to it.
+
+```ink
+{ FLOAT(3) }
+```
+
+### `CHOICE_COUNT()`
+
+The `CHOICE_COUNT()` function returns the number of choices within the recent section of project.
+
+```ink
+* {false} Option A
+* {true} Option B
+* {CHOICE_COUNT() == 1} Option C
+```
+
+### `TURNS()`
+
+The `TURNS()` function returns the number of "turns" (user actions).
+
+```ink
+{ TURNS() } // 0
+
+* Option 1
+
+{ TURNS() } // 1
+```
+
+### `SEED_RANDOM(seed)`
+
+The function `SEED_RANDOM()` accepts a value to "seed" the `RANDOM()` function. This function can be used to "lock" the randomness of a flow from a single value.
+
+```ink
+~ SEED_RANDOM(255)
+```

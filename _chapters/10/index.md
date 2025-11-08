@@ -1,5 +1,5 @@
 ---
-title: "Tunnels and Threads"
+title: "Understanding the inkjs Runtime"
 order: 10
 chapter_number: 10
 layout: chapter
@@ -9,232 +9,452 @@ layout: chapter
 
 By the end of this chapter, you will be able to:
 
-- Construct tunnels to navigate through story sections and return
-- Design nested tunnels for complex narrative structures
-- Implement threads to collapse weaves into central points
-- Contrast tunnels and threads to select the appropriate technique
-- Combine knots and diverts with tunnels and threads effectively
+- Export Ink projects for web deployment using the Inky Editor
+- Organize exported files and understand their roles in web presentation
+- Implement special tags including IMAGE, CLEAR, RESTART, and theme
+- Modify CSS stylesheets to customize story appearance
+- Create CLASS tags to apply custom styling to story elements
+- Integrate HTML and inline CSS within Ink stories
 
 ## Summary
 
-In this chapter, you will learn about Tunnels, Threads, and how they can be used in larger projects.
+In this chapter, you will learn more about the Ink for Web option, how it works, and special tags that can be used as part of Ink for Web.
 
 ---
 
 - [Learning Objectives](#learning-objectives)
 - [Summary](#summary)
-- [Tunnels](#tunnels)
-  - [Tunnel Code Example](#tunnel-code-example)
-  - [Tunnels to Tunnels](#tunnels-to-tunnels)
-- [Threads](#threads)
-  - [Thread Code Example](#thread-code-example)
-  - [Combining Knots](#combining-knots)
+- [Ink for Web](#ink-for-web)
+- [Folder Organization](#folder-organization)
+  - [Editing Files](#editing-files)
+  - [Using Images](#using-images)
+  - [Images Do Not Appear in Inky Preview](#images-do-not-appear-in-inky-preview)
+- [Meta Instructions](#meta-instructions)
+  - [Author](#author)
+  - [Theme](#theme)
+  - [Clear](#clear)
+  - [Restart](#restart)
+- [Adding CLASS](#adding-class)
+  - [Changing CSS](#changing-css)
+    - [Adding New Declarations](#adding-new-declarations)
+    - [Changing Existing CSS](#changing-existing-css)
+- [Built-In CSS Classes](#built-in-css-classes)
+  - [`.end`](#end)
+  - [`.byline`](#byline)
+  - [`.choice`](#choice)
+- [Working with HTML](#working-with-html)
+- [Inline CSS and Choices](#inline-css-and-choices)
+- [Try It](#try-it)
 
 ---
 
-## Tunnels
+## Ink for Web
 
-Because of the complex nature of connections between knots and diverts, sometimes a way to move "through" a complex weave is needed. Tunnels provide that.
+So far in this book, Ink was shown running as part of Inky Editor. There is also another option for running Ink, Ink for the Web!
 
-In Ink, it can often be useful to create a knot that is returned to multiple times throughout a flow. Instead of a complex series of diverts and knots, Ink has functionality to quickly go to a knot and then return called a tunnel.
+As part of the Ink Editor, a website version of the Ink code can be created using the File → "Export for web..." option.
 
-As it names implies, tunnels are connections between sections where the flow is diverted to a knot or stitch and then returns again. The player passes through the "tunnel" and out the other side back to the same or different place in the story.
+![Export for Web](chapter12-export-for-web.png)
 
-```ink
--> Show_Day -> Show_Time -> DONE
-```
+*Figure 1:* File -> Export for web... menu option
 
-Tunnels are created using the divert (arrow) to "go to" a knot or stitch and then a second divert after the name of the knot or stitch.
+When using the Inky Editor, code written in Ink can be exported for the web. When used in this way, a compiled Ink project can be played in a web browser and shared on websites for others to see.
 
-```ink
-=== Show_Day ===
-Today is {~Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday}
-->->
-```
+When used for the first time with a project, Inky will save the project based on the file name, creating a folder based on what is inputted in the Save As field.
 
-To return from the tunnel, use two divert symbols in a row. This will "twice divert" back to the original location.
+## Folder Organization
 
-### Tunnel Code Example
+Inside the exported project folder will be five files: `index.html`, `ink.js`, `main.js`, `style.css`, and `nameOfProject.js`.
 
-```ink
--> Show_Day -> Show_Time -> DONE
+![macOS File Structure](chapter12-file-structure.png)
 
-=== Show_Day ===
-Today is {~Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday}
-->->
+*Figure 2:* macOS File Structure
 
-=== Show_Time ===
-It is {~1|2|3|4|5|6|7|8|9|10|11|12} {~am|pm}
-->->
-```
+- `index.html`: Combines the story, engine, and CSS code to be run in a web browser.
 
-In the above example, the first divert `-> Show-Day` moves to the knot **Show_Day**.
+- `ink.js`: Ink engine code.
 
-Inside this knot, a shuffle alternative is used to select a random day from the existing elements.
+- `main.js`: JavaScript code to feed the story into the Ink engine code and process player interactions in the browser.
 
-Next, a tunnel is returned to via the double-divert, `->->`.
+- `style.css`: CSS rules for the story.
 
-Back to the original place in the code, the next divert, `-> Show_Time` is run. This moves to the knot **Show_Time**.
+- `Example.js`: Story compiled into a JSON format and set to the value of a variable.
 
-This uses two shuffles to first pick a number between 1 and 12 and then to pick either "am" or "pm".
+To play the project locally, open the `index.html` file in a web browser. It should appear as it did in the editor view, but with the name of the project included at the top.
 
-Next, the tunnel is returned to using another double-divert `->->`.
+![Running in Browser](chapter12-index.png)
 
-In order, the above code runs the knot **Show_Day**, returns, runs the **Show_Time**, and then returns again before the story ends with `-> DONE`.
+*Figure 3:* Running in Browser
 
-### Tunnels to Tunnels
+### Editing Files
 
-As tunnels use diverts and knots, it is also possible to include tunnels inside other tunnels. This is completely safe!
+To prepare a project for others to play, two files are more important than the others: `index.html` and `style.css`. Unfortunately, these two files will be replaced each time the Export to Web process is completed!
 
-```ink
--> One -> Two -> Three -> Four -> Five -> Six -> DONE
+When editing the `style.css file` (to change CSS rules), use the "Export story.js only..." option from the File menu and select the `nameOfProject.js` file to replace only that file each time.
 
-=== One ===
-It <>
-->->
+### Using Images
 
-=== Two ===
-starts <>
-->->
+Starting with release version 0.10, the Inky editor has the ability to build versions of Ink for the web with images using a new tag: `# IMAGE`.
 
-=== Three ===
-with <>
-->->
+> **Reminder:** When used in Inky, tags are created using the hash symbol, `#`, and then additional instructions.
 
-=== Four ===
-one <>
-->->
+The image tag is used with the capitalized word `IMAGE` and a colon. Images are then referenced either in the current directory or with a relative path in relation to the `index.html` file.
 
-=== Five ===
-thing.
-->->
-
-=== Six ===
-
--> SixOne -> SixTwo -> SixThree -> SixFour ->->
-
-= SixOne
-I <>
-->->
-
-= SixTwo
-don't <>
-->->
-
-= SixThree
-know <>
-->->
-
-= SixFour
-why.
-->->
-```
-
-In the above, complicated example, the story starts with one tunnel as a series of diverts: `-> One -> Two -> Three -> Four -> Five -> Six -> DONE`.
-
-Each numbered knot adds a single word (using glue) and then returns to the tunnel. Finally, the tunnel reaches knot **Six**.
-
-Inside **Six** are four stitches. These are used as part of an internal tunnel. All of these add their own words.
-
-Finally, the inner **Six** tunnel returns back to the original and the story content ends.
-
-Combined together, it creates the following out:
+> **Note:** A *relative path* is a term meaning a location of a file that is not *absolute*. A relative path includes symbols like the period, `.` and slash, `/`. These define the location of a file *in relation* to another.
 
 ```ink
-It starts with one thing.
-
-I don't know why.
+The vast dunes stretch off into the horizon. # IMAGE: dunes.png
 ```
 
-**Reminder:** The use of `<>` is *glue*. It runs the next line into the current, *gluing* them together. It can be used across knots and stitches to combine output on one line.
+In the above example, the file `dunes.png` has a relative path of the same folder as the `index.html` file. It would be loaded by the Ink for Web option.
+
+### Images Do Not Appear in Inky Preview
+
+When used in the Inky editor, tags will appear as-is within the preview area. *Images will not be loaded or shown*.
+
+![Image Tag in Preview](chapter12-image-tag.png)
+
+*Figure 4:* Image Tags in Preview
+
+To see the images, use either File –> Export to Web (for first time exporting) or File –> "Export story.js only..." (for additional exporting).
+
+The reason for this is simple: the `# IMAGE` tag is just that, a *tag*. Ink, and Inky by extension, simply records tags and saves their values. *It does not process them.* It is the Ink for Web functionality that is processing the image tag and adding the image to the final, HTML output.
+
+The following code would show only that a tag was being used, not load the image:
+
+**Code:**
+
+```ink
+The vast dunes stretch off into the horizon. # IMAGE: dunes.png
+```
+
+**Output:**
+
+```ink
+The vast dunes stretch off into the horizon.
+```
+
+## Meta Instructions
+
+Along with understanding code commands, the tagging system in Inky also allows for more meta instructions like author, theme, clear, and restart.
+
+### Author
+
+The author tag allows for adding an author to the project. Once added, the "author" area will appear under the title in the web version.
+
+```ink
+# author: Jane Doe
+
+My life really began after I died.
+```
+
+![Author Tag](chapter12-author.png)
+
+*Figure 5:* Author Tag
+
+> **Note** The author tag is always written in lowercase as `# author`.
+
+### Theme
+
+By default, the "theme" (CSS style rules) is set to "white". As with other tags, including the keyword "theme:" and a new choice will change it. Version 0.10 introduced a new theme option: dark.
+
+```ink
+# theme: dark
+
+The rain pounded on the windows. Its staccato pace matched my own heart as its unsteady beat echoed each other. I had seen a ghost -- or, at least, I thought I did. Could this house really be haunted?
+```
+
+![Theme Tag](chapter12-theme.png)
+
+*Figure 6:* Theme Tag
+
+> **Note** The theme tag is always written in lowercase as `# theme`.
+
+### Clear
+
+While other instructions change code properties, `# CLEAR` works only in the web-export version. It "clears" all other instructions and starts at the top of the screen with the next set of instructions.
+
+> **Note** `# CLEAR` should usually only be used after the player has made a choice. If used in the middle of a flow, it will clear all the text before the player has a chance to read it!
+
+```ink
+You enter the commands in the console and pause before pressing the last key.
+
+* Press Last Key
+  # CLEAR
+  The screen flashes before resetting. Were you successful?
+```
+
+![Clear Tag](chapter12-clear.png)
+
+*Figure 7:* Clear Tag
+
+> **Note** The clear tag is always written in uppercase as `# CLEAR`.
+
+### Restart
+
+Like `# CLEAR`, `# RESTART` also only works in the web-exported version of Ink. Instead of removing things, however, `# RESTART` does as its name implies: it restarts the project.
+
+> **Note:** Like `# CLEAR`, it is best to use `# RESTART` after the player has made a choice, since it clears all the text on the screen as well.
+
+```ink
+You pick up the treasure. After many trials and challenges, you have finally come to the end of your journey.
+
+* Restart?
+  # RESTART
+```
+
+![Restart Tag](chapter12-restart.png)
+
+*Figure 8:* Restart Tag
+
+> **Note** The Restart tag is always written in uppercase as `# RESTART`.
+
+## Adding CLASS
+
+Like with working with the `# IMAGE` tag, Ink/Inky also supports a tag for defining new CSS rules: `# CLASS`.
+
+When used at the end of a line, the Inky web-exported version will apply any CSS classes matching that name from its `style.css` file.
+
+Adding or changing rules in this file will be reflected when the `index.html` file is refreshed in the web browser.
+
+**Example Ink:**
+
+```ink
+This will use a special CSS class! # CLASS: green
+```
+
+**Example Addition to `style.css`:**
+
+```css
+.green {
+  color: green;
+}
+```
+
+**Example Presentation:**
+
+![CSS Class](chapter12-css-class.png)
+
+> **Note:** When adding a new `# CLASS` tag in a project, it will need to be exported again before those changes will appear.
+>
+> Be sure to use File –> "Export story.js only..." and replace the story before refreshing the `index.html` file!
+
+### Changing CSS
+
+The default CSS can also be updated adding new declarations or changing the existing content in the `style.css` file.
+
+> **Note:** A story will need to have gone through the "Export to web" process at least once to generate a `style.css` file. This can then be edited in another program or editor.
+
+#### Adding New Declarations
+
+It make a class for larger text, a new class, *biggerText*, could be added to the bottom of the `style.css` file with new CSS declarations.
+
+> **Note:** A *declaration* is the official name for what is commonly known as a "CSS rule."
+>
+> It is written in the format of `property: value` with a known property on the left-hand side, a colon, `:`, and then the value to update. This format *declares* a property to have a certain new value.
+
+```css
+.biggerText {
+  font-size: 1.5em;
+}
+```
+
+After add a new class *biggerText*, it can be used with the `# CLASS` tag.
+
+```ink
+"WHAT!?" you shout. "THIS IS A SUPER IMPORTANT PART AND THE FONT IS LARGER THAN NORMAL." # CLASS: biggerFont
+```
+
+> **Note:** Instead of using "Export to web" a second time, the menu option "Export story.js only..." should be used.
+>
+> This will export a new `story.js` file (where "story" is replaced with the name of the project. Select the existing `story.js` file and replace it.
+
+When run in a browser, the HTML produced would be the following:
+
+```html
+<p class="biggerFont">"WHAT!?" you shout. "THIS IS A SUPER IMPORTANT PART AND THE FONT IS LARGER THAN NORMAL."
+</p>
+```
+
+#### Changing Existing CSS
+
+Any of the existing CSS declarations can be changed in the `style.css` file. Changing the rules for the *p* selector, for example could make the text bigger for all output shown.
+
+> **Note:** In CSS, a *selector* is what is used to "select" what content in a HTML document should be affects by its declarations. There are [many different forms of selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors), but a common usage is to find all of the elements of a certain type.
+>
+> For example, using the selector `p` would find all of the `<p>` elements in a document and apply certain style rules.
+
+Finding the *p* selector in the `style.css` file shows the following declarations in its block.
+
+```css
+p {
+    font-size: 13pt;
+    color: #888;
+    line-height: 1.7em;
+    font-weight: lighter;
+}
+```
+
+Adjusting the `font-size` to a larger value, for example, would make the font larger for all usages of the `<p>` element in the HTML document.
+
+```css
+p {
+    font-size: 15pt; /* Updated value! */
+    color: #888;
+    line-height: 1.7em;
+    font-weight: lighter;
+}
+```
+
+> **Note:** In the above example, the use of `/* */` marks a comment in CSS. This is different than Ink!
+>
+> In CSS, comments begin with `/*` and end with `*/`. The use of the double-slash format used in Ink, `//`, is not allowed in CSS.
+
+Any additional rules or changes can be made to the `style.css` file. However, two things need to be remembered:
+
+1) Making changes in Inky means doing a File –> "Export story.js only..." before refreshing the `index.html` file to see those changes.
+2) Tags work on sections of text. When used after a selection of text on the same line, it will wrap that text in those styles. Otherwise, tags will work on the next section of text.
 
 ---
 
-## Threads
+## Built-In CSS Classes
 
-*Threads* provide a way to "collapse" a weave and "pull together" knots and diverts.
+### `.end`
 
-In some ways, threads are the opposite of tunnels and using diverts. Instead of "going out," threads "pull together" content as part of a flow.
+The class `.end`, as explained in the `style.css` file, can be used for changing how the presentation of the text "The End" (or any other story ending) appears.
 
-To use threading, the divert arrow changes and points in, `<-`.
+```css
+/* Built in class if you want to write:
+     The End # CLASS: end
+*/
+.end {
+  text-align: center;
+  font-weight: bold;
+  color: black;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
 
-```ink
-<- FirstChoice
-<- SecondChoice
-<- ThirdChoice
+.dark .end {
+  color: white;
+}
 ```
 
-Using threads helps separate knots into logical sections of code for the author and developer and then "thread" them all together again.
+### `.byline`
 
-### Thread Code Example
+When the `# author: name` tag is used, its content is placed in an element with the class of "byline".
 
-```ink
-This is a thread example:
-<- FirstChoice
-<- SecondChoice
-<- ThirdChoice
-
-=== FirstChoice ===
-* Pick me!
--> CollectChoices
-
-=== SecondChoice ===
-* No, pick me!
--> CollectChoices
-
-=== ThirdChoice ===
-* No, this one! Me!
--> CollectChoices
-
-=== CollectChoices ===
-All of the above knots are collected (threaded together) and end up here!
--> DONE
+```css
+.byline {
+  font-style: italic;
+}
 ```
 
-In the above example, the story starts and three threads are used: `<- FirstChoice`, `<- SecondChoice`, and `<- ThirdChoice`.
+### `.choice`
 
-All three of these point to same knot **CollectChoices**, and thus are all "threaded" to that center point.
+All choices are given the class "choice" by default. Changes to the `.choice` and `.choice a` will affect how choices (and their hyperlinks) appear to players.
 
-### Combining Knots
+```css
+.choice {
+  text-align: center;
+  line-height: 1.7em;
+}
 
-While a common example might use choices, this need not be the case. Threads can also be used for text content.
+/* first choice */
+:not(.choice) + .choice {
+  padding-top: 1em;
+}
 
-```ink
-This is a thread example:
-<- FirstChoice
-<- SecondChoice
-<- ThirdChoice
 
-=== FirstChoice ===
-Show this thing!
--> CollectChoices
-
-=== SecondChoice ===
-Show this!
--> CollectChoices
-
-=== ThirdChoice ===
-Now show me!
--> CollectChoices
-
-=== CollectChoices ===
--> DONE
+.choice a {
+  font-size: 15pt;
+}
 ```
 
-In fact, the earlier tunnel example could be re-written as example using threads instead:
+---
+
+## Working with HTML
+
+Along with using text in Inky, it is also possible to use HTML directly. Style elements such as `<strong>` and `<em>` can be used within the editor and their effects will show up in the preview pane.
+
+> **Note:** In HTML, the element `<em>` is used to give some selection *emphasis*.
+>
+> The `<strong>` element gives a selection **strong emphasis**.
+
+While the styling of elements must happen through CSS rules, any HTML that has a structural or styling factor can be used in Inky and "passed through" to the Ink for Web usage as well.
+
+**Example.ink:**
 
 ```ink
-<- Show_Day
-<- Show_Time
+"But that's an <em>alien</em> woman!" she shouted. "How can you love her!?"
 
-=== Show_Day ===
-Today is {~Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday}
--> Update
-
-=== Show_Time ===
-It is {~1|2|3|4|5|6|7|8|9|10|11|12} {~am|pm}
--> Update
-
-=== Update ===
--> DONE
+"I don't care where she came from," you reply. "<strong>I love her!</strong>"
 ```
+
+**Example Preview in Inky:**
+
+![HTML Preview](chapter12-html-preview.png)
+
+This means that text can be arranged within the Inky Editor through using HTML directly, too.
+
+```html
+<table>
+  <tr>
+    <td>Yes.</td>
+    <td>It</td>
+    <td>is possible to do things like this.</td>
+  </tr>
+</table>
+<h1>And this?</h1>
+```
+
+---
+
+## Inline CSS and Choices
+
+Normally, all of the choice text in the story will appear the same way. Even with changing the styling of all of the choice text in a story by editing the rules of `.choices` in the `style.css` file, they would appear the same. Every individual choice would be styled in the same way, which can be somewhat limiting.
+
+Luckily, there is a workaround within Ink to style individual choices! This workaround involves using inline CSS within the text of a choice to change the styling of that individual choice. Using the attribute *style* inside of an element, in-line CSS can be applied.
+
+> **Note:** In HTML, anything inside of the opening tag of an element is an *attribute*. These define settings and values that affect the structure or presentation of the element.
+>
+> The *style* attribute can contain CSS declarations that will be applied only to that single element.
+
+Consider the following example:
+
+```ink
+What is your favorite color?
+
++ <p style="color:blue;">Blue!</p>
+  -> DONE
+
++ <p style="color:red;">Red!</p>
+  -> DONE
+
++ <p style="color:green;">Green!</p>
+  -> DONE
+```
+
+**Example Inky Preview:**
+
+![Inline Preview](chapter12-inline-preview.png)
+
+---
+
+## Try It
+
+The examples in this chapter demonstrate how you can use Ink’s web features to create stories that you can easily share on a website.
+
+Many of these features rely on knowledge of HTML or CSS that is not fully covered in this book, but this chapter provides some basic examples that should get you started, even if you have never worked with those languages before. While there are plenty of resources online to help you learn HTML and CSS, it is also worth learning how such code works inside the Inky editor, as well as learning about Ink’s specialized web features.
+
+We suggest completing the following practices exercises. Before beginning on them, we recommend that you choose a story you have created from one of the exercises in a previous chapter, though you can create a new story if you wish.
+
+- Add author information to your story and apply the dark theme to it using Ink’s specialized web features. Remember that you won’t be able to see these things in the Ink editor: you will only see them once your story has been exported for the web.
+
+- Find an appropriate visual for your story and use the image feature to add it. Again, keep in mind that you will not be able to see the image until the story is exported. (Remember to place this image in the folder created by the  "Export for web" option or in a relative path to the folder.)
+
+- Add at least two HTML elements to your story. If you have never used HTML, try the `<strong>` and `<em>` examples shown earlier in the chapter. You should be able to see them in the Inky editor, so you can quickly determine if you have done it correctly or not!
+
+- (Optional) If you have used CSS before, add at least two of Ink’s CLASS tags to your story. If you have not used CSS before, you can skip this step.
+
+- Export your story for the web and view the resulting story in a web browser. Make sure the image from #2 above is in the same folder as your exporter story, and if you completed the optional #4 step, edit the stylesheet with the relevant CSS changes.

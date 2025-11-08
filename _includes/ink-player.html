@@ -48,8 +48,8 @@
 <script type="module">
   (async function() {
     const playerId = '{{ player_id }}';
-    const storyPath = '{{ site.baseurl }}/examples/{{ story_path }}.json';
-    const sourcePath = '{{ site.baseurl }}/examples/{{ story_path }}.ink';
+    const storyPath = '{{ site.baseurl }}/_examples/{{ story_path }}.json';
+    const sourcePath = '{{ site.baseurl }}/_examples/{{ story_path }}.ink';
     const container = document.getElementById(playerId);
     const restartBtn = document.getElementById(playerId + '-restart');
     const sourceCode = document.getElementById(playerId + '-source');

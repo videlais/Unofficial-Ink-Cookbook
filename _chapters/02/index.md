@@ -1,5 +1,5 @@
 ---
-title: "Ink and the Inky Editor"
+title: "Understanding Choices"
 order: 2
 chapter_number: 2
 layout: chapter

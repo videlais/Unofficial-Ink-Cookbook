@@ -1,5 +1,5 @@
 ---
-title: "Knot and Function Parameters"
+title: "Tunnels and Threads"
 order: 9
 chapter_number: 9
 layout: chapter
@@ -9,233 +9,721 @@ layout: chapter
 
 By the end of this chapter, you will be able to:
 
-- Compare knot parameters with Ink functions and their capabilities
-- Design functions that accept parameters and return values
-- Apply the pass-by-reference technique to modify variables
-- Utilize built-in functions like RANDOM(), POW(), and FLOOR()
-- Implement proper variable naming conventions to avoid conflicts
+- Create and manipulate LISTs for tracking collections of values
+- Apply built-in LIST functions including LIST_COUNT(), LIST_MIN(), and LIST_MAX()
+- Implement list operations for addition, subtraction, and intersection
+- Design state machines using LISTs to model changing conditions
+- Construct multi-listed lists for tracking object properties across categories
+- Evaluate list containment and equality for conditional logic
 
 ## Summary
 
-In this chapter, you will learn about knot parameters, functions, and the differences between the two.
+In this chapter, you will learn how to work with LISTs, some of the basic functionality, and how they can be used within projects.
 
 ---
 
 - [Learning Objectives](#learning-objectives)
 - [Summary](#summary)
-- [Functions](#functions)
-- [Knot Parameters](#knot-parameters)
-  - [Knot Parameter Code Example](#knot-parameter-code-example)
-- [Ink Functions](#ink-functions)
-  - [Ink Function Rules](#ink-function-rules)
-- [Passing By Reference](#passing-by-reference)
-- [Variable Naming Issues](#variable-naming-issues)
+- [LIST](#list)
+- [Automatically Set to `false`](#automatically-set-to-false)
+- [Enabling Values](#enabling-values)
 - [Built-in Functions](#built-in-functions)
-  - [`POW(number, to-the-power-of)`](#pownumber-to-the-power-of)
-  - [`RANDOM(min, max)`](#randommin-max)
-  - [`FLOOR()`](#floor)
-  - [`INT()`](#int)
-  - [`FLOAT()`](#float)
-  - [`CHOICE_COUNT()`](#choice_count)
-  - [`TURNS()`](#turns)
-  - [`SEED_RANDOM(seed)`](#seed_randomseed)
+  - [`LIST_COUNT()`](#list_count)
+  - [`LIST_MIN()`](#list_min)
+  - [`LIST_MAX()`](#list_max)
+  - [`LIST_ALL()`](#list_all)
+  - [`LIST_RANGE()`](#list_range)
+  - [`LIST_VALUE()`](#list_value)
+  - [`LIST_INVERT()`](#list_invert)
+  - [`LIST_RANDOM()`](#list_random)
+- [Inclusion Testing](#inclusion-testing)
+  - [Manipulating List Values](#manipulating-list-values)
+    - [Addition](#addition)
+    - [Subtraction](#subtraction)
+    - [Setting Multiple Values](#setting-multiple-values)
+- [Conflicting Values and Variable Names](#conflicting-values-and-variable-names)
+- [Comparing LISTS](#comparing-lists)
+  - [Equality Testing](#equality-testing)
+  - [Containment vs Equality](#containment-vs-equality)
+  - [Less Than](#less-than)
+    - [Greater Than](#greater-than)
+    - [Greater Than Or Equal To](#greater-than-or-equal-to)
+    - [Less Than Or Equal To](#less-than-or-equal-to)
+- [List Intersection](#list-intersection)
+- [Using Lists as State Machines](#using-lists-as-state-machines)
+- [Using Lists for Flags and Tracking](#using-lists-for-flags-and-tracking)
+- [Multi-listed Lists](#multi-listed-lists)
+  - [Tracking Objects with Lists](#tracking-objects-with-lists)
+  - [Tracking Multiple Properties](#tracking-multiple-properties)
+- [Advanced: Custom List Values](#advanced-custom-list-values)
+- [Practical Example: Inventory and State Management](#practical-example-inventory-and-state-management)
+- [Try It](#try-it)
 
 ---
 
-## Functions
+## LIST
 
-To help with processing data, Ink provides ways to pass information between different parts of a story. When working with variables, these provide a way to process or test data in different ways.
+Beyond using variables, Ink also provides a data type call a `LIST`. These store collections of values that can be accessed, changed, and manipulated in different ways in connection to each other.
 
-In programming terminology, a *function* is some section of code designed around some task. It borrows the term from mathematical functions in which data is changed through applying a set of rules.
+```ink
+LIST moods = happy, angry, sad
+```
 
-In Ink, the concept of functions comes in two ways. The first is in Knot Parameters and then second is in Functions themselves.
+Rules for Lists:
 
-For Ink, these divisions help authors to think through how to divide up their code and calculations in ways that may be more narrative or mechanically focused, depending on their needs.
+- Must contain unique variable names
+- Ordering matters
+- Positions start with 1 (unless overwritten)
+- Will create variables if they do not already exist
+- Created variables are set to `false`
+
+Because lists will create new variables if included and not previous created, this allows for creating a list of possibilities and then having a new, separate variable.
+
+These can also be used as part of the flow once set earlier, allowing for changing states throughout a story.
 
 ---
 
-## Knot Parameters
+## Automatically Set to `false`
 
-When working with functions and their related concepts, the most commonly associated term is *parameters*. In programming terminology, a *parameter* is one or more values passed to a function or other function-like programming concept. In Ink, this means that data can be passed to a knot that can then act on it in some way.
+The values used in a `LIST` are automatically set to `false`. What this means in practice is that any values include in a `LIST` are in it, but do not count toward its total unless they are "enabled," set to true.
 
-Data is passed as a parameter to a knot through including its name and opening and closing parentheses. Within these, a value or the name of an existing variable can be placed. Multiple parameters are separated by commas.
-
-Within the knot itself, the new names for the values passed it as parameters are defined through open and closing parentheses. These new named variables exist within the context of the knot and act like temporary variables -- they can only be used within the knot itself.
-
-### Knot Parameter Code Example
+The following code will show a value of 0.
 
 ```ink
--> Greeting("Hi, there!")
+LIST moods = happy, angry, sad
 
-=== Greeting(greetingPhrase) ===
-I smiled when I saw him. He said, "{greetingPhrase}"
--> DONE
+{ LIST_COUNT(moods) }
 ```
 
-In the above example, the value "Hi, there!" is being passed to the knot **Greeting**. Inside the knot, the temporary variable *greetingPhrase* is given this value. It can then be accessed inside the knot to, in the above example, display the value of the variable when the story is run.
+> **Note:** function `LIST_COUNT()` returns the total number of enabled entries in a `LIST`. If they are not `true`, they are not counted toward its total.
 
----
+## Enabling Values
 
-## Ink Functions
+Values in a `LIST` are considered `true` if they have opening and closing parentheses around them.
 
-Functions in Ink act like knots with parameters. They can define the name of variables and those act as temporarily variables within their context. They can also perform small tasks and make calculations using code. However, knots with parameters and functions have a small very key difference: *functions can return data*.
-
-Functions are a special type of knot but use the keyword `function`. This also enables them to use additional functionality not available to regular knots and stitches: returning data using the `return` keyword.
-
-Similar to many other scripting languages, functions in Ink can be called, perform some task, and then return the result of the task.
+The same code which shown a total of zero will change to three when all of its values are now set to `true`.
 
 ```ink
-Today is {getRandomDay()}.
+LIST moods = (happy), (angry), (sad)
 
-=== function getRandomDay() ===
-~ return "{~Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday}"
+{ LIST_COUNT(moods) }
 ```
-
-In programming terminology, the phrase "calling a function" means running any code inside that function. In common syntax, it also means including opening and closing parentheses after the name of the function. For example, to call the function **getRandomDay**, the form would be **getRandomDay()**.
-
-### Ink Function Rules
-
-While functions enable the useful feature of being able to react and respond with a return value, they also have some rules.
-
-Functions cannot:
-
-- contain stitches
-- use diverts or offer choices
-
-Functions can:
-
-- call other functions
-- include printed content
-- return a value of any type
-- recurse safely
-
-In Ink, functions are the most useful as tools to calculate or adjust values. As they cannot contain diverts or use choices, this makes them ideal as a way to logically divide up more programming-related tasks to better organize a project.
-
----
-
-## Passing By Reference
-
-Functions in Ink are also capable of another common programming concept called *passing by reference*. Normally, values are copied when a function is used. Within the function, some action is taken and maybe a value is returned. The values passed to the function, however, do not change inside of the function itself.
-
-Using a concept called passing by reference, values *passed* to a function can be changed. The term "by reference" takes is meaning from an early programming term of where the location of a variable in computer memory was its *reference*. By knowing a variable's reference, it was possible to change its value directly.
-
-In Ink, this terminology means that using the keyword `ref` a variable is available to be changed inside of the function. Instead of copying its value, its reference is passed to the function.
-
-```ink
-VAR name = "Dan"
-
-The current name is {name}.
-
-The new name is {changeName(name)} {name}.
-
-=== function changeName(ref newName) ===
-~ newName = "Fred"
-```
-
----
-
-## Variable Naming Issues
-
-As was mentioned in an earlier chapter, variables created using the keyword `VAR` are global. This means they can be accessed anywhere in a story. This also means that their names are reserved. **Two variables cannot have the same name.**
-
-In the earlier section explaining how parameters are temporary variables within a knot or function, this means *they cannot share names with other, existing variables in a project*. Naming variables and parameters, then, becomes a matter of trying to use the most descriptive names for their purpose.
-
-To help avoid this issue, it is recommended to name the parameters of a function or knot using the name of the knot itself.
-
-```ink
--> Greeting("Hi, there!")
-
-=== Greeting(greetingPhrase) ===
-I smiled when I saw him. He said, "{greetingPhrase}"
--> DONE
-```
-
-In the above code, the variable needed was *phrase*. However, as it is a temporary variable (because it is a knot parameter), it was named based on the knot, **Greeting**, it is associated with internally. This became *greetingPhrase*.
-
-In camel-case naming is not the preferred style, using an underscore is another choices. The above code could have also been written as the following:
-
-```ink
--> Greeting("Hi, there!")
-
-=== Greeting(greeting_phrase) ===
-I smiled when I saw him. He said, "{greeting_phrase}"
--> DONE
-```
-
-**Reminder:** Variable names *cannot* contain spaces. The two common approaches to naming variables as to use alternating capital letters or underscores to separate words in the name of a variable.
 
 ---
 
 ## Built-in Functions
 
-To help with common mathematical operations, Ink has several built-in functions that can be called anywhere in a project. They include the following:
+For dealing directly with lists, Ink also has several specific functions. As a `LIST` can have both `true` and `false` values, each of these functions deals with and understands the entries in a `LIST` in different ways.
 
-### `POW(number, to-the-power-of)`
+### `LIST_COUNT()`
 
-The function `POW()` computes and returns a number multiplied by itself the number of times supplied by the second parameter. It is the to-the-power-of function.
-
-```ink
-{ POW(4, 2) }
-```
-
-### `RANDOM(min, max)`
-
-The `RANDOM()` function returns a random number between ranges of the minimum and maximum numbers passed to it.
+The function `LIST_COUNT()` returns the number of values in the `LIST` that are set to `true` .
 
 ```ink
-{ RANDOM(1, 6) }
+LIST moods = (happy), angry, (sad)
+
+{ LIST_COUNT(moods) }
 ```
 
-### `FLOOR()`
+### `LIST_MIN()`
 
-The `FLOOR()` function rounds down a decimal number to the nearest whole number.
+The function `LIST_MIN()` returns the first true entry in a `LIST` or nothing if there are no true entries in the `LIST`.
 
 ```ink
-{ FLOOR(3.14159) }
+LIST moods = happy, angry, (sad)
+
+{ LIST_MIN(moods) }
 ```
 
-### `INT()`
+### `LIST_MAX()`
 
-The `INT()` function converts a decimal number into a whole number by removing its decimal value.
+The function `LIST_MAX()` returns the last true entry in a `LIST` or nothing if there are no true entries in the `LIST`.
 
 ```ink
-{ INT(3.01) }
+LIST moods = happy, angry, (sad)
+
+{ LIST_MAX(moods) }
 ```
 
-### `FLOAT()`
+### `LIST_ALL()`
 
-The `FLOAT()` function converts a whole number into a decimal number, adding a decimal value to it.
+The function `LIST_ALL()` returns all entries regardless if true or not as comma-separated values.
 
 ```ink
-{ FLOAT(3) }
+LIST moods = happy, angry, (sad)
+
+{ LIST_ALL(moods) }
 ```
 
-### `CHOICE_COUNT()`
+This is particularly useful when you want to access the complete set of possible values in a list, rather than just the currently enabled ones.
 
-The `CHOICE_COUNT()` function returns the number of choices within the recent section of project.
+### `LIST_RANGE()`
+
+The function `LIST_RANGE()` returns a selection from a `LIST` starting at the minimum value and extending to the maximum values. The minimum and maximum values are the numerical values, positions, starting at 1 (unless overwritten).
+
+If the minimum or maximum value is outside the list of values, its nearest correct values is used.
 
 ```ink
-* {false} Option A
-* {true} Option B
-* {CHOICE_COUNT() == 1} Option C
+LIST moods = happy, (angry), sad, melancholy
+
+{ LIST_RANGE(moods, 2, 3) }
 ```
 
-### `TURNS()`
-
-The `TURNS()` function returns the number of "turns" (user actions).
+You can also use `LIST_RANGE` with `LIST_ALL()` to get a slice of all possible values:
 
 ```ink
-{ TURNS() } // 0
+LIST primeNumbers = two, three, five, seven, eleven, thirteen, seventeen, nineteen
 
-* Option 1
-
-{ TURNS() } // 1
+{LIST_RANGE(LIST_ALL(primeNumbers), 3, 6)} // five, seven, eleven, thirteen
 ```
 
-### `SEED_RANDOM(seed)`
+### `LIST_VALUE()`
 
-The function `SEED_RANDOM()` accepts a value to "seed" the `RANDOM()` function. This function can be used to "lock" the randomness of a flow from a single value.
+The function `LIST_VALUE()` returns the numerical value of a `LIST` entry regardless of if it is true or not.
 
 ```ink
-~ SEED_RANDOM(255)
+LIST moods = happy, angry, sad, melancholy
+
+{ LIST_VALUE(sad) }
 ```
+
+### `LIST_INVERT()`
+
+The function `LIST_INVERT()` returns a new `LIST` with each entry’s value to its opposite, `true` to `false` and `false` to `true`.
+
+```ink
+LIST moods = happy, angry, sad, melancholy
+
+{ LIST_COUNT(moods) }
+~ moods = LIST_INVERT(moods)
+{ LIST_COUNT(moods) }
+```
+
+### `LIST_RANDOM()`
+
+The function `LIST_RANDOM()` returns a random `true` entry from a `LIST`. If there are no `true` entries, the function returns nothing.
+
+```ink
+LIST moods = (happy), (angry), (sad), (melancholy)
+
+{ LIST_RANDOM(moods) }
+```
+
+---
+
+## Inclusion Testing
+
+Beyond functions to work with `LIST` values, Ink also has special symbols for working with testing for inclusion in a `LIST`. When comparing multiple values, they should be within an opening and closing parentheses.
+
+- `?`: If multiple entries are part of the list and `true`.
+
+```ink
+LIST moods = (happy), (angry), (sad), (melancholy)
+
+{ moods ? (happy, angry): Both happy and angry }
+```
+
+- `has`: If an entry is part of the list and is true
+
+The keyword has works the same as using the question mark, `?`.
+
+```ink
+LIST moods = (happy), (angry), (sad), (melancholy)
+
+{ moods has (happy, angry): Both happy and angry }
+```
+
+- `!?`: If multiple entries are not part of the list and not true
+
+The exclamation mark works as a negation to the inclusion, question mark, `?`, symbol.
+
+```ink
+LIST moods = happy, angry, sad, melancholy
+
+{ moods !? (happy, angry): Neither happy nor angry }
+```
+
+- `hasnt`: If an entry is not part of a list and not `true`
+
+The keyword `hasnt` is the same as using the symbols, `!?`
+
+```ink
+LIST moods = happy, angry, sad, melancholy
+
+{ moods hasnt (happy, angry): Neither happy nor angry }
+```
+
+### Manipulating List Values
+
+Like other variable values, a `LIST` can also use some of the same mathematical symbols others can. However, a `LIST` can only use values associated with either itself or another `LIST` within the same project.
+
+#### Addition
+
+Adding a value to a `LIST`, `VAR`, or `CONST` using existing `LIST` values works through the `+=` symbol pairing. It means "set the current value to itself plus this new value." When used with `LIST` values, they can be "added" to the existing `LIST`.
+
+```ink
+LIST Items = (Dagger), (Lead_Pipe), (Spanner), (Candlestick), (Revolver), (Rope)
+
+LIST clues = Main_Room
+
+~ clues += (Dagger)
+
+Current Clues: {clues}
+```
+
+#### Subtraction
+
+Removing values from a `LIST` or using `LIST` values works similar to addition. It uses the `-=` symbols to mean "set the current value to itself minus this new value."
+
+```ink
+LIST Items = (Dagger), (Lead_Pipe), (Spanner), (Candlestick), (Revolver), (Rope)
+
+LIST clues = Main_Room
+
+~ Items -= (Dagger)
+~ clues += (Dagger)
+
+Current Clues: {clues}
+```
+
+Trying to add an entry that's already in the list does nothing. Trying to remove an entry that's not there also does nothing. Neither produces an error, and a list can never contain duplicate entries.
+
+#### Setting Multiple Values
+
+You can assign multiple values to a list at once using parentheses:
+
+```ink
+LIST DoctorsInSurgery = Adams, Bernard, Cartwright, Denver, Eamonn
+
+~ DoctorsInSurgery = (Adams, Bernard)  // Only Adams and Bernard are now true
+```
+
+You can also assign the empty list to clear a list out:
+
+```ink
+~ DoctorsInSurgery = ()  // Everyone has gone home
+```
+
+And you can add or remove multiple entries at once:
+
+```ink
+~ DoctorsInSurgery += (Eamonn, Denver)
+~ DoctorsInSurgery -= (Adams, Bernard)
+```
+
+---
+
+## Conflicting Values and Variable Names
+
+One of the rules of `LIST` is that they must contain unique variable names. A value cannot exist in two separate `LIST`s! Therefore, when moving values from one `LIST` to another, it is recommended to remove first and then add to the new `LIST`.
+
+```ink
+LIST Items = (Dagger), (Lead_Pipe), (Spanner), (Candlestick), (Revolver), (Rope)
+
+LIST clues = Main_Room
+
+~ temp randomClue = LIST_RANDOM(Items)
+
+The random clue is {randomClue}.
+
+~ Items -= randomClue
+~ clues += randomClue
+
+Current Clues: {clues}
+```
+
+## Comparing LISTS
+
+Ink provides several ways to compare lists. Some comparisons test for equality or containment, while others compare the numerical values of entries.
+
+### Equality Testing
+
+Testing multi-valued lists is slightly more complex than single-valued ones. Equality (`==`) means 'set equality' - that is, all entries are identical.
+
+```ink
+LIST DoctorsInSurgery = (Adams), (Bernard), Cartwright
+
+{ DoctorsInSurgery == (Adams, Bernard):
+    Dr Adams and Dr Bernard are having a loud argument in one corner.
+}
+```
+
+If Dr Cartwright is also present, the two won't argue, as the lists being compared won't be equal - DoctorsInSurgery will have a Cartwright that the list (Adams, Bernard) doesn't have.
+
+Not equals (`!=`) works as expected:
+
+```ink
+{ DoctorsInSurgery != (Adams, Bernard):
+    At least Adams and Bernard aren't arguing.
+}
+```
+
+### Containment vs Equality
+
+The `?` (or `has`) operator tests for containment, not equality:
+
+```ink
+{ DoctorsInSurgery ? (Adams, Bernard):
+    Dr Adams and Dr Bernard are present (and possibly others too).
+}
+```
+
+This is different from equality because it only checks if Adams and Bernard are in the list, not whether they're the *only* ones in the list.
+
+### Less Than
+
+```ink
+LIST_A < LIST_B
+```
+
+The smallest value in A is less than the smallest values in B.
+
+#### Greater Than
+
+```ink
+LIST_A > LIST_B
+```
+
+The smallest value in A is bigger than the largest values in B.
+
+#### Greater Than Or Equal To
+
+```ink
+LIST_A >= LIST_B
+```
+
+The smallest value in A is at least the smallest value in B, and the largest value in A is at least the largest value in B.
+
+#### Less Than Or Equal To
+
+```ink
+LIST_A <= LIST_B
+```
+
+The smallest value in A is smaller than all values in B, and the largest value in A is smaller than the largest value in B.
+
+> **Note:** These comparison operators work on the numerical values of list entries, not on containment. They're most useful when using lists as state machines where the order matters.
+
+---
+
+## List Intersection
+
+The intersection operator (`^`) allows you to find the overlap between two lists. This returns a new list containing only the values that appear in both lists.
+
+```ink
+LIST CoreValues = strength, courage, compassion, greed, nepotism, self_belief, delusions_of_godhood
+VAR desiredValues = (strength, courage, compassion, self_belief)
+VAR actualValues = (greed, nepotism, self_belief, delusions_of_godhood)
+
+{desiredValues ^ actualValues} // prints "self_belief"
+```
+
+The result is a new list, so you can test it:
+
+```ink
+{desiredValues ^ actualValues: 
+    The new president has at least one desirable quality.
+}
+
+{LIST_COUNT(desiredValues ^ actualValues) == 1: 
+    Correction, the new president has only one desirable quality. 
+    {desiredValues ^ actualValues == self_belief: 
+        It's the scary one.
+    }
+}
+```
+
+This is particularly useful for checking if there's "some overlap" between lists, which is different from the `?` operator that checks if one list entirely contains another.
+
+---
+
+## Using Lists as State Machines
+
+One of the most powerful uses of lists is as state machines. Each list entry represents a state, and you can move between states using simple operations.
+
+```ink
+LIST KettleState = cold, boiling, recently_boiled
+
+VAR kettleState = cold
+
+* [Turn on kettle]
+    The kettle begins to bubble and boil.
+    ~ kettleState = boiling
+    
+* {kettleState == boiling} [Turn off kettle]
+    You turn off the kettle.
+    ~ kettleState = recently_boiled
+    
+* {kettleState == recently_boiled} [Make tea]
+    Perfect timing for tea!
+```
+
+You can use `++` and `--` to step through states:
+
+```ink
+LIST VolumeLevel = off, quiet, medium, loud, deafening
+
+VAR volume = quiet
+
+* [Turn up volume]
+    ~ volume++
+    {volume == deafening:
+        The sound is overwhelming!
+    - else:
+        The volume increases.
+    }
+```
+
+When a list is used as a state machine, it typically contains only one value at a time, representing the current state.
+
+---
+
+## Using Lists for Flags and Tracking
+
+Lists are excellent for tracking game flags - things that have happened or been discovered. Unlike using multiple boolean variables, a list keeps everything organized in one place.
+
+```ink
+LIST GameEvents = foundSword, openedCasket, metGorgon, solvedRiddle
+
+VAR completedEvents = ()
+
+* [Open the casket]
+    You open the ancient casket with a creak.
+    ~ completedEvents += openedCasket
+    {completedEvents ? foundSword:
+        You place the sword inside carefully.
+    - else:
+        It's empty. You'll need to find something to put in it.
+    }
+
+* {completedEvents ? openedCasket && not completedEvents ? foundSword}
+    [Search for a sword]
+    After searching, you find an ancient sword!
+    ~ completedEvents += foundSword
+```
+
+You can test for multiple flags at once:
+
+```ink
+{completedEvents ? (foundSword, openedCasket, solvedRiddle):
+    With the sword placed in the casket and the riddle solved, the door opens!
+}
+```
+
+This pattern is much cleaner than having separate variables for each flag and manually checking them all.
+
+---
+
+## Multi-listed Lists
+
+One of the most powerful features of lists is that a single variable can contain values from multiple different list families. This allows you to use lists for world modeling and object tracking.
+
+### Tracking Objects with Lists
+
+You can define lists for different types of things, then combine them to track what's where:
+
+```ink
+LIST Characters = Alfred, Batman, Robin
+LIST Props = champagne_glass, newspaper
+
+VAR BallroomContents = (Alfred, Batman, newspaper)
+VAR HallwayContents = (Robin, champagne_glass)
+
+=== function describe_room(roomState)
+    {roomState ? Alfred: Alfred is here, standing quietly in a corner.}
+    {roomState ? Batman: Batman's presence dominates all.}
+    {roomState ? Robin: Robin is all but forgotten.}
+    {roomState ? champagne_glass: A champagne glass lies discarded on the floor.}
+    {roomState ? newspaper: A newspaper headline screams WHO IS THE BATMAN?}
+
+{describe_room(BallroomContents)}
+```
+
+This produces:
+
+```
+Alfred is here, standing quietly in a corner.
+Batman's presence dominates all.
+A newspaper headline screams WHO IS THE BATMAN?
+```
+
+You can then move things between rooms:
+
+```ink
+* [Move to hallway]
+    ~ BallroomContents -= Batman
+    ~ HallwayContents += Batman
+    Batman strides into the hallway.
+```
+
+### Tracking Multiple Properties
+
+You can also use multi-valued lists to track different properties of the same object:
+
+```ink
+LIST OnOff = on, off
+LIST HotCold = cold, warm, hot
+
+VAR kettleState = (off, cold)
+
+=== function turnOnKettle()
+    {kettleState ? hot:
+        You turn on the kettle, but it immediately flips off again.
+    - else:
+        The water in the kettle begins to heat up.
+        ~ kettleState -= off
+        ~ kettleState += on
+    }
+
+=== function can_make_tea()
+    ~ return kettleState ? (hot, off)
+```
+
+Here, `kettleState` tracks both whether the kettle is on/off AND whether it's hot/cold simultaneously. This is much cleaner than having two separate variables.
+
+To make changing states easier, you can create a helper function:
+
+```ink
+=== function changeStateTo(ref stateVariable, stateToReach)
+    // Remove all states of this type
+    ~ stateVariable -= LIST_ALL(stateToReach)
+    // Put back the state we want
+    ~ stateVariable += stateToReach
+
+~ changeStateTo(kettleState, on)
+~ changeStateTo(kettleState, warm)
+```
+
+---
+
+## Advanced: Custom List Values
+
+By default, list values start at 1 and increment by 1, but you can specify your own numerical values:
+
+```ink
+LIST PrimeNumbers = two = 2, three = 3, five = 5, seven = 7, eleven = 11
+
+{LIST_VALUE(seven)}  // 7
+```
+
+If you specify a value but not the next one, Ink will assume an increment of 1:
+
+```ink
+LIST PrimeNumbers = two = 2, three, five = 5
+// 'three' will automatically be 3
+```
+
+This is useful when the numerical values have meaning in your game, such as damage values, prices, or difficulty levels.
+
+---
+
+## Practical Example: Inventory and State Management
+
+Here's a practical example showing how to use lists for a simple inventory and puzzle system:
+
+```ink
+LIST Inventory = (none), key, torch, rope, map
+LIST RoomItems = (chest), (door), (window)
+LIST DoorState = locked, unlocked, open
+
+VAR playerInventory = ()
+VAR currentRoom = (chest, door)
+VAR doorState = locked
+
+-> room
+
+=== room ===
+You are in a dark room.
+{currentRoom ? chest: There is a wooden chest here.}
+{currentRoom ? door: There is a locked door to the north.}
+{currentRoom ? window: A window lets in some light.}
+
+- (choices)
+* {currentRoom ? chest && playerInventory !? key} [Search the chest]
+    You search the chest and find a key!
+    ~ playerInventory += key
+    ~ currentRoom -= chest
+    -> choices
+
+* {currentRoom ? door && doorState == locked && playerInventory ? key}
+    [Unlock the door]
+    You use the key to unlock the door.
+    ~ doorState = unlocked
+    -> choices
+
+* {currentRoom ? door && doorState == unlocked} [Open the door]
+    You open the door and escape!
+    ~ doorState = open
+    -> escaped
+
+* {playerInventory != ()} [Check inventory]
+    You are carrying: {playerInventory}.
+    -> choices
+
++ {choices > 2} [Wait]
+    Time passes...
+    -> choices
+
+=== escaped ===
+You have escaped! Congratulations!
+-> END
+```
+
+This example demonstrates:
+- Using lists for inventory tracking
+- Using lists for room contents
+- Using lists as state machines (door state)
+- Testing list contents for conditional choices
+- Adding and removing items from lists
+
+---
+
+## Try It
+
+Lists are one of Ink's most powerful features, but they take practice to master. Here are some exercises to help you understand them better:
+
+**Exercise 1: Basic List Operations**
+
+Create a simple mood tracker:
+- Define a LIST of different moods (happy, sad, angry, excited, calm)
+- Start with one mood active
+- Create choices that change the mood
+- Display the current mood to the player
+- Try using `++` and `--` to move between moods in order
+
+**Exercise 2: Inventory System**
+
+Build a basic inventory system:
+- Create a LIST of items the player can find
+- Create a VAR to hold the player's current inventory
+- Add choices to pick up items (add them to inventory)
+- Add choices to use or drop items (remove them from inventory)
+- Display the inventory contents
+- Create a conditional choice that only appears when the player has a specific item
+
+**Exercise 3: Multi-Property Tracking**
+
+Create an object with multiple states:
+- Define two LISTs: one for on/off states, one for temperature states
+- Create a variable that tracks both properties
+- Write functions to change each property independently
+- Create conditional text that reacts to different combinations of states
+
+**Exercise 4: Flag Tracking**
+
+Build a simple quest system:
+- Create a LIST of quest events (talked_to_guard, found_key, opened_chest, etc.)
+- Track which events have been completed
+- Create choices that only appear after certain events are completed
+- Use the `?` operator to check for multiple completed events before showing a final choice
+
+**Exercise 5: Advanced Challenge**
+
+Combine everything you've learned:
+- Create a mystery game with suspects, locations, and clues as separate LISTs
+- Track which clues have been found
+- Track suspect locations
+- Use list intersection to find overlaps (e.g., which suspects were in a certain location AND have a certain clue)
+- Create a final accusation that checks if the player has gathered enough evidence
+
+The key to mastering lists is understanding when to use them as state machines (one value at a time), flags (multiple values tracking what's happened), or properties (mixing values from different list families). Experiment with all three approaches!

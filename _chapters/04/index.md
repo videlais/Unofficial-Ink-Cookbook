@@ -1,5 +1,5 @@
 ---
-title: "Understanding Choices"
+title: "Organizing Ink Projects"
 order: 4
 chapter_number: 4
 layout: chapter

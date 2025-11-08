@@ -9,9 +9,9 @@ layout: chapter
 
 By the end of this introduction, you will be able to:
 
-- Identify the target audience and prerequisites for this book
-- Recognize the style conventions used throughout the chapters
-- Distinguish between different types of emphasis and code formatting
+- Identify the target audience and prerequisites for this book.
+- Recognize the style conventions used throughout the chapters.
+- Distinguish between different types of emphasis and code formatting.
 
 ## Summary
 

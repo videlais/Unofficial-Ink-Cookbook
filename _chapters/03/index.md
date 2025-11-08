@@ -1,5 +1,5 @@
 ---
-title: "Writing Your First Ink Story"
+title: "Diverts and Knots"
 order: 3
 chapter_number: 3
 layout: chapter

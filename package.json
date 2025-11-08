@@ -19,7 +19,7 @@
   "author": "Dan Cox and Taylor Howard",
   "license": "CC-BY-SA-4.0",
   "devDependencies": {
-    "inkjs": "^2.2.3",
-    "nodemon": "^3.0.1"
+    "inkjs": "^2.3.2",
+    "nodemon": "^3.1.10"
   }
 }
