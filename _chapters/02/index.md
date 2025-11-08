@@ -1,5 +1,5 @@
 ---
-title: "Understanding Choices"
+title: "Diverts and Knots"
 order: 2
 chapter_number: 2
 layout: chapter
@@ -9,164 +9,252 @@ layout: chapter
 
 By the end of this chapter, you will be able to:
 
-- Define ink as a narrative scripting language and describe its purpose.
-- Install the Inky Editor on your operating system.
-- Demonstrate basic file operations including opening, saving, and creating projects.
-- Utilize the Preview pane to test and review your ink stories.
+- Define key ink terminology including weave, flow, and choices
+- Construct basic choices and flows in the Inky Editor
+- Apply comments and tags to document and annotate your code
+- Experiment with the Preview pane to test different story paths
 
 ## Summary
 
-In this chapter, you will learn about ink, where to find the Inky Editor, and generally how to install and use it through basics like opening, editing, and saving an ink file.
+In this chapter, the terms weave, flow, and divert will be reviewed and the basics of writing and using the Preview pane in the Inky editor will be explained.
 
 ---
 
 - [Learning Objectives](#learning-objectives)
 - [Summary](#summary)
-- [Inky Editor](#inky-editor)
-- [Installing Inky](#installing-inky)
-  - [Windows](#windows)
-  - [macOS](#macos)
-- [Using the Inky Editor](#using-the-inky-editor)
-  - [Opening an Ink File](#opening-an-ink-file)
-  - [Saving an Ink File](#saving-an-ink-file)
-  - [Creating a New Project](#creating-a-new-project)
-  - [Adding a New Included Ink File](#adding-a-new-included-ink-file)
-  - [Working with an Inky Project](#working-with-an-inky-project)
-    - [Rewind a Single Choice](#rewind-a-single-choice)
-    - [Restart a Story](#restart-a-story)
-- [Reviewing File Exports](#reviewing-file-exports)
-  - [JSON Export](#json-export)
-  - [Web Export](#web-export)
-  - [Export Process](#export-process)
+- [Common Terms](#common-terms)
+- [Creating a New Project](#creating-a-new-project)
+  - [Playing with Preview](#playing-with-preview)
+  - [Comments](#comments)
+  - [Tags](#tags)
+- [Creating Flows](#creating-flows)
+  - [Styling Choice Output](#styling-choice-output)
+  - [Adding More Choices](#adding-more-choices)
 - [Try It](#try-it)
 
 ---
 
-## Inky Editor
+## Common Terms
 
-ink can be written in anything that can handle text. Some authors prefer to work in their favorite text editor and only move to another tool when it is time to create a compiled, final product. The choice, as always, is up to individual authors. However, the Inky Editor has something most other text editing programs do not: the Preview pane.
+Every language has its own terms for its elements. ink is no different, and explains how to write and understand code in relationship to a project through the following terms:
 
-When writing ink using the Inky Editor, the code will be previewed on the right-hand side. Every time there is a stop in writing, the code preview will be updated and the compiled product shown to the user. This helps in not only seeing how the code will look when run, but the previewing area allows for rewinding through choices and restarting the story, providing a quick way to see how taking other paths through the story might also look to a player.
+- *Choice:* Some text defining a possible branching path
+- *Weave:* Collection of choices
+- *Flow:* A path through the available choices
 
-## Installing Inky
+Ink uses the metaphor of threads and sewing to describe projects. The total collection of all choices is a project's *weave*. Through making *choices*, a user creates a *flow* through the overall *weave*.
 
-{% include figure.html src="chapters/02/chapter2-ink-website.png" alt="Screenshot of the ink website homepage showing the download section with a blue Download Inky button" caption="Figure 2.1: The ink website with download options for the Inky Editor" id="fig-2-1" %}
-
-The [ink webpage](https://www.inklestudios.com/ink/) has a link to the Inky editor. Scroll down the page and click on the "Download" button under the name Inky. Builds exist for Windows, Mac, and Linux systems and can be found on the [Releases page](https://github.com/inkle/inky/releases/) for the product on GitHub. (Always download the most-current build to get the newest features and bug fixes!)
-
-### Windows
-
-When downloaded in Windows, Ink will be in a ZIP file. Uncompress the ZIP file and look for the Ink.exe executable file. Running this will open the Inky Editor.
-
-### macOS
-
-For macOS users, Inky will be in a DMG file. These can be opened and the Inky application moved into the Applications directory. Run Inky from inside the Application directory or directly from the Launchpad.
+> **Note:** This book uses the term *option* for what the user sees and clicks on to interact with in an Inky project. *Choices* are what an author creates; a user interacts with *options*.
 
 ---
 
-## Using the Inky Editor
+## Creating a New Project
 
-{% include figure.html src="chapters/02/chapter2-ink-editor.png" alt="Screenshot of Inky Editor interface with code editor pane on the left containing ink script and preview pane on the right showing the compiled output" caption="Figure 2.2: The Inky Editor showing the dual-pane interface with code on the left and live preview on the right." id="fig-2-2" %}
+Using the Inky editor, go to File → New Project to create a new project. In the editor pane, write the following:
 
-When opened, the Inky Editor will show two main panes. The first, on the left, is where the code is written. As it is run in the editor, the results will be previewed on the right pane.
+```ink
+Hello, handsome!
+```
 
-### Opening an Ink File
+After text has been added to a project, the Preview pane shows it. This updates every time there is a pause in the typing.
 
-Existing Ink files can be opened through the File menu and going to File → Open. Any Ink files can be opened this way and will be loaded in the Editor with their code on the left and the previewed results of the code on the right.
+Underneath the previous text, add the following:
 
-### Saving an Ink File
+```ink
+Choose to Write More
+Give up on a New Project
+```
 
-A collection of Ink files is called a project. Even if a project only contains one file, it can still be saved through the File → Save Project menu option.
+Choices are the basic building block of any ink project. They are what a user interacts with when playing an Ink game, and how the other key concepts in Ink relate to each other within the Flow of a project.
 
-### Creating a New Project
+Through adding Choices, the preview pane in Inky can be used to "choose," and then rewind or restart a story. When working with the Inky Editor, this can help in moving through a story's *weave*, and in testing how different parts work together.
 
-A new project can be created through going to File → New Project. This will open a new window of the Inky Editor.
+### Playing with Preview
 
-By default, Inky will list all current Ink files in the same directory of a newly created and saved Ink project.
+Testing a project in the Inky Editor is one of the most important skills to learn when working with Ink. Based on the example now written in the editor, its different choices and their outcomes can be examined.
 
-### Adding a New Included Ink File
+First, click on the "Choose to Write More" option in the Preview pane. It will be shown and then the End of Story text will be shown.
 
-To more directly add a new Ink file to an existing project, the File → New Included Ink File option can be used. It will prompt what to name the file and then add it to the project.
+> **Note:** Whenever a story ends, the "End of Story" text is shown in the Inky Editor. This signals that there is no more content in the story.
 
-### Working with an Inky Project
+Click the "Restart" button in the Inky Editor. (It is the double-arrow, the rightmost icon above the Preview Pane area.) This will restart the story back before any choices were made.
 
-{% include figure.html src="chapters/02/chapter2-rewind.png" alt="Close-up of Inky Editor preview pane header showing two buttons: a left-pointing arrow labeled Rewind and a circular arrow labeled Restart" caption="Figure 2.3: Rewind and Restart buttons in the Inky Editor preview pane." id="fig-2-3" %}
+This time, click on the "Give up on a New Project" option. Notice that it too will be shown and then the same "End of Story" text is shown.
 
-Above the Preview pane where the Ink story is being run are two buttons: Rewind a Single Choice and Restart a Story.
+Right now, these two choices do not amount to much. Clicking on either will choose that option and then end the story right there.
 
-The Preview pane will always show the End of Story as well. This is the true ending and is added when an author does not explicitly add it.
+### Comments
 
-#### Rewind a Single Choice
+So far, only code has been added to Ink projects. There is also another type of text that can be added that helps with understanding how code works: comments.
 
-While a story is being run, the Inky editor remembers each choice. At any point, these choices can be rewound by a single group of choices to the last previous position in the story.
+In programming terminology, a comment is some text that is included in code but is ignored when it is run.
 
-#### Restart a Story
+*A comment is text written for an author or as a reminder of how something works*.
 
-Similar to the Rewind a Single Choice button, the Restart Story button rewinds a story back to the first set of choices.
+Comments can also simply be used as notes to help keep track of things in a project as an author works on it.
 
-## Reviewing File Exports
+Comments in Ink are added through using two forward slashes, `//`. Anything that follows the slashes until the next line is considered a new comment. This also includes adding comments on lines after code as well.
 
-The Inky Editor provides several export options to convert your Ink stories into formats that can be used by other applications and platforms. Understanding these export formats is crucial for integrating your Ink stories into games, web applications, or other interactive media.
+Anything from the two slashes to the end of the line is a comment and ignored by Ink.
 
-### JSON Export
+```ink
+// These are all comments.
+// ink skips over anything written with two forward-slashes.
 
-The most common export format is JSON (JavaScript Object Notation). When you compile your Ink story, Inky generates a `.json` file that contains the compiled story data. This JSON file can be read by:
+Hello! // Comments can also be written after code, too!
+```
 
-- The Ink JavaScript runtime for web applications.
-- Unity projects using the Ink Unity plugin.
-- Custom applications using Ink runtime libraries.
+### Tags
 
-To export to JSON, simply save your project in Inky, and the editor will automatically generate a corresponding `.json` file with the same name as your `.ink` file.
+If comments are text written for authors and other developers, *tags* can be thought of as instructions for *other programs*.
 
-### Web Export
+Ink supports adding *tags*, text starting with a hash, `#` and extending to the end of a line. When Ink encounters these, it ignores them.
 
-Inky also provides a "Export for web..." option under the File menu. This creates a standalone HTML file that includes:
+```ink
+This is an example using tags. # See?
+```
 
-- Your compiled story in JSON format.
-- The Ink JavaScript runtime.
-- A basic web interface for playing the story.
-- CSS styling for a clean, readable presentation.
+In the above example, the output would be the following:
 
-This web export is perfect for:
+```text
+This is an example using tags.
+```
 
-- Sharing your story online.
-- Testing your story in a web browser.
-- Creating prototypes for web-based narrative games.
+When using the Inky preview pane, it would also show the following on a separate line in a lighter color:
 
-### Export Process
+```ink
+ # See?
+```
 
-1. Complete writing your ink story.
-2. Save your project (File → Save Project).
-3. For web export: go to File → Export for web...
-4. Choose a location and filename for your exported file.
-5. The exported file(s) will be ready to use in your target application.
+In Ink, tags are optional text that it ignores as part of the story output. However, internally, it keeps track of the tags it encounters and, when working with other programs, these tags can have special meaning.
+
+For example, when working with the Ink for Web output option in Inky, the tag `# CLEAR` has a special meaning: it clears the text from the screen!
+
+When working with other programs like Unity, tags can also be used to add greater semantic meaning to the text, adding in, for example, tone, confidence, or other information to what a character is speaking in a part of the story.
+
+```ink
+Your dad slams his hand on the table. "No! I won't allow you to date her! I forbid you from seeing that girl!" # mood: angry
+
+"But dad!" you scream. "I love her!" # mood: pleading
+```
+
+In the above example, *mood* is used as part of a tag with a colon and then a value. In Ink, this would simply be another tag and ignore. However, in Unity or another program, it could read and parse the tag to add greater emotional context to a scene or how a character's text should be displayed.
+
+> **Note:** Tags are parsed between story 'stopping points'. In Ink, the story continues until it finds a choice. At that point, it waits for input. Internally, Ink would process all tags up to that point and then also stop.
+
+Tags are also associated with a single line. If used at the end of a line, they would be associated with that line. If a tag is used before a line, it becomes associated with the next output line.
+
+For example, the following example's use of a tag would be associated with the next line.
+
+```ink
+# AUTHOR: Jane
+
+My life really began after I died.
+```
+
+> **Note:** Determining which line a tag is associated with can be determined in the Inky preview pane through verifying where they show up. If they are shown after a line in the preview, they are associated with that line.
+
+## Creating Flows
+
+---
+
+More text can be added to a choice by placing it "under" each.
+
+Consider the following code:
+
+```ink
+* Choose to Write More
+Look! I am writing more!
+* Give up on a New Project
+Nope. I have given up writing in Ink!
+```
+
+Add the same new lines under each choice and then restart the project.
+
+This time, choose the "Give up on a New Project" option. Now, not only will the text of the choice show up, but so will the text "underneath" it as well! The same is also true of the other choice if the story is restarted and the other option picked instead.
+
+---
+
+### Styling Choice Output
+
+To avoid confusion, the common style when adding text to the output of a choice is to indent it. Pressing the TAB key or using two spaces between the edge of the editor and the content of the choice is the preferred way of showing that certain text is associated with a choice.
+
+```ink
+* Choose to Write More
+    Look! I am writing more!
+* Give up on a New Project
+    Nope. I have given up writing in Ink!
+```
+
+This styling approach also extends to multiple levels of choice output. If one choice is "under" another, the amount of indentation would continue. It is not uncommon, in larger projects, to see many different levels of indentation, each signaling various choices and their output all coexisting at once.
+
+### Adding More Choices
+
+Adding additional choices to the existing code is as easy as including extra asterisks and then more text of the choice option for the user.
+
+```ink
+* Choose to Write More
+    Look! I am writing more!
+    ** Do I continue?
+        Yes, I do!
+* Give up on a New Project
+    Nope. I have given up writing in Ink!
+```
+
+Like with the indentation, additional asterisks for choices mark that some are also "under" others. Enter the above code into the project or otherwise add a new choice option under one of the first ones.
+
+Restart the story.
+
+Following the above code, one path through the story is to click on "Choose to Write More" and then "Do I continue?" before the story finally ends.
+
+It has two *choices*, one *weave*, and two possible *flows* composed of the paths through the project!
 
 ---
 
 ## Try It
 
-Let's practice working with ink files!
-
-First, make sure you have downloaded the Inky Editor for your operating system.
-
-Open the Inky Editor.
-
-Copy or type the following in the left-hand code pane:
+Create a new Ink project called "FirstStory.ink" and save the file. In the code area, add the following:
 
 ```ink
-Greetings, Universe!
+You stand before a cave entrance. There are three passages forward.
 ```
 
-Over in the Preview pane, the results of the code will be shown.
+This will be a cave exploration example with two initial choices.
 
-{% include figure.html src="chapters/02/chapter2-preview.png" alt="Screenshot of Inky Editor preview pane displaying the text 'Greetings, Universe!' as output" caption="Figure 2.4: Preview pane showing the output of a simple ink script" id="fig-2-4" %}
+Copy or type the following code for the first set of choices:
 
-By default, the name of a new ink project is "Untitled.ink".
+```ink
+* Go Deeper
+* Retreat
+```
 
-Choose "Save Project" from the File menu. File → Save Project.
+Under the choice *Go Deeper*, add the following text:
 
-In the Save As field, name this file `Chapter2.ink`, select a location to save the file, and then click the "Save" button.
+```ink
+    It gets very dark quickly.
+        ** Do you keep going?
+            You keep going and going into the cave. You believe you see some light and head towards it as the darkness recedes.
 
-The Inky Editor will update its name to the new file. The project is now called "Chapter2.ink".
+            You see what looks like an exit from the cave.
 
-Congratulations on creating a new file, adding code, and then saving it!
+            You take it and find yourself emerging into a forest.
+```
+
+Now, as the player enters the cave, they are given a choice that leads to another. The flow is a path from one to another, but there is only ever one choice per set.
+
+**Example:**
+
+```ink
+You stand before a cave entrance.
+
+* Go Deeper
+    It gets very dark quickly.
+        ** Do you keep going?
+            You keep going and going into the cave. You believe you see some light and head towards it as the darkness recedes.
+
+            You see what looks like an exit from the cave.
+
+            You take it and find yourself emerging into a forest.
+* Retreat
+  You leave the cave.
+```

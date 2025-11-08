@@ -1,5 +1,5 @@
 ---
-title: "Gather Points"
+title: "It's All Variable"
 order: 5
 chapter_number: 5
 layout: chapter
@@ -9,300 +9,439 @@ layout: chapter
 
 By the end of this chapter, you will be able to:
 
-- Explain the purpose of gather points in collapsing branching narratives
-- Construct chained gather points for multi-stage conversations
-- Create labelled options to track player choices
-- Apply label scopes across knots and stitches
-- Design multi-level gather point structures for complex flows
+- Differentiate between global, temporary, and constant variables
+- Manipulate numerical, string, and boolean data types
+- Implement conditional logic using comparison operators
+- Construct switch statements for multi-condition testing
+- Evaluate knot values to create conditional story branches
 
 ## Summary
 
-In this chapter, you will learn about gather points, how they are used, and the shorthand they provide for larger and more complex projects.
+In this chapter, you will learn about global, temporary, and constant variables in Ink and how to use them for different purposes.
 
 ---
 
 - [Learning Objectives](#learning-objectives)
 - [Summary](#summary)
-- [Gather Points](#gather-points)
-  - [Explaining Gather Points](#explaining-gather-points)
-  - [Chaining Gathering Points](#chaining-gathering-points)
-- [Labelled Options](#labelled-options)
-  - [Label Scopes](#label-scopes)
-  - [Diverting to Labels](#diverting-to-labels)
-  - [Labels and Gathering Point Levels](#labels-and-gathering-point-levels)
+- [Working with Code](#working-with-code)
+- [Single Line](#single-line)
+- [Multiple lines](#multiple-lines)
+- [Variables](#variables)
+  - [Types of Data](#types-of-data)
+    - [Numbers](#numbers)
+    - [Strings](#strings)
+    - [Booleans](#booleans)
+    - [Text of Diverts](#text-of-diverts)
+    - [Knots](#knots)
+  - [Types of Variables](#types-of-variables)
+    - [Global Variables](#global-variables)
+    - [Temporary Variables](#temporary-variables)
+    - [Constant Variables](#constant-variables)
+- [Conditional Logic](#conditional-logic)
+  - [Chaining Testing (Switch Statements)](#chaining-testing-switch-statements)
+  - [Testing Knot Values](#testing-knot-values)
+  - [Multiple Conditionals](#multiple-conditionals)
+  - [Advanced Choices](#advanced-choices)
+  - [Working with Alternatives](#working-with-alternatives)
+- [Try It](#try-it)
 
 ---
 
-## Gather Points
+## Working with Code
 
-Through presenting a series of choices, an author can create a complex path through a story.
+Like many other scripting languages, Ink also has the concepts of variables. Used to store and react to values during a program, variables in Ink can take different forms and be used for various uses.
 
-```ink
-* Choice 1
-  ** Choice 1.1
-  ** Choice 1.2
-* Choice 2
-  ** Choice 2.1
-  ** Choice 2.2
-* Choice 3
-  ** Choice 3.1
-  ** Choice 3.2
-```
+When using variables in Ink, more direct coding is required. While variables can be created using their keywords, as covered later in this chapter, changing their values requires knowing more about how Ink handles its own programming.
 
-One choice can lead to another that connects to a third. These can be both in the same file or across files using the `INCLUDE` keyword.
-
-However, there is often a need to show some output after a choice is made or regardless of how a choice was made. The existing structures for doing such a thing do not work well or are potentially wasteful.
-
-Consider the following example:
-
-```ink
-He leaned against the wall and waited. I could tell he was tense and the wrong thing could drive him away.
-
-* "We can make it, just give me a second chance!"
-* "I know I messed up, babe, but we can work it out!"
-* "Are you really going to give up on five years of a relationship!"
-```
-
-In the above code, there are three choices. Each could, potentially, lead to other places using diverts or show more output. However, what if the outcome of all the choices needed to be the same?
-
-One solution might be put the same text under each choice.
-
-```ink
-He leaned against the wall and waited. I could tell he was tense and the wrong thing could drive him away.
-
-* "We can make it, just give me a second chance!"
-  He paused and shook his head. "We are done. Please leave."
-* "I know I messed up, babe, but we can work it out!"
-  He paused and shook his head. "We are done. Please leave."
-* "Are you really going to give up on five years of a relationship!"
-  He paused and shook his head. "We are done. Please leave."
-```
-
-However, that's repetitive. There should not be a need to have the exact same text in multiple places!
-
-Another solution might also be to simply have all the choices divert to the same knot:
-
-```ink
-He leaned against the wall and waited. I could tell he was tense and the wrong thing could drive him away.
-
-* "We can make it, just give me a second chance!"
-  -> Outcome
-* "I know I messed up, babe, but we can work it out!"
-  -> Outcome
-* "Are you really going to give up on five years of a relationship!"
-  -> Outcome
-
-=== Outcome ==
-He paused and shook his head. "We are done. Please leave."
-
--> DONE
- ```
-
-While less wasteful than the previous solution, the outcome is still the same: the choices are using the result. While cleaner, in that the code is not as wasteful, there is a far better way to solve this issue.
-
-### Explaining Gather Points
-
-In previous code in the above examples, each choice could potentially branch the code or have used diverts. There needed to be a way to "gather" all the branches together!
-
-In Ink, *gather points* use the minus sign, `-`, and serve as their name suggests, they *gather*.
-
-```ink
-He leaned against the wall and waited. I could tell he was tense and the wrong thing could drive him away.
-
-* "We can make it, just give me a second chance!"
-* "I know I messed up, babe, but we can work it out!"
-* "Are you really going to give up on five years of a relationship!"
--  He paused and shook his head. "We are done. Please leave."
-```
-
-Using a *gather point* with a set of choices *gathers* the outcomes together. The result of all of the options would be the same: the gather point! No matter what was picked, all of the choices would "collapse" to the use of the `-` minus sign at the end of the set of choices.
-
-However, this need not always be the case. The use of gather points *gather* all of the *eventual* output together. One usage of gather points is to make choices that all *gather* to a single output. A second usage could be to have output per choice that *eventually gathers* at a single outcome.
-
-```ink
-He leaned against the wall and waited. I could tell he was tense and the wrong thing could drive him away.
-
-* "We can make it, just give me a second chance!"
-  I took a step forward.
-* "I know I messed up, babe, but we can work it out!"
-  I tried not to look at his eyes.
-* "Are you really going to give up on five years of a relationship!"
-  I was trying not to scream at him.
--  He paused and shook his head. "We are done. Please leave."
-```
-
-In the above adjusted example, each choice has its own output that make it different than the others. However, the use of the gather point at the end of the set of choices *gathers* all of the eventual output together at the end.
-
-With a gather point in a set of choices, and assuming no diverts are used, the outcome will always arrive at the gather point. After all, its purpose is to *gather* branches in a story.
-
-### Chaining Gathering Points
-
-Gathering points work well when "chained" together. When used with multiple sets of choices (and assuming no diverts are used), each gathering point will always be reached.
-
-A quick way to create conversations where only one choice in a set has a consequence is through using gathering points. For the choice with the consequence, a line of code or additional output could be added, knowing the gathering point will move the story toward the next "chain" of dialogue.
-
-```ink
-VAR relationship = 50
-
-"Can you reach that for me?" she asked, motioning up to the mixing bowls at the top of the shelf. Even stretching, and I tried not to look at her as she tried a couple times to reach it, she could not quite get a grip on them.
-"Sure," I replied, getting up and walking over. As I reached for the shelf, I thought she would move, but she just stood there. "You gonna step back?"
-"Do you want me to?" she asked, her eyes seemingly blinking at me innocently, but the question was more emotionally loaded than simply asking about the bowls.
-
-* "I thought we were over this, J."
-  ~ relationship -= 20
-* I stood there silently waiting.
-- "Fine," she said, a note of frustration in her voice as she finally moved out of my space.
-
-* I considered reminding her that we had broken up two weeks ago and I would be moving away soon.
-* Could I turn my back on months together for a new job? Was it more important than our life together?
-  ~ relationship += 20
-- My hand found the bowls. I pulled them down and handed them over.
-
-She didn't look at me as she answered. "Thanks, Dee," she replied, moving the bowls, and herself, across the room from me.
-```
-
-In the above example, there are two sets of choices. However, only one of each set has a consequence for the story. For these choices, the value of *relationship* is changed. Otherwise, the story proceeds to the gathering point.
+Previously, programming in Ink consisted of using Knots, Diverts, and Alternatives. These were used to move around in a story or cycle through a collection of values. When working with variables and manipulating their values in Ink, this changes and takes on two different forms: single line or multiple lines.
 
 ---
 
-## Labelled Options
+## Single Line
 
-Like knots, choices can also be labelled. If a name is put into parentheses before the output of the option, it becomes the *label* for the option.
+A single line of programming in Ink starts with the tilde character, ~. It signifies that something will happen only on that single line and Ink should show or otherwise parse the next line as it normally work outside of programming.
 
 ```ink
-As I paused at the door, I heard a noise in the kitchen.
-
-* (investigate) Might as well go see what it is.
-* (ignore) "It's nothing, I'm sure," I said.
-
+~ health = health - 1
 ```
 
-Knots, stitches, and labels all have values. Like what was done with conditional choices, labelled options work the same way. The use of curly brackets can check to see if an option has been chosen and react accordingly.
+---
 
-> **Note:** Labels, like with the name of knots, can be used as if they were variables. When included in curly brackets, the value of the variable is used as if it was a conditional statement. In these cases, 0 is `false` and other values are `true`.
+## Multiple lines
+
+For programming that may take multiple lines, opening and closing curly brackets can be used to mark it off within other Ink code. Such usage is for multiple conditional testing (which is covered in this chapter) and extended uses of alternatives. However, it is important to be aware of how it used before it is explained in greater detail later.
 
 ```ink
-As I paused at the door, I heard a noise in the kitchen.
-
-* (investigate) Might as well go see what it is.
-* (ignore) "It's nothing, I'm sure," I said.
--
-
-* {investigate} I walked to the kitchen.
-* {ignore} I walked back to my bedroom.
+{- health > 0:
+    health = health - 1
+ - else health <= 0:
+    You die.
+    -> DEATH
+}
 ```
 
-In the above code, if the player picks the option to investigate, the label *investigate* gains the value of 1 (and is thus `true`). If, instead, they pick the option to ignore, choosing the label *ignore*, its value is increased to 1.
+---
 
-A gathering point is then used to *gather* the output together with the minus sign, `-`, at the end of the set of choices.
+## Variables
 
-> **Note:** The use of the gathering point is important in the above example. It serves to *gather* the otherwise potentially branching paths back together before the next set of choices. Without it, the story ends after the first set of choices!
+In programming terminology, a variable is something that can change. Often, the metaphor used is one of a bucket. The variable represents a value when the program is running. The two commons actions are to "look into" the bucket to see its value or to "change" the value that is in the bucket through replacing it or adding more into it.
 
-For the next set of choices, the values of the labels are tested. If the player chose to investigate earlier, the label *investigate* will be `true` and a new option will be shown. If the label *ignore* was picked, its option would appear, instead.
-
-When combined with gathering points, labelled options can optimize writing structures where different paths can be picked, gathered, and then tested without needing to use diverts or knots for the same task.
-
-### Label Scopes
-
-In programming terminology, a *scope* is a way of describing access to a variable. If something has a *local* scope, it can only be accessed within its block of code. If it has a *higher* scope, it can be accessed in its block of code and in another. If a variable has a *global* scope, it can be accessed anywhere in the code.
-
-Labels have a *local* scope to the weave block in which they were created. However, like with stitches, they can be accessed through the name of the knots and stitch in which they were created.
-
-For example, to access a stitch, *StitchExample*, inside of a knot, *KnotExample*, it would use the address of `KnotExample.StitchExample`. Both the knot and stitch names are needed, with a period, `.`, between them.
+The values of variables can be shown through using opening and closing curly brackets around them. This allows an easy way to include different values such as statistics for players to see before they make decisions.
 
 ```ink
--> KnotExample.StitchExample
+You have {health}.
+```
 
-=== KnotExample ===
+### Types of Data
 
-= StitchExample
-Show this!
+Ink supports saving and using many different types of data. These include numbers, strings, Booleans, and even the text of diverts.
+
+#### Numbers
+
+The value of any variable can be any number, including both whole and decimal.
+
+```ink
+VAR test = 4.5
+```
+
+Numbers can be added, subtracted, and divided from each other using the addition (+), subtraction (-), and forward-slash (/) symbols.
+
+```ink
+VAR test = 4.5
+~ test = test + 10
+~ test = test - 9
+~ test = test / 3
+```
+
+Numbers also have an additional operation called modulo or mod. A modulus operation returns the remainder after division. For example, 9 % 3 would be 0, as there is not a remainder. However, 10 % 3 would be 1, as there is a single 1 remaining after the nearest division.
+
+The mod operator uses the percentage symbol, `%`.
+
+```ink
+VAR test = 10
+~ test = test % 3
+```
+
+#### Strings
+
+In programming terminology, a string is a collection of letters, numbers, spaces, and other special characters enclosed in double quotation marks.
+
+```ink
+VAR name = “John”
+```
+
+In Ink, there is limited support for working with strings. However, there are three operations that can take place between strings: equality, inequality, and substring.
+
+To test if one string is exactly the same as another string, the equality symbol, ==, can be used.
+
+```ink
+{ "Yes, exactly." == "Yes, exactly." }
+```
+
+For comparing strings that are not exactly the same, the inequality, not equal, symbol, `!=`, can be used.
+
+```ink
+{ "Not exact." != "Nope. Not at all." }
+```
+
+The last operation is the substring operation. It tests if the string to the right can be found in the string to the left of the operator. It uses the question mark, ?.
+
+```ink
+{ "Not exact." ? "exact" }
+```
+
+#### Booleans
+
+Boolean values are named after George Boole, the inventor of what is now called boolean algebra. In his work, he created a representation of complex systems using simple rules where the outcome was either true or false.
+
+In computer programming, these values, the keywords `true` and `false`, are called Boolean values because they represent either 1 or 0. These are the outcomes of any conditional testing (covered later in this chapter) and can also be stored in variables as well.
+
+```ink
+VAR proof = true
+VAR example = false
+```
+
+#### Text of Diverts
+
+Because variables can hold strings, the "target" of a divert can also be stored in a variable. While limited in application, such values can be used to save a longer divert name and use the variable in its place in more complicated or larger projects.
+
+```ink
+VAR someDivert = -> Next
+
+* What was next?
+    -> someDivert
+
+=== Next ==
+This was!
 -> DONE
 ```
 
-This is also true of labels. They can be accessed through their knot and stitch names.
+#### Knots
+
+When the name of a knot is placed in curly brackets, `{}`, its *value* can be used. In Ink, the value of a knot is a Boolean value. If it has not been visited, its value is 0 (`false`). If it has, its value is 1 (`true`).
 
 ```ink
+// Value of Example_Knot will be 0 to start.
+The knot Example_Knot has not been visited. Its value is {Example_Knot}.
 
--> KnotExample.StitchExample
+-> Example_Knot
 
-=== KnotExample ===
-
-= StitchExample
-* (LabelExample) This is a label
--
--> DifferentKnot
-
-=== DifferentKnot ===
-
-{KnotExample.StitchExample.LabelExample: You picked the label option! Great job!}
-
+=== Example_Knot ===
+// Knot has been visited.
+// Its value will now be 1.
+This knot has been visited! Its value is now {Example_Knot}.
 -> DONE
+
 ```
 
-In the above code, in order to test the label *LabelExample* (which is in a stitch inside of another knot), its full address is needed. This is `KnotExample.StitchExample.LabelExample`.
+### Types of Variables
 
-In the second knot, **DifferentKnot**, this address is used and the example, once the option "This is a label" is picked by the player, would show the output of "You picked the label option! Great job!".
+Ink provides three different types of variables: global, temporary, and constant.
 
-### Diverting to Labels
+#### Global Variables
 
-All content in Ink is a weave. This means that labels, like knots and stitches, can also be diverted to as well.
-
-For example, it is possible to divert directly to a choice if it has a label.
+Like many other scripting languages, Ink also understands *scope*. In programming terminology, a variable’s scope is where it can be accessed in a program. Depending on which “level” (scope) a variable has, it can or can not be accessed by other parts of the program.
 
 ```ink
-
--> KnotExample.StitchExample.LabelExample
-
-=== KnotExample ===
-
-= StitchExample
-- (LabelExample) Go here!
--> DONE
+VAR health = 0
+VAR name = "Dan"
+VAR divertExample = ->Example
 ```
 
-In the above example, the divert address of `KnotExample.StitchExample.LabelExample` is used. This moves directly to the label option of **LabelExample** (which is inside of **KnotExample** and **StitchExample**).
-
-> **Note:** The combination of the words *labelled options* is important. Labels are part of options and thus must use choice syntax. This means that they must use choices, `*`, sticky choices, `+`, or gathering point, `-`, symbols in from of them. The labels are fo the *options*.
-
-While labels are used with choices, when treated as addresses for diverts, they are no longer "choices." After all, if the story has diverted to that exact point, the choice has already been made!
-
-For example, in the following code, the divert `-> LabelExample` is used.
+Global variables are defined using the keyword `VAR` in Ink. Because they are global, they can be accessed in any part of a project. Once they are created, they are a part of everything. They can be used, updated, and accessed across the entire Flow. They can contain numbers, strings, and even diverts.
 
 ```ink
--> LabelExample
+Example:
 
-* (LabelExample) This is a label using a gathering point!
-  -> DONE
+VAR health = 0
+
+-> FIGHT
+
+=== FIGHT ===
++ [Do you fight?]
+    You try to fight, but are attacked.
+    ~ health = health - 1
+    -> FIGHT
 ```
 
-The output of the above code, however, would not be a choice *This is a label using a gathering point!*, but the output of "This is a label using a gathering point!". The choice was "made" when the divert happened.
+#### Temporary Variables
 
-### Labels and Gathering Point Levels
+When a global might be too much, or a number of calculations need to be carried out through creating new values per step, temporary variables can be used.
 
-Labels work with any choice syntax. Gathering points *gather* the output of choices and collapse branches to a single point. Through adding a label at any point in a set of choices, it can be diverted to and used as if it was the output.
+Temporary variables are created through using the tilde and the keyword "temp". Once created, they last during the life of the knot or stitch in which they were created.
+
+**Example:**
 
 ```ink
-He leaned against the wall and waited. I could tell he was tense and the wrong thing could drive him away.
+VAR health = 0
 
-* "We can make it, just give me a second chance!"
-  - - (ending) He paused and shook his head. "We are done. Please leave."
-* "I know I messed up, babe, but we can work it out!"
-  -> ending
-* "Are you really going to give up on five years of a relationship!"
-  -> ending
--
+-> Potion
+
+=== Potion ===
++ [Drink a Potion]
+     ~ temp additionalHealth = RANDOM(1,5)
+    You gain some additional health. +{additionalHealth}
+    ~ health = health + additionalHealth
+    -> Potion
 ```
 
-In a revision of earlier code in this chapter, it could be re-written to use a label under the first choice. All other choices, then, could then divert to this label, showing the same output every time.
+#### Constant Variables
 
-However, using this more advanced pattern requires two things:
+Like global variables, constants are set and can be accessed throughout a Flow. However, unlike global variables, they cannot be changed once set. Their values are constant.
 
-- Using a gathering point at the end of the choices to avoid running out of content.
-- Using *second level* gathering point for the label.
+Constants are created using the keyword `CONST`.
 
-Without the second gathering point, the choices would be gathered after the first one. The story would show the first choice *"We can make it, just give me a second chance!"* and then gather before moving to the second set of choices that would then begin with *"I know I messed up, babe, but we can work it out!"*.
+**Example:**
 
-With a second level gathering point, it works with the gathering *two levels out.* In other words, instead of gathering at the end of first choice, it works wih the larger set of choices, two levels up from itself.
+```ink
+VAR enemyHealth = 20
+CONST swordDamage = 4
 
-In the new code, all options divert to the inner label, which is a second level gathering point. As this works with the gathering point of the set of choices, it serves as the output for all of the choices before they are ultimately gathered at the end of the set of choices.
+-> FIGHT
+
+=== FIGHT ===
++ [Swing Sword]
+    ~ enemyHealth = enemyHealth - swordDamage
+    You swing your sword at the enemy! They take {swordDamage} damage!
+    Their current health is {enemyHealth}.
+    -> FIGHT
+```
+
+---
+
+## Conditional Logic
+
+Like testing if a player has visited a knot or stitch a certain number of times, conditional logic can be used to test the values of variables and react accordingly.
+
+The symbols used to compare values are called operators and include the following symbols and testing:
+
+- `<:` Less than
+- `>:` Greater than
+- `<=:` Less than OR equal to
+- `>=` Greater than OR equal to
+- `!=:` Not equal
+- `==:` Equal
+- `&&:` And
+- `||:` Or
+- `Not:` same as not equal
+
+Conditional logic can be part of multiple lines of code usage in Ink. In these cases, the first conditional logic test must follow the first opening curly bracket.
+
+```ink
+VAR drink = 10
+
+-> DrinkMore
+
+=== DrinkMore ===
+ + [Drink more?]
+    {- drink > 1:
+          ~ drink = drink - 1
+    }
+    -> DrinkMore
+```
+
+Conditional logic follows the form of if testing. The use of "if" logic test if that which follows it is true or not. If it is, any code that follows it is also run. If the logic is not true, its instructions are ignored.
+
+```ink
+VAR drink = 4
+
+-> DrinkMore
+
+=== DrinkMore ===
+
+The amount of drink left is {drink}.
+
+ + {drink > 0} [Drink more?]
+    ~ drink = drink - 1
+    -> DrinkMore
+
+ + {drink < 1} [Stop drinking]
+    You decide to stop drinking.
+    -> DONE
+```
+
+Along with the "if" testing is also an alternative, "else." The use of the `else` keyword uses hyphens within a multiple-line block of code. It establishes what should happen if the first conditional logic is not true. If that first test is not true, it then does something. What it can do is either provide some alternative code or additional tests.
+
+**Example:**
+
+```ink
+VAR drink = 4
+VAR stopDrinking = false
+
+-> DrinkMore
+
+=== DrinkMore ===
+
+The amount of drink left is {drink}.
+
+{drink > 0:
+    ~ drink = drink - 1
+ - else:
+    ~ stopDrinking = true
+}
+
+ + {not stopDrinking} [Drink more?]
+    -> DrinkMore
+
+ + {stopDrinking} [Stop Drinking]
+    -> DONE
+```
+
+### Chaining Testing (Switch Statements)
+
+It is possible to "chain" multiple conditional logic tests together, one after another. In these cases, each testing will be run in order from top to bottom and any code associated with the test will be run if any of the tests are true.
+
+In other scripting languages, such usages are sometimes called "switch statements." In Ink, it is possible to use a variable as the initial conditional and have the logic be possible values. In this case, each hyphen is a possible value from the variable with the else keyword as the "default" code to run if the other values are not available.
+
+```ink
+VAR drink = 4
+VAR stopDrinking = false
+
+-> DrinkMore
+
+=== DrinkMore ===
+
+The amount of drink left is {drink}.
+
+{drink:
+    - 0:
+        ~ stopDrinking = true
+    - 2:
+        The drink is almost gone!
+         ~ drink = drink - 1
+    - else:
+        ~ drink = drink - 1
+}
+
+ + {not stopDrinking} [Drink more?]
+    -> DrinkMore
+
+ + {stopDrinking} [Stop Drinking]
+    -> DONE
+```
+
+### Testing Knot Values
+
+The value of a knot (0 or 1) can be used to *conditionally* show content.
+
+the choice will show the text or not based on the name of the knot.
+
+Combining diverts and knots, choices can also be conditionally shown. Because Knots have unique names, code can check if they have been visited or not.
+
+### Multiple Conditionals
+
+Conditionals checking if a knot has been visited can also be used together, checking if the player has seen (or not) a set of different knots.
+
+These can create a series of choices that have to be progressed through in order to continue, looping back and checking if other knots have been seen yet or not.
+
+### Advanced Choices
+
+Knot labels are not strictly Boolean (true or false) values. They are actually integers (numbers) and a count of how many times the player has seen the knot.
+
+```ink
+-> Pizza_Choices
+=== Pizza_Choices ===
++ [Pizza?]
+    -> Pizza
++ {Pizza > 0} [Salad?]
+    We picked salad.
+    -> DONE
+
+=== Pizza ===
+He shook his head. "I don't like pizza."
+-> Pizza_Choices
+```
+
+Testing if the value of the knot label is less than one is the same as testing if it has not been seen yet. If it has been seen multiple times, the value will be higher.
+
+Testing for multiple values allows for repeating the loop between choices and knots, allowing for the same choice to be chosen and the outcome changing when repeated.
+
+### Working with Alternatives
+
+It is possible to save the result of an alternative in Ink. However, it cannot be the initial value of a variable. The reason for this is that alternatives collapse their possibilities when played; before the story starts, each alternative is all of its possible values!
+
+Setting an initial default value is a good approach for working with alternatives, though. This value can be then be overridden by a single line of code that changes the value of the variable.
+
+```ink
+VAR day = ""
+
+~ day = "{~Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday}"
+```
+
+The variable *day* would then retain whatever element was chosen by the shuffle until it was changed again by another line of code or the shuffle was used again in the same way.
+
+---
+
+## Try It
+
+This chapter’s examples show off the power of variables, a concept used in many other scripting languages. Working with variables in Ink will allow you to create content that could be difficult (or even impossible!) to make otherwise. Using variables in your stories will also help you practice for other kinds of programming work.
+
+If you are already familiar with how variables in other coding languages work, it is worth practicing with Ink’s variables to understand the similarities and differences between how Ink handles them in comparison to other languages.
+
+To practice with Ink’s variables, we offer the following exercises:
+
+First, create an Ink story that uses at least two numerical variables.  Display the starting value of both of the variables to your player. Change both of those variables at least once throughout the story and show the new values to your player. Make sure to use other kinds of Ink content, such as choices, knots, and diverts (Chapter 4) as well to create a story that makes sense and is fun to read through!
+
+Next, revise your story and add at least one string to it. Display the starting value of the string to your player at some point in the story. Then, at some point in the story, offer your player a branching set of choices that can change the value of the string to one of at least two different options.  Once the string’s value has been changed, show it to your player again.
+
+Finally, revise your story and add at least one boolean to it. Create at least one place in the story where the value of that boolean can be changed based on your player’s choices. Then, at some point in the story, use conditional logic that tests whether the value of the boolean is true or false and does something based on the value of the variable.

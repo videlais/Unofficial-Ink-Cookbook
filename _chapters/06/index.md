@@ -1,5 +1,5 @@
 ---
-title: "It's All Variable"
+title: "Conditionals"
 order: 6
 chapter_number: 6
 layout: chapter

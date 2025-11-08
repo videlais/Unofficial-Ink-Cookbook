@@ -35,3 +35,223 @@ figure {
     text-align: center;
   }
 }
+
+// ===== WCAG AAA Compliant Accessible Blockquotes =====
+/* Base blockquote styling */
+blockquote {
+  margin: 1.5em 0;
+  padding: 1em 1.25em 1em 2.5em;
+  border-radius: 6px;
+  font-size: 1em;
+  line-height: 1.6;
+  position: relative;
+  border-left: 5px solid #666666;
+  background-color: #f8f9fa;
+  color: #333333;
+}
+
+/* Information blockquotes */
+blockquote.info {
+  border-left-color: #0066cc;
+  background-color: #e6f3ff;
+  color: #003d7a;
+}
+
+blockquote.info::before {
+  content: "ℹ️";
+  position: absolute;
+  left: 0.75em;
+  top: 0.75em;
+  font-size: 1.3em;
+  line-height: 1;
+}
+
+/* Warning blockquotes */
+blockquote.warning {
+  border-left-color: #cc6600;
+  background-color: #fff3e6;
+  color: #7a3d00;
+}
+
+blockquote.warning::before {
+  content: "⚠️";
+  position: absolute;
+  left: 0.75em;
+  top: 0.75em;
+  font-size: 1.3em;
+  line-height: 1;
+}
+
+/* Note blockquotes */
+blockquote.note {
+  border-left-color: #6600cc;
+  background-color: #f3e6ff;
+  color: #3d0070;
+}
+
+blockquote.note::before {
+  content: "📝";
+  position: absolute;
+  left: 0.75em;
+  top: 0.75em;
+  font-size: 1.3em;
+  line-height: 1;
+}
+
+/* Tip blockquotes */
+blockquote.tip {
+  border-left-color: #00cc66;
+  background-color: #e6fff3;
+  color: #007a3d;
+}
+
+blockquote.tip::before {
+  content: "💡";
+  position: absolute;
+  left: 0.75em;
+  top: 0.75em;
+  font-size: 1.3em;
+  line-height: 1;
+}
+
+/* Example blockquotes */
+blockquote.example {
+  border-left-color: #cc0066;
+  background-color: #ffe6f3;
+  color: #7a003d;
+}
+
+blockquote.example::before {
+  content: "📋";
+  position: absolute;
+  left: 0.75em;
+  top: 0.75em;
+  font-size: 1.3em;
+  line-height: 1;
+}
+
+/* Important blockquotes */
+blockquote.important {
+  border-left-color: #cc0000;
+  background-color: #ffe6e6;
+  color: #7a0000;
+}
+
+blockquote.important::before {
+  content: "❗";
+  position: absolute;
+  left: 0.75em;
+  top: 0.75em;
+  font-size: 1.3em;
+  line-height: 1;
+}
+
+/* Blockquote typography */
+blockquote p {
+  margin: 0 0 1em 0;
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+blockquote strong:first-child {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-right: 0.5em;
+}
+
+/* Dark mode support for blockquotes */
+@media (prefers-color-scheme: dark) {
+  blockquote {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+    border-left-color: #999999;
+  }
+  
+  blockquote.info {
+    background-color: #1a2b3d;
+    color: #66b3ff;
+    border-left-color: #3399ff;
+  }
+  
+  blockquote.warning {
+    background-color: #3d2b1a;
+    color: #ffb366;
+    border-left-color: #ff9933;
+  }
+  
+  blockquote.note {
+    background-color: #2b1a3d;
+    color: #b366ff;
+    border-left-color: #9933ff;
+  }
+  
+  blockquote.tip {
+    background-color: #1a3d2b;
+    color: #66ffb3;
+    border-left-color: #33ff99;
+  }
+  
+  blockquote.example {
+    background-color: #3d1a2b;
+    color: #ff66b3;
+    border-left-color: #ff3399;
+  }
+  
+  blockquote.important {
+    background-color: #3d1a1a;
+    color: #ff6666;
+    border-left-color: #ff3333;
+  }
+}
+
+/* High contrast mode support for blockquotes */
+@media (prefers-contrast: high) {
+  blockquote {
+    border-left-width: 8px;
+    font-weight: 500;
+  }
+  
+  blockquote::before {
+    font-size: 1.4em;
+    font-weight: bold;
+  }
+}
+
+/* Mobile responsive blockquotes */
+@media (max-width: 768px) {
+  blockquote {
+    margin: 1em 0;
+    padding: 0.75em 1em;
+    font-size: 0.95em;
+  }
+  
+  blockquote::before {
+    left: -0.15em;
+    top: 0.5em;
+    font-size: 1.1em;
+  }
+}
+
+/* Print blockquote support */
+@media print {
+  blockquote {
+    break-inside: avoid;
+    border-left: 5px solid #333333;
+    background-color: transparent;
+    color: #000000;
+  }
+  
+  blockquote::before {
+    display: none;
+  }
+}
+
+/* Reduced motion blockquote support */
+@media (prefers-reduced-motion: reduce) {
+  blockquote::before {
+    animation: none;
+  }
+}

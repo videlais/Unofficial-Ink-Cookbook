@@ -1,5 +1,5 @@
 ---
-title: "Functions"
+title: "Tunnels and Threads"
 order: 8
 chapter_number: 8
 layout: chapter

@@ -1,0 +1,50 @@
+<!-- 
+Enhanced blockquote styling with accessibility
+Automatically detects blockquotes starting with specific keywords and applies:
+- CSS classes for visual styling (.info, .warning, .note, .tip, .example, .important)
+- ARIA roles and labels for screen readers
+- Icons and semantic meaning
+
+Usage: Start blockquotes with **Information**, **Warning**, **Note**, **Tip**, **Example**, or **Important**
+-->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Auto-detect and style blockquotes based on content
+  const blockquotes = document.querySelectorAll('blockquote');
+  
+  blockquotes.forEach(function(blockquote) {
+    const firstStrong = blockquote.querySelector('strong:first-child, p:first-child > strong:first-child');
+    
+    if (firstStrong) {
+      const text = firstStrong.textContent.toLowerCase().trim();
+      
+      // Add appropriate class based on the strong text content
+      if (text.includes('information')) {
+        blockquote.classList.add('info');
+        blockquote.setAttribute('role', 'note');
+        blockquote.setAttribute('aria-label', 'Information');
+      } else if (text.includes('warning')) {
+        blockquote.classList.add('warning');
+        blockquote.setAttribute('role', 'alert');
+        blockquote.setAttribute('aria-label', 'Warning');
+      } else if (text.includes('note')) {
+        blockquote.classList.add('note');
+        blockquote.setAttribute('role', 'note');
+        blockquote.setAttribute('aria-label', 'Note');
+      } else if (text.includes('tip')) {
+        blockquote.classList.add('tip');
+        blockquote.setAttribute('role', 'complementary');
+        blockquote.setAttribute('aria-label', 'Tip');
+      } else if (text.includes('example')) {
+        blockquote.classList.add('example');
+        blockquote.setAttribute('role', 'region');
+        blockquote.setAttribute('aria-label', 'Example');
+      } else if (text.includes('important')) {
+        blockquote.classList.add('important');
+        blockquote.setAttribute('role', 'alert');
+        blockquote.setAttribute('aria-label', 'Important');
+      }
+    }
+  });
+});
+</script>

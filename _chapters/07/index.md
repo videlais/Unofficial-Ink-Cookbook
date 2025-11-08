@@ -1,5 +1,5 @@
 ---
-title: "Conditionals"
+title: "Functions"
 order: 7
 chapter_number: 7
 layout: chapter
@@ -9,233 +9,232 @@ layout: chapter
 
 By the end of this chapter, you will be able to:
 
-- Compare knot parameters with Ink functions and their capabilities
-- Design functions that accept parameters and return values
-- Apply the pass-by-reference technique to modify variables
-- Utilize built-in functions like RANDOM(), POW(), and FLOOR()
-- Implement proper variable naming conventions to avoid conflicts
+- Construct tunnels to navigate through story sections and return
+- Design nested tunnels for complex narrative structures
+- Implement threads to collapse weaves into central points
+- Contrast tunnels and threads to select the appropriate technique
+- Combine knots and diverts with tunnels and threads effectively
 
 ## Summary
 
-In this chapter, you will learn about knot parameters, functions, and the differences between the two.
+In this chapter, you will learn about Tunnels, Threads, and how they can be used in larger projects.
 
 ---
 
 - [Learning Objectives](#learning-objectives)
 - [Summary](#summary)
-- [Functions](#functions)
-- [Knot Parameters](#knot-parameters)
-  - [Knot Parameter Code Example](#knot-parameter-code-example)
-- [Ink Functions](#ink-functions)
-  - [Ink Function Rules](#ink-function-rules)
-- [Passing By Reference](#passing-by-reference)
-- [Variable Naming Issues](#variable-naming-issues)
-- [Built-in Functions](#built-in-functions)
-  - [`POW(number, to-the-power-of)`](#pownumber-to-the-power-of)
-  - [`RANDOM(min, max)`](#randommin-max)
-  - [`FLOOR()`](#floor)
-  - [`INT()`](#int)
-  - [`FLOAT()`](#float)
-  - [`CHOICE_COUNT()`](#choice_count)
-  - [`TURNS()`](#turns)
-  - [`SEED_RANDOM(seed)`](#seed_randomseed)
+- [Tunnels](#tunnels)
+  - [Tunnel Code Example](#tunnel-code-example)
+  - [Tunnels to Tunnels](#tunnels-to-tunnels)
+- [Threads](#threads)
+  - [Thread Code Example](#thread-code-example)
+  - [Combining Knots](#combining-knots)
 
 ---
 
-## Functions
+## Tunnels
 
-To help with processing data, Ink provides ways to pass information between different parts of a story. When working with variables, these provide a way to process or test data in different ways.
+Because of the complex nature of connections between knots and diverts, sometimes a way to move "through" a complex weave is needed. Tunnels provide that.
 
-In programming terminology, a *function* is some section of code designed around some task. It borrows the term from mathematical functions in which data is changed through applying a set of rules.
+In Ink, it can often be useful to create a knot that is returned to multiple times throughout a flow. Instead of a complex series of diverts and knots, Ink has functionality to quickly go to a knot and then return called a tunnel.
 
-In Ink, the concept of functions comes in two ways. The first is in Knot Parameters and then second is in Functions themselves.
-
-For Ink, these divisions help authors to think through how to divide up their code and calculations in ways that may be more narrative or mechanically focused, depending on their needs.
-
----
-
-## Knot Parameters
-
-When working with functions and their related concepts, the most commonly associated term is *parameters*. In programming terminology, a *parameter* is one or more values passed to a function or other function-like programming concept. In Ink, this means that data can be passed to a knot that can then act on it in some way.
-
-Data is passed as a parameter to a knot through including its name and opening and closing parentheses. Within these, a value or the name of an existing variable can be placed. Multiple parameters are separated by commas.
-
-Within the knot itself, the new names for the values passed it as parameters are defined through open and closing parentheses. These new named variables exist within the context of the knot and act like temporary variables -- they can only be used within the knot itself.
-
-### Knot Parameter Code Example
+As it names implies, tunnels are connections between sections where the flow is diverted to a knot or stitch and then returns again. The player passes through the "tunnel" and out the other side back to the same or different place in the story.
 
 ```ink
--> Greeting("Hi, there!")
+-> Show_Day -> Show_Time -> DONE
+```
 
-=== Greeting(greetingPhrase) ===
-I smiled when I saw him. He said, "{greetingPhrase}"
+Tunnels are created using the divert (arrow) to "go to" a knot or stitch and then a second divert after the name of the knot or stitch.
+
+```ink
+=== Show_Day ===
+Today is {~Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday}
+->->
+```
+
+To return from the tunnel, use two divert symbols in a row. This will "twice divert" back to the original location.
+
+### Tunnel Code Example
+
+```ink
+-> Show_Day -> Show_Time -> DONE
+
+=== Show_Day ===
+Today is {~Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday}
+->->
+
+=== Show_Time ===
+It is {~1|2|3|4|5|6|7|8|9|10|11|12} {~am|pm}
+->->
+```
+
+In the above example, the first divert `-> Show-Day` moves to the knot **Show_Day**.
+
+Inside this knot, a shuffle alternative is used to select a random day from the existing elements.
+
+Next, a tunnel is returned to via the double-divert, `->->`.
+
+Back to the original place in the code, the next divert, `-> Show_Time` is run. This moves to the knot **Show_Time**.
+
+This uses two shuffles to first pick a number between 1 and 12 and then to pick either "am" or "pm".
+
+Next, the tunnel is returned to using another double-divert `->->`.
+
+In order, the above code runs the knot **Show_Day**, returns, runs the **Show_Time**, and then returns again before the story ends with `-> DONE`.
+
+### Tunnels to Tunnels
+
+As tunnels use diverts and knots, it is also possible to include tunnels inside other tunnels. This is completely safe!
+
+```ink
+-> One -> Two -> Three -> Four -> Five -> Six -> DONE
+
+=== One ===
+It <>
+->->
+
+=== Two ===
+starts <>
+->->
+
+=== Three ===
+with <>
+->->
+
+=== Four ===
+one <>
+->->
+
+=== Five ===
+thing.
+->->
+
+=== Six ===
+
+-> SixOne -> SixTwo -> SixThree -> SixFour ->->
+
+= SixOne
+I <>
+->->
+
+= SixTwo
+don't <>
+->->
+
+= SixThree
+know <>
+->->
+
+= SixFour
+why.
+->->
+```
+
+In the above, complicated example, the story starts with one tunnel as a series of diverts: `-> One -> Two -> Three -> Four -> Five -> Six -> DONE`.
+
+Each numbered knot adds a single word (using glue) and then returns to the tunnel. Finally, the tunnel reaches knot **Six**.
+
+Inside **Six** are four stitches. These are used as part of an internal tunnel. All of these add their own words.
+
+Finally, the inner **Six** tunnel returns back to the original and the story content ends.
+
+Combined together, it creates the following out:
+
+```ink
+It starts with one thing.
+
+I don't know why.
+```
+
+**Reminder:** The use of `<>` is *glue*. It runs the next line into the current, *gluing* them together. It can be used across knots and stitches to combine output on one line.
+
+---
+
+## Threads
+
+*Threads* provide a way to "collapse" a weave and "pull together" knots and diverts.
+
+In some ways, threads are the opposite of tunnels and using diverts. Instead of "going out," threads "pull together" content as part of a flow.
+
+To use threading, the divert arrow changes and points in, `<-`.
+
+```ink
+<- FirstChoice
+<- SecondChoice
+<- ThirdChoice
+```
+
+Using threads helps separate knots into logical sections of code for the author and developer and then "thread" them all together again.
+
+### Thread Code Example
+
+```ink
+This is a thread example:
+<- FirstChoice
+<- SecondChoice
+<- ThirdChoice
+
+=== FirstChoice ===
+* Pick me!
+-> CollectChoices
+
+=== SecondChoice ===
+* No, pick me!
+-> CollectChoices
+
+=== ThirdChoice ===
+* No, this one! Me!
+-> CollectChoices
+
+=== CollectChoices ===
+All of the above knots are collected (threaded together) and end up here!
 -> DONE
 ```
 
-In the above example, the value "Hi, there!" is being passed to the knot **Greeting**. Inside the knot, the temporary variable *greetingPhrase* is given this value. It can then be accessed inside the knot to, in the above example, display the value of the variable when the story is run.
+In the above example, the story starts and three threads are used: `<- FirstChoice`, `<- SecondChoice`, and `<- ThirdChoice`.
 
----
+All three of these point to same knot **CollectChoices**, and thus are all "threaded" to that center point.
 
-## Ink Functions
+### Combining Knots
 
-Functions in Ink act like knots with parameters. They can define the name of variables and those act as temporarily variables within their context. They can also perform small tasks and make calculations using code. However, knots with parameters and functions have a small very key difference: *functions can return data*.
-
-Functions are a special type of knot but use the keyword `function`. This also enables them to use additional functionality not available to regular knots and stitches: returning data using the `return` keyword.
-
-Similar to many other scripting languages, functions in Ink can be called, perform some task, and then return the result of the task.
+While a common example might use choices, this need not be the case. Threads can also be used for text content.
 
 ```ink
-Today is {getRandomDay()}.
+This is a thread example:
+<- FirstChoice
+<- SecondChoice
+<- ThirdChoice
 
-=== function getRandomDay() ===
-~ return "{~Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday}"
-```
+=== FirstChoice ===
+Show this thing!
+-> CollectChoices
 
-In programming terminology, the phrase "calling a function" means running any code inside that function. In common syntax, it also means including opening and closing parentheses after the name of the function. For example, to call the function **getRandomDay**, the form would be **getRandomDay()**.
+=== SecondChoice ===
+Show this!
+-> CollectChoices
 
-### Ink Function Rules
+=== ThirdChoice ===
+Now show me!
+-> CollectChoices
 
-While functions enable the useful feature of being able to react and respond with a return value, they also have some rules.
-
-Functions cannot:
-
-- contain stitches
-- use diverts or offer choices
-
-Functions can:
-
-- call other functions
-- include printed content
-- return a value of any type
-- recurse safely
-
-In Ink, functions are the most useful as tools to calculate or adjust values. As they cannot contain diverts or use choices, this makes them ideal as a way to logically divide up more programming-related tasks to better organize a project.
-
----
-
-## Passing By Reference
-
-Functions in Ink are also capable of another common programming concept called *passing by reference*. Normally, values are copied when a function is used. Within the function, some action is taken and maybe a value is returned. The values passed to the function, however, do not change inside of the function itself.
-
-Using a concept called passing by reference, values *passed* to a function can be changed. The term "by reference" takes is meaning from an early programming term of where the location of a variable in computer memory was its *reference*. By knowing a variable's reference, it was possible to change its value directly.
-
-In Ink, this terminology means that using the keyword `ref` a variable is available to be changed inside of the function. Instead of copying its value, its reference is passed to the function.
-
-```ink
-VAR name = "Dan"
-
-The current name is {name}.
-
-The new name is {changeName(name)} {name}.
-
-=== function changeName(ref newName) ===
-~ newName = "Fred"
-```
-
----
-
-## Variable Naming Issues
-
-As was mentioned in an earlier chapter, variables created using the keyword `VAR` are global. This means they can be accessed anywhere in a story. This also means that their names are reserved. **Two variables cannot have the same name.**
-
-In the earlier section explaining how parameters are temporary variables within a knot or function, this means *they cannot share names with other, existing variables in a project*. Naming variables and parameters, then, becomes a matter of trying to use the most descriptive names for their purpose.
-
-To help avoid this issue, it is recommended to name the parameters of a function or knot using the name of the knot itself.
-
-```ink
--> Greeting("Hi, there!")
-
-=== Greeting(greetingPhrase) ===
-I smiled when I saw him. He said, "{greetingPhrase}"
+=== CollectChoices ===
 -> DONE
 ```
 
-In the above code, the variable needed was *phrase*. However, as it is a temporary variable (because it is a knot parameter), it was named based on the knot, **Greeting**, it is associated with internally. This became *greetingPhrase*.
-
-In camel-case naming is not the preferred style, using an underscore is another choices. The above code could have also been written as the following:
+In fact, the earlier tunnel example could be re-written as example using threads instead:
 
 ```ink
--> Greeting("Hi, there!")
+<- Show_Day
+<- Show_Time
 
-=== Greeting(greeting_phrase) ===
-I smiled when I saw him. He said, "{greeting_phrase}"
+=== Show_Day ===
+Today is {~Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday}
+-> Update
+
+=== Show_Time ===
+It is {~1|2|3|4|5|6|7|8|9|10|11|12} {~am|pm}
+-> Update
+
+=== Update ===
 -> DONE
-```
-
-**Reminder:** Variable names *cannot* contain spaces. The two common approaches to naming variables as to use alternating capital letters or underscores to separate words in the name of a variable.
-
----
-
-## Built-in Functions
-
-To help with common mathematical operations, Ink has several built-in functions that can be called anywhere in a project. They include the following:
-
-### `POW(number, to-the-power-of)`
-
-The function `POW()` computes and returns a number multiplied by itself the number of times supplied by the second parameter. It is the to-the-power-of function.
-
-```ink
-{ POW(4, 2) }
-```
-
-### `RANDOM(min, max)`
-
-The `RANDOM()` function returns a random number between ranges of the minimum and maximum numbers passed to it.
-
-```ink
-{ RANDOM(1, 6) }
-```
-
-### `FLOOR()`
-
-The `FLOOR()` function rounds down a decimal number to the nearest whole number.
-
-```ink
-{ FLOOR(3.14159) }
-```
-
-### `INT()`
-
-The `INT()` function converts a decimal number into a whole number by removing its decimal value.
-
-```ink
-{ INT(3.01) }
-```
-
-### `FLOAT()`
-
-The `FLOAT()` function converts a whole number into a decimal number, adding a decimal value to it.
-
-```ink
-{ FLOAT(3) }
-```
-
-### `CHOICE_COUNT()`
-
-The `CHOICE_COUNT()` function returns the number of choices within the recent section of project.
-
-```ink
-* {false} Option A
-* {true} Option B
-* {CHOICE_COUNT() == 1} Option C
-```
-
-### `TURNS()`
-
-The `TURNS()` function returns the number of "turns" (user actions).
-
-```ink
-{ TURNS() } // 0
-
-* Option 1
-
-{ TURNS() } // 1
-```
-
-### `SEED_RANDOM(seed)`
-
-The function `SEED_RANDOM()` accepts a value to "seed" the `RANDOM()` function. This function can be used to "lock" the randomness of a flow from a single value.
-
-```ink
-~ SEED_RANDOM(255)
 ```

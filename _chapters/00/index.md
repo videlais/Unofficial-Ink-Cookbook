@@ -5,6 +5,10 @@ chapter_number: 0
 layout: chapter
 ---
 
+## Chapter Summary
+
+This introduction explains who this book is for, the style conventions used throughout, and how to read and interpret the various formatting elements you'll encounter in the chapters.
+
 ## Learning Objectives
 
 By the end of this introduction, you will be able to:
@@ -13,30 +17,38 @@ By the end of this introduction, you will be able to:
 - Recognize the style conventions used throughout the chapters.
 - Distinguish between different types of emphasis and code formatting.
 
-## Summary
+## Table of Contents
 
-This introduction explains who this book is for, the style conventions used throughout, and how to read and interpret the various formatting elements you'll encounter in the chapters.
-
----
-
+- [Chapter Summary](#chapter-summary)
 - [Learning Objectives](#learning-objectives)
-- [Summary](#summary)
+- [Table of Contents](#table-of-contents)
 - [Who This Book is For](#who-this-book-is-for)
+- [What You'll Learn](#what-youll-learn)
 - [Style Conventions](#style-conventions)
-  - [Code](#code)
+  - [Code Example](#code-example)
+  - [Interactive Example](#interactive-example)
   - [Emphasis](#emphasis)
-    - [Concepts](#concepts)
-    - [Representations](#representations)
-- [Other Programming Languages](#other-programming-languages)
+    - [Italics for Emphasis](#italics-for-emphasis)
+    - [Bold for Key Terms](#bold-for-key-terms)
+    - [Inline Code for Syntax](#inline-code-for-syntax)
 - [Notes and Reminders](#notes-and-reminders)
 
 ## Who This Book is For
 
-This is an open educational resource designed for a public audience. Some things such as the ability to navigate the book and copy and paste text are assumed.
+This is an open educational resource designed for a hobbyist or student audience. Some things such as the ability to navigate the book and copy and paste text are assumed.
 
-Wherever possible, terms are explained and examples given. However, as this is an open source book, additional clarification can be requested!
+Wherever possible, terms are explained and examples given. However, as this is an open educational resource, additional clarification or more examples can be requested!
 
-Submit an [Issue](https://github.com/videlais/Unofficial-Ink-Cookbook/issues) to help improve the book for future audiences!
+Found something confusing? Have a suggestion? Submit an [Issue on GitHub](https://github.com/videlais/Unofficial-Ink-Cookbook/issues) to help improve this book for future audiences!
+
+## What You'll Learn
+
+Throughout this book, you'll explore:
+
+- **Basic ink syntax**: Writing stories, creating flow, and understanding structure.
+- **Choices and branching**: Building interactive narratives with player decisions.
+- **Variables and state**: Tracking information and creating dynamic content.
+- **Advanced techniques**: Organizing complex projects and implementing game logic.
 
 ---
 
@@ -44,47 +56,65 @@ Submit an [Issue](https://github.com/videlais/Unofficial-Ink-Cookbook/issues) to
 
 This book uses some style conventions to visually explain concepts.
 
-### Code
+### Code Example
 
-All Ink code is marked in code blocks. It may appear `in-line`, but most code will appear as the following:
+All ink code is marked in code blocks. It may appear `in-line`, but most code will appear as the following:
 
 ```ink
 This is some code.
 This is a second line of code.
 ```
 
+### Interactive Example
+
+In many chapters, ink code examples will be followed by an interactive version of the same code. This interactive player demonstrates how your code will run. You can interact with it using either the mouse (clicking on choices) or via keyboard (using Tab and Enter keys).
+
+{% include ink-player.html
+   story="chapter00/example"
+   title="Example ink"
+   height="350px"
+%}
+
+You'll see examples like this throughout the book to test and explore concepts interactively.
+
 ### Emphasis
 
-#### Concepts
+#### Italics for Emphasis
 
-When introducing terms, it will be given *emphasis*.
+In different places, *emphasis may be repeated to stress importance or connection to other, previous concepts.* For example, when we introduce the concept of *flow* in Chapter 1, it appears in italics to draw your attention.
 
-In different places, *emphasis may repeated to stress importance or connection to other, previous concepts.*
+#### Bold for Key Terms
 
-#### Representations
+Strong emphasis is used for important terms. For example, when formally defining a concept in a chapter, it may appear with **stronger emphasis** like **flow**. This indicates a term you should remember.
 
-Strong emphasis is used for **story knots** and **stitches**. As these are the different sections of a story, they are given **strong emphasis**
+#### Inline Code for Syntax
 
-Diverts are represented as in-line code blocks. For example, the divert `-> Example` would be shown with both its arrow and the name of the knots or stitch it uses.
-
-Keywords in Ink also appear throughout using in-line code blocks. For example, `VAR` would appear like this.
+Inline code like `VAR` is used for ink keywords, syntax elements, and short code snippets. This helps distinguish code from regular text. For example: "Use the `*` symbol to create a choice."
 
 Choices are written using *emphasis*. However, their output is enclosed in quotation marks.
 
----
-
-## Other Programming Languages
-
-When discussing other scripting or programming languages such as JavaScript or C#, *emphasis* is used for properties. Strong emphasis is used for the name of objects, methods, or other complex data structures.
+In Chapter 1, you'll begin writing your first ink stories using these formatting conventions.
 
 ---
 
 ## Notes and Reminders
 
-Notes appear as blockquotes:
+Throughout this book, you'll encounter different types of callout boxes to highlight important information.
 
-> **Note:** Notes appear in blockquotes throughout the book to clarify or explain certain concepts.
+For notes, the following blockquote style will be used.
 
-Reminders also appear as blockquotes:
+> **Note** Notes clarify or explain certain concepts. They provide additional context without interrupting the main flow.
 
-> **Reminder:** Some chapters have reminders on previous topics and concepts covered in the book.
+For important information, the following blockquote style will be used.
+
+> **Important** Important callouts highlight critical information you should pay special attention to.
+
+For helpful suggestions and best practices, the following style will appear.
+
+> **Tip** Tips offer helpful suggestions and best practices to improve your ink writing.
+
+Common mistakes and potential issues will appear as the following:
+
+> **Warning** Warnings alert you to common mistakes or potential issues to avoid.
+
+These enhanced callouts use the formatting from the OpenTextbook theme to make important information easy to spot.
