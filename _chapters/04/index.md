@@ -5,6 +5,10 @@ chapter_number: 4
 layout: chapter
 ---
 
+## Chapter Summary
+
+In this chapter, you will learn about variables in ink—how to store and manipulate data to create dynamic, stat-based narratives. You'll discover how to use global, temporary, and constant variables to track player statistics, story state, and make decisions based on conditional logic. Variables transform ink from a simple branching narrative tool into a full programming language capable of complex game mechanics.
+
 ## Learning Objectives
 
 By the end of this chapter, you will be able to:
@@ -14,70 +18,135 @@ By the end of this chapter, you will be able to:
 - Implement conditional logic using comparison operators
 - Construct switch statements for multi-condition testing
 - Evaluate knot values to create conditional story branches
+- Display variable values within your narrative
 
-## Summary
+## Table of Contents
 
-In this chapter, you will learn about global, temporary, and constant variables in Ink and how to use them for different purposes.
+- [Chapter Summary](#chapter-summary)
+- [Learning Objectives](#learning-objectives)
+- [Table of Contents](#table-of-contents)
+- [Introduction](#introduction)
+- [Working with Code](#working-with-code)
+  - [Single Line Code](#single-line-code)
+  - [Code Example 4.1: Single Line Operations](#code-example-41-single-line-operations)
+  - [Multiple Line Code](#multiple-line-code)
+  - [Code Example 4.2: Multiple Line Operations](#code-example-42-multiple-line-operations)
+- [Variables](#variables)
+  - [Displaying Variable Values](#displaying-variable-values)
+  - [Code Example 4.3: Displaying Variables](#code-example-43-displaying-variables)
+  - [Types of Data](#types-of-data)
+    - [Numbers](#numbers)
+    - [Code Example 4.4: Working with Numbers](#code-example-44-working-with-numbers)
+    - [Interactive Example 4.4: Numeric Variables](#interactive-example-44-numeric-variables)
+    - [Strings](#strings)
+    - [Code Example 4.5: Working with Strings](#code-example-45-working-with-strings)
+    - [Booleans](#booleans)
+    - [Code Example 4.6: Working with Booleans](#code-example-46-working-with-booleans)
+    - [Interactive Example 4.6: Boolean Variables](#interactive-example-46-boolean-variables)
+    - [Text of Diverts](#text-of-diverts)
+    - [Code Example 4.7: Divert Variables](#code-example-47-divert-variables)
+    - [Knots as Values](#knots-as-values)
+    - [Code Example 4.8: Knot Values](#code-example-48-knot-values)
+    - [Interactive Example 4.8: Knot Values](#interactive-example-48-knot-values)
+  - [Types of Variables](#types-of-variables)
+    - [Global Variables](#global-variables)
+    - [Code Example 4.9: Global Variables](#code-example-49-global-variables)
+    - [Interactive Example 4.9: Global Variables](#interactive-example-49-global-variables)
+    - [Temporary Variables](#temporary-variables)
+    - [Code Example 4.10: Temporary Variables](#code-example-410-temporary-variables)
+    - [Constant Variables](#constant-variables)
+    - [Code Example 4.11: Constant Variables](#code-example-411-constant-variables)
+    - [Interactive Example 4.11: Constant Variables](#interactive-example-411-constant-variables)
+- [Conditional Logic](#conditional-logic)
+  - [Comparison Operators](#comparison-operators)
+  - [Code Example 4.12: Basic Conditionals](#code-example-412-basic-conditionals)
+  - [Interactive Example 4.12: Basic Conditionals](#interactive-example-412-basic-conditionals)
+  - [If-Else Logic](#if-else-logic)
+  - [Code Example 4.13: If-Else Statements](#code-example-413-if-else-statements)
+  - [Interactive Example 4.13: If-Else Logic](#interactive-example-413-if-else-logic)
+  - [Switch Statements](#switch-statements)
+  - [Code Example 4.14: Switch Statements](#code-example-414-switch-statements)
+  - [Interactive Example 4.14: Switch Statements](#interactive-example-414-switch-statements)
+  - [Testing Knot Values](#testing-knot-values)
+  - [Code Example 4.15: Conditional Knot Testing](#code-example-415-conditional-knot-testing)
+  - [Interactive Example 4.15: Knot-Based Conditionals](#interactive-example-415-knot-based-conditionals)
+  - [Advanced Conditional Choices](#advanced-conditional-choices)
+  - [Code Example 4.16: Conditional Choices](#code-example-416-conditional-choices)
+  - [Working with Alternatives and Variables](#working-with-alternatives-and-variables)
+  - [Code Example 4.17: Alternatives in Variables](#code-example-417-alternatives-in-variables)
+- [Summary](#summary)
+- [Review Questions](#review-questions)
+- [Try It](#try-it)
 
 ---
 
-- [Learning Objectives](#learning-objectives)
-- [Summary](#summary)
-- [Working with Code](#working-with-code)
-- [Single Line](#single-line)
-- [Multiple lines](#multiple-lines)
-- [Variables](#variables)
-  - [Types of Data](#types-of-data)
-    - [Numbers](#numbers)
-    - [Strings](#strings)
-    - [Booleans](#booleans)
-    - [Text of Diverts](#text-of-diverts)
-    - [Knots](#knots)
-  - [Types of Variables](#types-of-variables)
-    - [Global Variables](#global-variables)
-    - [Temporary Variables](#temporary-variables)
-    - [Constant Variables](#constant-variables)
-- [Conditional Logic](#conditional-logic)
-  - [Chaining Testing (Switch Statements)](#chaining-testing-switch-statements)
-  - [Testing Knot Values](#testing-knot-values)
-  - [Multiple Conditionals](#multiple-conditionals)
-  - [Advanced Choices](#advanced-choices)
-  - [Working with Alternatives](#working-with-alternatives)
-- [Try It](#try-it)
+## Introduction
+
+In Chapters 1 through 3, you learned how to create dynamic narratives using choices, knots, diverts, and alternatives. These tools allow you to build branching stories with variety and replayability.
+
+However, you may have noticed a limitation: there's no way to track player decisions over time, accumulate statistics, or make story branches depend on accumulated choices rather than individual moments. For example, how would you create a health system, track a player's relationship with different characters, or unlock content based on collecting items?
+
+**Variables** solve these problems by giving ink the power to remember and track information throughout your story. A variable is a named container that holds a value—like a health score, a character's name, or whether the player has found a key. Variables allow you to create RPG-style stats, inventory systems, relationship trackers, and sophisticated game mechanics within your narratives.
+
+In this chapter, you'll learn about three types of variables (**global**, **temporary**, and **constant**), different kinds of data they can store (**numbers**, **strings**, **booleans**), and how to use **conditional logic** to make story decisions based on variable values. You'll also discover how to combine variables with the ink features you've already learned to create truly interactive, stat-driven narratives.
+
+> **Note** If an interactive example does not load, you can view the [source code]({{ site.baseurl }}/_examples/chapter04/) directly. Use Tab and Enter keys to navigate choices in the interactive examples.
 
 ---
 
 ## Working with Code
 
-Like many other scripting languages, Ink also has the concepts of variables. Used to store and react to values during a program, variables in Ink can take different forms and be used for various uses.
+Like many other scripting languages, ink provides the concept of **variables**—containers that store and track values during your story. Variables in ink can take different forms and serve various purposes, from tracking health points to remembering a character's name.
 
-When using variables in Ink, more direct coding is required. While variables can be created using their keywords, as covered later in this chapter, changing their values requires knowing more about how Ink handles its own programming.
+When using variables in ink, you'll write more direct code than you have with choices and diverts. While variables are declared using keywords (covered later in this chapter), changing their values requires understanding how ink handles programming operations.
 
-Previously, programming in Ink consisted of using Knots, Diverts, and Alternatives. These were used to move around in a story or cycle through a collection of values. When working with variables and manipulating their values in Ink, this changes and takes on two different forms: single line or multiple lines.
+> **Important** Previously, your ink "programming" consisted of knots, diverts, and alternatives—structural elements for navigation and variation. Variables introduce true computational programming: math, logic, and state tracking.
 
----
+Ink code that manipulates variables takes two forms: **single line** or **multiple line** operations.
 
-## Single Line
+### Single Line Code
 
-A single line of programming in Ink starts with the tilde character, ~. It signifies that something will happen only on that single line and Ink should show or otherwise parse the next line as it normally work outside of programming.
+A single line of programming in ink starts with the tilde character, `~`. It signifies that an operation happens only on that line, and ink should process the next line normally.
+
+> **Tip** Think of the tilde (`~`) as ink's way of saying "this line is code, not story text." It's how you tell ink to perform calculations or change variable values without displaying anything to the player.
+
+### Code Example 4.1: Single Line Operations
 
 ```ink
+VAR health = 10
+
+You take damage!
 ~ health = health - 1
+
+Your current health is {health}.
 ```
 
----
+The tilde line subtracts 1 from health without displaying anything. Only the narrative text and the health value appear to the player.
 
-## Multiple lines
+### Multiple Line Code
 
-For programming that may take multiple lines, opening and closing curly brackets can be used to mark it off within other Ink code. Such usage is for multiple conditional testing (which is covered in this chapter) and extended uses of alternatives. However, it is important to be aware of how it used before it is explained in greater detail later.
+For programming that spans multiple lines, opening and closing curly brackets `{}` create a code block. This is used for conditional testing (covered later) and complex logic.
+
+> **Note** Multi-line code blocks are especially useful for if-else logic, where you need to test conditions and execute different code based on the results.
+
+### Code Example 4.2: Multiple Line Operations
 
 ```ink
-{- health > 0:
-    health = health - 1
- - else health <= 0:
-    You die.
+VAR health = 5
+
+You take a devastating hit!
+
+{health > 0:
+    ~ health = health - 1
+    You're hurt but still standing. Health: {health}
+- else:
+    You collapse, defeated.
     -> DEATH
 }
+
+== DEATH ==
+Game Over.
+-> END
 ```
 
 ---
@@ -89,7 +158,320 @@ In programming terminology, a variable is something that can change. Often, the 
 The values of variables can be shown through using opening and closing curly brackets around them. This allows an easy way to include different values such as statistics for players to see before they make decisions.
 
 ```ink
-You have {health}.
+---
+
+## Variables
+
+In programming terminology, a **variable** is something that can change. A common metaphor is a bucket or container: the variable represents a value while the program runs. You can "look into" the bucket to see its value or "change" what's inside by replacing it or adding to it.
+
+> **Note** The term "variable" comes from "varies"—these containers hold values that can vary (change) as your story progresses.
+
+### Displaying Variable Values
+
+Variable values can be displayed by placing the variable name within curly brackets, `{}`. This allows you to show statistics, scores, or other tracked information to players.
+
+### Code Example 4.3: Displaying Variables
+
+```ink
+VAR health = 100
+VAR name = "Hero"
+VAR hasKey = false
+
+{name} stands ready for adventure.
+Current health: {health}
+Carrying a key: {hasKey}
+```
+
+When this runs, the player sees:
+```
+Hero stands ready for adventure.
+Current health: 100
+Carrying a key: false
+```
+
+### Types of Data
+
+Ink supports several different types of data that variables can store. Understanding these **data types** is crucial for using variables effectively.
+
+#### Numbers
+
+Variables can hold any numeric value, including both whole numbers (integers) and decimal numbers (floats).
+
+> **Tip** Ink handles both integers (1, 5, 100) and decimals (4.5, 0.25, 99.9) seamlessly. Use decimals when you need precision, like for damage multipliers or percentage calculations.
+
+Numbers support mathematical operations:
+- **Addition:** `+`
+- **Subtraction:** `-`
+- **Multiplication:** `*`
+- **Division:** `/`
+- **Modulo (remainder):** `%`
+
+### Code Example 4.4: Working with Numbers
+
+```ink
+VAR gold = 100
+VAR price = 25
+VAR discount = 0.5
+
+You have {gold} gold coins.
+
+~ gold = gold - price
+After buying the sword: {gold} gold
+
+~ gold = gold * discount
+After the mysterious curse halves your gold: {gold} gold
+
+VAR remainder = 10 % 3
+Ten divided by three leaves a remainder of {remainder}.
+```
+
+> **Important** The modulo operator (`%`) returns the remainder after division. For example, `10 % 3 = 1` because 10 divided by 3 is 3 with a remainder of 1. This is useful for cycling through values or checking if numbers are even/odd.
+
+### Interactive Example 4.4: Numeric Variables
+
+{% include ink-player.html
+   story="chapter04/numbers"
+   title="Example: Numeric Variables"
+   height="450px"
+%}
+
+#### Strings
+
+In programming terminology, a **string** is a collection of characters (letters, numbers, spaces, punctuation) enclosed in double quotation marks.
+
+> **Warning** In ink, string manipulation is limited. You cannot concatenate (join) strings or perform complex operations. Strings are primarily for storage and comparison.
+
+### Code Example 4.5: Working with Strings
+
+```ink
+VAR playerName = "Alice"
+VAR npcResponse = "Welcome to my shop"
+
+{npcResponse}, {playerName}!
+
+// String comparisons:
+{playerName == "Alice": You are Alice! }
+{playerName != "Bob": You are not Bob. }
+{"Welcome" ? npcResponse: The NPC said welcome. }
+```
+
+String operations:
+- **Equality:** `==` (tests if strings are identical)
+- **Inequality:** `!=` (tests if strings are different)
+- **Substring:** `?` (tests if right string appears in left string)
+
+#### Booleans
+
+**Boolean** values are named after George Boole, who created boolean algebra. In programming, boolean values represent binary states: `true` or `false`, `1` or `0`, yes or no.
+
+> **Note** Booleans are the result of all conditional tests. When you check `health > 0`, the result is a boolean: either true (health is greater than 0) or false (it isn't).
+
+### Code Example 4.6: Working with Booleans
+
+```ink
+VAR hasKey = false
+VAR doorUnlocked = false
+
+{hasKey: You have the key. }
+{not hasKey: You don't have the key. }
+
+~ hasKey = true
+~ doorUnlocked = hasKey
+
+{doorUnlocked: The door is now unlocked! }
+```
+
+### Interactive Example 4.6: Boolean Variables
+
+{% include ink-player.html
+   story="chapter04/booleans"
+   title="Example: Boolean Variables"
+   height="400px"
+%}
+
+#### Text of Diverts
+
+Because variables can hold strings, they can also store the "target" of a divert. While limited in application, this can be useful for saving navigation paths in complex projects.
+
+> **Tip** Divert variables are advanced features. They're most useful in procedurally generated stories or when you need to dynamically choose destinations based on game state.
+
+### Code Example 4.7: Divert Variables
+
+```ink
+VAR nextLocation = -> Market
+
+You decide where to go next.
+
+* [Head to the market]
+    ~ nextLocation = -> Market
+    -> nextLocation
+* [Head to the tavern]
+    ~ nextLocation = -> Tavern
+    -> nextLocation
+
+== Market ==
+You arrive at the bustling market.
+-> DONE
+
+== Tavern ==
+You enter the cozy tavern.
+-> DONE
+```
+
+#### Knots as Values
+
+When you place a knot name in curly brackets `{}`, you access its **value**—a number representing how many times it's been visited.
+
+> **Important** Knot values start at 0 (not visited) and increment each time the knot is encountered. A knot visited once has value 1, twice has value 2, and so on.
+
+### Code Example 4.8: Knot Values
+
+```ink
+// Example_Knot hasn't been visited yet, so its value is 0
+The knot Example_Knot has value {Example_Knot} (not visited).
+
+-> Example_Knot
+
+== Example_Knot ==
+// Now we're IN the knot, so it's been visited
+This knot's value is now {Example_Knot} (visited once).
+
+-> Example_Knot_Again
+
+== Example_Knot_Again ==
+Going back to check...
+-> Example_Knot_Check
+
+== Example_Knot_Check ==
+After visiting Example_Knot, its value is {Example_Knot}.
+-> DONE
+```
+
+### Interactive Example 4.8: Knot Values
+
+{% include ink-player.html
+   story="chapter04/knot-values"
+   story="chapter04/knot-values"
+   title="Example: Knot Values"
+   height="400px"
+%}
+
+---
+
+### Types of Variables
+
+Ink provides three different categories of variables: **global**, **temporary**, and **constant**. Each serves a different purpose and has different scope and mutability.
+
+> **Note** "Scope" refers to where a variable can be accessed in your code. "Mutability" refers to whether a variable's value can change after it's created.
+
+#### Global Variables
+
+**Global variables** are defined using the keyword `VAR` and can be accessed from anywhere in your ink project. They persist throughout the entire story and are perfect for tracking player stats, inventory, or story state.
+
+> **Important** Global variables must be declared at the top of your ink file, before any knots or story content. This is a requirement of ink's structure.
+
+### Code Example 4.9: Global Variables
+
+```ink
+VAR health = 100
+VAR playerName = "Adventurer"
+
+Welcome, {playerName}! Health: {health}
+
+-> FIGHT
+
+== FIGHT ==
++ [Attack]
+    You attack! The enemy strikes back.
+    ~ health = health - 20
+    Your health: {health}
+    {health <= 0: -> GameOver }
+    -> FIGHT
++ {health > 50} [Run away]
+    You flee to safety.
+    -> DONE
+
+== GameOver ==
+You've been defeated!
+-> DONE
+```
+
+### Interactive Example 4.9: Global Variables
+
+{% include ink-player.html
+   story="chapter04/global-vars"
+   title="Example: Global Variables"
+   height="450px"
+%}
+
+#### Temporary Variables
+
+**Temporary variables** are created using the tilde `~` followed by the keyword `temp`. They only exist within the knot or stitch where they're created and are deleted when that knot/stitch ends.
+
+> **Tip** Use temporary variables for calculations you only need momentarily, like random values, intermediate math results, or loop counters. They don't clutter your global namespace.
+
+### Code Example 4.10: Temporary Variables
+
+```ink
+VAR health = 50
+
+-> Potion
+
+== Potion ==
++ [Drink a potion]
+    ~ temp healAmount = RANDOM(1, 10)
+    The potion glows warmly. You heal {healAmount} health!
+    ~ health = health + healAmount
+    Your health is now {health}.
+    -> Potion
++ [Stop drinking potions]
+    You've had enough potions.
+    -> DONE
+```
+
+**Note:** The `RANDOM(1, 10)` function generates a random number between 1 and 10 (inclusive). `healAmount` only exists within the Potion knot.
+
+#### Constant Variables
+
+**Constants** are created using the keyword `CONST`. Like global variables, they can be accessed throughout your project, but unlike globals, their values cannot be changed once set.
+
+> **Warning** Constants are truly constant—attempting to change a constant's value will cause an ink error. Use them for values that should never change, like maximum stats, damage values, or game rules.
+
+### Code Example 4.11: Constant Variables
+
+```ink
+VAR enemyHealth = 50
+CONST SWORD_DAMAGE = 10
+CONST CRIT_DAMAGE = 20
+
+Enemy health: {enemyHealth}
+
+-> FIGHT
+
+== FIGHT ==
++ [Normal attack]
+    ~ enemyHealth = enemyHealth - SWORD_DAMAGE
+    You deal {SWORD_DAMAGE} damage! Enemy: {enemyHealth}
+    {enemyHealth <= 0: -> Victory }
+    -> FIGHT
++ [Critical strike]
+    ~ enemyHealth = enemyHealth - CRIT_DAMAGE
+    Critical! {CRIT_DAMAGE} damage! Enemy: {enemyHealth}
+    {enemyHealth <= 0: -> Victory }
+    -> FIGHT
+
+== Victory ==
+Victory! The enemy is defeated!
+-> DONE
+```
+
+### Interactive Example 4.11: Constant Variables
+
+{% include ink-player.html
+   story="chapter04/constants"
+   title="Example: Constant Variables"
+   height="450px"
+%}
 ```
 
 ### Types of Data
@@ -271,177 +653,382 @@ CONST swordDamage = 4
 
 ## Conditional Logic
 
-Like testing if a player has visited a knot or stitch a certain number of times, conditional logic can be used to test the values of variables and react accordingly.
+Variables become truly powerful when combined with conditional logic—the ability to test values and make decisions based on those tests. This allows your stories to respond dynamically to player choices and story state.
 
-The symbols used to compare values are called operators and include the following symbols and testing:
+> **Note:** Conditional logic is fundamental to interactive storytelling. Mastering these techniques will allow you to create sophisticated branching narratives that remember and respond to player actions.
 
-- `<:` Less than
-- `>:` Greater than
-- `<=:` Less than OR equal to
-- `>=` Greater than OR equal to
-- `!=:` Not equal
-- `==:` Equal
-- `&&:` And
-- `||:` Or
-- `Not:` same as not equal
+### Comparison Operators
 
-Conditional logic can be part of multiple lines of code usage in Ink. In these cases, the first conditional logic test must follow the first opening curly bracket.
+Ink uses comparison operators to test relationships between values. These operators work with numbers, strings, and booleans:
+
+- `<` Less than
+- `>` Greater than
+- `<=` Less than or equal to
+- `>=` Greater than or equal to
+- `!=` Not equal
+- `==` Equal
+- `&&` And (both conditions must be true)
+- `||` Or (at least one condition must be true)
+- `not` Negation (opposite of the value)
+
+> **Tip:** Comparison operators return boolean values (`true` or `false`), which makes them perfect for controlling story flow.
+
+#### Code Example 4.12: Basic Conditionals
 
 ```ink
-VAR drink = 10
+VAR gold = 50
+VAR hasKey = false
 
--> DrinkMore
-
-=== DrinkMore ===
- + [Drink more?]
-    {- drink > 1:
-          ~ drink = drink - 1
-    }
-    -> DrinkMore
+You have {gold} gold coins.
+{hasKey: You also have a key.}
+{not hasKey: You don't have a key yet.}
+{gold >= 100: You're quite wealthy!}
+{gold < 20: You're running low on funds.}
 ```
 
-Conditional logic follows the form of if testing. The use of "if" logic test if that which follows it is true or not. If it is, any code that follows it is also run. If the logic is not true, its instructions are ignored.
+#### Interactive Example 4.12
+
+{% include ink-player.html storyPath="chapter04/basic-conditionals.json" %}
+
+### If-Else Logic
+
+The most common conditional pattern is if-else logic: if a condition is true, do one thing; otherwise (else), do another.
+
+> **Important:** In multi-line conditional blocks, the first test must immediately follow the opening curly bracket `{`, then alternatives use `- else:`.
+
+#### Code Example 4.13: If-Else Statements
 
 ```ink
-VAR drink = 4
+VAR health = 75
 
--> DrinkMore
-
-=== DrinkMore ===
-
-The amount of drink left is {drink}.
-
- + {drink > 0} [Drink more?]
-    ~ drink = drink - 1
-    -> DrinkMore
-
- + {drink < 1} [Stop drinking]
-    You decide to stop drinking.
-    -> DONE
-```
-
-Along with the "if" testing is also an alternative, "else." The use of the `else` keyword uses hyphens within a multiple-line block of code. It establishes what should happen if the first conditional logic is not true. If that first test is not true, it then does something. What it can do is either provide some alternative code or additional tests.
-
-**Example:**
-
-```ink
-VAR drink = 4
-VAR stopDrinking = false
-
--> DrinkMore
-
-=== DrinkMore ===
-
-The amount of drink left is {drink}.
-
-{drink > 0:
-    ~ drink = drink - 1
- - else:
-    ~ stopDrinking = true
+{health > 50:
+    You're feeling healthy and strong.
+- else:
+    You're wounded and weakened.
 }
 
- + {not stopDrinking} [Drink more?]
-    -> DrinkMore
-
- + {stopDrinking} [Stop Drinking]
-    -> DONE
+{health >= 100:
+    Your health is at maximum!
+- health >= 50:
+    Your health is good.
+- health >= 25:
+    Your health is low. Be careful!
+- else:
+    You're critically injured!
+}
 ```
 
-### Chaining Testing (Switch Statements)
+#### Interactive Example 4.13
 
-It is possible to "chain" multiple conditional logic tests together, one after another. In these cases, each testing will be run in order from top to bottom and any code associated with the test will be run if any of the tests are true.
+{% include ink-player.html storyPath="chapter04/if-else.json" %}
 
-In other scripting languages, such usages are sometimes called "switch statements." In Ink, it is possible to use a variable as the initial conditional and have the logic be possible values. In this case, each hyphen is a possible value from the variable with the else keyword as the "default" code to run if the other values are not available.
+> **Warning:** Ink evaluates conditionals from top to bottom. Place more specific conditions before general ones to ensure correct logic flow.
+
+### Switch Statements
+
+Ink supports switch-style logic where you test a variable against multiple specific values. This is particularly useful for state machines or menu systems.
+
+> **Note:** In switch statements, each case uses a single hyphen `-`, and `- else:` serves as the default case when no other values match.
+
+#### Code Example 4.14: Switch Statements
 
 ```ink
-VAR drink = 4
-VAR stopDrinking = false
+VAR currentRoom = "kitchen"
 
--> DrinkMore
-
-=== DrinkMore ===
-
-The amount of drink left is {drink}.
-
-{drink:
-    - 0:
-        ~ stopDrinking = true
-    - 2:
-        The drink is almost gone!
-         ~ drink = drink - 1
+{currentRoom:
+    - "kitchen":
+        You're in the kitchen. The smell of fresh bread fills the air.
+    - "bedroom":
+        You're in the bedroom. A soft bed beckons.
+    - "cellar":
+        You're in the dark cellar. It's damp and cold.
     - else:
-        ~ drink = drink - 1
+        You're somewhere else entirely.
 }
-
- + {not stopDrinking} [Drink more?]
-    -> DrinkMore
-
- + {stopDrinking} [Stop Drinking]
-    -> DONE
 ```
+
+You can also use switch statements with numbers:
+
+```ink
+VAR suspicion = 3
+
+{suspicion:
+    - 0:
+        They trust you completely.
+    - 1:
+        They're slightly wary of you.
+    - 2:
+        They're slightly wary of you.
+    - 3:
+        They're suspicious of your motives.
+    - 4:
+        They're suspicious of your motives.
+    - else:
+        They consider you an enemy!
+}
+```
+
+#### Interactive Example 4.14
+
+{% include ink-player.html storyPath="chapter04/switch-statements.json" height="400px" %}
 
 ### Testing Knot Values
 
-The value of a knot (0 or 1) can be used to *conditionally* show content.
+As mentioned earlier, knots have numeric values that track how many times they've been visited. You can use these values in conditional logic to create sophisticated control flow.
 
-the choice will show the text or not based on the name of the knot.
+> **Important:** Unvisited knots have a value of `0` (which is equivalent to `false`). Each visit increments the count, so `{KnotName}` checks if it's been visited at least once, while `{KnotName > 2}` checks if it's been visited more than twice.
 
-Combining diverts and knots, choices can also be conditionally shown. Because Knots have unique names, code can check if they have been visited or not.
-
-### Multiple Conditionals
-
-Conditionals checking if a knot has been visited can also be used together, checking if the player has seen (or not) a set of different knots.
-
-These can create a series of choices that have to be progressed through in order to continue, looping back and checking if other knots have been seen yet or not.
-
-### Advanced Choices
-
-Knot labels are not strictly Boolean (true or false) values. They are actually integers (numbers) and a count of how many times the player has seen the knot.
+#### Code Example 4.15: Conditional Knot Testing
 
 ```ink
--> Pizza_Choices
-=== Pizza_Choices ===
-+ [Pizza?]
-    -> Pizza
-+ {Pizza > 0} [Salad?]
-    We picked salad.
+-> CheckProgress
+
+=== CheckProgress ===
+{SecretRoom:
+    You remember the secret room you discovered.
+- else:
+    There might be hidden areas you haven't found yet.
+}
+
+{SecretRoom > 1:
+    You've been to the secret room multiple times.
+}
+
++ {not SecretRoom} [Search for secrets]
+    -> SecretRoom
++ {SecretRoom} [Return to the secret room]
+    -> SecretRoom
++ [Continue exploring]
     -> DONE
 
-=== Pizza ===
-He shook his head. "I don't like pizza."
--> Pizza_Choices
+=== SecretRoom ===
+You found the secret room!
+-> CheckProgress
 ```
 
-Testing if the value of the knot label is less than one is the same as testing if it has not been seen yet. If it has been seen multiple times, the value will be higher.
+#### Interactive Example 4.15
 
-Testing for multiple values allows for repeating the loop between choices and knots, allowing for the same choice to be chosen and the outcome changing when repeated.
+{% include ink-player.html storyPath="chapter04/knot-conditionals.json" height="400px" %}
 
-### Working with Alternatives
+### Conditional Choices
 
-It is possible to save the result of an alternative in Ink. However, it cannot be the initial value of a variable. The reason for this is that alternatives collapse their possibilities when played; before the story starts, each alternative is all of its possible values!
+Conditionals can control which choices appear to the player. This creates dynamic choice menus that respond to story state.
 
-Setting an initial default value is a good approach for working with alternatives, though. This value can be then be overridden by a single line of code that changes the value of the variable.
+> **Tip:** Conditional choices are perfect for creating progression systems where new options unlock based on player actions or variable values.
+
+#### Code Example 4.16: Conditional Choices
 
 ```ink
-VAR day = ""
+VAR hasKey = false
+VAR knowsPassword = false
+VAR gold = 30
 
-~ day = "{~Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday}"
+-> Castle
+
+=== Castle ===
+You stand before the castle gate.
+
++ {hasKey} [Use the key to unlock the gate]
+    You unlock the gate with the key.
+    -> Inside
++ {knowsPassword} [Speak the password]
+    The guard nods and opens the gate.
+    -> Inside
++ {gold >= 50} [Bribe the guard (50 gold)]
+    ~ gold -= 50
+    The guard pockets the coins and looks away.
+    -> Inside
++ [Try to sneak in]
+    The guards catch you. Try a different approach!
+    -> Castle
+
+=== Inside ===
+You've made it inside the castle!
+-> DONE
 ```
 
-The variable *day* would then retain whatever element was chosen by the shuffle until it was changed again by another line of code or the shuffle was used again in the same way.
+#### Interactive Example 4.16
+
+{% include ink-player.html storyPath="chapter04/conditional-choices.json" height="450px" %}
+
+> **Warning:** Make sure players always have at least one choice available. If all choices are conditional, include a fallback option that's always accessible.
+
+### Combining Variables and Alternatives
+
+Variables and alternatives can work together to create dynamic, varied content that remembers state.
+
+> **Important:** You cannot assign an alternative directly as a variable's initial value (e.g., `VAR day = {~Mon|Tue}` won't work). Instead, declare the variable first, then assign the alternative result using a line of code.
+
+#### Code Example 4.17: Variables with Alternatives
+
+```ink
+VAR currentWeather = ""
+VAR mood = "neutral"
+
+// Assign a random weather condition
+~ currentWeather = "{~sunny|rainy|cloudy|snowy}"
+
+The day is {currentWeather}.
+
+{currentWeather == "sunny":
+    ~ mood = "happy"
+    The sunshine lifts your spirits!
+}
+
+{currentWeather == "rainy":
+    ~ mood = "gloomy"
+    The rain dampens your mood.
+}
+
+Your current mood: {mood}
+```
+
+#### Interactive Example 4.17
+
+{% include ink-player.html storyPath="chapter04/alternatives-vars.json" height="350px" %}
+
+> **Tip:** This technique is excellent for creating dynamic descriptions, random events, or procedurally generated content that still maintains consistency throughout your story.
+
+---
+
+## Summary
+
+This chapter introduced you to variables and conditional logic in Ink—essential tools for creating dynamic, responsive interactive narratives.
+
+**Variables** allow you to store and manipulate data throughout your story. Ink provides three types:
+
+- **Global variables** (`VAR`) are accessible throughout your entire story and persist across knots and stitches. They're perfect for tracking player stats, inventory, relationships, or any story-wide state.
+- **Temporary variables** (`temp`) exist only within the knot or stitch where they're created. They're ideal for calculations, intermediate values, or local state that doesn't need to persist.
+- **Constants** (`CONST`) are global values that cannot be changed once set. They're useful for game rules, difficulty settings, or any value that should remain fixed throughout the story.
+
+**Data types** in Ink include:
+
+- **Numbers** for counting, calculations, and tracking quantities
+- **Strings** for storing text like names, locations, or descriptions
+- **Booleans** for true/false flags and yes/no decisions
+- **Diverts** for storing story destinations
+- **Knot values** which track how many times each knot has been visited
+
+**Conditional logic** enables your story to make decisions based on variable values and story state:
+
+- **Comparison operators** (`<`, `>`, `<=`, `>=`, `==`, `!=`, `&&`, `||`, `not`) test relationships between values
+- **If-else statements** create branching logic that responds to conditions
+- **Switch statements** efficiently test a variable against multiple specific values
+- **Knot value testing** allows your story to remember and respond to which paths the player has taken
+- **Conditional choices** show or hide options based on story state, creating dynamic menus that evolve with the narrative
+- **Variables with alternatives** combine randomness with persistence for varied yet consistent content
+
+Together, these techniques form the foundation of sophisticated interactive storytelling. They enable you to create stories that remember player actions, respond to choices with nuanced consequences, and maintain complex narrative state across branching paths.
+
+---
+
+## Review Questions
+
+1. **What is the difference between global variables (`VAR`), temporary variables (`temp`), and constants (`CONST`)? When would you use each type?**
+
+2. **What are the five data types that variables can store in Ink? Give an example of when you might use each type in a story.**
+
+3. **How do you display the value of a variable in your story text? What symbol is used?**
+
+4. **What value does an unvisited knot have? How does this value change when the player visits the knot?**
+
+5. **Explain the difference between `==` and `=` in Ink. What does each symbol do?**
+
+6. **In an if-else conditional block, what happens if the first condition is false? How do you specify alternative code to run?**
+
+7. **What is a switch statement and how does it differ from a series of if-else conditionals? When might a switch statement be more appropriate?**
+
+8. **Why can't you assign an alternative (like `{~A|B|C}`) as the initial value of a variable? How should you work with alternatives and variables together?**
 
 ---
 
 ## Try It
 
-This chapter’s examples show off the power of variables, a concept used in many other scripting languages. Working with variables in Ink will allow you to create content that could be difficult (or even impossible!) to make otherwise. Using variables in your stories will also help you practice for other kinds of programming work.
+Variables and conditional logic are fundamental programming concepts that appear in nearly every programming language. Mastering them in Ink will not only improve your interactive storytelling but also help you develop skills transferable to other coding contexts.
 
-If you are already familiar with how variables in other coding languages work, it is worth practicing with Ink’s variables to understand the similarities and differences between how Ink handles them in comparison to other languages.
+> **Tip:** Start simple and build complexity gradually. Test your code frequently to catch errors early.
 
-To practice with Ink’s variables, we offer the following exercises:
+### Starter Code
 
-First, create an Ink story that uses at least two numerical variables.  Display the starting value of both of the variables to your player. Change both of those variables at least once throughout the story and show the new values to your player. Make sure to use other kinds of Ink content, such as choices, knots, and diverts (Chapter 4) as well to create a story that makes sense and is fun to read through!
+Use this basic story structure as a starting point for your exercises:
 
-Next, revise your story and add at least one string to it. Display the starting value of the string to your player at some point in the story. Then, at some point in the story, offer your player a branching set of choices that can change the value of the string to one of at least two different options.  Once the string’s value has been changed, show it to your player again.
+```ink
+// Variables
+VAR playerName = "Adventurer"
+VAR gold = 100
+VAR health = 100
+VAR hasMap = false
 
-Finally, revise your story and add at least one boolean to it. Create at least one place in the story where the value of that boolean can be changed based on your player’s choices. Then, at some point in the story, use conditional logic that tests whether the value of the boolean is true or false and does something based on the value of the variable.
+-> Introduction
+
+=== Introduction ===
+Welcome, {playerName}!
+
+You begin your journey with {gold} gold coins and {health} health.
+
+-> MainHub
+
+=== MainHub ===
+What would you like to do?
+
++ [Check inventory]
+    -> CheckInventory
++ [Explore the area]
+    -> Explore
++ [Rest]
+    -> Rest
++ [End journey]
+    -> DONE
+
+=== CheckInventory ===
+Your current status:
+- Gold: {gold}
+- Health: {health}
+- Map: {hasMap: You have it!|You don't have one.}
+
+-> MainHub
+
+=== Explore ===
+You explore the surrounding area...
+-> MainHub
+
+=== Rest ===
+You rest for a while...
+-> MainHub
+```
+
+### Objectives
+
+#### Objective 1: Work with Numeric Variables
+
+Expand the `Explore` knot to create encounters that change your gold and health values. Create at least three different encounters:
+
+- One that increases gold (finding treasure)
+- One that decreases gold (paying a toll or buying something)
+- One that decreases health (combat or an accident)
+
+Display the updated values to the player after each encounter and use conditional logic to check if gold or health reach critical thresholds (like gold < 10 or health < 25).
+
+#### Objective 2: Add String Variables and Choices
+
+Add a `VAR location = "forest"` string variable at the top of your story. In the `Explore` knot, offer the player branching choices that change the location to different values (like "mountain", "village", or "cave"). Display the current location in the `MainHub` knot so players know where they are. Make the encounters in Objective 1 vary based on the current location using conditional logic.
+
+#### Objective 3: Implement Boolean Logic
+
+Expand the story to include at least two boolean variables (like `hasMap`, `hasWeapon`, or `knowsSecret`). Create encounters in the `Explore` knot where these booleans can be set to `true` based on player choices. Then, use conditional choices in `MainHub` or `Explore` to show different options based on these boolean values—for example, a choice to "Use the map" only appears if `hasMap` is true.
+
+#### Objective 4: Track Progress with Knot Values
+
+Create a new knot called `SecretArea`. In your `Explore` knot, add a conditional choice that only appears after the player has explored a certain number of times—use the `Explore` knot's visit count to determine this (for example, `{Explore > 3}`). When the player visits `SecretArea`, display different text based on whether it's their first visit or a repeat visit using knot value conditionals.
+
+### Testing Your Story
+
+As you build your story, test it regularly:
+
+- Verify that all variable changes work as expected
+- Check that conditional choices appear and disappear correctly
+- Ensure you can't get stuck with no choices available
+- Confirm that knot visit counters work properly
+- Test edge cases like running out of gold or health
+
+> **Important:** Good interactive fiction always gives players meaningful choices. Make sure your conditionals enhance the story rather than restrict it unnecessarily.
